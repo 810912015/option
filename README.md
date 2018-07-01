@@ -1,2 +1,2 @@
 # option
-A Europen Option Trade System
+A Europen Option Based on Bitscorn Index Trade System

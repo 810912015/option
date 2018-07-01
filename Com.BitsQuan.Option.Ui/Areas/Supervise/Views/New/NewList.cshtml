@@ -1,0 +1,58 @@
+﻿@{
+   
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+
+    <h4>用户信息管理</h4>
+    <table class="table table-bordered" style="width:100%;text-align:center;line-height:30px">
+        <tr>
+            <th>编号</th>
+            <th>用户名</th>
+            <th>操作</th>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var v in Model)
+            {
+                <tr>
+                    <td>@v.Id</td>
+                    <td>@v.UserName</td>
+                    <td>
+                        <a href="javascript:void(0)" class="AddPage">添加</a>
+                        <a href="javascript:void(0)" class="UpdatePage">修改</a>
+                        <a href="javascript:void(0)" class="del">删除</a><span style="display:none">@v.Id</span>
+
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    @{
+        Html.RenderPartial("_Pager", ViewData["pager"]);
+    }
+
+
+
+
+</body>
+</html>
+
+@section scripts{
+    <script>
+
+        $(".del").click(function () {
+            //获得当前节点的下一个span节点
+            alert($(this).next("span").html());
+        })
+    </script>
+}
+
+

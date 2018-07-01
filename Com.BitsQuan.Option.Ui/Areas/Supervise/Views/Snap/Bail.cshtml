@@ -1,0 +1,43 @@
+﻿@using System.Linq
+@model List<Com.BitsQuan.Option.Core.Trader>
+<link href="~/Scripts/tablesortor/theme.default.css" rel="stylesheet" />
+<script src="~/Scripts/tablesortor/jquery.tablesorter.min.js"></script>
+<script src="~/Scripts/tablesortor/jquery.tablesorter.widgets.min.js"></script>
+<h3>所有用户保证金账户资金总和:<strong>@Model.Select(a => a.Account.BailAccount.Total).Sum() 个</strong></h3>
+
+<table class="table  table-striped">
+    <thead>
+
+
+        <tr>
+            <th>用户</th>
+            <th>总额</th>
+            <th>可用</th>
+            <th>冻结</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+
+            <tr>
+                @{
+            var cur = Model[i];
+                }
+                <td>@cur.Name</td>
+                <td>@cur.Account.BailAccount.Total</td>
+                <td>@cur.Account.BailAccount.Sum</td>
+                <td>@cur.Account.BailAccount.Frozen</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(function () {
+        $("table").tablesorter();
+    })
+</script>

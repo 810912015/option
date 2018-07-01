@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Ui.Models.ApplicationUser>
+@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+
+<input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)" />
+<div id="modify-panel" class="form-group" style="display:none;">
+    <input type="hidden" id="hid-id" />
+    <label>真实姓名</label>
+    <input type="text" class="form-control" id="txt-realname" />
+    <label>uid</label>
+    <input type="text" id="txt-uid" class="form-control" />
+    <label>证件类型</label>
+    @Html.DropDownList("sel-identity-type", Com.BitsQuan.Option.Ui.Controllers.SecureController.IdentityTypes.Select(_ => new SelectListItem { Text = _, Value = _ }), new { @class = "form-control" })
+    <label>证件号</label>
+    <input id="txt-id-number" type="text" class="form-control" />
+    <label>电话</label>
+    <input id="txt-phone-number" type="text" class="form-control" />
+    <label>邮箱</label>
+    <input id="txt-email" type="text" class="form-control" />
+    <label>推荐人</label>
+    <input type="hidden" id="hid-invitorId" />
+    <input id="txt-invitor" type="text" class="form-control" />
+    <label>费率</label>
+    <input id="txt-ratio" type="text" class="form-control" />
+    <input id="btn-save" type="button" value="保存修改" class="btn btn-success" />
+    <input type="button" value="取消" class="btn btn-danger" onclick="$('#modify-panel').hide();" />
+    <span id="save-result"></span>
+</div>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            用户名
+        </th>
+        <th>
+            姓名
+        </th>
+        <th width="50%">
+            详细
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RealityName)
+            </td>
+
+            <td>
+                <em>证件类型</em>： <strong>@Html.DisplayFor(modelItem => item.IdNumberType)</strong>|
+                <em>号码</em>：<strong> @Html.DisplayFor(modelItem => item.IdNumber)</strong>|
+                <em>电话</em>：<strong> @Html.DisplayFor(modelItem => item.PhoneNumber)</strong>|
+                <em>确认</em>：<strong> @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)</strong>|
+                <em>邮箱</em>：<strong> @Html.DisplayFor(modelItem => item.Email)</strong>|
+                <em>邮箱确认</em>：<strong> @Html.DisplayFor(modelItem => item.EmailConfirmed)</strong>|
+                <em>注册时间</em>：<strong> @Html.DisplayFor(modelItem => item.RegisterTime)</strong>|
+                <em>最后错误时间</em>：<strong> @Html.DisplayFor(modelItem => item.EnderrorTime)</strong>|
+                <em>返还费率</em>：<strong> @Html.DisplayFor(modelItem => item.InvitorFeeRatio)</strong>|
+                <em>推荐人</em>：<strong> @Html.DisplayFor(modelItem => item.GetInvitor().UserName)</strong>|
+                <strong>@(item.IsAllowToTrade ? "已允许交易" : "")</strong>
+            </td>
+            <td>
+
+
+                <span id="rse_@item.UserName">
+                    @*@if (!item.EmailConfirmed)
+                        {*@
+                    <a class="btn btn-primary btn-xs" onclick="resendemail('@item.UserName')">重新发送注册邮件</a>
+                    @*}*@
+                </span>
+
+                <span id="td_@item.Id">
+                    @if (!item.IsAllowToTrade)
+                    {
+                        <a onclick="makeAllow('@item.Id')" class="btn btn-danger btn-xs">允许交易(创建交易用户)</a>
+                    }
+                </span>
+                <span>
+                    <a href="javascript:showDetial('@item.Id','@item.IdNumber','@item.PhoneNumber','@item.Email','@item.IdNumberType','@item.RealityName','@item.Uiden','@item.InvitorFeeRatio','@item.GetInvitor().Id','@item.GetInvitor().UserName');" class="btn btn-xs btn-danger">修改信息</a>
+                </span>
+
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+    function showDetial(id, idNumber, phoneNumber, email, identityType, realName, uid, ratio, invitorId, invitorName) {
+        $("#txt-id-number").val(idNumber);
+        $("#txt-phone-number").val(phoneNumber);
+        $("#txt-email").val(email);
+        $("#hid-id").val(id);
+        $("#sel-identity-type").val(identityType);
+        $("#txt-realname").val(realName);
+        $("#txt-uid").val(uid);
+        $("#txt-ratio").val(ratio);
+        $("#hid-invitorId").val(invitorId);
+        $("#txt-invitor").val(invitorName);
+        $("#save-result").text("");
+        $("#modify-panel").show();
+    }
+    $(function () {
+        $("#btn-save").click(function () {
+            $.getJSON(
+                "@Url.Action("UpdateUser","AppUsers")",
+                {
+                    id: $("#hid-id").val(),
+                    phoneNumber: $("#txt-phone-number").val(),
+                    idNumber: $("#txt-id-number").val(),
+                    identityType: $("#sel-identity-type").val(),
+                    email: $("#txt-email").val(),
+                    realName: $("#txt-realname").val(),
+                    ratio: $("#txt-ratio").val(),
+                    invitor: $("#txt-invitor").val(),
+                    uid: $("#txt-uid").val()
+                },
+                function (r) {
+                    $("#save-result").text(r.result);
+                }
+            );
+        });
+    });
+</script>

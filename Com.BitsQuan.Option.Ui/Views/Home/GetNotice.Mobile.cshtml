@@ -1,0 +1,32 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@{
+    Layout = null;
+}
+<div>
+    <div class="row">
+        <div class="lead pull-left">
+            公告中心
+        </div>
+        <div class="pull-right">
+            @Html.ActionLink("More", "index", "NewNotices", new { type = (int)ContentType.行业新闻 }, new { @class = "btn-link" })
+        </div>
+    </div>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="row">
+                <p>
+                    @if (item.Htitle.Length < 20)
+                    { <a style=" font-family: '微软雅黑';" href="/NewNotices/New/@item.Id">@item.Htitle</a> }
+                    else
+                    {
+                        <a style=" font-family: '微软雅黑';" href="/NewNotices/New/@item.Id">@{@item.Htitle.Substring(0, 20)}...</a>
+                    }
+                </p>
+            </div>            
+        }
+    }
+
+</div>
+

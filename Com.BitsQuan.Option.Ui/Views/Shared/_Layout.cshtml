@@ -1,0 +1,152 @@
+﻿@using Com.BitsQuan.Miscellaneous;
+@using Com.BitsQuan.Option.Ui.Models;
+@{
+    var tid = User.GetTraderId();
+    var os = MvcApplication.OptionService.Model.Traders.Where(a => a.Id == tid).FirstOrDefault();
+    ViewData["ActCapital"] = os;
+    ApplicationDbContext dbm = new ApplicationDbContext();
+
+    ViewData["a"] = dbm.AdvImgs.OrderBy(f => f.SortId).Take(15).ToList();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="比权网,比特币期权,比特币交易,比特币期权交易,比特币期权交易平台,比特币交易平台,比特币行情,比特币交易" name="keywords" />
+    <meta content="比权网是中国最专业的比特币期权交易平台,我们采用ssl、冷存储、gslb、分布式服务器等先进技术，确保比特币交易的安全、快捷、稳定。致力于打造最专业的比特币中国期权交易平台" name="description" />
+    <title>@(ViewBag.Title == null ? "比权网-最好的比特币期权交易平台" : ViewBag.Title.ToString())</title>
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Index.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @if (Request.Browser.VBScript)
+    {
+        @Scripts.Render("~/bundles/j1")
+    }
+    else
+    {
+        @Scripts.Render("~/bundles/jquery")
+    }
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Scripts/FontRoll.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            ScrollText($('#scrollText'), 35, 400, '比特币指数 : <span style="color:#ff0000" id="span-btc-index">￥0</span> | 成交量 : <span style="color:#ff0000" id="span-total-deals"></span> | 持仓量 : <span style="color:#ff0000" id="span-total-positions"></span>', 'left', 1, 20);//滚动字幕
+            getMarket5();
+        });
+        var getMarket5 = function () {
+            $.getJSON(
+                "@Url.Action("GetOptionMarket","Home")",
+                function (back) {
+                    $("#span-btc-index").text("￥" + back.btcIndex);
+                    $("#span-total-positions").text(back.positions);
+                    $("#span-total-deals").text(back.deals);
+                }
+            );
+            setTimeout("getMarket5();", 3000);
+            $("#IdexOption").load("/home/GetOption");
+        };
+
+    </script>
+
+    <script src="~/Scripts/trade/jquery-migrate-1.2.1.js"></script>
+
+</head>
+
+
+<body style="margin:0px;padding:0px;width:100%">
+
+    <div id="tip" class="alert alert-danger alert-dismissible hidden" role="alert" style="text-align:center;">
+
+        您正在使用 Internet Explorer 的一个老版本。请
+        <a href="http://browsehappy.com/" target="_blank">马上升级&gt;&gt;</a><span class="closeBox">
+            您的浏览器，以改善您的体验。
+
+        </span>
+    </div>
+    <script>
+        var IsIe = function () {
+            var _uat = navigator.userAgent;
+            if (_uat.indexOf("MSIE 6.0") > 0) return true;
+            else if (_uat.indexOf("MSIE 7.0") > 0) return true;
+            else if (_uat.indexOf("MSIE 8.0") > 0) return true;
+            else if (_uat.indexOf("MSIE 9.0") > 0) return true;
+            return false;
+        }
+        $(function () {
+            if (IsIe()) {
+                var ver = parseFloat($.browser.version);
+                if (ver < 10) {
+                    $("#tip").removeClass("hidden");
+                    $("#mainbody").addClass("hidden");
+                }
+            }
+        })
+    </script>
+
+    <div id="mainbody">
+        <!--数据栏-->
+        <div class="loding">
+            <div class="neck">
+                <div id="scrollText"></div>
+                <div style="float:left;margin-left:100px">
+                    @Html.AntiForgeryToken()
+                    @Html.Partial("_LoginPartial2")
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!--导航和LOGO-->
+        <div class="logobox">
+            <div class="nav_logo">
+                <a href="~/Home/index"><img class="logo" src="~/Content/img/logo.png"></a>
+                <div class="nav">
+                    <a href="~/Home/index">首页</a>
+                    <a href="~/Home/Trade">期权交易</a>
+
+                    @if (!AppSettings.Read<bool>("isDisableBtcTrade", true))
+                    {
+                        <a href="~/Spot/Trade">比特币交易</a>
+                    }
+                    <a href="~/Cache/index">资金中心</a>
+                    <a href="~/Secure/Index">安全中心</a>
+                    @*<a href="~/FrontForum/Index">论坛中心</a>*@
+                    <a href="~/NewNotices/Index">新闻公告</a>
+                    @if (!AppSettings.Read<bool>("isSimulate"))
+                    {
+                        <a href="http://@(Request.Url.Host + ":8080")">进入模拟盘</a>
+                    }
+                    else
+                    {
+                        <a href="https://@Request.Url.Host">进入实盘</a>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <div class="container">
+                @RenderBody()
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="tf" style="margin-top:20px">
+                @RenderSection("links", required: false)
+                @Html.Partial("Footer")
+            </div>
+
+
+            @RenderSection("scripts", required: false)
+        </div>
+    </div>
+    @Html.Partial("SideMenu")
+</body>
+</html>

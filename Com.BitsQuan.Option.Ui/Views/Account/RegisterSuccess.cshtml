@@ -1,0 +1,405 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <style>
+        body, h1, h2, h3, h4, blockquote, p, dl, dt, dd, ul, ol, li, th, td, form, fieldset, legend, button, input, textarea {
+            margin: 0;
+            padding: 0;
+        }
+
+        body, button, input, select, textarea {
+            font: 12px/1.75 \5b8b\4f53,arial,sans-serif;
+        }
+
+        button, input, select, textarea, h1, h2, h3, h4 {
+            font-size: 100%;
+        }
+
+        em, i {
+            font-style: normal;
+        }
+
+        ol, ul {
+            list-style: none;
+            list-style-position: outside;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        img, fieldset {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        .clearfix:after {
+            content: "\20";
+            clear: both;
+            height: 0;
+            display: block;
+            overflow: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clear {
+            font-size: 0;
+            line-height: 0;
+            height: 0;
+            overflow: hidden;
+            clear: both;
+            visibility: hidden;
+        }
+
+        a {
+            color: #777;
+            text-decoration: none;
+            outline: none;
+        }
+
+            a:hover {
+                color: #f60;
+                text-decoration: underline;
+            }
+
+        .wrap {
+            color: #777;
+        }
+
+        .main {
+            width: 990px;
+            margin: 0 auto;
+            font-family: "微软雅黑";
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 10px 0;
+            min-height: 400px;
+            _height: 400px;
+        }
+
+        .blue, .blue a {
+            color: #639bd4;
+        }
+
+            .blue:hover, .blue a:hover {
+                color: #f60;
+            }
+
+        .logobox {
+            width: 100%;
+            background: url(../Content/images/headbg.png);
+            background-repeat: repeat-x;
+            height: 100px;
+        }
+
+        .logo {
+            width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+            .logo img {
+                margin-top: 20px;
+            }
+
+            .logo .logoli1 {
+                font-size: 12px;
+                float: right;
+                line-height: 100px;
+                color: #535353;
+                font-family: "宋体";
+            }
+
+                .logo .logoli1 .btn {
+                    font-weight: bold;
+                    color: #666;
+                    height: 32px;
+                    width: 64px;
+                    border: none;
+                    background-image: url(../Content/images/lond.png);
+                }
+
+            .logo .logoli {
+                float: left;
+            }
+
+
+
+
+
+        .inp {
+            height: 30px;
+            border: 1px solid #D2D2D2;
+            padding: 0 5px;
+            width: 255px;
+            -moz-border-radius: 1px;
+            -webkit-border-radius: 1px;
+            border-radius: 1px;
+            line-height: 29px\9;
+            _line-height: 30px;
+            font-family: "微软雅黑";
+        }
+
+        .err {
+            border-color: #d84b4b;
+        }
+
+        .inpBtn {
+            background: url(../Content/images/main.png) repeat-x 0 -57px;
+            height: 38px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #e9880e;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            font-family: "微软雅黑";
+        }
+
+        a.inpBtn {
+            display: inline-block;
+            text-align: center;
+            line-height: 38px;
+        }
+
+            a.inpBtn:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+
+        /*信息*/
+        .infoBox {
+            line-height: 28px;
+            margin: 62px 0 0 250px;
+        }
+
+            .infoBox:after {
+                content: "\20";
+                clear: both;
+                height: 0;
+                display: block;
+                overflow: hidden;
+            }
+
+            .infoBox .icon {
+                background: url(%E6%9C%9F%E6%9D%83%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F1/images/main.png) no-repeat;
+                float: left;
+                height: 54px;
+                width: 54px;
+                margin-right: 13px;
+            }
+
+            .infoBox .emailIcon {
+                background-position: -60px -182px;
+            }
+
+            .infoBox .succeedIcon {
+                background-position: 0 -182px;
+            }
+
+            .infoBox .infoTxt {
+                overflow: hidden;
+                zoom: 1;
+            }
+
+            .infoBox .tit {
+                font-weight: 700;
+                font-size: 18px;
+                color: #333;
+                padding-left: 70px;
+                background: url(../Content/images/icon3png.png) no-repeat;
+                line-height: 54px;
+            }
+
+            .infoBox .f14 {
+                color: #333;
+                font-weight: 700;
+            }
+
+            .infoBox .email {
+                color: #ff8100;
+                font-weight: 400;
+            }
+
+            .infoBox .meg, .infoBox .subTit {
+                font-size: 14px;
+            }
+
+            .infoBox .subTit {
+                font-weight: 700;
+            }
+
+            .infoBox .inpBtn {
+                width: 128px;
+                margin-right: 10px;
+                vertical-align: middle;
+            }
+
+            .infoBox a.inpBtn {
+                display: inline-block;
+                text-align: center;
+                line-height: 38px;
+            }
+
+                .infoBox a.inpBtn:hover {
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+            .infoBox .subMeg {
+                line-height: 32px;
+                padding-left: 13px;
+                text-indent: -13px;
+            }
+
+            .infoBox .dBtn {
+                margin: 13px 0 20px;
+            }
+        .footer {
+            overflow: hidden;
+            width: 1000px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .about {
+            float: left;
+            width: 284px;
+        }
+
+            .about p {
+                font-family: "宋体";
+                font-size: 12px;
+                line-height: 26px;
+                color: white;
+                padding-top: 18px;
+            }
+
+        .boofborder {
+            float: left;
+            margin: 0 10px 0 10px;
+        }
+
+        .weixin {
+            float: left;
+            width: 232px;
+        }
+
+        .footer img {
+            display: block;
+            padding-right: 40px;
+        }
+
+        .contact li {
+            font-family: "宋体";
+            font-size: 12px;
+            color: #e4e4e4;
+            line-height: 26px;
+        }
+
+        .footerbox {
+            background-color: #535353;
+            margin-top: 156px;
+        }
+
+        .contact .help li a {
+            font-family: "宋体";
+            font-size: 12px;
+            color: #e4e4e4;
+            line-height: 40px;
+            margin-right: 12px;
+        }
+
+        .contact .help li {
+            float: left;
+        }
+
+        .contact .contactimg {
+            display: block;
+            padding-bottom: 14px;
+        }
+
+        .qq a {
+            float: left;
+            font-size: 12px;
+            font-family: "宋体";
+        }
+
+        .qq {
+            overflow: hidden;
+        }
+    </style>
+    @*@Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/Index.css")*@
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+</head>
+
+<body>
+    <div class="logobox">
+
+        <ul class="logo">
+            <li class="logoli"><img src="../Content/images/logo.png"></li>
+            <li class="logoli1">我已注册，现在就&nbsp;@*<button class="btn">登入</button>*@<strong> <a href="/Cache/index">登入</a></strong> </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+    <div class="wrap clearfix">
+        <div class="main clearfix content">
+            <div class="infoBox">
+                @if (ViewData["reg"]!=null)
+                {
+                    <div class="infoTxt">
+                        <p class="tit">
+                            恭喜您注册成功：<span class="email" id="email">
+                                @if (ViewBag.msg != null)
+                                {
+                                    @ViewBag.msg
+                                }
+                            </span>
+                        </p>
+                        <div class="dBtn">
+                            <input name="toEmail" class="inpBtn" value="进入身份认证" id="loginBtn" onclick="window.location.href = '/Secure/Index'" type="button" style="margin-left:70px">
+                            @*邮箱写错了？ <a href="http://my.pcauto.com.cn/passport/edit_email.jsp" class="blue">换个邮箱</a>*@
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="infoTxt" style="font-size:20px;color:red">
+                        激活时间已过或此链接失效，请重新注册
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+    @Html.Partial("Footer")
+</body>
+</html>
+
+

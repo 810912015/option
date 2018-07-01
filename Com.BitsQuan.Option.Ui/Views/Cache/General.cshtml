@@ -1,0 +1,277 @@
+﻿<style>
+    .title {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-size: 18px;
+        color: #666666;
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+        margin-top: 10px;
+    }
+
+    .rb {
+        border: 1px solid #c2c2c2;
+        margin-top: 10px;
+        width: 780px;
+    }
+
+    .tb {
+        margin: 20px 20px 0 20px;
+        background-color: #f2f2f2;
+        height: 30px;
+        border-bottom: 1px solid #c2c2c2;
+    }
+
+        .tb a {
+            line-height: 30px;
+            display: inline-block;
+            width: 135px;
+            text-align: center;
+            color: #535353;
+            background-image: url(@Url.Content("~/Content/images/cnyborder.png"));
+            background-position: right;
+            background-repeat: no-repeat;
+        }
+
+            .tb a:hover {
+                color: white;
+                background-color: #559be9;
+            }
+
+    .cash {
+        background: url(@Url.Content("~/Content/images/bg.png"));
+        height: 35px;
+        border: 1px solid #CDCDCD;
+        color: #656565;
+        font-size: 14px;
+        font-family: "Microsoft YaHei";
+    }
+
+    .ctit {
+        font-size: 16px;
+        margin-left: 40px;
+        line-height: 20px;
+        padding-top: 14px;
+    }
+
+    .text {
+        font-size: 14px;
+        margin-left: 40px;
+        line-height: 26px;
+    }
+
+        .text span {
+            margin-left: 8px;
+            font-size: 14px;
+            font-weight: 200;
+        }
+
+        .text .sp {
+            color: #de5705;
+        }
+
+    #general .table {
+        width: 90%;
+        margin: 20px auto;
+        text-align: center;
+        font-size: 14px;
+        font-family: "Microsoft YaHei";
+    }
+
+        #general .table th {
+            text-align: center;
+            background-color: #F2F2F2;
+            font-weight: normal;
+        }
+</style>
+@Styles.Render("~/content/autoaddbail.css")
+
+@using Com.BitsQuan.Option.Core
+@using Com.BitsQuan.Option.Match.Imp
+@model Com.BitsQuan.Option.Core.Trader
+@{
+    Com.BitsQuan.Option.Core.Trader os = Model;
+    var snap = (MyBailAccount)ViewData["snap"];
+}
+
+
+<div data-cat="func" id="general">
+
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" class="active" id="li1">
+                <a href="#basic" aria-controls="basic" role="tab" data-toggle="tab" style="border-top:none;border-left:none">基本信息</a>
+            </li>
+            <li role="presentation" id="li2">
+                <a href="#bank" aria-controls="bank" role="tab" data-toggle="tab" style="border-left:none">银行卡管理</a>
+            </li>
+ @if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <li role="presentation" id="li3">
+                <a href="#address" aria-controls="address" role="tab" data-toggle="tab" style="border-left:none">BTC提现地址管理</a>
+            </li>
+ }
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active table-responsive" id="basic">
+
+                @if (os != null)
+                {
+                    <table class="table">
+                        <tr>
+                            <th>资金类型</th>
+                            <th>人民币总额</th>
+                            <th>可用人民币</th>
+                            <th>冻结人民币</th>
+                        </tr>
+                        <tr>
+                            <td>人民币</td>
+                            <td>@os.Account.CacheAccount.CnyAccount.Total.ToString("C2")</td>
+                            <td>@os.Account.CacheAccount.CnyAccount.Sum.ToString("C2")</td>
+                            <td>@os.Account.CacheAccount.CnyAccount.Frozen.ToString("C2")</td>
+                        </tr>
+                    </table>
+                     if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+                    <table class="table">
+                        <tr>
+                            <th>资金类型</th>
+                            <th>比特币总额</th>
+                            <th>可用比特币</th>
+                            <th>冻结比特币</th>
+                        </tr>
+                        <tr>
+                            <td>比特币</td>
+                            <td>฿@os.Account.CacheAccount.BtcAccount.Total</td>
+                            <td>฿@os.Account.CacheAccount.BtcAccount.Sum</td>
+                            <td>฿@(os.Account.CacheAccount.BtcAccount.Frozen)</td>
+                        </tr>
+                    </table>
+                     }
+                    <table class="table">
+                        <tr>
+                            <th>资金类型</th>
+                            <th>保证金总额</th>
+                            <th>可用保证金</th>
+                            <th>维持保证金</th>
+                            <th>冻结保证金</th>
+                        </tr>
+                        <tr>
+                            <td>保证金</td>
+                            <td>@Model.Account.BailAccount.Total.ToString("C2")</td>
+                            <td>@snap.Usable.ToString("C2")</td>
+                            <td>@snap.Maintain.ToString("C2")</td>
+                            <td>@(os.Account.BailAccount.Frozen.ToString("C2"))</td>
+                        </tr>
+                    </table>
+
+                    <div style="font-size:14px;font-family:'Microsoft YaHei';width:90%;margin:20px auto;">
+                        <span style="color:#ff0000;">友情提示：</span><br />
+                        <div style="text-indent:2em">在期权买卖中维持保证金的金额是根据比特币的价格随时发生变动，如果维持保证金不足，导致保证率小于1时，就会出现爆仓，为避免此情况建议您选择 <span style="color:#ff0000;">开启自动保证金划转</span> 功能</div>
+                    </div>
+                    <div class="cash" style="margin-bottom: 60px; overflow: hidden;width:90%; margin: 20px auto;">
+                        <div style="width:100%;height:5px;float:left;"></div>
+                        <div style="width:30px;height:1px;float:left;"></div>
+                        <div style="width:20px;height:1px;float:right;"></div>
+                        <div style="float:left;">保证金自动划转</div><div data-bind="style:{backgroundPosition:autoAddBailFromCache() ? '0 0':'0px -26px'},click:toggleAutoAddBailFromCache" style="float:right;width:52px;height:24px;background-image:url(@Url.Content("~/content/images/switch.png"))"></div>
+                    </div>
+                }
+
+
+            </div>
+            <div role="tabpanel" class="tab-pane table-responsive" id="bank">
+                @{
+                    Html.RenderAction("BankAccounts");
+                }
+            </div>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <div role="tabpanel" class="tab-pane table-responsive" id="address">
+                @{
+                    Html.RenderAction("CurrenAddress");
+                }
+            </div>
+}
+        </div>
+    </div>
+    <div>
+
+        @if (ViewData["handle"] != null)
+        {
+            <span id="ggg" style="color:white;font-size:12px">@ViewData["handle"]</span>
+        }
+    </div>
+</div>
+
+<!--打开自动追加保证金弹出层-->
+<div class="zcbzj zz ft_14 color0" style="display:none;">
+    <div class="zz_tit ft_16 color5">
+        自动追加保证金
+    </div>
+    <div class="pcText">
+        您正在开启自动追加保证金，当您持有的仓位爆仓时，会从现金账户
+        中划转一定金额的人民币充当保证金，这将降低您被爆仓的概率，
+        但可能存在风险。您确定要开启自动追加保证金功能吗？
+    </div>
+    <div class="pcFoot center">
+        <a class="bgColor1" href="javascript:;">确定</a><a class="bgColor2" href="javascript:;">取消</a>
+    </div>
+</div>
+
+<!--关闭自动追加保证金弹出层-->
+<div class="gbbzj zz ft_14 color0" style="display:none;">
+    <div class="zz_tit ft_16 color5">
+        关闭自动追加保证金
+    </div>
+    <div class="pcText">
+        您正在关闭自动追加保证金功能，当您的账户达到爆仓价的时候，将会被爆仓，当前所持合约会被强平，您确定要关闭该功能吗？
+    </div>
+    <div class="pcFoot center">
+        <a class="bgColor1" href="javascript:;">确定</a><a class="bgColor2" href="javascript:;">取消</a>
+    </div>
+</div>
+
+@Scripts.Render("~/scripts/knockout.min.js")
+<script>
+    var ViewModel = function (authed, autoAddBailFromCache) {
+        var self = this;
+        self.autoAddBailFromCache = ko.observable(autoAddBailFromCache);
+        self.authed = authed;
+        self.toggleAutoAddBailFromCache = function () {
+            if (!self.authed) return;
+
+            var confirmPopup = new Popup($(self.autoAddBailFromCache() ? ".gbbzj" : ".zcbzj")[0], '522px', '297px');
+            confirmPopup.show();
+            var $popup = $(confirmPopup.popup);
+
+            $popup.find(".bgColor1")[0].onclick = function () {
+                $.post("/cache/autoConvert", function (d) {
+                    self.autoAddBailFromCache(d);
+                    confirmPopup.close();
+                });
+            };
+            $popup.find(".bgColor2")[0].onclick = function () {
+                confirmPopup.close();
+            };
+        };
+    };
+    ko.applyBindings(new ViewModel(true,@((User.GetTrader().IsAutoAddBailFromCache).ToString().ToLower())));
+</script>
+<script>
+    $(function () {
+        var ggg = $("#ggg").html();
+        if (ggg == "2") {
+            $("#li1").removeAttr("class");
+            $("#li2").attr("class", "active");
+            $("#li3").removeAttr("class");
+            $("#basic").attr("class", "tab-pane");
+            $("#bank").attr("class", "tab-pane active");
+            $("#address").attr("class", "tab-pane");
+        } else if (ggg == "3") {
+            $("#li1").removeAttr("class");
+            $("#li2").removeAttr("class");
+            $("#li3").attr("class", "active");
+            $("#basic").attr("class", "tab-pane");
+            $("#bank").attr("class", "tab-pane");
+            $("#address").attr("class", "tab-pane active");
+        }
+    });
+</script>

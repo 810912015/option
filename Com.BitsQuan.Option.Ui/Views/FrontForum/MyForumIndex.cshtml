@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "_right.cshtml";
+}
+
+<style>
+
+    /*.title1 {
+        font-size: 16px;
+        background-color: #90dfff;
+        line-height: 46px;
+        background-image: url(../Content/images/bbsicon.png);
+        background-repeat: no-repeat;
+        background-position: 23px 10px;
+        padding-left: 95px;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }*/
+
+</style>
+
+@using Com.BitsQuan.Option.Ui.Models
+@model Com.BitsQuan.Option.Ui.Models.HostModel   
+    @using (Ajax.BeginForm("MyForumIndex", "FrontForum", null, new AjaxOptions
+    {
+        UpdateTargetId = "MyForumIndex",
+        InsertionMode = InsertionMode.Replace
+    }, new { @class = "orm-horizontal",role="form" })){
+  <li class="title1">我的论坛</li>
+     <div style="width: 100%;  margin-top: 25px; line-height: 30px; border-bottom: 3px solid #5daaff">
+         <div style="width: 55%; margin: 0 auto; border: 0px solid #5daaff; ">
+           @Html.LabelFor(a => a.Title)
+             @Html.TextBoxFor(a => a.Title, new { @class = "input", maxlength = "20",style="width:60%" })<br />
+           @Html.LabelFor(a => a.Hcontent)
+             @Html.TextAreaFor(a => a.Hcontent, new { @class = "input", cols = 80, rows = 8,style="margin-left:12%" })<br />
+             @Html.LabelFor(a => a.Htype)
+             @Html.DropDownListFor(a => a.Htype, (List<SelectListItem>)ViewData["s"], new { @class = "input" })<br />
+             <input type="submit" value="发帖" class="subbtn" />
+         </div>
+        </div>
+    }
+    <div style="width: 100%;margin-top:20px ">
+        <ul style="width:100%">
+            <li class="title1"><i class="i1">标题</i><i class="i2">内容</i><i class="i3">作者</i><i class="i4">最后发表</i></li>
+@if (ViewData["myHost"] != null)
+{
+    foreach (var item in ViewData["myHost"] as List<ForumHost>)
+    {
+            <li class="title2">
+                <span class="i1">
+                    @Html.ActionLink("" + (((item.Fname.Length > 11) ? item.Fname.Substring(0, 10) : item.Fname) as System.Collections.IEnumerable) + "", "FrontForumReply", new { fid = item.Id })</span>
+                <span class="i2">
+                    @Html.ActionLink("" + (((item.Fcontent.Length > 21) ? item.Fcontent.Substring(0, 20) : item.Fcontent) as System.Collections.IEnumerable) + "", "FrontForumReply", new { fid = item.Id })
+                </span>
+                <span class="i3" style="color:orange"> &nbsp;@item.FuserName</span>
+                <span class="i4">@item.FDate</span>
+            </li>
+    }
+}
+         </ul>
+        @{Html.RenderPartial("_Pager", ViewData["pager"]);}
+    </div>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.BlasterOperaton>
+
+<input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)" />
+
+<table class="table table-striped">
+    <tr>
+        <th>编号</th>
+        <th>爆仓编号</th>
+        <th>持仓</th>
+        <th>委托时间</th>
+       @* <th>合约名称</th>*@
+        <th>委托
+        @*@if (ViewData["hrji"] != null) { 
+            @ViewData["hrji"]
+        }*@
+        </th>
+        @*<th>委托描述</th>*@
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>
+                    @v.Id
+                </td>
+                <td>@v.BlasterRecordId</td>
+                <td>
+                  @*@v.PositionId*@
+                    @if (v.Order == null)
+                    {
+
+
+                    }
+                    else
+                    {
+                        @v.Order.Trader.Positions.Count
+                    }
+                   
+                </td>
+                
+                <td>
+                    @if (v.Order == null)
+                    {
+                      
+
+                    }
+                    else
+                    {
+                        @v.Order.OrderTime
+                    }
+              </td>
+                @*<td>@v.Order.Contract.Name</td>*@
+                <td>
+                    @if (v.Order == null)
+                    {
+                        var q = MvcApplication.OptionService.Matcher.Container.GetOrderById(v.OpOrderId);
+                        if (q != null)
+                        {
+                            @q.ToShortString()
+                        }
+                        else
+                        {
+                            @v.OpOrderId
+                        }
+                        
+                    }
+                    else
+                    {
+                        @v.Order.ToShortString()
+                    }
+                </td>
+                @*<td>@v.Order.ToShortString()</td>*@
+            </tr> 
+        
+        }
+    }
+</table> 

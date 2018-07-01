@@ -1,0 +1,20 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.ApplicationRole
+
+<div class="form-group">
+    <label for="Name" class="col-md-2 control-label">角色名称</label>
+    <div class="col-md-2">
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+    <label for="BlongTo" class="col-md-2 control-label">从属于</label>
+    <div class="col-md-2">
+        @Html.DropDownListFor(m => m.BelongTo, (IEnumerable<SelectListItem>)ViewData["roles"], new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    <label for="Description" class="col-md-2 control-label">权限描述</label>
+    <div class="col-md-4">
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", style = "height:100px;width:300px" })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+</div>

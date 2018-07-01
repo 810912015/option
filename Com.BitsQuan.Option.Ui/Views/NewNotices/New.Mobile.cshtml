@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = ((ViewBag.Help.Htitle.Length > 25) ? ViewBag.Help.Htitle.Substring(0, 25) : ViewBag.Help.Htitle) + "-最好的比特币期权交易平台";
+}
+
+ 
+
+
+
+
+
+<!--内容-->
+<div >
+    <!--左侧导航-->
+    @Html.Partial("_LeftNav")
+
+    <!--右侧内容-->
+
+    <div class="container">
+        @if (ViewBag.Help != null)
+        {
+            <div style="border-bottom:1px solid #c2c2c2">
+                <p class="title" style="font-family:'Microsoft Yahei','微软雅黑','黑体'; font-size: 22px; font-weight:bold">
+                @((ViewBag.Help.Htitle.Length > 25) ? ViewBag.Help.Htitle.Substring(0, 25) : ViewBag.Help.Htitle)</p>
+                <p class="subtitle">编辑:&nbsp;&nbsp;&nbsp;<span>@((ViewBag.Help.Hperson.Length > 10) ? ViewBag.Help.Hperson.Substring(0, 9) : ViewBag.Help.Hperson)</span>&nbsp;|&nbsp;@ViewBag.Help.Hdate</p>
+            </div>
+
+            <div>
+                <div class="newspic"></div>
+                <p class="text">
+                    @Html.Raw(ViewBag.Help.Hcontent)
+                </p>
+            </div>
+        }
+        else
+        {
+            <h1>您要访问的内容不存在！</h1>
+        }
+    </div>
+</div>

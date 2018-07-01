@@ -1,0 +1,58 @@
+﻿@{
+     
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+<style>
+    .border {
+        border-bottom: 4px solid #666;
+        margin-bottom: 20px;
+        margin-top: 30px;
+    }
+</style>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<link href="~/Content/Secure.css" rel="stylesheet" />
+<div class="border"></div>
+<div class="row1">
+
+    <!--内容-->
+    <div class="box">
+        <!--左侧导航-->
+        <div class="leftnavbox">
+            <ul class="leftnav">
+                <li><a class="funds_center">安全中心</a></li>
+                <li class="prompt">@Ajax.ActionLink("实名认证", "AccountIdentifi", null, ajo, new { @class = "prompta" })</li>
+                <li class="prompt">@Ajax.ActionLink("修改登录密码", "LoginPwd", null, ajo, new { @class = "prompta" })</li>
+                <li class="prompt">@Ajax.ActionLink("修改交易密码", "TradePwd", null, ajo, new { @class = "prompta" })</li>
+                @*<li class="prompt">@Ajax.ActionLink("谷歌验证", "GoogleValidate2", null, ajo, new { @class = "prompta" })</li>*@
+                <li class="prompt">@Ajax.ActionLink("绑定手机", "BindPhone", null, ajo, new { @class = "prompta" })</li>
+                <li class="prompt">@Ajax.ActionLink("交易密码输入设置", "TradeInputSet", null, ajo, new { @class = "prompta" })</li>
+            </ul>
+        </div>
+
+
+
+        <!--右侧内容-->
+
+        <div class="rightbox" id="maincontent">
+            @{
+                if (ViewData["AccNum"] == "1")
+                {
+                    Html.RenderAction("BindPhoneSet");
+                }
+                else if (ViewData["AccNum"] != null && ViewData["AccNum"] != "1")
+                {
+                    Html.RenderAction("AccountInfo");
+                }
+                else
+                {
+                    Html.RenderAction("AccountIdentifi");
+                }
+            }
+        </div>
+
+    </div>
+</div>

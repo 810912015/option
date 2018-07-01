@@ -1,0 +1,131 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.ApplicationRole
+
+@{
+     
+}
+<style>
+  li{
+      list-style-type:none;
+  }
+</style>
+<h4>修改用户角色</h4>
+<div class="pull-right">
+    @Html.ActionLink("返回列表", "Roles", null, new { @class = "btn btn-info btn-xs" })
+</div>
+<hr />
+
+   @{
+       var asl = new System.Text.StringBuilder();
+       foreach (var v in Model.Menus)
+       {
+           asl.AppendFormat("{0},", v.Id);
+       }
+       if (asl.Length > 0)
+       {
+           asl.Remove(asl.Length - 1, 1);
+       }
+       
+       var aslr = asl.ToString();           
+   }
+    <div class="row">
+
+    <div class="col-md-2 col-md-offset-2 ">
+        <div>请选择权限</div>
+        @foreach (var v in Com.BitsQuan.Option.Models.Security.MenuManager.Instance.Tops)
+            {
+            @Html.Partial("_PartialMenuSelect", v)
+            }
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("EditRole", "security", FormMethod.Post, new { @class = "form-horizontal", role = "form",id="theform" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.Hidden("selected", "", new { id="selMids"})
+            @Html.Hidden("already", aslr, new { id="already"})
+            <div class="form-group">
+                <label for="Name" class="col-md-2 control-label">角色名称</label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="Description" class="col-md-2 control-label">权限描述</label>
+                <div class="col-md-4">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", style = "height:100px;width:300px" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+
+            <div class="col-md-2 col-md-offset-2">
+                <input type="submit" value="保存" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+<script>
+    
+    $(function () {
+        var alr = $("#already").val(); 
+        var alra = alr.split(","); 
+        for (var i=0;i<alra.length;i++) {
+            //debugger;
+            $("#cb_" +alra[i]).attr("checked", true);
+        }
+
+        $("a[id^=btn]").click(function () {
+            var tid = $(this).data("tag");
+            var isHidden = $("#" + tid).hasClass("hidden");
+
+            if (isHidden) {
+                $("#" + tid).removeClass("hidden");
+                $(this).removeClass("glyphicon-minus");
+                $(this).addClass("glyphicon-plus");
+            }
+            else {
+                $("#" + tid).addClass("hidden");
+                $(this).removeClass("glyphicon-plus");
+                $(this).addClass("glyphicon-minus");
+            }
+        });
+        $("input[type=checkbox]").change(function () {
+
+            var ttag = $(this).data("tag");
+
+            var ischecked = $(this).attr("checked") == "checked";
+
+
+            $("input[id^=cb_]").each(function (i, j) {
+                var tag = $(j).data("belong");
+                var isin = tag.indexOf(ttag.toString());
+                if (isin >= 0) {
+                     
+                    $(j).attr("checked", ischecked);
+                }
+            });
+
+        });
+        $("#theform").submit(function () {
+            var ma = [];
+            $("input[type='checkbox']").each(function (i, j) {
+                var isChecked = $(j).is(":checked"); 
+                
+                if (isChecked) {
+                    var tag = $(this).data("tag");
+                     
+                    ma.push(tag);
+                };
+            });
+            var sa = ma.join(",");
+             
+            $("#selMids").val(sa);
+        })
+    })
+</script>
+
+
+
+ 
+

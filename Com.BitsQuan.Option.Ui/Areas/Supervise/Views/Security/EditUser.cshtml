@@ -1,0 +1,41 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.ApplicationUser
+
+@{
+     
+}
+
+<h3>用户编辑</h3>
+
+@using (Html.BeginForm("edituser", "security", FormMethod.Post, new { @class="form-horizontal",role="form"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, "用户名", new { @class = "control-label col-md-2" })
+
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @readonly = "readonly", disabled = "desabled" })
+        </div>
+    </div>
+     <div class="form-group">
+         <div class="col-md-2 col-md-offset-2">
+             <div class="btn-group">
+                 <input type="submit" value="保存修改" class="btn btn-success"/>
+                 @Html.ActionLink("返回列表", "users", null, new { @class = "btn btn-info" })
+             </div>
+         </div>
+     </div>
+        <p>
+            
+        </p>
+    
+}
+
+<div>
+    
+</div>
+
+

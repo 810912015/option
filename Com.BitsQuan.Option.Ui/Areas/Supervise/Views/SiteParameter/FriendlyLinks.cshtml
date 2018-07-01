@@ -1,0 +1,158 @@
+﻿<style>
+    .txt {
+        width: 300px;
+        height: 25px;
+    }
+</style>
+
+<div style="margin:50px;line-height:50px">
+    <table>
+        <tr>
+            <td><span class="btn btn-danger">链接名称</span></td>
+            <td><input class="txt" id="par1" type="text" style="height:30px; line-height:20px" /><input class="txt" id="par4" type="hidden" /></td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">链接地址</span></td>
+            <td><input class="txt" id="par2" type="text" style="height:30px;line-height:20px" /></td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">排序</span></td>
+            <td><input class="txt" id="par3" type="text" style="height:30px;line-height:20px" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="button" value="保存" class="btn btn-danger" id="btn" onclick="Save()" style="margin-right:100px"/><input type="button" value="修改" class="btn btn-danger" id="Update" /></td>
+        </tr>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <div id="contractquery">
+            <table class="table table-bordered" style="width:100%;text-align:center;line-height:30px">
+                <tr>
+                    <th>编号</th>
+                    <th>链接名称</th>
+                    <th>链接路径</th>
+                    <th>排序</th>
+                    <th>操作</th>
+                </tr>
+                @if (Model != null)
+                {
+                    foreach (var v in Model)
+                    {
+                        <tr>
+                            <td>@v.Id</td>
+                            <td>@v.LinkName</td>
+                            <td>@v.LinkUrl</td>
+                            <td>@v.SortId</td>
+                            <td>
+
+                                <a href="javascript:void(0)" class="UpdatePage">修改</a>
+                                <a href="javascript:void(0)" class="del">删除</a><span style="display:none">@v.Id</span>
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function Save() {
+        var par1 = $("#par1").val();
+        var par2 = $("#par2").val();
+        var par3 = $("#par3").val();
+        $.get("/Supervise/SiteParameter/FriendLinks", { "par1": par1, "par2": par2, "par3": par3 }, function (d) {
+            if (d) {
+                alert("设置成功");
+            } else {
+                alert("设置失败");
+            }
+        })
+    }
+    function Add() {
+        //添加操作
+        $("#Add").click(function () {
+            var Name = $("#Name").val();
+            var Code = $("#Code").val();
+            var MainBailRatio = $("#MainBailRatio").val();
+            var MainBailTimes = $("#MainBailTimes").val();
+            $.post("/Supervise/Coin/AddMethod", {
+                "name": Name,
+                "Code": Code,
+                "mainBailRatio": MainBailRatio,
+                "mainBailTimes": MainBailTimes
+            }, function (d) {
+                alert(d);
+                DataBind();
+            });
+        })
+    }
+    function Update() {
+
+        //修改操作
+        $("#Update").click(function () {
+            if (parseInt($("#par4").val()) > 0) {
+                var par1 = $("#par1").val();
+                var par2 = $("#par2").val();
+                var par3 = $("#par3").val();
+                $.post("/Supervise/SiteParameter/UpdateFriendLinks", {
+                    "id": id,
+                    "LinkName": par1,
+                    "LinkUrl": par2,
+                    "SortId": par3
+                }, function (d) {
+                    alert(d);
+                    DataBind();
+                });
+               
+            }
+            else {
+                alert("请选择要删除的数据");
+            }
+        })
+
+
+    }
+    function del() {
+        //删除操作
+        $(".del").click(function () {
+            id = $(this).next("span").html();
+            $.post("/Supervise/SiteParameter/DelFriendLinks", {
+                "id": id
+            }, function (d) {
+                alert(d);
+                DataBind();
+            });
+        })
+    }
+    function UpdatePage() {
+        //修改传值
+        $(".UpdatePage").click(function () {
+
+            id = $(this).next("a").next("span").html();
+            $.post("/Supervise/SiteParameter/GetFriendLinksByID", {
+                "id": id
+            }, function (d) {
+                var arr = d.split(',');
+                $("#par4").val(arr[0]);
+                $("#par1").val(arr[1]);
+                $("#par2").val(arr[2]);
+                $("#par3").val(arr[3]);
+            });
+        })
+    }
+    $(function () {
+        del();
+        Add();
+        Update();
+        UpdatePage();
+    });
+    function load() {
+
+
+
+
+    }
+</script>

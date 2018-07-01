@@ -1,0 +1,72 @@
+﻿@model Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.CreateUserModel
+
+@{
+
+    var rsl = (List<SelectListItem>)ViewData["roles"];
+}
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<h3>新建用户</h3>
+@using (Html.BeginForm("createuser", "security", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "theform" }))
+{
+    <div style="width:800px;margin:auto;">
+        @Html.ValidationSummary()
+    </div>
+
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, "请输入用户名", new { @class = "control-label col-md-2" })
+        <div class=" col-md-4">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id = "tbname" })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, "请输入登录密码", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "pwd" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, "请确认登录密码", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TradePassword, "请输入授权码", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PasswordFor(m => m.TradePassword, new { @class = "form-control", id = "pwd" })
+            @Html.ValidationMessageFor(m => m.TradePassword)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m, "请确认授权码", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PasswordFor(m => m.ConfirmTradePassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmTradePassword)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoleId, "请选择权限组", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DropDownListFor(m => m.RoleId, rsl, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.RoleId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <div class="btn-group">
+                <input type="submit" value="保存" class="btn btn-success" />
+                <a href="javascript:history.back();" class="btn btn-info">返回</a>
+            </div>
+
+        </div>
+    </div>
+}
+

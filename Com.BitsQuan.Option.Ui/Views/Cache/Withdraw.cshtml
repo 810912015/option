@@ -1,0 +1,325 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@model Com.BitsQuan.Option.Ui.Models.BankOpModel
+
+
+<style>
+    /*右侧内容*/
+    .withdraw_cash .cash {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-size: 18px;
+        color: #666666;
+        display: block;
+        margin: 0 auto;
+        width: 60px;
+    }
+
+    .cashbox {
+        border: 1px solid #c2c2c2;
+        margin-top: 10px;
+        width: 780px;
+        height: 450px;
+    }
+
+        .cashbox a {
+            font-family: "微软雅黑";
+            color: #666666;
+            font-size: 14px;
+            /*line-height: 31px;*/
+            display: inline-block;
+            width: 136px;
+            text-align: center;
+        }
+
+    .withdraw_cash .cashbox .cny1 {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #c2c2c2;
+        margin-top: 20px;
+    }
+
+    .cashbox .cny1 .cny:hover {
+        background-color: #559be9;
+        color: white; 
+    }
+
+    .cashbox .cny1 .btc:hover {
+        background-color: #559be9;
+        color: white;
+    }
+
+    .cashbox .cny1 .cny {
+        background-image: url(../Content/images/cnyborder.png);
+        background-repeat: no-repeat;
+        background-position: right;
+    }
+
+    .text {
+        color: #666666;
+        font-size: 12px;
+        background-color: #fcf9dc;
+        border: 1px solid #ff7c7c;
+        margin: 20px 0 20px 0;
+        /*line-height: 30px;*/
+        width: 610px;
+        margin-left: 90px;
+    }
+
+        .text span {
+            color: red;
+            font-family: Arial;
+            font-size: 12px;
+        }
+
+        .text i {
+            margin-left: 30px;
+        }
+
+    .cashbox .address4 i {
+        font-family: arial;
+        font-size: 14px;
+        margin-left: 12px;
+    }
+
+    .cashbox .address {
+        /*line-height: 26px;*/
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        /*margin-bottom: 10px;*/
+        margin-left: 110px;
+    }
+
+    .cashbox .address4 {
+        /*line-height: 26px;*/
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        /*margin-bottom: 10px;*/
+        margin-left: 97px;
+    }
+
+    .cashbox input {
+        /*line-height: 26px;*/
+        margin-left: 10px;
+        width: 180px;
+        height: 30px;
+    }
+
+    .cashbox .address .address1 {
+        font-family: "宋体";
+        color: red;
+        font-size: 12px;
+        width: 80px;
+        text-align: center;
+    }
+
+    .cashbox .address2 {
+        /*line-height: 26px;*/
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        margin-bottom: 20px;
+        margin-left: 110px;
+    }
+
+    .cashbox .address3 .ipt1 {
+        color: white;
+        /*line-height: 30px;*/
+        font-family: "微软雅黑";
+        width: 80px;
+        text-align: center;
+        font-size: 14px;
+        background: url(../Content/images/btn1.png) no-repeat;
+        border: none;
+        margin-left: 15px;
+        height: 30px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .cashbox .address3 {
+        /*line-height: 26px;*/
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        /*margin-bottom: 10px;*/
+        margin-left: 97px;
+    }
+
+    #button1 {
+        background: url(../../Content/images/btn.png) no-repeat;
+        border: none;
+        width: 180px;
+        margin-top: 20px;
+        font-family: "微软雅黑";
+        color: white;
+        font-size: 14px;
+        height: 30px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .title {
+        font-family: "微软雅黑";
+        color: #559be9;
+        font-size: 14px;
+        /*line-height: 40px;*/
+        margin-top: 30px;
+    }
+
+    .record .title1 {
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        /*line-height: 28px;*/
+        background-color: #f2f2f2;
+        width: 130px;
+        text-align: center;
+        float: left;
+        border-top: 1px solid #c2c2c2;
+        border-left: 1px solid #c2c2c2;
+    }
+
+    .record {
+        overflow: hidden;
+        width: 782px;
+        margin: 0 auto;
+    }
+
+        .record .title2 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            background-color: #f2f2f2;
+            border-top: 1px solid #c2c2c2;
+        }
+
+        .record .title3 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            background-color: #f2f2f2;
+            border-top: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+        }
+
+        .record .title4 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-left: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .record .title5 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .record .title6 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+    .cashbox .cny1 {
+        width: 782px;
+        margin: 0 auto;
+    }
+
+
+    .leftnavbox {
+        float: left;
+        width: 158px;
+    }
+
+    .withdraw_cash {
+        float: left;
+        margin-left: 18px;
+        margin-top: 10px;
+    }
+
+    .box {
+        overflow: hidden;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .class {
+        line-height: 15px;
+    }
+</style>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@if (ViewBag.msg11 == "请到安全中心实名认证")
+{
+    <script>alert("您没有实名认证");
+        window.location = "/Secure/Index";
+    </script>
+
+}
+else
+{
+
+<div data-cat="func" id="redraw">
+    <div role="tabpanel">
+      
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" id="wCNY" class="active">
+                <a href="#redrawcache" aria-controls="redrawcache" role="tab" data-toggle="tab" style="border-top:none;border-left:none">人民币提现</a>
+            </li>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <li role="presentation" id="wBTC">
+                <a href="#redrawbtc" aria-controls="redrawbtc" role="tab" data-toggle="tab" style="border-left:none">比特币提现</a>
+            </li>
+}
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="redrawcache">
+              
+                  @{  Html.RenderAction("WithdrawCny");}
+           
+            </div>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <div role="tabpanel" class="tab-pane" id="redrawbtc">
+             
+               @{     Html.RenderAction("WithdrawBTC");}
+             
+
+
+            </div>
+}
+        </div>
+    </div>
+</div>
+}
+
+

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    var ajo= new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<div class="row">
+    <div class="col-md-2">
+        <div class=" btn-group btn-group-vertical btn-group-lg pull-right" style="margin-top:20px">
+            @Ajax.ActionLink("委托数据", "Orders", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("资金流水", "AccountTradeRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("交易记录", "Deals", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("持仓明细记录", "UserPositionRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("持仓变动记录", "UserDynamicPositionRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("爆仓数据", "BlastRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("爆仓平仓数据", "BlastOps", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("熔断数据", "FuseRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("用户消息数据", "TraderMsgRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("系统资金流水", "SysAccountRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("行权执行记录", "CerRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("现货成交记录", "sdRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("现货委托", "soRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("后台日志", "LogRecords", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("已行权合约", "../contracts/Query/1", null, ajo, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="col-md-10" id="maincontent">
+        @{Html.RenderAction("Orders");}
+    </div>
+</div>
+

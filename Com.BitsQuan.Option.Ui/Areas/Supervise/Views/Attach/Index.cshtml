@@ -1,0 +1,59 @@
+﻿@{
+    
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<div class="row">
+    <div class="col-md-2">
+        <div class=" panel panel-info" style="margin-top:20px;">
+            @*<div class=" panel panel-heading">
+                <h3 style="text-align:center;">交易数据查看</h3>
+            </div>*@
+            <div class="panel panel-body" style="padding:0;margin:0;">
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("银行卡管理", "BankManege", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("资金流水", "AccountTradeRecords", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("交易记录", "Deals", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("持仓记录", "UserPositionRecords", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("爆仓数据", "BlastRecords", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("爆仓平仓数据", "BlastOps", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="col-md-10" id="maincontent"></div>
+</div>

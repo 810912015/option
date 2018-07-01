@@ -1,0 +1,112 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.HisSpotOrderModel
+
+<div id="hisorderpanel" style="height:370px;overflow-y:auto;">
+    @if (ViewBag.msg != null)
+    {
+        <div class="lead" style="border-top:1px solid #ddd">
+            @ViewBag.msg
+        </div>
+    }
+    @if (Model != null && Model.Orders != null)
+    {
+        @Html.HiddenFor(m => m.PageIndex, new { id = "hispindex" })
+        <table class="table table-striped">
+
+            <tr style="background-color:white;border-bottom:1px solid #ddd;text-align:center;">
+                <td>委托编号</td>
+                <td>委托时间</td>
+                <td>币种</td>
+                <td>类型</td>
+                <td>委托价格</td>
+                <td>委托数量</td>
+                <td>尚未成交</td>
+                <td>成交量</td>
+                <td>状态</td>
+
+            </tr>
+
+            @foreach (var v in Model.Orders)
+            {
+                <tr>
+                    <td>@v.Id</td>
+                    <td>@Convert.ToDateTime(v.OrderTime).ToString("yyyy-MM-dd  HH:mm")</td> 
+                    <td>@v.Coin.Name</td>
+                    <td>@(v.Direction == Com.BitsQuan.Option.Core.TradeDirectType.买 ? "买入" : "卖出")</td> 
+                    <td>@v.Price</td>
+                    <td>@v.ReportCount</td>
+                    <td>@(v.ReportCount - v.TotalDoneCount)</td>
+                    <td>@v.TotalDoneCount</td>
+                    <td>@v.State</td> 
+                    
+                </tr>
+            }
+
+        </table>
+    }
+
+
+    <ul class="pagination">
+        @if (Model != null && Model.PageIndex > 1)
+        {
+            <li><a class="btn btn-primary" id="prehisorder">上一页</a></li>
+
+        }
+        else
+        {
+            <li><span>上一页</span></li>
+
+        }
+
+        @if (Model != null && Model.HasNext)
+        {
+            <li><a class="btn btn-primary" id="nexthisorder">下一页</a></li>
+
+        }
+        else
+        {
+            <li><span>下一页</span></li>
+
+        }
+        <li><a class="btn btn-primary" id="refhisorder">刷新</a></li>
+    </ul>
+    <script>
+        $(function () {
+            var getHisIndex = function () {
+                var hi = $("#hispindex").val();
+                var hii = parseInt(hi, 0);
+                return hii;
+            };
+            var setHisIndex = function (hi) {
+                $("#hispindex").val(hi);
+            };
+            var qhis = function (hi) {
+                $.get("/spot/myhistoryorder?pageIndex=" + hi, function (d) {
+                    $("#hisorderpanel").html(d);
+                })
+            };
+            $("#prehisorder").click(function () {
+                var hi = getHisIndex() - 1;
+                qhis(hi);
+                setHisIndex(hi);
+            });
+            $("#nexthisorder").click(function () {
+                var hi = getHisIndex() + 1;
+                qhis(hi);
+                setHisIndex(hi);
+            });
+            $("#refhisorder").click(function () {
+                var hi = getHisIndex();
+                qhis(hi);
+            });
+
+            $('#spotorders a[href="#coinpanel"]').click(function (e) {
+                e.preventDefault();
+                qhis(1);
+               // $("#refhisorder").trigger("click");
+                $(this).tab('show')
+            })
+        })
+    </script>
+
+
+</div>

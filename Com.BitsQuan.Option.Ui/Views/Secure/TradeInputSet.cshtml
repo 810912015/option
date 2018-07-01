@@ -1,0 +1,144 @@
+﻿
+<style>
+    /*右侧内容*/
+    .setup_In {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-size: 18px;
+        color: #666666;
+        display: block;
+        margin: 0 auto;
+        width: 140px;
+    }
+
+    .cny1_In {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #e6e6e6;
+        margin-top: 20px;
+        width: 782px;
+        margin-bottom: 20px;
+        margin-left: 20px;
+    }
+
+        .cny1_In a {
+            font-family: "微软雅黑";
+            color: #666666;
+            font-size: 14px;
+            line-height: 30px;
+            display: inline-block;
+            width: 136px;
+            text-align: center;
+        }
+
+    .cashbox_In {
+        border: 1px solid #c2c2c2;
+        width: 820px;
+    }
+
+        .cashbox_In li {
+            line-height: 30px;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #535353;
+        }
+
+    .one_In {
+        line-height: 28px;
+    }
+
+    .select_In {
+        margin-left: 10%;
+        line-height: 36px;
+    }
+
+        .select_In .selectipt_In {
+            font-size: 14px;
+            font-family: Airal;
+            border: 1px solid #c2c2c2;
+            height: 30px;
+            font-family: "微软雅黑";
+            margin-left: 10%;
+        }
+
+    .btnt2_In {
+        background: url(../../content/images/btn.png) no-repeat;
+        width: 182px;
+        height: 32px;
+        color: white;
+        line-height: 22px;
+        border: 0px solid #5daaff;
+        font-family: "微软雅黑";
+        margin-left: 2%;
+    }
+
+    .select1_In {
+        line-height: 36px;
+        margin: 10px 0 10px 80px;
+    }
+
+    #trade-inputset input {
+        margin-bottom: 20px;
+        line-height: 30px;
+        margin-left: 10px;
+        width: 20px;
+        color: #535353;
+    }
+</style>
+<!--右侧内容-->
+<div id="trade-inputset" class="cashbox_In">
+    <ul>
+        <li class="cny1_In"><a class="cny_In">交易密码输入设置</a></li>
+        <li class="select_In">
+
+            <input type="radio" name="RadioGroup1" value="n" id="RadioGroup1_0">
+            <span class="ts">每笔交易都输入交易密码</span>
+
+            <br>
+
+            <input type="radio" name="RadioGroup1" value="1" id="RadioGroup1_1">
+            每次登录只输入一次交易密码
+
+            <br>
+
+            <input type="radio" name="RadioGroup1" value="0" id="RadioGroup1_1">
+            每次交易都不需要输入交易密码
+
+        </li>
+
+        <li style="padding-left:103px">&nbsp;输入交易密码:<input type="password" class="input" id="txtcount" style="border:1px solid #c2c2c2;width:200px"></li>
+        <li class="select1_In"><input class="btnt2_In input" type="submit" value="确定" style="color:#ffffff;" onclick="Save()"></li>
+        <li style="padding-left:23%"><span style="color:red" id="error"></span></li>
+
+
+    </ul>
+</div>
+
+<script>
+    function Save() {
+        var count = null;
+        $("input:radio").each(function () {
+            if (this.checked) {
+                count = $(this).val();
+            }
+        });
+        if (count == null) {
+            $("#error").html("请选择！");
+            return;
+        }
+        var tpwd = $("#txtcount").val();
+        //    alert(tpwd);
+        $.get("/Secure/SetInputTradeCount", { "count": count, "tpwd": tpwd }, function (d) {
+            //alert(d);
+            if (d == "True" || d == true) {
+                $("#error").html("修改成功");
+            } else {
+                $("#error").html("交易密码错误");
+            }
+        })
+
+    }
+
+
+
+</script>
+

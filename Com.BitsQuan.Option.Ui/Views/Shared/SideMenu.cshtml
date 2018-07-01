@@ -1,0 +1,323 @@
+﻿<style>
+    .side-menu {
+        bottom: 0;
+    }
+
+        .side-menu.fixed {
+            position: fixed;
+            bottom: 0;
+        }
+
+        .side-menu li {
+            width: 56px;
+            height: 48px;
+            padding-bottom: 10px;
+            vertical-align: middle;
+            position: relative;
+        }
+
+            .side-menu li .icon-w {
+                width: 56px;
+                display: block;
+                height: 48px;
+                background: #FFF;
+                color: #88909b;
+                text-align: center;
+                cursor: pointer;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .side-menu li .caption {
+                height: 48px;
+                width: 56px;
+                display: none;
+                background: #8a929c;
+                height: 48px;
+                color: #FFF;
+                line-height: 48px;
+                text-align: center;
+                cursor: pointer;
+                font-size: 12px;
+                overflow: hidden;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+                .side-menu li .caption .bds_more {
+                    background: none;
+                    display: block;
+                    height: 48px;
+                    text-align: center;
+                    margin: 0;
+                    line-height: 48px;
+                    color: #FFF;
+                }
+
+            .side-menu li .caption2 {
+                line-height: 165%;
+                padding: 5px 0 0;
+            }
+
+            .side-menu li .caption a {
+                display: block;
+                color:#fff;
+            }
+
+                .side-menu li .caption a:hover {
+                    background-color: #8a929c;
+                    color: #FFF;
+                }
+
+        .side-menu .icon-w .icon {
+            background: url(../content/images/smenu_icons.jpg);
+            display: block;
+            margin: 7px auto 0;
+        }
+
+        .side-menu .icon-w .icon-contact {
+            background-position: 0 0;
+            width: 30px;
+            height: 35px;
+        }
+
+        .side-menu .icon-w .icon-calculator {
+            background-position: -35px 0;
+            width: 30px;
+            height: 30px;
+        }
+
+        .side-menu .icon-w .icon-qq {
+            background:url(@Url.Content("~/content/images/qq.jpg"));
+            width: 30px;
+            height: 34px;
+        }
+
+        .side-menu .icon-w .icon-share {
+            background-position: -70px 0;
+            width: 32px;
+            height: 29px;
+        }
+
+        .side-menu .icon-w .icon-return {
+            background-position: -110px -30px;
+            width: 24px;
+            height: 25px;
+        }
+
+        .side-menu .contact-box {
+            position: absolute;
+            left: -227px;
+            top: 0;
+            width: 230px;
+            padding: 0 12px 0 0;
+            display: none;
+            background: url(../images/trans.gif);
+        }
+
+            .side-menu .contact-box .icon {
+                background: url(../content/images/p2p_sprite.png);
+            }
+
+            .side-menu .contact-box .icon-qq {
+                background-position: -365px 0;
+                width: 17px;
+                height: 20px;
+                vertical-align: middle;
+                margin: 7px 5px 0 15px;
+                float: left;
+            }
+
+            .side-menu .contact-box .inner {
+                border: 1px solid #ddd;
+                position: relative;
+                background: #FFF;
+            }
+
+            .side-menu .contact-box .qq-panel {
+                padding: 15px;
+            }
+
+                .side-menu .contact-box .qq-panel iframe {
+                    float: left;
+                }
+
+                .side-menu .contact-box .qq-panel .more {
+                    float: right;
+                    margin: 5px 0 0;
+                }
+
+                    .side-menu .contact-box .qq-panel .more:hover {
+                        text-decoration: underline;
+                        color: #7faf2a;
+                    }
+
+            .side-menu .contact-box .avtar {
+                width: 80px;
+                padding: 1px;
+                border: 1px solid #DDD;
+                float: left;
+                margin: 0 10px 0 0;
+            }
+
+            .side-menu .contact-box .info {
+                width: 100px;
+                font-size: 14px;
+                float: left;
+            }
+
+                .side-menu .contact-box .info .tit {
+                    line-height: 18px;
+                }
+
+                    .side-menu .contact-box .info .tit a {
+                        float: right;
+                        font-size: 12px;
+                        color: #2989a4;
+                    }
+
+                        .side-menu .contact-box .info .tit a:hover {
+                            color: #7faf2a;
+                            text-decoration: underline;
+                        }
+
+            .side-menu .contact-box .qq {
+                width: 100px;
+                height: 33px;
+                display: block;
+                background: #09a3dc;
+                line-height: 33px;
+                color: #FFF;
+                float: left;
+            }
+
+                .side-menu .contact-box .qq:hover {
+                    background: #0ab8f9;
+                }
+
+                .side-menu .contact-box .qq.online {
+                    background: #09a3dc;
+                }
+
+            .side-menu .contact-box .c-green {
+                padding: 5px 0;
+            }
+
+            .side-menu .contact-box .c-orange {
+                text-align: left;
+            }
+
+            .side-menu .contact-box .icon-arrow {
+                background-position: -135px 0;
+                position: absolute;
+                width: 10px;
+                height: 20px;
+                right: -10px;
+                top: 15px;
+            }
+
+            .side-menu .contact-box .tel {
+                background: #f7f7f7;
+                height: 60px;
+                padding: 20px 20px 0;
+            }
+
+        .side-menu .qqgroup {
+            position: absolute;
+            left: -227px;
+            top: 0;
+            width: 230px;
+            padding: 0 12px 0 0;
+            display: none;
+            background: url(../images/trans.gif);
+        }
+        .side-menu .qqgroup .inner {
+            border: 1px solid #ddd;
+            position: relative;
+            background: #FFF;
+            line-height:30px;
+        }
+        .side-menu .qqgroup .icon {
+            background: url(../content/images/p2p_sprite.png);
+        }
+        .side-menu .qqgroup .icon-arrow {
+            background-position: -135px 0;
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            right: -10px;
+            top: 15px;
+        }
+</style>
+<div class="side-menu" style="right:20px; display: block;position: fixed; top: auto;bottom:0;">
+    <ul>
+        <li class="contact">
+            <div class="icon-w" style="display: block;"><i class="icon icon-contact"></i></div>
+            <div class="caption caption2" style="display: none;">
+                联系<br>
+                客服
+            </div>
+            <div class="contact-box" style="display: none;">
+                <div class="inner">
+                    <i class="icon icon-arrow"></i>
+                    <div class="qq-panel clearfix">
+                        <a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4000010672&aty=0&a=0&curl=&ty=1" target="_blank" class="qq"><i class="icon icon-qq"></i>QQ在线</a>
+                        <a target="_blank" href="@Url.Action("index","webhelper")" class="more">更多&gt;</a>
+                    </div>
+                    <div class="c-orange tel">
+                        7x24小时服务热线：<br>
+                        <span class="f24">400-001-0672</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="calculator">
+            <div class="icon-w" style="display: block;"><i class="icon icon-calculator"></i></div>
+            <div class="caption" style="display: none;"><a id="btn-calc" href="javascript:;">计算器</a></div>
+        </li>
+        @*<li class="qqgroup-menu">
+            <div class="icon-w" style="display: block;"><i class="icon icon-qq"></i></div>
+            <div class="caption" style="display: none; opacity: 1;"><a href="javascript:;">QQ群</a></div>
+            <div class="qqgroup" style="display: none;">
+                <div class="inner">
+                    <i class="icon icon-arrow"></i>
+                    <div>比权网官方交流群1：384234827</div>
+                    <div>比权网官方交流群2：281872036</div>
+                </div>
+            </div>
+        </li>*@
+        <li class="return">
+            <div class="icon-w" style="display: block; opacity: 1;"><i class="icon icon-return"></i></div>
+            <div id="btn-gotop" class="caption caption2" style="display: none; opacity: 1;">返回<br>顶部</div>
+        </li>
+    </ul>
+</div>
+@Html.Partial("calc")
+@Scripts.Render("~/scripts/simplepopup.js","~/scripts/draggable.js")
+<script>
+    $(function () {
+        $(".side-menu>ul>li").on("mouseover mouseout", function () {
+            $(this).children("div").toggle();
+        });
+        $(".contact-box").hover(function () {
+            $(".contact icon-w").hide();
+            $(".contact caption").show();
+        }, function () {
+            $(".contact icon-w").show();
+            $(".contact caption").hide();
+        });
+
+        var popup = new Popup(document.getElementById("CalcTop"));
+        $("#btn-calc").click(function () {
+            popup.show();
+        });
+        $("#btn-close").click(function () { popup.close(); });
+        $("#btn-gotop").click(function () { });
+        $(".return").click(function () {
+            $('body,html').animate({ scrollTop: 0 }, 1000);
+        });
+        new Draggable($("#calcheader")[0], $("#CalcTop")[0]);
+    });
+</script>

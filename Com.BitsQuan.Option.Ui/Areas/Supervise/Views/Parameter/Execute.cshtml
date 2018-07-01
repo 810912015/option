@@ -1,0 +1,62 @@
+﻿@model Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.ManualExcuteModel
+
+@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+    var cs = (List<SelectListItem>)ViewData["contracts"];
+}
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<h4>
+    手动行权
+</h4>
+
+@if (cs==null||cs.Count==0)
+{ 
+    <div class="lead">没有可以手动行权的合约,无法手动行权</div>
+
+}
+else
+{
+    if (ViewBag.msg != null)
+    {
+        <div class="lead">@ViewBag.msg</div>
+    }
+    using (Ajax.BeginForm("execute", null, ajo, new { role = "form", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContractId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ContractId, cs, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContractId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ExecuteBasePrice, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ExecuteBasePrice, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ExecuteBasePrice)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="开始行权" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style>
+        .btn {
+            margin-top:20px;
+            margin-left:5px;
+        }
+        .td_right {
+            text-align: right;
+            font-weight:700;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h4>新建帮助</h4>
+        <hr />
+@using (Ajax.BeginForm("AddMethod", "Helper", new AjaxOptions { HttpMethod = "Post" }, new { enctype = "multipart/form-data", @id = "form0" }))
+{
+    <table border="0" style="line-height:40px">
+        <tr>
+            <td class="td_right">标题：</td>
+            <td><input type="text" id="title" style="width:100%" name="title"/><input type="hidden" id="id" style="width:100%" name="id" /><input type="hidden" id="urlPath" style="width:100%" name="urlPath" /><input type="hidden" id="ReadTime" style="width:100%" name="ReadTime" /></td>
+        </tr>
+        <tr>
+            <td class="td_right">内容：</td>
+            <td>
+                <textarea style="margin-top:10px" cols="50" rows="3" id="content" name="content"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">类型：</td>
+            <td>
+                <select id="type" name="type" style="width:100%">
+                    <option value="1">新闻中心</option>
+                    <option value="2">公告中心</option>
+                    <option value="3">帮助中心</option>
+                    <option value="4">期权知识</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">发布人：</td>
+            <td>
+                <input type="text" id="publishName" style="width:100%" name="publishName" />
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">上传图片：</td>
+            <td>
+                <input type="file" id="upImg" style="width:100%" name="upImg" />
+                <img src="#" id="imgSrc"  width="100" height="100" />
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">前台显示：</td>
+            <td>
+                <input type="checkbox" checked="checked" id="ckeShow" name="ckeShow"/>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <div style="float:left">
+                    <input class="btn btn-default" type="button" value="修改" id="Update" style="display:none" />
+                    <input class="btn btn-default" type="button" value="添加" id="Add" />
+                </div>
+                <input class="btn btn-default" type="button" value="重置" id="reset" style="float:right" />
+            </td>
+        </tr>
+    </table>
+}
+        
+
+    </div>
+
+</body>
+</html>
+

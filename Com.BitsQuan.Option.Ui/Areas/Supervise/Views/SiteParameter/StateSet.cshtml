@@ -1,0 +1,87 @@
+﻿<style>
+    .txt {
+        width: 300px;
+        height: 25px;
+    }
+</style>
+
+<div style="margin:50px;line-height:50px">
+    <table>
+        <tr>
+            <td><span class="btn btn-danger">开启网站</span></td>
+            <td>
+                <select id="par1" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">开启用户登录</span></td>
+            <td>
+                <select id="par2" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">开启用户注册</span></td>
+            <td>
+                <select id="par3" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </td>
+        </tr>
+        @*<tr>
+            <td><span class="btn btn-danger">维护公告</span></td>
+            <td><input class="txt" id="par4" type="text" /></td>
+        </tr>*@
+        <tr>
+            <td></td>
+            <td><input type="button" value="保存" class="btn btn-danger" onclick="Save()" /></td>
+        </tr>
+    </table>
+
+
+
+</div>
+
+
+<script>
+    function Save() {
+        var par1 = $("#par1").val();
+        var par2 = $("#par2").val();
+        var par3 = $("#par3").val();
+        if (par1 == "1") {
+            par1 = true;
+        } else {
+            par1 = false;
+        }
+
+        if (par2 == "1") {
+            par2 = true;
+        } else {
+            par2 = false;
+        }
+
+        if (par3 == "1") {
+            par3 = true;
+        } else {
+            par3 = false;
+        }
+   //    var par4 = $("#par4").val();, "par4": par4
+        $.get("/Supervise/SiteParameter/UpdateSiteAll2", { "par1": par1, "par2": par2, "par3": par3 }, function (d) {
+            if (d) {
+                alert("设置成功");
+            } else {
+                alert("设置失败");
+            }
+        })
+    }
+
+
+
+</script>

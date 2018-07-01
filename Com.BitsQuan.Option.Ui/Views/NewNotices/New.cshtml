@@ -1,0 +1,350 @@
+﻿@{
+    ViewBag.Title = ((ViewBag.Help.Htitle.Length > 25) ? ViewBag.Help.Htitle.Substring(0, 25) : ViewBag.Help.Htitle) + "-最好的比特币期权交易平台";
+}
+@Styles.Render("~/Content/newnotices.css")
+<style>
+    /*重置*/
+
+
+
+
+    /*内容*/
+
+    .box {
+        overflow: hidden;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    /*.leftnavbox {
+        float: left;
+    }*/
+
+    .rightbox {
+        float: left;
+        margin-left: 18px;
+        width: 820px;
+        border: 1px solid #c2c2c2;
+    }
+    /*左侧导航*/
+    /*.leftnav {
+        background-color: #f2f2f2;
+        border: 1px solid #c2c2c2;
+        width: 158px;
+        height: 330px;
+    }
+
+        .leftnav li a {
+            width: 158px;
+            display: block;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #535353;
+            line-height: 40px;
+            text-indent: 24px;
+        }
+
+        .leftnav li .funds_center {
+            font-family: "微软雅黑";
+            font-size: 16px;
+            color: #535353;
+            line-height: 45px;
+            background-image: url(images/border.png);
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+
+        .leftnav li .prompta:hover {
+            color: white;
+        }
+
+        .leftnav .prompt:hover {
+            background-color: #559be9;
+        }*/
+
+    /*右侧内容*/
+    .title {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 38px;
+        width: 820px;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+        color: #8f8e8e;
+        line-height: 22px;
+        width: 820px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+        .subtitle span {
+            font-size: 12px;
+            color: #a6df9e;
+        }
+
+    .newspic {
+        width: 553;
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .text {
+        font-size: 12px;
+        font-family: "宋体";
+        line-height: 20px;
+        margin-left: 100px;
+        margin-top: 20px;
+        color: #8f8e8e;
+    }
+
+    .text1 {
+        font-size: 14px;
+        font-family: "微软雅黑";
+        line-height: 26px;
+        margin-left: 100px;
+        margin-top: 20px;
+        color: #5e5e5e;
+        margin-bottom: 40px;
+        font-weight: 600;
+    }
+
+        .text1 span {
+            font-size: 12px;
+        }
+
+    .btn a {
+        display: inline-block;
+        width: 90px;
+        border: 1px solid #c2c2c2;
+        line-height: 38px;
+        border-bottom: none;
+        color: #292929;
+    }
+
+    .btn {
+        padding-top: 20px;
+        border-top: 1px solid #c2c2c2;
+        padding-left: 100px;
+    }
+
+    .inputbox input {
+        width: 550px;
+        border: 1px solid #c2c2c2;
+        height: 88px;
+        margin: 30px 0 10px 36px;
+    }
+
+    .inputbox {
+        width: 624px;
+        border-left: 1px solid #c3c3c3;
+        border-right: 1px solid #c3c3c3;
+    }
+
+    .btn .a1 {
+        text-align: center;
+        border-top: 1px solid #ffc919;
+    }
+
+    .btn .a2 {
+        width: 518px;
+        border-left: none;
+        background-color: #fafafa;
+        padding-left: 15px;
+        border-bottom: 1px solid #c2c2c2;
+    }
+
+    .name {
+        width: 624px;
+        overflow: hidden;
+        padding-bottom: 20px;
+        border-left: 1px solid #c3c3c3;
+        border-right: 1px solid #c3c3c3;
+    }
+
+    .nameinput {
+        float: left;
+        line-height: 25px;
+        font-size: 14px;
+        padding-top: 10px;
+        padding-left: 36px;
+    }
+
+    .namebtn {
+        float: left;
+        line-height: 25px;
+        font-size: 14px;
+        padding-top: 10px;
+    }
+
+        .namebtn button {
+            width: 75px;
+            height: 25px;
+            background-image: url(images/btn.png);
+            background-repeat: no-repeat;
+            display: inline-block;
+        }
+
+    .nameinput input {
+        height: 23px;
+        border: 1px solid #c2c2c2;
+        line-height: 25px;
+        margin-left: 5px;
+    }
+
+    .discuss {
+        width: 550px;
+        line-height: 30px;
+        border-bottom: 1px solid #c2c2c2;
+        margin-left: 36px;
+    }
+
+    .nt {
+        float: left;
+        margin-left: 36px;
+        line-height: 14px;
+    }
+
+    .nt1 {
+        float: left;
+        margin-left: 310px;
+        line-height: 14px;
+    }
+
+    .ntbox {
+        overflow: hidden;
+        padding-top: 20px;
+        border-left: 1px solid #c2c2c2;
+        border-right: 1px solid #c2c2c2;
+        width: 624px;
+    }
+
+        .ntbox span {
+            color: #559be9;
+        }
+
+
+
+    /*页脚*/
+    .footer {
+        overflow: hidden;
+        width: 1000px;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+
+    .about {
+        float: left;
+        width: 284px;
+    }
+
+        .about p {
+            font-family: "宋体";
+            font-size: 12px;
+            line-height: 26px;
+            color: white;
+            padding-top: 18px;
+        }
+
+    .boofborder {
+        float: left;
+        margin: 0 10px 0 10px;
+    }
+
+    .weixin {
+        float: left;
+        width: 232px;
+    }
+
+    .footer img {
+        display: block;
+        padding-right: 40px;
+    }
+
+    .contact li {
+        font-family: "宋体";
+        font-size: 12px;
+        color: #e4e4e4;
+        line-height: 26px;
+    }
+
+    .footerbox {
+        background-color: #535353;
+        margin-top: 30px;
+    }
+
+    .contact .help li a {
+        font-family: "宋体";
+        font-size: 12px;
+        color: #e4e4e4;
+        line-height: 40px;
+        margin-right: 12px;
+    }
+
+    .contact .help li {
+        float: left;
+    }
+
+    .contact .contactimg {
+        display: block;
+        padding-bottom: 14px;
+    }
+
+    .qq a {
+        float: left;
+        color: white;
+        font-size: 12px;
+        font-family: "宋体";
+    }
+
+    .qq {
+        overflow: hidden;
+    }
+
+    .footbd {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .footbd img {
+            display: block;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+</style>
+
+
+
+
+
+<!--内容-->
+<div class="box">
+    <!--左侧导航-->
+    @Html.Partial("_LeftNav")
+
+    <!--右侧内容-->
+
+    <div class="rightbox">
+        @if (ViewBag.Help != null)
+        {
+            <div style="border-bottom:1px solid #c2c2c2">
+                <p class="title" style="font-family:'Microsoft Yahei','微软雅黑','黑体'; font-size: 22px; font-weight:bold">@((ViewBag.Help.Htitle.Length > 25) ? ViewBag.Help.Htitle.Substring(0, 25) : ViewBag.Help.Htitle)</p>
+                <p class="subtitle">编辑:&nbsp;&nbsp;&nbsp;<span>@((ViewBag.Help.Hperson.Length > 10) ? ViewBag.Help.Hperson.Substring(0, 9) : ViewBag.Help.Hperson)</span>&nbsp;|&nbsp;@ViewBag.Help.Hdate</p>
+            </div>
+
+            <div>
+                <div class="newspic"></div>
+                <p class="text">
+                    @Html.Raw(ViewBag.Help.Hcontent)
+                </p>
+            </div>
+        }
+        else
+        {
+            <h1>您要访问的内容不存在！</h1>
+        }
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.UpdL_PwdModel
+
+<style>
+    label {
+        font-weight: normal;
+    }
+
+    .register {
+        font-family: 'Microsoft YaHei';
+        margin-left: 170px;
+    }
+
+    table.register td {
+        height: 45px;
+    }
+</style>
+
+<div id="tradepwdupd">
+    @using (Ajax.BeginForm("tradepwdupd", "secure", null, new AjaxOptions
+        {
+            UpdateTargetId = "tradepwdupd",
+            InsertionMode = InsertionMode.Replace
+        },
+        new {id="form1", @class = "form-horizontal", role = "form" }))
+    {
+        @*<p class="Biao"><span class="possword"></span>修改交易密码</p>*@
+        <div class="posswordbox_td">
+            <div class="title_td"><p>&nbsp;&nbsp;为确保您的账户财产安全，请牢记您的交易密码且不要轻易泄漏给他人</p></div>
+            <table class="register">
+                <tr>
+                    <td align="right">
+                        @Html.LabelFor(a => a.Lnpwd)
+                    </td>
+                    <td>
+                        @Html.PasswordFor(a => a.Lnpwd, new { @class="input",style = "border:1px solid #c2c2c2;", onmouseout = "this.style.border='1px solid #c2c2c2'", onmouseover = "this.style.border='1px solid #559be9'" })
+                        @Html.ValidationMessageFor(m => m.Lnpwd)
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        @Html.LabelFor(a => a.Lnpwd2)
+                    </td>
+                    <td>
+                        @Html.PasswordFor(a => a.Lnpwd2, new {@class="input", style = "border:1px solid #c2c2c2;", onmouseout = "this.style.border='1px solid #c2c2c2'", onmouseover = "this.style.border='1px solid #559be9'" })
+                        @Html.ValidationMessageFor(m => m.Lnpwd2)
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        @Html.LabelFor(a => a.Code, new { style = "width:98px;text-align:right" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Code, new {@class="input", style = "border:1px solid #c2c2c2;", onmouseout = "this.style.border='1px solid #c2c2c2'", onmouseover = "this.style.border='1px solid #559be9'" })
+                        <i class="ipt1" style="width:80px;height:30px;line-height:30px;display:inline-block;text-align:center;color:white;cursor:pointer;background-repeat:no-repeat;background-position:0 -36px;background-image:url(@Url.Content("~/content/images/change_pwd_btn.png"))" id="getCode_td">&nbsp;点击获取&nbsp;</i>
+                        @Html.ValidationMessageFor(m => m.Code)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div style="margin-left:10px;width:177px;height:30px;line-height:30px;display:inline-block;text-align:center;color:#ffffff;cursor:pointer;background-repeat:no-repeat;background-position:0 0;background-image:url(@Url.Content("~/content/images/change_pwd_btn.png"))" onclick="$('#form1').submit();">保存</div>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                @if (ViewBag.msg != null)
+                {
+                    <p style="color:red;width:150px"> @ViewBag.msg</p>
+                }
+                @if (ViewData["Phone_td"] != null)
+                {
+                    <span id="Phone_td" style="color:white">@ViewData["Phone_td"]</span>
+                }
+            </div>
+        </div>}
+</div>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function(){
+        $("#getCode_td").bind("click",function(){getOldCode();});
+    });
+    //获得验证码
+    function getOldCode() {
+        var $btn = $("#getCode_td");
+        $btn.unbind("click").css("cursor", "");
+        var phone = $("#Phone_td").html();//手机号
+        if (phone == null || phone == "") {
+            alert("请先绑定手机号");
+            return;
+        }
+
+        $.get("/Secure/getOldCode", { "phone": phone }, function (d) {
+            time($("#getCode_td"));
+        });
+    }
+    var wait = 30;
+    function time(o) {
+        if (wait == 0) {
+            o.bind("click", function(){getOldCode();}).css("cursor", "pointer");
+            o.html("&nbsp;点击获取&nbsp;");
+            wait = 30;
+        } else {
+            o.html("&nbsp;等待(" + wait + ")&nbsp;");
+
+            wait--;
+            setTimeout(function () {
+                time(o)
+            },
+        1000)
+        }
+    }
+
+
+</script>

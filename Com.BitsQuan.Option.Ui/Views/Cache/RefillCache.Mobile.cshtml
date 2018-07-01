@@ -1,0 +1,202 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@using Com.BitsQuan.Option.Ui.Controllers
+@model Com.BitsQuan.Option.Ui.Models.BankOpModel2
+
+
+
+<div>
+
+
+
+    <div id="refillcache">
+        <div>
+            @using (Ajax.BeginForm("RefillCache", "cache", null, new AjaxOptions
+                        {
+                            UpdateTargetId = "refillcache",
+                            InsertionMode = InsertionMode.Replace
+                        },
+        new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken();
+                <div style="border-bottom: 1px solid #c2c2c2;">
+                    <div class="shuoming" style="color:#000000;font-size:14px;font-weight:bold;margin-top:10px">充值说明</div>
+                    <div class="shuoming">
+                        1 为方便财务精准区分您的汇款信息，请您在汇款时确保汇款金额 <span style="color:#ff0000">保留到小数点后两位（例如：30,000.50人民币、50,000.72人民币）</span><br />
+                        2 每笔汇款充值金额要求 <span style="color:#ff0000">最低为100.01人民币（小于100.01人民币不予受理）</span><br />
+                        3 在进行连续多笔汇款时，<span style="color:#ff0000">请填写不同的汇款金额</span>以便财务能够清晰区分您的汇款信息<br />
+                    </div>
+                </div>
+
+            <!--第一段-->
+                <div style="display:block" id="div_one">
+
+                    <div class="rech">
+                        充值方式<select style="color:#97b356;border:2px solid #b3d465;margin-left:8px;">
+                            <option style="color:#535353">银行卡</option>
+                            @*<option style="color:#535353">比权网充值卡</option>*@
+                        </select>
+                    </div>
+
+                    <div>
+                        <span> @Html.LabelFor(m => m.BankAccountId)</span>
+                        <select id="BankAccountId" name="BankAccountId" style="color:#97b356;border:2px solid #b3d465;margin-left:8px;">
+                            @foreach (var i in (IList<BankAccount>)ViewData["accounts"])
+                            {
+                                <option value="@i.Number" salesofficename="@i.SalesOfficeName" bankname="@i.BankName">@(i.BankName + "-" + i.Number)</option>
+                            }
+                        </select>
+                        <span style="color: #CA4A75" id="bankerr"></span>
+                        @Html.ValidationMessageFor(a => a.BankAccountId, "", new { style = "margin-right:10px" })
+
+                        @Html.ActionLink("[管理银行卡]", "Index", new { id = 2 }, new { style = "width:100px;color:red" })
+                       
+                    </div>
+                    <div class="je">
+                        <div class="je1">
+                            <div class="je2">@Html.LabelFor(m => m.Delta)</div>
+                            <div class="je3">
+                                @Html.TextBoxFor(a => a.Delta, new { id = "txtnum", onmousedown = "blurVal()", style = "width:115px;height:23px" })
+                                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=@(CacheController.ServiceQQNumber)&site=qq&menu=yes"><img border="0" src="~/content/images/qq.png" alt="点击这里给我发消息" title="点击这里给我发消息" /></a>
+                                @Html.ValidationMessageFor(a => a.Delta)
+                                <span style="color: #CA4A75" id="error"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <i class="btn btn-primary"   onclick="next2()" id="getCode2">&nbsp;下一步&nbsp;</i>
+                    </div>
+
+                </div>
+
+                <!--第二段-->
+                <div class="huikuan" style="display:none;" id="div_two">
+                    <div>
+                        <div>汇款金额 &nbsp;&nbsp;<span style="color:#ff0000;" id="money"></span></div>
+                        <div>汇款支行 &nbsp;&nbsp;<span id="salesofficename"></span></div>
+                        <div>汇款银行 &nbsp;&nbsp;<span id="bankName"></span></div>
+                        <div>汇款卡号 &nbsp;&nbsp;<span id="number"></span></div>
+                        <div>备注/附言/摘要 &nbsp;&nbsp;<span style="color:#ff0000;font-size:12px;" id="uid">@ViewData["Uid"]</span></div>
+                        <div style="color:#ff0000;">
+                            请务必在汇款时在“备注/附言/摘要”栏目写上您的UID
+                        </div>
+                        <div>
+                            附言中请不要填写除了数字以外的其它字符（比特币、莱特币等），否则不能及时到账！
+                        </div>
+                        <div>
+                            此数字每次提交时都会重新生成，为了您的到账速度，请务必在“备注”中认真填写
+                        </div>
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="提交汇款信息">
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <table class="table table-striped">
+            <caption>
+                <div class="record-title">
+                    充值记录
+                </div>
+
+            </caption>
+            <tr>
+                <th>编号</th>
+                <th>时间</th>
+                <th>充值方式</th>
+                <th>充值金额</th>
+                <th>充值银行</th>
+                <th>状态</th>
+
+            </tr>
+            @if (ViewData["refills"] != null)
+            {
+                foreach (var v in ViewData["refills"] as List<BankRecord>)
+                {
+                    <tr>
+                       
+                        <td>@v.Id</td>
+                        <td>@v.When</td>
+                        <td>银行汇款</td>
+                        <td>@v.Delta</td>
+                        <td>@v.Account.BankName</td>
+                        <td>@(v.IsApproved ? "已审核" : "审核中")</td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+    @if(ViewBag.msg != null){
+        @:alert("@ViewBag.msg");
+            }
+
+    function blurVal() {
+        $("#error").html("");
+    }
+    function next2() {
+        $("#bankerr").html("");
+        var num = $("#txtnum").val(); //金额
+        var NumError = $("#txtnum-error").html();//文本提示错误信息
+
+        //  alert("mes"+mes);
+        var bank = $("#BankAccountId").val();//银行卡
+        if (bank == "" || bank == null) {
+            $("#bankerr").html("不能为空!");
+            return;
+        }
+        if (NumError != "" && NumError != null && NumError != "undefined") {
+            return;
+        }
+        var r = $("#error").html();
+        if (num == "" || num == null) {
+            $("#error").html("请填写充值金额");
+            return;
+        }
+        if (num < 100.01) {
+            $("#error").html("小于100.01人民币不予受理");
+            return;
+        }
+        if (r != "" && r != null) {
+            return;
+        }
+
+        $("#money").html(num);
+        $("#money2").html(num);
+        var $selectedBankAccount = $("#BankAccountId>option:selected");
+        $("#salesofficename").text($selectedBankAccount.attr("salesofficename"));
+        $("#bankName").text($selectedBankAccount.attr("bankname"));
+        $("#number").text($selectedBankAccount.val());
+
+        $("#div_one").attr("style", "display:none");
+        $("#div_two").attr("style", "display:block");
+
+
+    }
+
+    function next3() {
+        $("#error").html("");
+        $("#div_two").attr("style", "display:none");
+        $("#div_three").attr("style", "display:block");
+    }
+    function back2() {
+        $("#error").html("");
+        $("#div_one").attr("style", "display:block");
+        $("#div_two").attr("style", "display:none");
+    }
+
+    function back3() {
+        $("#error").html("");
+        $("#div_two").attr("style", "display:block");
+        $("#div_three").attr("style", "display:none");
+    }
+
+</script>

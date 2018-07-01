@@ -1,0 +1,39 @@
+﻿
+
+<div data-cat="func" id="flowaa">
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" class="active"><a href="#messagesaa" aria-controls="messagesaa" role="tab" data-toggle="tab" style="border-top:none;border-left:none">支付</a></li>
+            <li role="presentation"><a href="#homeaa" aria-controls="homeaa" role="tab" data-toggle="tab" style="border-top:none;">现金</a></li>
+            <li role="presentation"><a href="#profileaa" aria-controls="profileaa" role="tab" data-toggle="tab" style="border-top:none;">冻结</a></li>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <li role="presentation"><a href="#btc" aria-controls="btc" role="tab" data-toggle="tab" style="border-top:none;">BTC</a></li>
+}
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane " id="homeaa">
+                @{
+                    Html.RenderAction("CacheFlow", new { pageIndex = 1 });
+                }
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profileaa">
+                @{
+                    Html.RenderAction("FreezeFlow", new { pageIndex = 1 });
+                }
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="messagesaa">
+                @{
+                    Html.RenderAction("TradeFlow", new { pageIndex = 1 });
+                }
+            </div>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <div role="tabpanel" class="tab-pane" id="btc">
+                @{
+                    Html.RenderAction("BtcTradeFlow", new { pageIndex = 1 });
+                }
+            </div>
+}
+        </div>
+
+    </div>
+</div> 

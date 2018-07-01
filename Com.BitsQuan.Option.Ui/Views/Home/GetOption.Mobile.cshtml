@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+<table class="table table-striped">
+    
+    <tr> 
+        <th colspan="2">期权合约</th>
+    </tr>
+    <tr>
+        
+        <th  >合约</th>
+        <th  >详情</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var v in Model)
+        {
+              <tr>
+        <td>@v.Code <strong>@v.Name</strong></td>
+         
+        <td>
+            最新:@v.NewestDealPrice,最高:@v.HitPrice,最低:@v.LowPrice,成交:@v.Times
+            持仓:@v.PositionTotal
+        </td>
+    </tr>
+        }
+    }
+  
+</table> 

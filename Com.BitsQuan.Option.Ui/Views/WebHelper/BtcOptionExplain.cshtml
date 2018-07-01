@@ -1,0 +1,189 @@
+﻿@using Com.BitsQuan.Option.Ui.Extensions
+@Styles.Render("~/content/webhelper.css")
+<style>
+    #btc-option-explain a.index {
+        color: #E56600;
+    }
+
+        #btc-option-explain a.index:hover {
+            text-decoration: underline;
+        }
+
+    #btc-option-explain a.title {
+        color: #000;
+    }
+</style>
+<div class="box">
+    <div class="text" id="btc-option-explain">
+        <div style="padding:0 30px 0 30px">
+            <h2 class="article_title" style="font-family:'helvetica neue', 'hiragino sans gb', stheiti, 'microsoft yahei', Tahoma, Arial, STHeiti, sans-serif;color:#333333;font-size:22px;text-align:center;background-color:#FFFFFF;">
+                一分钟玩转比特币期权
+            </h2>
+            <hr />
+            <strong>
+                <strong>
+                    <strong>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12.0000pt;">&nbsp; &nbsp; </span><span style="font-family:微软雅黑;font-size:12.0000pt;">&nbsp;<span style="color:#E56600;"> <a href="#1" class="index">1. 什么是比特币期权？</a></span></span><span style="font-family:微软雅黑;font-size:12.0000pt;"></span>
+                        </p>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12pt;color:#E56600;">&nbsp; &nbsp; &nbsp; <a href="#2" class="index">2. 什么是合约单位？</a></span><span style="font-family:微软雅黑;font-size:12.0000pt;"></span>
+                        </p>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12pt;color:#E56600;">&nbsp; &nbsp; &nbsp;&nbsp;<a href="#3" class="index">3. 合约结算价格如何确定？</a></span><span style="font-family:微软雅黑;font-size:12.0000pt;"></span>
+                        </p>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12pt;color:#E56600;">&nbsp; &nbsp; &nbsp;&nbsp;<a href="#4" class="index">4. 什么是认购期权？</a></span><span style="font-family:微软雅黑;font-size:12.0000pt;"></span>
+                        </p>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12pt;color:#E56600;">&nbsp; &nbsp; &nbsp; <a href="#5" class="index">5. 什么是认沽期权？</a></span><span style="font-family:微软雅黑;font-size:12.0000pt;"></span>
+                        </p>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12pt;color:#E56600;">&nbsp; &nbsp; &nbsp; <a href="#6" class="index">6. 保证金如何计算？</a></span><span style="font-family:微软雅黑;font-size:12.0000pt;"></span>
+                        </p>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12pt;color:#E56600;">&nbsp; &nbsp; &nbsp; <a href="#7" class="index">7. 什么时候会发生爆仓？</a></span><span style="font-family:微软雅黑;font-size:12.0000pt;"></span>
+                        </p>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12pt;color:#E56600;">&nbsp; &nbsp; &nbsp;&nbsp;<a href="#8" class="index">8. 什么是熔断机制？</a></span><span style="font-family:微软雅黑;font-size:12.0000pt;"></span>
+                        </p>
+                        <p class="MsoNormal" style="margin-left:0.0000pt;text-indent:0.0000pt;text-align:justify;">
+                            <span style="font-family:微软雅黑;font-size:12pt;color:#E56600;">&nbsp; &nbsp; &nbsp; <a href="#9" class="index">9. 怎样估算期权的价值？</a></span>
+                        </p>
+                        <br />
+                    </strong>
+                </strong>
+            </strong>
+            <p>
+                <br />
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong></span></strong><strong><strong></strong><a name="1" class="title">什么是比特币期权？</a></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:33px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">比特币期权即比特币指数期权，期权购买者通过支付一笔期权费给期权出售方，换取在未来某个时间以某种价格买进或卖出基于比特币指数的标的物的权利。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">&nbsp; &nbsp; &nbsp; 比特币期权允许交易者进行买开、卖开、买平、卖平操作，且对于投资者期权合约持仓数量没有限制。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong><span style="font-family:微软雅黑, 'Microsoft YaHei';"><a name="2" class="title">什么是合约单位？</a></span></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">比权网比特币期权合约单位为0.1比特币，1份期权合约对应0.1比特币；</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">例如：目前比特币的价格为1400元，则该期权合约所对应的价值为140元。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong><span style="font-family:微软雅黑, 'Microsoft YaHei';"><a name="3" class="title">合约结算价格如何确定？</a></span></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:31px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">比权网期权的合约行权价格是通过对国内交易量最大的3家比特币现货交易所的比特币最新成交价格加权平均后（即比特币价格指数）进行结算。目前选取的是火币网、okcoin、比特币中国，具体行情可参考&nbsp;</span><a href="http://www.btc123.com/">http://www.btc123.com/</a>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:33px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">比权网周合约期权行权时间：每周五 16：00</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:33px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">比权网月合约期权行权时间：每月最后一周周五16：00</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><strong><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"></span><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong></span></strong></strong><span style="font-family:微软雅黑, 'Microsoft YaHei';"><a name="4" class="title">什么是认购期权？</a></span></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">认购期权又被称为看涨期权，是指买方可以在特定日期按照特定价格买入约定数量合约标的的期权合约</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">例如：假设比特币目前价格为1400元，以6元的价格买入“BTC20150605购1400”合约1份，合约单位为0.1BTC，当比特币价格为1460元以上时，投资者将稳稳获利，若比特币价格跌破1400元时，投资者可以放弃行权，最多只损失买入期权时权利金6元。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><strong><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"></span><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong></span></strong></strong><span style="font-family:微软雅黑, 'Microsoft YaHei';"><a name="5" class="title">什么是认沽期权？</a></span></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">认沽期权又被称为认沽期权，指买方可以在特定日期按照特定价格卖出约定数量合约标的的期权合约。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">例如：假设比特币目前价格为1400元，以5元的价格买入BTC20150605沽1400合约1份，合约单位为0.1BTC，当比特币价格跌破1450元以下时，投资者将稳稳获利，若比特币价格涨至1500元以上时，投资者可以放弃行权，最多只损失买入期权时权利金5元。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><strong><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"></span><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong></span></strong></strong><span style="font-family:微软雅黑, 'Microsoft YaHei';"><a name="6" class="title">保证金如何计算？</a></span></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">比权网允许交易者进行买开、卖开合约，买开认购、认沽期权时，会冻结买开所对应的金额，例如：以10元的价格买入BTC20150605购1400合约5份，相对应的冻结金额为50元；</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">合约卖开时，比权网采用的是动态保证金制度即维持保证金，若交易者需要卖开合约时，需要保证金账户内有相应的资金，</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="color:red;">比特币认购期权的维持保证金计算公式为：max{3*认购期权，(认购期权+10%*合约单位比特币价格)}</span></strong><strong><span style="color:red;"></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">例如:以5元的价格卖开BTC20150605购1400合约1份，合约单位0.1BTC，此时比特币价格为1450元，此时卖开期权合约需要维持保证金：max{3*5,(5+10%*0.1*1450)}=19.5元，若1分钟后比特币价格变为1400元时，此时卖开需要维持保证金：max{3*5,(5+10%*0.1*1400)}=19元；</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="color:red;">比特币认沽期权的维持保证金计算公式为：min{合约单位行权价，max[3*认沽期权，(认沽期权+10%*合约单位行权价)]}</span></strong><strong><span style="color:red;"></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">例如：以3元的价格卖开BTC20150605沽1400合约1份，合约单位0.1BTC，此时比特币价格为1450元，此时卖开期权合约需要维持保证金：min{0.1*1400,max[3*3,(3+10%*0.1*1400)}=17元；若1分钟后比特币价格变为1400元时，此时卖开需要维持保证金min{0.1*1400,max[3*3,(3+10%*0.1*1400)}=17元。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><strong><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"></span><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong></span></strong></strong><span style="font-family:微软雅黑, 'Microsoft YaHei';"><a name="7" class="title">什么时候会发生爆仓？</a></span></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="color:red;">比权网推出保证率概念。保证率=(期权保证金-保证金冻结)/维持保证金。</span></strong><strong><span style="color:red;"></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="color:red;">当保证率小于1.1时，若投资者开通了保证金自动划转功能，系统将从现金账户划款到保证金账户。</span></strong><strong><span style="color:red;"></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="color:red;">当保证率小于1时，投资者将发生爆仓。</span></strong><strong><span style="color:red;"></span></strong><strong><span style="color:red;"></span></strong><strong><span style="color:red;"></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">例如：当前保证金帐号中有资金100元，以5元的价格卖开BTC20150605购1400合约1份，合约单位0.1BTC，此时比特币价格为1450元，此时卖开期权合约需要维持保证金：max{3*5,(5+10%*0.1*1450)}=19.5元；以10元的价格委托买入BTC20150605购1400合约7份，相对应的冻结金额为70元；</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">此时保证率=（100-70）/19.5=1.54 保证率大于1，帐号不会发生爆仓；</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">若比特币的价格上涨，涨到2500元，此时卖开的维持保证金： max{3*5,(5+10%*0.1*2600)}=31元；</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">此时保证率=（100-70）/31=0.97 此时<strong><span style="color:red;">保证率小于1，保证金账户发生爆仓，系统将进行爆仓前准备，按顺序主要进行如下操作：卖开委托撤单，买开委托撤单，买平卖平委托撤单，释放相应资金，若保证率仍小于1，则会采用阶梯爆仓的方式。每次爆仓系统买平1/10的义务仓，买平后若保证率&gt;＝1，系统不再买平。</span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><strong><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"></span><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong></span></strong></strong><span style="font-family:微软雅黑, 'Microsoft YaHei';"><a name="8" class="title">什么是熔断机制？</a></span></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">熔断机制（Circuit Breaker），是指为了防止某一合约价格短时间内发生剧烈波动而设置一个熔断价格，使合约买卖报价在一段时间内只能在这一价格范围内交易的机制。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">交易价格触及5分钟内最低价的1.5倍时，启动上涨熔断机制。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">交易价格触及5分钟内最高价的0.5倍时，启动下跌熔断机制。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">熔断时间为5分钟，5分钟后恢复正常价格。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:32px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">期权成交价格在合约单位比特币价格3%以上，启动熔断机制跟踪。比如，比特币的认购期权行权价为2000元，合约单位为0.1比特币，则合约单位比特币价格为200元。则认购期权成交价格在6元以上时启动熔断机制跟踪，认购期权成交价格低于6元时，系统不启动熔断机制跟踪，但此时上涨熔断价格为9元，下跌熔断价格为0.1元。</span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';"><strong><span style="font-family:宋体;"><strong><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"></span><strong><span style="font-family:宋体;"><span style="font-family:微软雅黑, 'Microsoft YaHei';font-size:12px;"><strong><span style="font-family:宋体;"><strong>●</strong></span></strong></span><strong><strong>&nbsp;&nbsp;</strong></strong></span></strong></strong><span style="font-family:微软雅黑, 'Microsoft YaHei';"><a name="9" class="title">怎样估算期权的价值？</a></span></span></strong></span>
+            </p>
+            <p style="font-family:sans-serif;font-size:15.555556297302246px;text-indent:24px;">
+                <span style="font-family:微软雅黑, 'Microsoft YaHei';">期权的理论价值受不同的因素所影响。比权网提供的期权估值计算器使用布莱克-舒尔斯(Black-Scholes)期权定价模型进行计算，行权方式为欧式。具体计算方式可参考：<a href="~/WebHelper/TheoryPriceExplain" target="_blank">@Url.ContentFullPath("~/WebHelper/TheoryPriceExplain")</a></span>
+            </p>
+            <p>
+                <br />
+            </p>
+            <p class="MsoNormal" style="text-indent:18pt;">
+                <span style="font-family:宋体;font-size:12.0000pt;"></span><span style="font-family:宋体;font-size:12.0000pt;"></span>
+            </p>
+            <p class="MsoNormal" style="text-indent:24pt;">
+                <span style="font-family:宋体;font-weight:bold;font-size:12.0000pt;"></span>
+            </p>
+        </div>
+    </div>
+</div>
+

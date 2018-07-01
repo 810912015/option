@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Ui.Models.ApplicationRole>
+
+@{
+   
+}
+<div class="container">
+    <h3>角色管理</h3>
+
+    <br/>
+    <p class="h4">
+        角色是权限的主体,通过为用户设置角色从而为用户赋权或收权.
+        权限项是功能点(很像菜单),每个功能点含菜单中未列出的相关功能.如角色中的增加修改等.
+        可以任意增加角色,也可以将用户加入角色或从角色中删除.
+        组织管理者角色拥有最高权限(可以使用全部功能)    </p>
+    <br/>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                角色名称
+            </th>
+            
+            <th>
+                描述
+            </th> 
+            <th>
+                操作
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Name == "组织管理者") { continue; }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                 
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <div class="btn-group">
+
+
+                        @Html.ActionLink("权限修改", "EditRole", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                        @Html.ActionLink("删除", "DeleteRole", new { id = item.Id }, new { @class = "btn btn-danger btn-xs", onclick = "return confirm('删除该角色，将同时删除角色下的登录用户，确定删除？')" })
+                    </div>
+                         </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+        @Html.ActionLink("添加新角色", "CreateRole", null, new { @class="btn btn-primary"})
+    </p>
+</div>

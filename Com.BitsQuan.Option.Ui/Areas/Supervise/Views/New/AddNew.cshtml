@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style>
+        .btn {
+            margin-top: 20px;
+            margin-left: 5px;
+        }
+
+        .td_right {
+            text-align: right;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h4>新建新闻</h4>
+        <hr />
+        <table border="0" style="line-height:40px">
+            <tr>
+                <td class="td_right">标题：</td>
+                <td><input type="text" id="title" style="width:100%" /></td>
+            </tr>
+            <tr>
+                <td class="td_right">内容：</td>
+                <td>
+                    <textarea style="margin-top:10px" cols="50" rows="3" id="content"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_right">前台显示：</td>
+                <td>
+                    <input type="checkbox" checked="checked" id="ckeShow" />
+
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <div style="float:left">
+                        <input class="btn btn-default" type="button" value="修改" id="Update" style="display:none" />
+                        <input class="btn btn-default" type="button" value="添加" id="Add" />
+                    </div>
+                    <input class="btn btn-default" type="button" value="重置" id="reset" style="float:right" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

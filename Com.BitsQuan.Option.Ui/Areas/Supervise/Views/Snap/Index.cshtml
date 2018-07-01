@@ -1,0 +1,45 @@
+﻿@{
+     
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<style>
+    .simple-trader{
+        border:1px solid lightgray;
+        width:200px;
+        display:inline-block;
+        padding:5px;
+        margin:5px;
+    }
+    .simple-trader div{
+        word-break:break-all;
+        word-wrap:break-word;
+    }
+</style>
+<div class="container" style="margin-top:30px;">
+    <div class="row">
+        <div class="col-md-2">
+            <div class=" btn-group btn-group-vertical btn-group-lg">
+                @Ajax.ActionLink("实时监控", "real", null, ajo, new { @class = "btn btn-primary" })
+                @Ajax.ActionLink("委托列表", "orders", null, ajo, new { @class = "btn btn-primary" })
+                @Ajax.ActionLink("人民币账户汇总", "cache", null, ajo, new { @class = "btn btn-primary" })
+                @Ajax.ActionLink("保证金账户汇总", "bail", null, ajo, new { @class = "btn btn-primary" })
+                @Ajax.ActionLink("虚拟币账户汇总", "coin", null, ajo, new { @class = "btn btn-primary" })
+                @Ajax.ActionLink("合约持仓汇总", "pos", null, ajo, new { @class = "btn btn-primary" })
+                @Ajax.ActionLink("期权交易排行", "optiontop", null, ajo, new { @class = "btn btn-primary" }) 
+                @Ajax.ActionLink("资金管理", "Manual", null, ajo, new { @class = "btn btn-primary" })
+                @Ajax.ActionLink("冻结错误修正", "CorrectFrozen", null, ajo, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="col-md-10" id="maincontent">
+             
+               @{Html.RenderAction("real");}
+             
+        </div>
+    </div>
+</div>
+

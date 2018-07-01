@@ -1,0 +1,54 @@
+﻿
+<h4>现有合约列表</h4>
+<table class="table table-bordered">
+    <tr>
+        <th>编号</th>
+        <th>代码</th>
+        <th>名称</th>
+        <th>币种</th>
+        <th>合约单位</th>
+        <th>类型</th>
+        <th>行权价</th>
+        <th>行权基准价</th>
+        <th>行权时间</th>
+        <th>购沽</th>
+        <th>标的</th>
+        <th>是否行权</th>
+        <th>操作</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Id</td>
+                <td>@v.Code</td>
+                <td>@v.Name</td>
+                <td>@v.Coin.Name</td>
+                <td>@v.CoinCount</td>
+                <td>@v.ContractType</td>
+                <td>@v.ExcutePrice</td>
+                <td>@v.ExcuteBasePrice</td>
+                <td>@v.ExcuteTime</td>
+                <td>@v.OptionType</td>
+                <td>@v.Target</td>
+                <td>
+                    @if (v.IsNotInUse == true)
+                    { @("已行权") }
+                    else
+                    {
+                        @("未行权")
+                    }
+            </td>
+            <td>
+                @if(!v.IsDel||v.IsNotInUse){
+                <a href="javascript:void(0)" class="del">删除</a><span style="display:none">@v.Id</span>
+                }
+            </td>
+        </tr>
+        }
+    }
+</table>
+@{
+    Html.RenderPartial("_Pager", ViewData["pager"]);
+}

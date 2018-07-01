@@ -1,0 +1,18 @@
+说明：
+1.名词：
+  期权：Option，
+  交易撮合：Match
+  合约:Contract
+  委托:Order
+  交易用户:Trader
+  资金账户:Account
+  用户持仓:Deal
+
+2.解决方案结构：
+
+  a.Core包含常用工具和业务对象定义
+  b.Provider包含对系统的数据提供程序
+  c.Match包含交易撮合系统;
+  d.Imp包含所有系统逻辑;
+  e.2个test分别对应逻辑和界面的单元测试;
+  d.ui是界面,一个mvc网站

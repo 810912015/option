@@ -1,0 +1,80 @@
+﻿@{
+     
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+
+    <h4>帮助</h4>
+    <select id="SelectByType" onchange="ooh()">
+        <option value="0">全部</option>
+        <option value="1">新闻</option>
+        <option value="2">公告</option>
+        <option value="3">帮助</option>
+    </select>
+    <table class="table table-bordered" style="width:100%;text-align:center;line-height:30px">
+        <tr>
+            <th>编号</th>
+            <th>标题</th>
+            <th>内容</th>
+            <th>发布时间</th>
+            <th>发布人</th>
+            <th>是否在前台显示</th>
+            <th>最后更新时间</th>
+            <th>图片路径</th>
+            <th>操作</th>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var v in Model)
+            {
+                <tr>
+                    <td>@v.Id</td>
+                    <td>@((v.Htitle.Length > 10) ? v.Htitle.Substring(0, 9) : v.Htitle)...</td>
+                    <td>@((v.Hcontent.Length > 21) ? v.Hcontent.Substring(0, 20) : v.Hcontent)...</td>
+                    <td>@v.Hdate</td>
+                    <td>@v.Hperson</td>
+                    <td>@v.HforeShow</td>
+                    <td>@v.HlastDate</td>
+                    <th>@v.imgSrc</th>
+                    <td>
+                        
+                        <a href="javascript:void(0)" class="AddPage">添加</a>
+                        <a href="javascript:void(0)" class="UpdatePage" onclick="UpdatePage(@(v.Id));">修改</a>
+                        <a href="javascript:void(0)" class="del">删除</a><span style="display:none">@v.Id</span>
+                                          
+                        </td>
+                    </tr>
+            }
+        }
+    </table>
+    @{
+        Html.RenderPartial("_Pager", ViewData["pager"]);
+    }
+
+
+
+
+</body>
+</html>
+
+@section scripts{
+    <script>
+
+        $(".del").click(function () {
+            //获得当前节点的下一个span节点
+            alert($(this).next("span").html());
+        })
+
+
+
+    </script>
+}
+
+

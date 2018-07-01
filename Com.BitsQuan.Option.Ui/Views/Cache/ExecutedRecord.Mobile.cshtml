@@ -1,0 +1,55 @@
+﻿@*@model IEnumerable<Com.BitsQuan.Option.Core.AccountTradeRecord>*@
+@model Com.BitsQuan.Option.Ui.Models.WhereModel
+
+<div style="min-height:400px;" id="cache2">
+    <div id="cacheflow">
+        @using (Ajax.BeginForm("ExecutedRecord", "cache", null, new AjaxOptions
+    {
+        UpdateTargetId = "ExecutedRecord"
+    }, new
+    {
+        role = "form"
+    }))
+        {
+
+        }
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                   <th>合约</th>
+                    <th>行权详情</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+                @if (ViewData["CacheFlow"] != null)
+                {
+                    foreach (var v in ViewData["CacheFlow"] as List<Com.BitsQuan.Option.Core.Contract>)
+                    {
+                        <tr>
+                            <td><em>@v.Id</em>
+                                @v.Code
+                                <strong>@v.Name</strong></td>
+                            <td>
+                                合约单位:@v.CoinCount|
+                                类型:@v.OptionType|
+                                行权价:@v.ExcutePrice|
+                                行权基准价:@v.ExcuteBasePrice|
+                                行权时间:@v.ExcuteTime</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+        @Html.Partial("_Pager", ViewData["cache"])
+
+        <div class="input-append date">
+
+            <span class="add-on">
+                <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+            </span>
+        </div>
+    </div>
+</div>

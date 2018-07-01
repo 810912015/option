@@ -1,0 +1,12 @@
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\Com.BitsQuan.Option.Core.dll.config
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\Com.BitsQuan.Option.Core.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\Com.BitsQuan.Option.Core.pdb
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\EntityFramework.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\Newtonsoft.Json.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\EntityFramework.xml
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\bin\Debug\Newtonsoft.Json.xml
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\obj\Debug\Com.BitsQuan.Option.Core.csprojResolveAssemblyReference.cache
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\obj\Debug\Com.BitsQuan.Option.Core.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Option.Core\obj\Debug\Com.BitsQuan.Option.Core.pdb

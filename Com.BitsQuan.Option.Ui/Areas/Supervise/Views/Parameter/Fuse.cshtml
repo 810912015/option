@@ -1,0 +1,73 @@
+﻿@model Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.FuseModel
+ 
+@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+
+<h4>
+    熔断参数设置
+</h4>
+
+@if (ViewBag.msg != null)
+{ <div style="color:red;">
+        @ViewBag.msg
+    </div>
+    <div class="lead">
+        熔断参数为:@Html.DisplayNameFor(m => m.FuseSpanInMin)<strong>@Model.FuseSpanInMin</strong>
+        ,@Html.DisplayNameFor(m => m.MinFuseRatioOfBtcPrice)<strong>@Model.MinFuseRatioOfBtcPrice</strong>,
+        @Html.DisplayNameFor(m => m.RaiseRatio)<strong>@Model.RaiseRatio</strong>,
+        @Html.DisplayNameFor(m => m.FallRatio)<strong>@Model.FallRatio</strong>
+    </div>
+}
+else
+{
+    using (Ajax.BeginForm("fuse", null, ajo, new { role = "form", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FuseSpanInMin, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.FuseSpanInMin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FuseSpanInMin)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MinFuseRatioOfBtcPrice, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.MinFuseRatioOfBtcPrice, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MinFuseRatioOfBtcPrice)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RaiseRatio, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.RaiseRatio, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RaiseRatio)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FallRatio, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.FallRatio, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FallRatio)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="保存" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    }
+}

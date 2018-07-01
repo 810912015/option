@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比权网络管理</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <style>
+        h3{
+            text-align:center;
+        }
+        body{
+            padding-top:50px;
+        }
+    </style>
+    <style>
+        .ft {
+            margin-top: 20px;
+            border-top: 1px dotted #D5D5D5;
+        }
+
+            .ft .copyright {
+                padding: 10px 0 10px 0;
+                text-align: center;
+                background: #7a53b2;
+                color: #fff;
+                font-size: 12px;
+            }
+
+                .ft .copyright a {
+                    color: #fff;
+                }
+    </style>
+</head>
+<body>
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand">比权网络管理</span>
+                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/home/index">前台</a></li>
+                    <li><a href="/supervise/contracts/index">合约</a></li>
+                    <li><a href="/Supervise/appusers/Index">用户</a></li>
+                    <li><a href="/supervise/coin/coinindex">货币</a></li>
+                    <li><a href="/supervise/tradedata/index">数据</a></li>
+                    <li><a href="/supervise/audit/index">审核</a></li>
+                    <li><a href="/supervise/helper/helpindex">帮助</a></li>
+                    <li><a href="/supervise/Forum/ForumIndex">论坛</a></li>
+                    <li><a href="/supervise/security/index">安全</a></li>
+                    <li><a href="/supervise/parameter/index">参数</a></li>
+                    <li><a href="/supervise/SiteParameter/index">网站参数</a></li>
+                    <li><a href="/supervise/snap/index">监控</a></li>
+                    <li><a href="/help">Api</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div style="min-height:760px;">
+            @RenderBody()
+        </div>
+        
+        <div class="ft">
+
+            <div class="copyright">
+                <a href="/aboutus.html">关于我们</a><span> | </span><a>联系我们</a><span> | </span><a>加入我们</a><span> | </span><a>法律声明</a><span> | </span><a>服务条款</a><span> | </span><a>费用说明</a><span> | </span><a>友情链接</a> <br>
+                沪ICP备00000000号-0　 		版权所有 © 2014 比权网络科技(上海)有限公司
+            </div>
+        </div>
+    </div>
+
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

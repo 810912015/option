@@ -1,0 +1,39 @@
+﻿<style>
+    .txt {
+        width: 300px;
+        height: 25px;
+    }
+</style>
+
+<div style="margin:50px;line-height:50px">
+    <table>
+        <tr>
+            <td><span class="btn btn-danger">用户登录过期时间</span></td>
+            <td><input class="txt" id="par1" /></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="button" value="保存" class="btn btn-danger" onclick="Save()" /></td>
+        </tr>
+    </table>
+
+
+
+</div>
+
+<script>
+    function Save() {
+        var par1 = $("#par1").val();
+        $.get("/Supervise/SiteParameter/UpdateSiteAll4", { "par1": par1}, function (d) {
+            if (d) {
+                alert("设置成功");
+            } else {
+                alert("设置失败");
+            }
+        })
+    }
+
+
+
+</script>

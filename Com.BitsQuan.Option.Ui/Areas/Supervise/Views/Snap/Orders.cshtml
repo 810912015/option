@@ -1,0 +1,41 @@
+﻿@using System.Linq
+@using Com.BitsQuan.Option.Core
+@using Com.BitsQuan.Option.Match
+@{
+    var ajo = new AjaxOptions
+    {
+        UpdateTargetId = "ordersQueryResult",
+        InsertionMode = InsertionMode.Replace
+    };
+    int count = 0;
+}
+
+<div class="container">
+  
+        <h3>
+            委托监控:选定合约当前未成交的合约.请点击合约名称选择合约
+        </h3>
+ 
+   
+        <div class=" btn-group" style="padding:10px;">
+
+            @foreach (var v in MvcApplication.OptionService.Model.Contracts)
+            {
+                count ++;
+
+                @Ajax.ActionLink(v.Code + "--" + v.Name, "ordersquery", new { contractCode = v.Code }, ajo, new { @class ="btn btn-default" })
+            }
+        </div>
+
+ 
+    <div class="row">
+      
+        <div   id="ordersQueryResult">
+
+            @{Html.RenderAction("ordersquery");}
+
+        </div>
+
+
+    </div>
+</div>

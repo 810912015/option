@@ -1,0 +1,85 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "新闻公告-最好的比特币期权交易平台";
+}
+
+<link href="~/Content/newnotices.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<style>
+    .footbd {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .footbd img {
+            display: block;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+    .border {
+        border-bottom: 4px solid #666;
+        margin-bottom: 20px;
+        margin-top: 30px;
+    }
+</style>
+<body style="padding:0px;margin:0px">
+
+    <div class="border"></div>
+    <!--内容-->
+    <div class="box" style="padding:0px;margin:0px;width:1170px;margin:0px auto">
+        <!--左侧导航-->
+        @Html.Partial("_LeftNav")
+
+        <!--右侧内容-->
+        <div class="rightbox">
+            <div class="news-head">@ViewBag.Type.ToString()</div>
+            @if (ViewBag.News != null)
+            {
+                foreach (Help item in ViewBag.News)
+                {
+                    <ul style="margin:0px;padding:0px">
+
+                        <li>
+                            <p style="text-align:left;padding-top:5px;font-size:16px">
+                                @Html.ActionLink(item.Htitle.Length > 30 ? item.Htitle.Substring(0, 30) : item.Htitle, "New", new { id = item.Id }, new { @class = "news-list-title" })
+                            </p>
+                            <p class="title2box">
+                                @if (item.Hcontent.Length < 100)
+                                { <a class="title2" href="/NewNotices/New/@item.Id">@Html.Raw(item.Hcontent)</a> }
+                                else
+                                {
+                                    <a class="title2" href="/NewNotices/New/@item.Id">@Html.Raw(Regex.Replace(Regex.Replace(Regex.Replace(item.Hcontent, "&nbsp;", " "), "<.+?>", " "), "<br>", " ", RegexOptions.IgnoreCase).Substring(0, 100))...</a>
+                                }
+                            </p>
+                        </li>
+                    </ul>
+                }
+                <div class="text-center">
+                    <ul class="pagination">
+                        <li @(ViewBag.Pager.PageIndex == 1 ? "class=disabled" : "")>
+                            <a href="@Url.Action("Index", new { id = ViewBag.Pager.PageIndex==1?1:ViewBag.Pager.PageIndex - 1,type=(int)ViewBag.Type })" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        @for (var i = 1; i <= ViewBag.Pager.PageCount; ++i)
+                        {
+                            <li @(i == ViewBag.Pager.PageIndex ? "class=active" : "")><a href="@Url.Action("Index", new { id = i,type=(int)ViewBag.Type })">@i</a></li>
+                        }
+                        <li @(ViewBag.Pager.PageIndex == ViewBag.Pager.PageCount ? "class=disabled" : "")>
+                            <a href="@Url.Action("Index", new { id = ViewBag.Pager.PageIndex == ViewBag.Pager.PageCount?ViewBag.Pager.PageCount:ViewBag.Pager.PageIndex + 1,type=(int)ViewBag.Type })" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+
+
+</body>

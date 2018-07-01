@@ -1,0 +1,113 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.UpdL_PwdModel2
+<style>
+    .form-control {
+        max-width: 200px;
+    }
+
+    .control-label {
+        text-align: right;
+    }
+</style>
+@if (ViewBag.msg == "修改成功")
+{
+    <script>
+        window.location = "/Account/Login";
+
+    </script>
+}
+else
+{
+
+    <div id="loginpwdupd" class="form-horizontal">
+        @using (Ajax.BeginForm("loginpwdupd", "secure", null, new AjaxOptions
+        {
+            UpdateTargetId = "loginpwdupd",
+            InsertionMode = InsertionMode.Replace
+        },
+        new { id = "form1", role = "form" }))
+        {
+            <div class="lead">
+                为确保您的账户财产安全，请牢记您的登录密码且不要轻易泄漏给他人
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.Lpwd, new { @class = "col-md-2 col-xs-4 control-label" })
+                <div class="col-md-10 col-xs-8">
+                    @Html.PasswordFor(a => a.Lpwd, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Lpwd)
+                </div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.Lnpwd, new { @class = "col-md-2 col-xs-4 control-label" })
+                <div class="col-md-10 col-xs-8">
+                    @Html.PasswordFor(a => a.Lnpwd, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Lnpwd)
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(a => a.Lnpwd2, new { @class = "col-md-2 col-xs-4 control-label" })
+                <div class="col-md-10 col-xs-8">
+                    @Html.PasswordFor(a => a.Lnpwd2, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Lnpwd2)
+                </div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.Code, new { @class = "col-md-2 col-xs-4 control-label" })
+                <div class="col-md-10 col-xs-8">
+                    @Html.TextBoxFor(a => a.Code, new { @class = "form-control" })
+                    <a class="btn btn-xs btn-success" id="getCode_td">点击获取验证码</a>
+                    @Html.ValidationMessageFor(m => m.Code)
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2 col-xs-4 col-md-offset-2 col-xs-offset-4">
+                    <div class="btn btn-xs btn-primary" onclick="$('#form1').submit();">保存</div>
+                </div>
+
+
+            </div>
+
+        }
+    </div>}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    $(function () {
+        $("#getCode_td").bind("click", function () { getOldCode(); });
+    });
+    //获得验证码
+    function getOldCode() {
+        var $btn = $("#getCode_td");
+        $btn.unbind("click").css("cursor", "");
+        var phone = $("#Phone_td").html();//手机号
+        if (phone == null || phone == "") {
+            alert("请先绑定手机号");
+            return;
+        }
+        $.get("/Secure/getOldCode", { "phone": phone }, function (d) {
+            time($btn);
+        });
+    }
+    var wait = 30;
+    function time(o) {
+        if (wait == 0) {
+            o.bind("click", function () { getOldCode(); }).css("cursor", "pointer");
+            o.html("&nbsp;点击获取&nbsp;");
+            wait = 30;
+        } else {
+            o.html("&nbsp;等待(" + wait + ")&nbsp;");
+            wait--;
+            setTimeout(function () {
+                time(o)
+            }, 1000)
+        }
+    }
+
+</script>

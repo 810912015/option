@@ -1,0 +1,199 @@
+﻿@using Com.BitsQuan.Option.Match.Imp
+@using Com.BitsQuan.Option.Match.Spot
+@using Com.BitsQuan.Option.Core
+@model Com.BitsQuan.Option.Core.Trader
+
+@{
+    var snap = Model.SnapshotBail();
+
+    var so = Model.GetSpotOrders();
+    var ps1 = Model.GetPositionSummaries();
+
+    var u = ViewData["user"] as Com.BitsQuan.Option.Ui.Models.ApplicationUser;
+
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<h3>交易用户@(Model.Name)的交易详情  <span style="font-size:x-small;">@Html.ActionLink("监控主页", "index")</span></h3>
+
+<div class="row" style="margin:10px;border:1px solid lightgray;background-color:lightgreen;">
+    <div class="col-md-8">
+        <div style="display:inline-block;margin:10px;line-height:1.3em;  ">
+            <img src="~/Content/img/money.jpg" style="height:80px;width:80px;" />
+            <div class="lead"><strong>个人账户信息</strong></div>
+
+        </div>
+        <div style="display:inline-block;margin:10px;line-height:1.3em; ">
+            <div>@Model.Name</div>
+            <div>@Html.DisplayFor(m => u.Email)</div>
+            <div>@Html.DisplayFor(m => u.PhoneNumber)</div>
+            <div>@Html.DisplayFor(m => u.RealityName)</div>
+            <div>@Html.DisplayFor(m => u.IdNumber)</div>
+        </div>
+        <div style="border:1px solid lightgreen; display: inline-block; word-break: break-all; word-wrap: break-word; ">
+            <strong>现金账户 </strong>
+            <div>
+                人民币账户 资产:@Model.Account.CacheAccount.CnyAccount.Total.ToString("C2") 元 可用: @Model.Account.CacheAccount.CnyAccount.Sum.ToString("C2") 元
+                冻结 @Model.Account.CacheAccount.CnyAccount.Frozen.ToString("C2") 元
+            </div>
+            <div>
+                比特币账户 资产:@Model.Account.CacheAccount.BtcAccount.Total.ToString("C2") 个 可用: @Model.Account.CacheAccount.BtcAccount.Sum.ToString("C2") 个
+                冻结: @Model.Account.CacheAccount.BtcAccount.Frozen.ToString("C2") 个
+            </div>
+            <br />
+            <strong>保证金账户(人民币)</strong>
+
+            <div>
+                保证金总额: @Model.Account.BailAccount.Total.ToString("C2")
+                维持保证金总额: @snap.Maintain.ToString("C2")
+                可用保证金总额: @snap.Usable.ToString("C2")
+                冻结:@(Model.Account.BailAccount.Frozen.ToString("C2"))
+            </div>
+            <div>
+                <strong>
+                    @(Model.IsAutoAddBailFromCache ? "已开启保证金自动转入" : "未开启保证金自动转入")
+                </strong>
+                <strong>@(Model.IsAutoSellRight ? "已开启权利仓自动买平" : "未开启权利仓自动卖平")</strong>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div style="display:inline-block;margin-top:10px; width:30%;min-width:400px;">
+            <div id="maincontent">
+                <div>
+                    @Ajax.ActionLink("手动调整资金", "manual", new { tid = @Model.Id }, new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th colspan="10">持仓列表</th>
+            </tr>
+        </thead>
+        <tr>
+            <th>代码</th>
+            <th>名称</th>
+            <th>类型</th>
+            <th>持仓</th>
+            <th>买入成本价</th>
+            <th>买入成本</th>
+            <th>浮动盈亏</th>
+            <th>平仓盈亏</th>
+            <th>合约市值</th>
+        </tr>
+        @if (ps1 != null)
+        {
+            foreach (var v in ps1)
+            {
+                <tr>
+                    <td>@v.Contract.Code</td>
+                    <td>@v.Contract.Name</td>
+                    <td>@v.PositionType</td>
+                    <td>@v.Count</td>
+                    <td>@Math.Round(v.BuyPrice)</td>
+                    <td>@Math.Round(v.BuyTotal)</td>
+                    <td>@Math.Round(v.FloatProfit)</td>
+                    <td>@Math.Round(v.CloseProfit)</td>
+                    <td>@Math.Round(v.TotalValue)</td>
+                </tr>
+            }
+        }
+    </table>
+
+</div>
+<div class="row">
+   
+    <div class="col-md-6">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="13">期权委托列表</th>
+                </tr>
+            </thead>
+            <tr>
+                <th>报单编号</th>
+                <th>合约代码</th>
+                <th>合约名称</th>
+                <th>当前状态</th>
+                <th>方向</th>
+                <th>开平</th>
+                <th>下单方式</th>
+                <th>报单价格</th>
+                <th>报单量</th>
+                <th>未成交</th>
+                <th>成交量</th>
+                <th>报单时间</th>
+                <th>当前状态</th>
+
+            </tr>
+
+            @foreach (var v in Model.Orders().Items)
+            {
+                if (v.State != OrderState.部分成交 && v.State != OrderState.等待中) { continue; }
+                <tr>
+                    <td>@v.Id</td>
+                    <td>@v.Contract.Code</td>
+                    <td>@v.Contract.Name</td>
+                    <td>@v.State</td>
+                    <td>@v.Direction</td>
+                    <td>@v.OrderType</td>
+                    <td>@v.OrderPolicy</td>
+                    <td>@v.Price</td>
+                    <td>@v.ReportCount</td>
+                    <td>@(v.ReportCount - v.TotalDoneCount)</td>
+                    <td>@v.TotalDoneCount</td>
+                    <td>@v.OrderTime</td>
+                    <td>@v.State.ToString()</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="col-md-6">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="9">现货委托列表</th>
+                </tr>
+            </thead>
+            <tr>
+                <th>报单编号</th>
+                <th>虚拟币</th>
+                <th>方向</th>
+                <th>报单价格</th>
+                <th>报单量</th>
+                <th>未成交</th>
+                <th>成交量</th>
+                <th>报单时间</th>
+                <th>当前状态</th>
+            </tr>
+            @if (so != null)
+            {
+                foreach (var v in so)
+                {
+                    if (v.State != OrderState.部分成交 && v.State != OrderState.等待中) { continue; }
+                    <tr>
+                        <td>@v.Id</td>
+                        <td>@v.Coin.Name</td>
+                        <td>@v.Direction</td>
+                        <td>@v.Price</td>
+                        <td>@v.ReportCount</td>
+                        <td>@(v.ReportCount - v.TotalDoneCount)</td>
+                        <td>@v.TotalDoneCount</td>
+                        <td>@v.OrderTime</td>
+                        <td>@v.State</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

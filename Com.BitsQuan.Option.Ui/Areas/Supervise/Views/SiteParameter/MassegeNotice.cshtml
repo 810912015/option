@@ -1,0 +1,78 @@
+﻿<style>
+    .txt {
+        width: 300px;
+        height: 25px;
+    }
+</style>
+
+<div style="margin:50px;line-height:50px">
+    <table>
+        <tr>
+            <td><span class="btn btn-danger">发送账号冻结短信</span></td>
+            <td>
+                <select id="par1" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">发送账号恢复短信</span></td>
+            <td>
+                <select id="par2" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">发送转账短信</span></td>
+            <td>
+                <select id="par3" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">发送提现短信</span></td>
+            <td>
+                <select id="par4" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">发送充值短信</span></td>
+            <td>
+                <select id="par5" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="button" value="保存" class="btn btn-danger" onclick="Save()" /></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    function Save() {
+        var par1 = $("#par1").val();
+        var par2 = $("#par2").val();
+        var par3 = $("#par3").val();
+        var par4 = $("#par4").val();
+        var par5 = $("#par5").val();
+        $.get("/Supervise/SiteParameter/UpdateSiteAll6", { "par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5 }, function (d) {
+            if (d) {
+                alert("设置成功");
+            } else {
+                alert("设置失败");
+            }
+        })
+    }
+</script>
+

@@ -1,0 +1,36 @@
+﻿@using Com.BitsQuan.Option.Match
+@using Com.BitsQuan.Option.Core
+@model IEnumerable<Com.BitsQuan.Option.Core.Deal>
+           
+ 
+ <div class="deal-panel">
+
+     <table class="table table-striped" style="border:1px solid #ddd;">
+
+         <tr style="background-color:#fafafa;border-bottom:1px solid #ddd;height:35px;text-align:center">
+             <td>成交时间</td>
+             <td>成交价格</td>
+             <td>持仓量</td>
+             <td>增仓</td>
+             <td>性质</td>
+         </tr>
+
+         @if (Model != null)
+         {
+             foreach (var v in Model)
+             {
+                <tr style="background-color:white;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                    <td>
+                        @v.When.ToString("HH:mm:ss")
+                    </td>
+                    <td>@v.Price.ToString("C2")</td>
+                    <td>@(v.Count)</td>
+                    <td>@(v.DealType == DealType.空换 ? 0 : v.DealType == DealType.双开 ? v.Count : v.Count * (-1))</td>
+                    <td>@v.DealType</td>
+                </tr>
+             }
+         }
+     </table>
+
+
+</div>

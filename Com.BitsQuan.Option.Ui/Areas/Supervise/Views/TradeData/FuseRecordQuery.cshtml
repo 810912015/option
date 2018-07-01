@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.FuseRecord>
+
+<input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)" />
+
+<table class="table table-striped">
+    <tr>
+        <th>编号</th>
+        <th>合约代码</th>
+        <th>合约名称</th>
+        <th>开始时间</th>
+        <th>熔断类型</th>
+        <th>导致熔断的价格</th>
+        <th>上涨熔断价</th>
+        <th>下跌熔断价</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>
+                    @v.Id
+                </td>
+                <td>@v.Contract.Code</td>
+                <td>@v.Contract.Name</td>
+                <td>@v.StartTime</td>
+                <td>@v.FuseType</td>
+                <td>@v.Price</td>
+                <td>@v.MaxPrice</td>
+                <td>@v.MinPrice</td>
+            </tr> 
+        
+        }
+    }
+</table> 

@@ -1,0 +1,144 @@
+﻿@{
+
+}
+
+<h3>新闻管理</h3>
+<div class="row">
+    <div class="col-md-9">
+        <div id="contractquery">
+
+            @{ Html.RenderAction("NewList"); }
+        </div>
+    </div>
+    <div class="col-md-3">
+
+
+            @{Html.RenderAction("AddNew");}
+
+
+
+
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        $(function () {
+            Load();
+            reset();
+
+            Add();
+            Update();
+        });
+
+        function Load() {
+            AddPage();
+            UpdatePage();
+            del();
+        }
+
+
+        function reset() {
+            //重置
+            $("#reset").click(function () {
+                $("#title").val("");
+                $("#content").val("");
+            })
+        }
+
+        function AddPage() {
+            //添加传值
+            $(".AddPage").click(function () {
+                $.post("/Supervise/New/GetHelpByID", {
+                    "id": 0
+                }, function (d) {
+                    var arr = d.split(',');
+                    $("#title").val("");
+                    $("#content").val("");
+                    $("#Add").attr("style", "display:block");
+                    $("#Update").attr("style", "display:none");
+
+                });
+            })
+        }
+        function Add() {
+            //添加
+            $("#Add").click(function () {
+                var title = $("#title").val();
+                var content = $("#content").val();
+                var ckeShow = $("input[type='checkbox']").is(':checked');
+                $.post("/Supervise/New/AddMethod", {
+                    "title": title,
+                    "content": content,
+                    "ckeShow": ckeShow
+                }, function (d) {
+                    alert(d);
+                    DataBind();
+                });
+            })
+        }
+
+
+        var id = 0;
+        function UpdatePage() {
+            //修改传值
+            $(".UpdatePage").click(function () {
+                id = $(this).next("a").next("span").html();
+                $.post("/Supervise/New/GetHelpByID", {
+                    "id": id
+                }, function (d) {
+                    var arr = d.split(',');
+                    $("#title").val(arr[0]);
+                    $("#content").val(arr[1]);
+                    $("#Update").attr("style", "display:block");
+                    $("#Add").attr("style", "display:none");
+
+                });
+            })
+        }
+
+        function Update() {
+            //修改操作
+            $("#Update").click(function () {
+                var title = $("#title").val();
+                var content = $("#content").val();
+                var ckeShow = $("input[type='checkbox']").is(':checked');
+                $.post("/Supervise/New/UpdateMethod", {
+                    "id": id,
+                    "title": title,
+                    "content": content,
+                    "ckeShow": ckeShow
+                }, function (d) {
+                    alert(d);
+                    DataBind();
+                });
+            })
+        }
+
+        function del() {
+            //删除操作
+            $(".del").click(function () {
+                var id = $(this).next("span").html();
+                $.post("/Supervise/New/DeleteMethod", {
+                    "id": id,
+                }, function (d) {
+                    alert(d);
+                    DataBind();
+
+                });
+            })
+        }
+
+        function DataBind() {
+            $.post("/Supervise/New/NewList", {},
+                function (d) {
+                    $("#contractquery").html(d);
+                    Load();
+                });
+        }
+
+    </script>
+}

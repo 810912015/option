@@ -1,0 +1,141 @@
+﻿    /*内容*/
+    .box {
+        overflow: hidden;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .leftnavbox {
+        float: left;
+    }
+
+    .rightbox {
+        float: left;
+        margin-left: 18px; 
+    }
+    .border{ border-bottom:4px solid #666666; margin-bottom:20px; margin-top:30px }
+    /*左侧导航*/
+    .leftnav {
+        background-color: #f2f2f2;
+        border: 1px solid #c2c2c2;
+        width: 158px;
+        height: 330px;
+    }
+
+        .leftnav li a {
+            width: 158px;
+            display: block;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #535353;
+            line-height: 40px;
+            text-indent: 24px;
+        }
+
+        .leftnav li .funds_center {
+            font-family: "微软雅黑";
+            font-size: 16px;
+            color: #535353;
+            line-height: 45px;
+            background-image: url(../Content/images/border.png);
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+
+        .leftnav li .prompta:hover {
+            color: white;
+        }
+
+        .leftnav .prompt:hover {
+            background-color: #559be9;
+        }
+  /*实名认证*/
+ .nameboxn{border:1px solid #c2c2c2;/*margin-top:10px;*/width:820px}
+.titlen{width:400px;margin:0 auto}
+.titlen .titlen1{margin:30px 0 30px 0;line-height:26px;height:36px;}
+.titlen .titlen1 span{font-weight:bold;color:#78b364; font-size:16px;vertical-align: middle;}
+.rightbox p{color:#535353;margin:0 auto;width:100px;font-family:"微软雅黑"; font-size:14px}
+.titlen li{font-size:14px;color:#535353;line-height:36px; font-weight:500}
+.titlen li span{font-size:12px;color:#535353;line-height:36px; font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif}
+.titlen .titlen2{font-size:12px;margin-bottom:30px;color:#535353; font-weight:100}
+
+
+  /*设置手机号*/
+.phone_ps{font-family:"微软雅黑"; font-weight:400;font-size:18px;color:#666666;display:block;margin:0 auto;width:100px;}
+.phonebox_ps{border:1px solid #c2c2c2;margin-top:10px;width:820px}
+.title_ps{width:100%;padding-left:170px;padding-top:30px;border:0px solid red}
+.submit1_ps{width:126px;background-color:#559be9;color:white;border:1px solid #5daaff}
+.submit2_ps{width:100px;background-color:#559be9;color:white;border:1px solid #5daaff; cursor:pointer}
+.submit3_ps{background-color:#559be9;color:white;border:1px solid #5daaff;margin-left:315px;margin-bottom:30px; cursor:pointer}
+.title1_ps{width:280px;margin:0 auto;}
+.tiele2_ps{width:100%;padding-left:230px;}
+.tiele3_ps{margin-left:270px}
+  /*修改手机号*/
+  /*右侧内容*/
+.phone_pd{color:#535353;margin:0 auto;width:100px;font-family:"微软雅黑"; font-size:16px}
+.phonebox_pd{border:1px solid #c2c2c2;width:820px}
+.title_pd{width:400px;margin:0 auto;padding-top:30px}
+.submit1_pd{width:122px;background-color:#559be9;color:white;border:1px solid #5daaff;border-radius:3px;}
+.submit2_pd{width:120px;background-color:#559be9;color:white;border:1px solid #5daaff;border-radius:3px;}
+.submit3_pd{background-color:#559be9;color:white;border:1px solid #5daaff;margin-bottom:30px;margin-left:288px;border-radius:3px;}
+.title1_pd{width:100%;padding-left:200px}
+.tiele2_pd{width:100%;padding-left:200px}
+.tiele3_pd{width:100%;padding-left:200px}
+  /*设置登录密码*/
+.possword_ls{color:#535353;margin:0 auto;width:100px;font-family:"微软雅黑"; font-size:16px}
+.title_ls p{font-family:"微软雅黑"; font-size:14px;margin-bottom:20px;color:#c90909;background-image:url(images/icon.png); background-repeat:no-repeat; background-position:left;padding-left:20px;left-height:18px;width:454px;margin:0 auto;}
+.title1_ls p{color:#535353;line-height:36px;margin:0 auto;width:300px;font-family:"微软雅黑"; font-size:14px}
+.posswordbox_ls{border:1px solid #c2c2c2;margin-top:10px;width:820px;}
+.posswordbox_ls .title_ls{margin-top:30px;margin-bottom:20px}
+.posswordbox_ls .title2_ls p{color:#535353;line-height:36px;margin:0 auto;width:300px;font-family:"微软雅黑"; font-size:14px}
+.posswordbox_ls .title3_ls p{color:#535353;line-height:36px;width:300px;margin-left:205px;font-family:"微软雅黑"; font-size:14px}
+.posswordbox_ls .title2_ls{margin-left:-56px}
+
+.posswordbox_ls .tiele4_ls{margin:0 auto;width:175px;font-family:"微软雅黑"; font-size:14px;}
+.posswordbox_ls .tiele4_ls input{border:1px solid #5daaff;margin-left:6px; background-color:#559be9;color:white;margin-bottom:30px;font-family:"微软雅黑"; font-size:14px}
+  /*修改登录密码*/
+
+.possword_ld{font-family:"微软雅黑"; font-weight:400;font-size:18px;color:#666666;display:block;margin:0 auto;width:120px;}
+.title_ld p{font-family:"微软雅黑"; font-size:14px;margin-bottom:20px;color:#c90909;background-image:url(images/icon.png); background-repeat:no-repeat; background-position:left;padding-left:20px;left-height:18px;width:464px;margin:0 auto;}
+.title1_ld p{color:#535353;line-height:36px;margin:0 auto;width:100%;font-family:"微软雅黑"; font-size:14px;padding-left:31%}
+.posswordbox_ld{border:1px solid #c2c2c2;width:820px;}
+.posswordbox_ld .title_ld{margin-top:30px;margin-bottom:20px}
+.posswordbox_ld .title2_ld p{color:#535353;line-height:36px;margin:0 auto;width:100%;font-family:"微软雅黑"; font-size:14px;padding-left:32%}
+.posswordbox_ld .title3_ld p{color:#535353;line-height:36px;width:300px;margin-left:205px;font-family:"微软雅黑"; font-size:14px}
+.posswordbox_ld .title2_ld{margin-left:-27px}
+
+.posswordbox_ld .tiele4_ld{margin:0 auto;width:175px;font-family:"微软雅黑"; font-size:14px;}
+.posswordbox_ld .tiele4_ld input{border:1px solid #5daaff;margin-left:6px; background-color:#559be9;color:white;margin-bottom:30px;font-family:"微软雅黑"; font-size:14px}
+
+  /*设置交易密码*/
+.possword_ts{color:#535353;margin:0 auto;width:100px;font-family:"微软雅黑"; font-size:16px}
+.title_ts p{font-family:"微软雅黑"; font-size:14px;margin-bottom:20px;color:#c90909;background-image:url(images/icon.png); background-repeat:no-repeat; background-position:left;padding-left:20px;left-height:18px;width:454px;margin:0 auto;}
+.title1_ts p{color:#535353;line-height:36px;margin:0 auto;width:300px;font-family:"微软雅黑"; font-size:14px}
+.posswordbox_ts{border:1px solid #c2c2c2;margin-top:10px;width:820px;}
+.posswordbox_ts .title_ts{margin-top:30px;margin-bottom:20px}
+.posswordbox_ts .title2_ts p{color:#535353;line-height:36px;margin:0 auto;width:300px;font-family:"微软雅黑"; font-size:14px}
+.posswordbox_ts .title3_ts p{color:#535353;line-height:36px;margin:0 auto;width:300px;font-family:"微软雅黑"; font-size:14px}
+.posswordbox_ts .tiele4_ts{margin:0 auto;width:175px}
+.posswordbox_ts .tiele4_ts input{margin-left:6px; background-color:#559be9;color:white;margin-bottom:30px;border:1px solid #5daaff}
+.posswordbox_ts .title2_ts{margin-left:-56px}
+  /*修改交易密码padding-left:31%*/
+.possword_td{font-family:"微软雅黑"; font-weight:400;font-size:18px;color:#666666;display:block;margin:0 auto;width:120px;}
+.title_td p{margin-bottom:20px;color:#c90909;background-image:url(images/icon.png); background-repeat:no-repeat; background-position:left;padding-left:20px;left-height:18px;width:465px;margin:0 auto;}
+.title1_td p{color:#535353;line-height:36px;margin:0 auto;width:100%;padding-left:30%;}
+.posswordbox_td{border:1px solid #c2c2c2;width:820px;}
+.posswordbox_td .title_td{margin-top:30px;margin-bottom:20px}
+.posswordbox_td .title2_td p{color:#535353;line-height:36px;margin:0 auto;width:100%;padding-left:31%;}
+.posswordbox_td .title3_td p{color:#535353;line-height:36px;width:300px;margin-left:205px}
+.posswordbox_td .title2_td{margin-left:-27px}
+
+.posswordbox_td .tiele4_td{margin:0 auto;width:175px}
+.posswordbox_td .tiele4_td input{margin-left:6px; background-color:#559be9;color:white;margin-bottom:30px;border:1px solid #5daaff}
+
+
+#maincontent .input{
+    line-height: 30px;
+    height:30px;
+    margin-left:10px;
+    width:175px;
+    color:#535353;
+}

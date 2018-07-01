@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5BC39FD4-ADBD-4A03-9D3B-F9F099F82B64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.BitsQuan.Option.Core</RootNamespace>
+    <AssemblyName>Com.BitsQuan.Option.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\BtcPriceGenerator.cs" />
+    <Compile Include="Account\AccountChangeType.cs" />
+    <Compile Include="Account\BtcPrice.cs" />
+    <Compile Include="Account\MyBailAccount.cs" />
+    <Compile Include="Account\SysAccountRecord.cs" />
+    <Compile Include="Account\InPastTimeSpan.cs" />
+    <Compile Include="Account\ExtremIn5.cs" />
+    <Compile Include="Account\Coin.cs" />
+    <Compile Include="Account\Account.cs" />
+    <Compile Include="Account\AccountTradeRecord.cs" />
+    <Compile Include="Account\CacheAccount.cs" />
+    <Compile Include="Account\TraderAccount.cs" />
+    <Compile Include="Account\BailAccount.cs" />
+    <Compile Include="Account\ContractExecuteRecord.cs" />
+    <Compile Include="BlasterOperaton.cs" />
+    <Compile Include="Contract\GlobalPrm.cs" />
+    <Compile Include="Contract\MarketRecord.cs" />
+    <Compile Include="Infra\OperationResult.cs" />
+    <Compile Include="Kline\MarketDeepth.cs" />
+    <Compile Include="Kline\OhlcType.cs" />
+    <Compile Include="Kline\Ohlc.cs" />
+    <Compile Include="Kline\OhlcContainerForFake.cs" />
+    <Compile Include="Kline\IKlineData.cs" />
+    <Compile Include="Kline\ListExtension.cs" />
+    <Compile Include="Kline\KlineData.cs" />
+    <Compile Include="Kline\KlineDataPool.cs" />
+    <Compile Include="Kline\FakeKlineData.cs" />
+    <Compile Include="Order\Trader.cs" />
+    <Compile Include="Order\OrderBundle.cs" />
+    <Compile Include="Order\IOrder.cs" />
+    <Compile Include="Order\DealType.cs" />
+    <Compile Include="Order\Deal.cs" />
+    <Compile Include="Order\OrderPolicy.cs" />
+    <Compile Include="Order\OrderType.cs" />
+    <Compile Include="Order\OrderRequestStatus.cs" />
+    <Compile Include="Infra\IEntityWithId.cs" />
+    <Compile Include="Contract\ContractType.cs" />
+    <Compile Include="Contract\OptionType.cs" />
+    <Compile Include="Contract\Contract.cs" />
+    <Compile Include="Order\PositionType.cs" />
+    <Compile Include="Order\TradeDirectType.cs" />
+    <Compile Include="Order\Order.cs" />
+    <Compile Include="Order\OrderState.cs" />
+    <Compile Include="Order\UserPosition.cs" />
+    <Compile Include="Order\TraderOrdersExtension.cs" />
+    <Compile Include="Infra\IBaseRepository.cs" />
+    <Compile Include="Log\ExceptionExtend.cs" />
+    <Compile Include="Log\ILog.cs" />
+    <Compile Include="Log\LogEntry.cs" />
+    <Compile Include="Log\LogLevel.cs" />
+    <Compile Include="Log\TextLog.cs" />
+    <Compile Include="PositionSummary.cs" />
+    <Compile Include="PredefinedCondition.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Infra\Singleton.cs" />
+    <Compile Include="Spot\SpotOrder.cs" />
+    <Compile Include="Order\TraderUpdateType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Option说明.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.UserViewModel>
+
+@{
+
+}
+
+<h3>用户管理</h3>
+
+<br />
+<p class="h4">
+    角色是权限的主体,通过为用户设置角色从而为用户赋权或收权.
+    权限项是功能点(很像菜单),每个功能点含菜单中未列出的相关功能.如角色中的增加修改等.
+
+    用户和职工对应.
+</p>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>
+            用户名
+        </th>
+        <th>
+            用户角色
+        </th>
+
+
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.RoleNames.Contains("交易员")) { continue; }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @if (item.RoleNames != null)
+                {
+
+                    foreach (var r in item.RoleNames)
+                    {
+                        <span>@r </span>
+                    }
+                }
+            </td>
+            <td>
+                <div class="btn btn-group btn-group-xs">
+                    @Html.ActionLink("角色修改", "EditUserRole", new { id = item.User.Id }, new { @class = "btn btn-info btn-xs" })
+                    <a href="#" class="btn btn-danger" data-id="@item.User.Id" id="resetpwd_@item.User.Id">重置密码</a>
+                    <a href="#" class="btn btn-primary" data-id="@item.User.Id" id="resetTradePwd_@item.User.Id">重置授权码</a>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.AntiForgeryToken()
+<p>
+    @Html.ActionLink("添加新用户", "createuser", null, new { @class = "btn btn-primary" })
+</p>
+<script src="@Url.Content("~/scripts/extension.js")"></script>
+<script>
+    $(function () {
+        $("a[id^=resetpwd_]").click(function () {
+            var op = prompt("请输入旧密码:");
+            if (op == null) return;
+            var np = prompt("请输入新密码:");
+            if (np != null) {
+                $.post(
+                    "/account/ResetPwd",
+                    addAntiForgeryToken({ "uid": $(this).data("id"), "oldpwd": op, "newpwd": np }),
+                    function (d) {
+
+                        alert(d.Desc);
+                    }
+                );
+            }
+
+        });
+        $("a[id^=resetTradePwd_]").click(function () {
+            var op = prompt("请输入旧密码:");
+            if (op == null) return;
+            var np = prompt("请输入新密码:");
+            if (np != null) {
+                $.post(
+                    "/account/resetTradePwd",
+                    addAntiForgeryToken({ "uid": $(this).data("id"), "oldpwd": op, "newpwd": np }),
+                    function (d) {
+
+                        alert(d.Desc);
+                    }
+                );
+            }
+
+        });
+    })
+</script>

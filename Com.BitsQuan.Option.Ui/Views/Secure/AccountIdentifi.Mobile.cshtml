@@ -1,0 +1,55 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.Account_iden
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@{
+    if (ViewData["AccNum"] != null)
+    {
+        Html.RenderAction("AccountInfo");
+    }
+    else
+    {
+        <div id="accountIdentifi">
+            @using (Ajax.BeginForm("accountIdentifi", "secure", null, new AjaxOptions
+                {
+                    UpdateTargetId = "accountIdentifi",
+                    InsertionMode = InsertionMode.Replace
+                },
+                new { @class = "form-horizontal", role = "form" }))
+            {
+                <div>
+                    <div class="lead">根据 <span style="color:red">国家相关规定</span>，比特币交易需进行实名登记，请填写您的真实身份信息，感谢您的理解与支持！</div>
+                    <div>
+                        <div>
+                            @Html.LabelFor(a => a.IdentityType, new { style = "font-weight:600" })&nbsp;&nbsp;
+                            @Html.DropDownListFor(a => a.IdentityType, (List<SelectListItem>)ViewData["type"], new { @class = "selType", style = "margin-left:-3px;" })
+                            @Html.ValidationMessageFor(a => a.IdentityType)
+                        </div>
+                        <div>
+                            @Html.LabelFor(a => a.RealityName, new { style = "font-weight:600" })
+                            @Html.TextBoxFor(a => a.RealityName, new { @class = "input" })<span style="color:red">
+                                @Html.ValidationMessageFor(a => a.RealityName, "", new { style = "color:red" })
+                            </span>
+                        </div>
+                        <div>
+                            @Html.LabelFor(a => a.IdentityId, new { style = "font-weight:600" })
+                            @Html.TextBoxFor(a => a.IdentityId, new { @class = "input" })
+                            @Html.ValidationMessageFor(a => a.IdentityId, "", new { style = "color:red" })
+                            <span>
+                                @if (ViewData["errorSe"] != null)
+                                {   @ViewData["errorSe"] }
+                            </span>
+                        </div>
+                        <div>
+                            <input class="input submit3_ai" style="margin:0 0 0 66px;" type="submit" value="确定">
+
+                        </div>
+                        <div class="titlen1"></div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+
+

@@ -1,0 +1,57 @@
+﻿ 
+<div style="min-height:400px;" id="cache">
+    <div id="UserExecuteRecord">
+        @using (Ajax.BeginForm("UserExecuteRecord", "cache", null, new AjaxOptions
+    {
+        UpdateTargetId = "UserExecuteRecord"
+    }, new
+    {
+        role = "form"
+    }))
+        {
+
+        }
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    
+                    <th>详情</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+                @if (ViewData["CacheFlow"] != null)
+                {
+                    foreach (var v in ViewData["CacheFlow"] as List<Com.BitsQuan.Option.Core.ContractExecuteRecord>)
+                    {
+                        <tr>
+                            <td>@v.Id</td>
+                           
+                            <td>合约:@v.Contract.Name|
+                                持仓类型:@v.PosType|
+                                持仓数量:@v.Count|
+                                行权基准价:@v.BasePrice|
+                                收钱付钱:@v.IsAddTo|
+                                    实际金额:@v.Total|
+                                执行时间:@v.When</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+        @Html.Partial("_Pager", ViewData["cache"])
+
+        <div class="input-append date">
+
+            <span class="add-on">
+                <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+            </span>
+        </div>
+    </div>
+</div>
+
+ 
+

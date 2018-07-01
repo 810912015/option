@@ -1,0 +1,293 @@
+﻿@{
+     
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div style="width: 100%; ">
+        <h1 style="width: 100%;text-align:center ">主贴</h1>
+        @*@{*@
+        <table style="border:1px solid #808080;width:100%;margin:0 auto;line-height:30px" border="0" id="tabHost" class="table table-striped">
+            <tr style="border:1px solid #808080" id="frist">
+                <td style="text-align:center;font-family:微软雅黑">标题</td>
+                <td style="font-family: 微软雅黑"> 内容</td>
+                <td style="font-family: 微软雅黑"> 发帖时间</td>
+                <td style="font-family: 微软雅黑"> 作者</td>
+                <td>操作</td>
+            </tr>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr style="border-bottom:1px dashed #ccc">
+                        <td style="text-align:center;font-family:微软雅黑">
+                            @Html.ActionLink("" + (((item.Fname.Length > 10) ? item.Fname.Substring(0, 10) : item.Fname) as System.Collections.IEnumerable) + "", "ShowForumReply", new { fid = item.Id })
+                        </td>
+                        <td style="font-family: 微软雅黑">
+                            <span></span>
+                            @Html.ActionLink("" + (((item.Fcontent.Length > 20) ? item.Fcontent.Substring(0, 20) : item.Fcontent) as System.Collections.IEnumerable) + "", "ShowForumReply", new { fid = item.Id })
+
+
+                        </td>
+                        <td>@item.FDate</td>
+                        <td>@item.FuserName</td>
+                        <td> @Html.ActionLink("删除", "DeleteHost", new { id = item.Id })</td>
+                    </tr>
+
+                }
+            }
+            else
+            {
+                <tr>
+                    @*item.Fcontent*@
+                <td>没有帖子</td>
+            </tr>
+            }
+
+        </table>
+          @*}*@
+                @{Html.RenderPartial("_Pager", ViewData["pager"]);}
+       
+     
+    </div>
+    <div style="margin:0 auto;border:1px solid #808080;width:100%;">
+        <div style="border-bottom: 3px solid #808080">
+            <h3 style="margin-top: 50px">大类型</h3>
+            <table style="width:100%;" class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>类型名称</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody id="BigBody">
+                    @if (ViewData["Bigs"] != null)
+                    {
+                        foreach (var item in ViewData["Bigs"] as List<Com.BitsQuan.Option.Ui.Models.BigType>)
+                        {
+                            <tr>
+                                <td><span id="span_@item.Id">@item.Name</span><input style="display:none" type="text" id="input_@item.Id" value="@item.Name" /> </td>
+                                <td>
+                                    <div style="float:left;margin-right:20px">
+                                        <a style="cursor:pointer" id="Open_@item.Id" onclick="OpenBig(@item.Id)">修改</a>
+                                        <a style="cursor: pointer; display: none;" id="Update_@item.Id" onclick="UpdateBig(@item.Id)">保存</a>
+                                    </div>
+                                    <a style="cursor:pointer" onclick="deleteBig(@item.Id)">删除</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div style="margin:0 0 20px 20px"> 添加大类型：<input type="text" id="txtBname" /><input type="button" value="添加" onclick="AddBigType()" /><br /></div> 
+        </div>
+        <div>
+
+            <h3 style="margin-top: 50px">小类型</h3>
+            <table style="width: 100%;" class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>类型名称</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody id="SmallBody">
+                    @if (ViewData["Smalls"] != null)
+                    {
+                        foreach (var item in ViewData["Smalls"] as List<Com.BitsQuan.Option.Ui.Models.SmallType>)
+                        {
+                            <tr>
+                                <td><span id="Mspan_@item.Id">@item.Name</span><input style="display:none" type="text" id="Minput_@item.Id" value="@item.Name" /> </td>
+                                <td>
+                                    <div style="float:left;margin-right:20px">
+                                        <a style="cursor:pointer" id="MOpen_@item.Id" onclick="MOpenBig(@item.Id)">修改</a>
+                                        <a style="cursor: pointer; display: none;" id="MUpdate_@item.Id" onclick="MUpdateBig(@item.Id)">保存</a>
+                                    </div>
+                                    <a style="cursor:pointer" onclick="deleteSmall(@item.Id)">删除</a>
+                                </td>
+
+                                @*<td><a style="cursor:pointer" onclick="deleteSmall(@item.Id)">删除</a></td>*@
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <div style="margin:0 0 20px 20px">
+                添加小类型：<select id="selBid">
+                    @if (ViewData["Bigs"] != null)
+                    {
+                        foreach (var item in ViewData["Bigs"] as List<Com.BitsQuan.Option.Ui.Models.BigType>)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+                名称：<input type="text" id="txtSname" />
+                说明：<input type="text" id="txtExplain" />
+                <input type="button" value="添加" onclick="AddSmallType()" />
+            </div>
+        </div>
+
+        </div>
+
+
+</body>
+</html>
+
+<script>
+    $("tr").not("#frist").mouseover(function () {
+        $(this).css("background-color", "#ccc");
+        $(this).mouseleave(function () {
+            $(this).css("background-color", "white");
+        })
+    })
+
+    //修改大类型
+    function OpenBig(bid) {
+        $("#span_" + bid).attr("style", "display:none");
+        $("#input_" + bid).attr("style", "display:block");
+        $("#Open_" + bid).attr("style", "display:none");
+        $("#Update_" + bid).attr("style", "display:block");
+
+    }
+
+    function UpdateBig(bid) {
+        var bigName = $("#input_" + bid).val();
+
+        $.get("/Supervise/Forum/UpdateBigType", { "bid": bid, "bname": bigName }, function (d) {
+            if (d) {
+                $("#input_" + bid).val(bigName);
+                $("#span_" + bid).html(bigName);
+                Bigbound();
+            }
+        })
+        $("#span_" + bid).attr("style", "display:block");
+        $("#input_" + bid).attr("style", "display:none");
+        $("#Open_" + bid).attr("style", "display:block");
+        $("#Update_" + bid).attr("style", "display:none");
+    }
+
+    //修改小类型
+    function MOpenBig(bid) {
+        $("#Mspan_" + bid).attr("style", "display:none");
+        $("#Minput_" + bid).attr("style", "display:block");
+        $("#MOpen_" + bid).attr("style", "display:none");
+        $("#MUpdate_" + bid).attr("style", "display:block");
+
+    }
+
+    function MUpdateBig(bid) {
+        var smallName = $("#Minput_" + bid).val();
+
+        $.get("/Supervise/Forum/UpdateSmallType", { "sid": bid, "sname": smallName }, function (d) {
+            if (d) {
+                $("#Minput_" + bid).val(smallName);
+                $("#Mspan_" + bid).html(smallName);
+                Bigbound();
+            }
+        })
+        $("#Mspan_" + bid).attr("style", "display:block");
+        $("#Minput_" + bid).attr("style", "display:none");
+        $("#MOpen_" + bid).attr("style", "display:block");
+        $("#MUpdate_" + bid).attr("style", "display:none");
+    }
+
+    //添加类型
+    function AddBigType() {
+        var bname = $("#txtBname").val();
+        $.get("/Supervise/Forum/AddBigType", { "bname": bname }, function (d) {
+            if (d) {
+                Bigbound();
+            }
+        })
+
+
+    }
+
+    //添加类型
+    function AddSmallType() {
+        var sname = $("#txtSname").val();
+        var explain = $("#txtExplain").val();
+        var bid = $("#selBid").val();
+        $.get("/Supervise/Forum/AddSmaillType", { "bid": bid, "sname": sname, "explain": explain }, function (d) {
+            if (d) {
+                Smallbound();
+            }
+        })
+    }
+
+    //删除
+    function deleteBig(bid) {
+        $.get("/Supervise/Forum/deleteBigType", { "bid": bid }, function (d) {
+            if (d) {
+                Bigbound();
+                Smallbound();
+            }
+        })
+    }
+
+    //删除
+    function deleteSmall(sid) {
+        $.get("/Supervise/Forum/deleteSmallType", { "sid": sid }, function (d) {
+            if (d) {
+                Smallbound();
+            }
+        })
+    }
+
+    function Bigbound() {
+        $.get("/Supervise/Forum/TypeBigBound", {}, function (d) {
+            var html = "";
+            var option = "";
+            $("#selBid").html("");
+            for (var i = 0; i < d.length; i++) {
+                var big = d[i];
+
+                html += '<tr>\
+                                <td><span id="span_' + big.Id + '">' + big.Name + '</span><input style="display:none" type="text" id="input_'+ big.Id + '" value="' + big.Name + '" /> </td>\
+                                <td>\
+                                    <div style="float:left;margin-right:20px">\
+                                        <a style="cursor:pointer" id="Open_'+ big.Id + '" onclick="OpenBig(' + big.Id + ')">修改</a>\
+                                        <a style="cursor: pointer; display: none;" id="Update_'+ big.Id + '" onclick="UpdateBig(' + big.Id + ')">保存修改</a>\
+                                    </div>\
+                                    <a style="cursor:pointer" onclick="deleteBig(' + big.Id + ')">删除</a></td>\
+                            </tr>'
+                //html += '<tr>\
+                //                <td>' + big.Name + '</td>\
+                //                <td><a style="cursor:pointer"  onclick="deleteBig('+ big.Id + ')">删除</a></td>\
+                //         </tr>';
+                option += ' <option value="' + big.Id + '">' + big.Name + '</option>';
+            }
+            $("#selBid").append(option);
+            $("#BigBody").html(html);
+        })
+    }
+
+
+    function Smallbound() {
+        $.get("/Supervise/Forum/TypeSmaillBound", {}, function (d) {
+            var html = "";
+            for (var i = 0; i < d.length; i++) {
+                var big = d[i];
+                html += '<tr>\
+                                <td>' + big.Name + '</td>\
+                                <td><a style="cursor:pointer"   onclick="deleteSmall(' + big.Id + ')">删除</a></td>\
+                         </tr>';
+            }
+            $("#SmallBody").html(html);
+        })
+    }
+
+    function AddOption() {
+
+    }
+
+</script>
+

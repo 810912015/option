@@ -1,0 +1,43 @@
+﻿
+ 
+
+@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+
+<h4>
+    重新计算冻结金额
+
+</h4>
+<h5>
+    操作步骤:1.所有委托解冻;2.冻结金额归零;3.所有委托重新冻结;
+</h5>
+@if (ViewBag.msg != null)
+{ <div style="color:red;">
+        @ViewBag.msg
+    </div>
+}
+else
+{
+    using (Ajax.BeginForm("CorrectFrozenPost", null, ajo, new { role = "form", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+       
+            <div class="form-group">
+
+                <div class="col-md-offset-2 col-md-4">
+
+                    <input type="submit" value="调整" class="btn btn-primary" />
+
+
+                </div>
+            </div>
+        
+    }
+}
+

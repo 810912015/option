@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.Spot.SpotDeal>
+
+<input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)" />
+
+<table class="table table-striped">
+    <tr>
+        <th>编号</th>
+        <th>币种</th>
+        <th>主委托人</th>
+        <th>主委托编号</th>
+        <th>数量</th>
+        <th>价格</th>
+        <th>从委托人</th>
+        <th>从委托编号</th>
+        <th>成交时间</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>
+                    @v.Id
+                </td>
+                <td>@v.Coin.Name</td>
+                <td>@v.MainTraderName</td>
+                <td>@v.MainId</td>
+                <td>@v.Count</td>
+                <td>@v.Price</td>
+                <td>@v.SlaveTraderId</td>
+                <td>@v.SlaveId</td> 
+                <td>@v.When</td>
+            </tr> 
+        
+        }
+    }
+</table> 

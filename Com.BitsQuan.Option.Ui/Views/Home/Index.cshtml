@@ -1,0 +1,672 @@
+﻿@using Com.BitsQuan.Option.Ui.Models;
+@using System.Text.RegularExpressions;
+
+
+<style>
+    /*重置*/
+    * {
+        text-decoration: none;
+        list-style: none;
+        margin: 0;
+        text-decoration: none;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+    }
+
+    img {
+        border: none;
+    }
+
+    i {
+        font-style: normal;
+    }
+
+
+    /*广告图*/
+    .banner {
+        width: 100%;
+        display: block;
+    }
+
+    /*数据表*/
+    .tablebox {
+        background-color: #f7f7f7;
+        padding-top: 20px;
+    }
+
+    .title_box {
+        width: 500px;
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 20px;
+    }
+
+
+    .table {
+        width: 998px;
+        margin: 0 auto;
+    }
+
+    .btctab {
+        width: 998px;
+        border: 1px solid #c2c2c2;
+        overflow: hidden;
+    }
+
+        .btctab li {
+            font-size: 14px;
+            float: left;
+            width: 166px;
+            background-color: white;
+            line-height: 40px;
+            text-align: center;
+        }
+
+    .table .btc {
+        width: 996px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #e69122;
+        background-color: #f1edeb;
+        border-bottom: 1px solid #c2c2c2;
+    }
+
+    .table .btcBottom {
+        border-bottom: 1px solid #c2c2c2;
+    }
+
+    .datasheet_title1 {
+        display: inline-block;
+        width: 120px;
+        line-height: 40px;
+        font-family: "微软雅黑";
+        font-size: 16px;
+        color: #834900;
+        border: 1px #c2c2c2 solid;
+        background-color: #FFF;
+    }
+
+    .datasheet_title2 {
+        display: inline-block;
+        width: 120px;
+        line-height: 40px;
+        font-family: "微软雅黑";
+        font-size: 16px;
+        color: #fff;
+        background-color: #e6e6e6;
+        border: 1px #c2c2c2 solid;
+    }
+
+    .datasheet li {
+        font-family: "微软雅黑";
+        font-size: 14px;
+        color: #444444;
+        line-height: 40px;
+        background-color: white;
+        float: left;
+        display: inline-block;
+        width: 142px;
+        border-top: 1px solid #c2c2c2;
+        text-align: center;
+    }
+
+        .datasheet li.btc {
+            width: 996px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #e69122;
+            background-color: #f1edeb;
+            border-left: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+        }
+
+    .datasheet ul {
+        padding-top: 20px;
+    }
+
+    .datasheet {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .datasheet .code {
+            border-left: 1px solid #c2c2c2;
+        }
+
+        .datasheet .quantum {
+            border-right: 1px solid #c2c2c2;
+        }
+
+        .datasheet .code1 {
+            border-left: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .datasheet .quantum1 {
+            border-right: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .datasheet .lastline {
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+    .border {
+        width: 1000px;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+
+        .border .border_img {
+            display: inline-block;
+        }
+
+    /*4个图片*/
+    .imgbox {
+        background-color: #f7f7f7;
+        padding-bottom: 20px;
+    }
+
+    .img {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .img .img_right {
+            margin-left: 15px;
+        }
+
+        .img img {
+            display: inline-block;
+        }
+
+    /*新闻和公告*/
+    /*热帖*/
+    .newbox {
+        width: 1000px;
+        margin: 0 auto;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .post1 {
+        font-family: "微软雅黑";
+        font-size: 18px;
+        color: #5a5a5a;
+        line-height: 57px;
+    }
+
+    .more {
+        font-family: Arial;
+        font-size: 14px;
+        color: #3a98e0;
+        line-height: 57px;
+        margin-left: 540px;
+    }
+
+    .p1 a {
+        font-family: "微软雅黑";
+        font-size: 16px;
+        color: #333333;
+        line-height: 22px;
+    }
+
+    .p2 a {
+        font-family: "宋体";
+        font-size: 12px;
+        color: #595959;
+        line-height: 18px;
+        width: 490px;
+        display: block;
+    }
+
+        .p2 a:hover {
+            text-decoration: none;
+        }
+
+    .p3 a {
+        font-family: "宋体";
+        font-size: 12px;
+        color: #646464;
+        line-height: 30px;
+        margin-right: 50px;
+    }
+
+        .p3 a:hover {
+            text-decoration: none;
+        }
+
+    .post img {
+        display: block;
+    }
+
+    .postbox .pic {
+        float: left;
+        padding: 20px 0 15px 20px;
+    }
+
+    .postbox .test {
+        float: left;
+    }
+
+    .postbox {
+        overflow: hidden;
+        width: 650px;
+    }
+
+    .p1 {
+        margin-top: 16px;
+    }
+
+    .test p {
+        margin-left: 20px;
+    }
+
+    .border1 {
+        margin: 10px 0 10px 0;
+    }
+
+    .postbox:hover {
+        background-color: #fbfaf4;
+    }
+
+    .more1 {
+        font-family: Arial;
+        font-size: 14px;
+        color: #3a98e0;
+        line-height: 57px;
+        margin-left: 167px;
+    }
+
+    /*新闻*/
+    .news p a {
+        font-family: "宋体";
+        font-size: 12px;
+        color: #838383;
+        line-height: 40px;
+    }
+
+        .news p a:hover {
+            color: #ff6600;
+        }
+
+    .post {
+        float: left;
+    }
+
+    .border2 {
+        float: left;
+        margin: 20px 20px 0 30px;
+    }
+
+    .news {
+        float: left;
+    }
+
+    .border3 {
+        margin-top: 0px;
+    }
+
+    .footbd {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+        .footbd img {
+            display: block;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+    .title3 {
+        background-color: #F2F2F2;
+    }
+
+    .titlebox {
+        width: 1000px;
+        margin: 0px auto;
+        overflow: hidden;
+        padding-bottom: 20px;
+    }
+
+    .safe {
+        float: left;
+        width: 233px;
+        height: 148px;
+        background-color: #FFF;
+        border: 1px solid #E5E5E5;
+        margin: 20px 20px 0px 0px;
+    }
+
+    .reliable {
+        float: left;
+        width: 233px;
+        height: 148px;
+        background-color: #FFF;
+        border: 1px solid #E5E5E5;
+        margin: 20px 20px 0px 0px;
+    }
+
+    .free {
+        float: left;
+        width: 233px;
+        height: 148px;
+        background-color: #FFF;
+        border: 1px solid #E5E5E5;
+        margin: 20px 20px 0px 0px;
+    }
+
+    .easy {
+        float: left;
+        width: 233px;
+        height: 148px;
+        background-color: #FFF;
+        border: 1px solid #E5E5E5;
+        margin: 20px 0px 0px;
+    }
+
+    .titlebox .safe i {
+        font-family: "微软雅黑";
+        font-size: 22px;
+        color: #24A9E1;
+        font-weight: bold;
+        line-height: 75px;
+        text-align: center;
+        display: block;
+        background-image: url("/Content/images/icon1.png");
+        background-repeat: no-repeat;
+        background-position: 40px 20px;
+    }
+
+    .titlebox .reliable i {
+        font-family: "微软雅黑";
+        font-size: 22px;
+        color: #24A9E1;
+        font-weight: bold;
+        line-height: 75px;
+        text-align: center;
+        display: block;
+        background-image: url("/Content/images/icon2.png");
+        background-repeat: no-repeat;
+        background-position: 40px 20px;
+    }
+
+    .titlebox .free i {
+        font-family: "微软雅黑";
+        font-size: 22px;
+        color: #24A9E1;
+        font-weight: bold;
+        line-height: 75px;
+        text-align: center;
+        display: block;
+        background-image: url("/Content/images/icon3.png");
+        background-repeat: no-repeat;
+        background-position: 40px 20px;
+    }
+
+    .titlebox .easy i {
+        font-family: "微软雅黑";
+        font-size: 22px;
+        color: #24A9E1;
+        font-weight: bold;
+        line-height: 75px;
+        text-align: center;
+        display: block;
+        background-image: url("/Content/images/icon4.png");
+        background-repeat: no-repeat;
+        background-position: 40px 20px;
+    }
+
+    .titlebox .safe p {
+        margin: 0px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+        color: #666;
+        line-height: 20px;
+        text-align: center;
+    }
+
+    .titlebox .reliable p {
+        margin: 0px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+        color: #666;
+        line-height: 20px;
+        text-align: center;
+    }
+
+    .titlebox .free p {
+        margin: 0px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+        color: #666;
+        line-height: 20px;
+        text-align: center;
+    }
+
+    .titlebox .easy p {
+        margin: 0px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+        color: #666;
+        line-height: 20px;
+        text-align: center;
+    }
+</style>
+<script>
+    function IdexBTCClick() {
+        $("#IdexBTC").attr("style", "display:block");
+        $("#IdexOption").attr("style", "display:none");
+    }
+
+    function OptionBTCClick() {
+        $("#IdexBTC").attr("style", "display:none");
+        $("#IdexOption").attr("style", "display:block");
+    }
+</script>
+<link href="~/Content/test.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="~/Scripts/test.js"></script>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+
+
+<!--广告图-->
+<div class="bigImage1" id="bigImage1" style="margin: 0px;">
+    <div>
+        <ul class="J-slide">
+            @for (int i = 1; i <= ViewBag.Advs.Count; i++)
+            {
+                if (i == 1)
+                {
+                    <li class="slide" id="bannerBackground@{@i}" style="position: absolute;">
+                        <div class="bannerBackgroundDownload" style="background:url(@Url.Content("~/Content/"+ViewBag.Advs[i-1].ImageAddress)) center rgb(51, 146, 226);">
+                            <div class="immediateDownload">
+                                <a href="@ViewBag.Advs[i-1].LinkUrl" title="@ViewBag.Advs[i-1].LinkName" target="_blank"></a>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+                else
+                {
+                    <li class="slide" id="bannerBackground@{@i}" style="position: absolute;display:none">
+                        <div class="bannerBackgroundDownload" style="background:url(@Url.Content("~/Content/"+ViewBag.Advs[i-1].ImageAddress)) center rgb(51, 146, 226);">
+                            <div class="immediateDownload">
+                                <a href="@ViewBag.Advs[i-1].LinkUrl" title="@ViewBag.Advs[i-1].LinkName" target="_blank"></a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="controlBackground">
+        <div class="slide-number" id="J-slide-number">
+            @for (int i = 1; i <= ViewBag.Advs.Count; i++)
+            {
+                if (i == 1)
+                {
+                    <a id="number@{@i}" onclick="showAuto(@i)" href="javascript:void(0)"> @i </a>
+                }
+                else
+                {
+                    <a id="number@{@i}" class="slide-number-active" onclick="showAuto(@i)" href="javascript:void(0)"> @i </a>
+                }
+            }
+            <input id="numberClick" type="hidden" value="1">
+        </div>
+    </div>
+
+</div>
+
+<div class="title3" style="font: 13px;">
+    <div class="titlebox" style="padding-top:10px">
+        <div class="safe">
+            <div><i>安全</i></div>
+            <div>
+                <p>银行系统级SSL安全连接</p>
+                <p>多重加密，短信身份验证以及冷</p>
+                <p>存储机制</p>
+            </div>
+        </div>
+        <div class="reliable">
+            <div><i>可靠</i></div>
+            <div>
+                <p>离线BTC钱包、服务器SLB均衡</p>
+                <p>与实时备份，冷存储备份全球分</p>
+                <p>钟级别备份</p>
+            </div>
+        </div>
+        <div class="free">
+            <div><i>免费</i></div>
+            <div>
+                <p>BTC充值0手续费</p>
+                <p>BTC交易0手续费</p>
+                <p>人民币汇款充值0手续费</p>
+            </div>
+        </div>
+        <div class="easy">
+            <div><i>贴心</i></div>
+            <div>
+                <p>7×24小时 400电话服务</p>
+                <p>7×24小时 在线企业客服</p>
+                <p>7×24小时 技术支持</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--数据表-->
+<div class="tablebox">
+
+    @*<div id="IdexBTC" class="table">
+        <ul class="btctab" style="font-family:'Microsoft YaHei';font-size:20px;">
+            <li class="btc">比特币</li>
+            <li class="btcBottom">代码</li>
+            <li class="btcBottom">币种</li>
+            <li class="btcBottom">最新价</li>
+            <li class="btcBottom">最低价</li>
+            <li class="btcBottom">最高价</li>
+            <li class="btcBottom">成交量</li>
+            <li>900001</li>
+            <li>比特币</li>
+            <li style="color:#d83636" id="newestprice">0</li>
+            <li id="min24">0</li>
+            <li id="max24">0</li>
+            <li id="totalcount">0</li>
+        </ul>
+    </div>*@
+
+    <div class="datasheet" id="IdexOption">
+        @{Html.RenderAction("GetOption");}
+
+    </div>
+    <div style="clear:both"></div>
+    <div class="border14" style="padding-bottom:10px;padding-top: 20px;">
+    </div>
+</div>
+
+<!--新闻和公告-->
+<!--热帖-->
+<div class="newbox" style="margin-top:0px">
+
+
+    <div class="post">
+        <a href="/NewNotices/index/1" class="post1">新闻中心</a><a href="/NewNotices/index/1" class="more">More</a>
+        @foreach (Help h in ViewBag.News)
+        {
+            <div class="postbox">
+                <img class="pic" src="~/Content/@h.imgSrc" width="137" height="129">
+                <div class="test">
+                    <p class="p1">
+                        <a href="/NewNotices/New/@h.Id">
+                            @if (h.Htitle.Length <= 25)
+                            { @h.Htitle }
+                            else
+                            {@Html.Raw(Regex.Replace(Regex.Replace(Regex.Replace(h.Htitle, "&nbsp;", " "), "<.+?>", " "), "<br>", " ", RegexOptions.IgnoreCase).Substring(0, 25) + "...");
+                            }
+                        </a>
+                    </p>
+                    <p class="p2">
+                        @if (h.Hcontent.Length < 84)
+                        { <a href="/NewNotices/New/@h.Id">@h.Hcontent</a> }
+                        else
+                        {
+                            <a href="/NewNotices/New/@h.Id">@Html.Raw(Regex.Replace(Regex.Replace(Regex.Replace(h.Hcontent, "&nbsp;", " "), "<.+?>", " "), "<br>", " ", RegexOptions.IgnoreCase).Substring(0, 84))...</a>
+                        }
+                    </p>
+                    <p class="p3">
+                        @if (h.Hperson.Length < 10)
+                        { <a>编辑：@h.Hperson</a> }
+                        else
+                        {
+                            <a>编辑：@{@h.Hperson.Substring(0, 10)}...</a>
+                        }
+                        <a>阅读：@h.ReadTime </a><a>更新时间： @h.Hdate</a>
+                    </p>
+                </div>
+            </div>
+            <img class="border1" src="~/Content/img/border1.png" />
+        }
+    </div>
+    <img class="border2" src="~/Content/img/border3.png">
+
+    <div class="news">
+        @{Html.RenderAction("GetNotice"); }
+        @{Html.RenderAction("GetNews"); }
+    </div>
+</div>
+@section links{
+    <div class="footbd"><img src="~/Content/img/border.png" /></div>
+    <div class="linkbox" style="height:50px;margin-bottom:10px">
+        <div class="link">
+            <div class="link1"><p>友情链接</p></div>
+            <div class="linkimg"><img src="~/Content/img/首页---副本_11.png"></div>
+            <div class="linka">
+                <ul>
+                    @foreach (var fl in ViewBag.FriendLinks)
+                    {
+                        <li><a href="@fl.LinkUrl" target="_blank">@fl.LinkName</a></li>
+                    }
+                    @*<li><a href="#">比特币新闻官网</a></li>
+                        <li><a href="#">零壹比特</a></li>
+                        <li><a href="#">比特币精灵</a></li>
+                        <li><a href="#">莱特币矿机</a></li>
+                        <li><a href="#">中国比特币</a></li>
+                        <li><a href="#">比特讯</a></li>
+                        <li><a href="#">搜搜比特币</a></li>
+                        <li><a href="#">比特币中文网</a></li>
+                        <li><a href="#">壹比特</a></li>
+                        <li><a href="#">狗嗨网</a></li>
+                        <li><a href="#">Coinif中文网</a></li>
+                        <li><a href="#">海峡比特币</a></li>
+                        <li><a href="#">比特币矿机</a></li>
+                        <li><a href="#">山寨币大全</a></li>
+                        <li><a href="#">LTCBase</a></li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,491 @@
+﻿
+
+<style>
+    /*重置*/
+    * {
+        font-family: "微软雅黑";
+        font-size: 14px;
+        border: 0px;
+        text-decoration: none;
+        list-style: none;
+        margin: 0;
+        text-decoration: none;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+    }
+
+    img {
+        border: none;
+    }
+
+    i {
+        font-style: normal;
+    }
+
+    .box {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+
+    .title {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #c2c2c2;
+        line-height: 30px;
+        padding-left: 20px;
+    }
+
+
+
+    input {
+        height: 30px;
+        border: 1px solid #c2c2c2;
+        margin-left: 10px;
+    }
+
+    .email {
+        margin: 30px 0 20px;
+        margin-left: 371px;
+        line-height: 30px;
+        height: 30px;
+    }
+
+    .pwd2 {
+        margin: 30px 0 20px;
+        margin-left: 371px;
+        line-height: 30px;
+        height: 30px;
+    }
+
+    .pass {
+        margin-bottom: 20px;
+        line-height: 30px;
+        margin-left: 358px;
+        height: 30px;
+    }
+
+        .pass select {
+            border: 1px solid #c2c2c2;
+            height: 30px;
+            margin-left: 10px;
+        }
+
+    .nub {
+        margin-bottom: 20px;
+        line-height: 30px;
+        margin-left: 358px;
+        height: 30px;
+    }
+
+    .password {
+        margin: 30px 0 20px;
+        line-height: 30px;
+        margin-left: 400px;
+        height: 30px;
+    }
+
+        .password a {
+            margin-left: 8px;
+            font-size: 12px;
+            color: #f36c1a;
+        }
+
+    .sub input {
+        width: 80px;
+        background-color: #4171b8;
+        border: none;
+        color: white;
+        margin-left: 454px;
+        margin-bottom: 10px;
+        width: 155px;
+    }
+        .border {
+        border-bottom: 4px solid #666;
+        margin-bottom: 20px;
+        margin-top: 30px;
+    }
+    .codeBody{
+	width:1000px;
+	margin:0 auto;
+}
+
+/* .codeSpanBg{ */
+/* 	background:url("/image/code/findcode.gif") no-repeat scroll -20px 0px transparent; */
+/* 	height:18px; */
+/* 	line-height:18px; */
+/* 	padding-left:30px; */
+/* 	display:inline-block; */
+/* 	font-size:14px; */
+/* 	font-weight:300; */
+/* 	margin-top:10px; */
+/* } */ 
+
+.codeMainBody{
+	width:1000px;
+	border:1px solid #e1e1e1;
+	text-align:center;
+	padding-top:60px;
+	padding-bottom:60px;
+	margin-top:15px;
+	margin-bottom:15px;
+	height:350px;
+}
+
+.codeMainBody span.content-1{
+	height:35px;
+	line-height:60px;
+	width:230px;
+}
+
+.codeMainBody span.content-2{
+	height:35px;
+	line-height:60px;
+}
+
+.codeMainBody .inputName{
+	width:240px;
+	padding-left:10px;
+	height:32px;
+	line-height:32px;
+}
+
+.codeMainBody .inputImage{
+	width:110px;
+	padding-left:10px;
+	height:32px;
+	line-height:32px;
+}
+
+
+.codeMainBody .codepicture{
+	background:#ff0000;
+	height:32px;
+	line-height:32px;
+	display:inline-block;
+	width:110px;
+	margin-left:15px;
+}
+
+.codeButton{
+	display:inline-block;
+	font-weight:700;
+	font-size:14px;
+	color:#fff;
+	text-align:center;
+	width:170px;
+	height:32px;
+	line-height:32px;
+	background:#1279b4;
+	margin-top:10px;
+}
+
+.codeButton:hover{
+	color:#fff;
+	text-decoration: none;
+	background:#1487c8;
+}
+.mod-sub-nav {
+    background: url("/Content/images/Lightcodebg.png") no-repeat scroll 0 0 transparent;
+    color: #418DDA;
+    font: 16px/36px 微软雅黑,黑体;
+    height: 36px;
+    margin: 30px 0 20px;
+    width: 695px;
+    margin:0px auto;
+}
+
+
+.mod-sub-nav li {
+    float: left;
+    padding-left: 40px;
+}
+
+.mod-sub-list1 {
+    width: 230px;
+}
+
+.mod-sub-list2 {
+    width: 202px;
+     
+}
+.mod-sub-nav li.list1-active {
+    background: url("/Content/images/codebg1.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+}
+
+.mod-sub-nav li.list2-active {
+    background: url("/Content/images/codebg2.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    margin-left: -16px;
+    padding-left: 56px;
+    width: 202px;
+}
+.mod-sub-nav li.list3-active {
+    background: url("/Content/images/codebg3.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    margin-left: -16px;
+    padding-left: 56px;
+    width: 183px;
+}
+.Information{
+	margin:30px auto;
+	width:650px;
+	padding-left:100px;
+}
+.Information .wordTitle{
+	display:inline-block;
+	width:190px;
+	text-align:right;
+	padding-right:10px;
+}
+.Information span.generality{
+	height:55px;
+	line-height:55px;
+	font-size:16px;
+	font-weight:300;
+}
+.Information .generality2{
+	height:24px;
+	line-height:24px;
+	font-size:16px;
+	font-weight:300;
+}
+.Information .generality3{
+	color:red;
+	font-size: 13px;
+	margin-left: 205px;
+	height:18px;
+	line-height:18px;
+}
+.Information span.leftDistance1{
+	margin-left:95px;
+}
+
+.Information span.leftDistance2{
+	margin-left:15px;
+}
+
+.Information span.leftDistance3{
+	margin-left:30px;
+}
+
+.Information span.leftDistance5{
+	margin-left:30px;
+}
+
+.Information span.leftDistance6{
+	margin-left:45px;
+}
+.Information span.leftDistance7{
+	margin-left:35px;
+}
+.Information .leftDistance4{
+	margin-right:10px;
+	height:30px;
+}
+.Information span.leftDistance2 .radio{
+	margin-left:10px;
+	margin-right:5px;
+}
+
+.Information span.leftDistance2 .radio2{
+	margin-left:158px;
+	margin-right:5px;
+}
+
+.Information span.number{
+	margin-left:10px;
+}
+.Information .inputName{
+	width:240px;
+	padding-left:10px;
+	height:32px;
+	line-height:32px;
+}
+.codeSearchButton{
+	display:inline-block;
+	font-weight:700;
+	font-size:14px;
+	color:#fff;
+	text-align:center;
+	width:130px;
+	height:32px;
+	line-height:32px;
+	background:#1279b4;
+	margin-top:20px;
+	margin-bottom:20px;
+	border:1px solid #fff;
+}
+.codeSearchButton:hover{
+	color:#fff;
+	text-decoration: none;
+	background:#1487c8;
+}
+
+.codeResetButton{
+	display:inline-block;
+	font-weight:700;
+	font-size:14px;
+	color:#fff;
+	text-align:center;
+	width:250px;
+	height:32px;
+	line-height:32px;
+    background:#329ddc;
+	border:1px solid #329ddc;
+	margin-left:203px;
+	margin-top:10px;
+}
+.restPasswordBody .checkCode{
+	background:#329ddc;
+	border:1px solid #329ddc;
+	color:#fff;
+	height:32px;
+	line-height:32px;
+	font-weight:700;
+}
+.codeResetButton:hover{
+	color:#fff;
+	text-decoration: none;
+	background:#1487c8;
+}
+.restPasswordBody .checkCode:hover{
+	background:#1487c8;
+}
+ .connphone{
+	padding:30px 0;
+}
+ .codeSearchMainBody{
+	width:1000px;
+	border:1px solid #e1e1e1;
+	padding-top:60px;
+	padding-bottom:60px;
+	margin-top:15px;
+	margin-bottom:15px;
+	height:550px;
+}
+</style>
+<script>
+    function fun() {
+        $("#img")[0].src = $("#img")[0].src + "?" + Math.random;
+    }
+
+</script>
+
+<div class="border"></div>
+
+<div class="codeBody">
+    <div class="codeSearchMainBody">
+        <ul class="mod-sub-nav">
+            <li class="mod-sub-list1">确认账户</li>
+            <li class="mod-sub-list2 list2-active" style="width:252px">重设登录密码</li>
+            <li class="mod-sub-list3 ">修改成功 </li>
+        </ul>
+
+        <div class="box">
+            <div class="email"><label>设置新密码</label>&nbsp;<input type="password" id="newPwd"> <span id="Span_email" style="color:white">@ViewData["email"]</span></div>
+            <div class="pwd2"><label>确认新密码</label>&nbsp;<input type="password" id="newPwd2"></div>
+            <div class="password">
+                <label>验证码</label>
+                <input type="text" id="Code">&nbsp;&nbsp;<img alt="验证码图片" id="img" src="/Account/getCode" style="width: 60px; height: 28px; border: 1px solid #ddd; margin-bottom: 3px;" />
+                <a href="#" onclick="fun()" style="color: #1b66c7">换一张</a>
+            </div>
+            <div class="sub"><input type="submit" value="确定" onclick="IsOk()" id="yes"></div>
+            <div style="margin:10px 0 20px 47%"><span style="color:red" id="error"></span></div>
+        </div>
+
+    </div>
+</div>
+@*<div class="box">
+    <p class="title">找回登录密码</p>
+    <div class="email"><label>新密码</label>&nbsp;<input type="password" id="newPwd"> <span id="Span_email" style="color:white">@ViewData["email"]</span></div>
+    <div class="pwd2"><label>确认新密码</label>&nbsp;<input type="password" id="newPwd2"></div>
+    <div class="password">
+        <label>验证码</label>
+        <input type="text" id="Code">&nbsp;&nbsp;<img alt="验证码图片" id="img" src="/Account/getCode" style="width: 60px; height: 28px; border: 1px solid #ddd; margin-bottom: 3px;" />
+        <a href="#" onclick="fun()" style="color: #1b66c7">换一张</a>
+    </div>
+    <div class="sub"><input type="submit" value="确定" onclick="IsOk()" id="yes"></div>
+    <div style="margin:10px 0 20px 47%"><span style="color:red" id="error"></span></div>
+</div>*@
+<script>
+    function IsOk() {
+        var newPwd = $("#newPwd").val();
+        var newPwd2 = $("#newPwd2").val();
+        var Code = $("#Code").val();
+
+        //if (email == "") {
+        //    $("#error").html("已超时,请重新发送邮件找回！");
+        //    return;
+        //}
+        if (newPwd == "" || newPwd2 == "" || Code == "") {
+            $("#error").html("请填写完整的信息");
+            return;
+        }
+        var regx = /^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){7,19}$/;
+        var validatePwd = regx.test(newPwd);
+        if (!validatePwd) {
+            $("#error").html("密码必须是8-20个以字母开头、可带数字、_、.的字串");
+            return;
+        }
+
+        if (newPwd != newPwd2) {
+            $("#error").html("上下密码不一致!");
+            return;
+        }
+        //判断验证码是否正确
+
+        var code = $("#Code").val();
+        $.ajax({
+            type: "post",
+            url: "/Account/IsTranPwdp",
+            cache: false,
+            async: false,
+            data: { "email": $("#Span_email").html(), "Lnpwd": newPwd },
+            success: function (d) {
+                if (d != "True") {
+                    $("#error").html("密码和交易密码不能相同");
+                    return;
+                }
+                else {
+                    if (code != "") {
+                        $.post("/Account/validateCode", { "code": code }, function (d) {
+                            if (d == "True") {
+                                Update();
+                            } else {
+                                $("#error").html("验证码不正确");
+                            }
+                        })
+                    }
+                }
+            }
+
+        });
+
+
+    }
+
+    function Update() {
+        var email = $("#Span_email").html();
+        var newPwd = $("#newPwd").val();
+        $.get("/Account/UpdateLoginPwd", { "email": email, "pwd": newPwd }, function (d) {
+            if (d = "1") {
+                $("input").not("#yes").val("");
+                $("#error").html("");
+                alert("修改成功");
+                window.location.reload();
+            } else if (d = "0") {
+                alert("修改失败");
+            }
+            else {
+                alert(d);
+            }
+        })
+    }
+
+
+
+</script>
+

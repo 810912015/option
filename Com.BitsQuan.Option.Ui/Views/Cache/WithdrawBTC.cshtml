@@ -1,0 +1,149 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@model Com.BitsQuan.Option.Ui.Models.OpModelBTCw
+
+<div style="margin:10px;padding:10px;">
+    <div id="withdrawbtc">
+        @using (Ajax.BeginForm("withdrawbtc", "cache", null, new AjaxOptions
+        {
+            UpdateTargetId = "withdrawbtc",
+            InsertionMode = InsertionMode.Replace
+        },
+        new { @class = "form-horizontal", role = "form" }))
+        {
+
+            @Html.AntiForgeryToken();
+             <div class="cashbox">
+     
+              <ul >
+                       <li class="text"><i> 1.提现手续费率为<span>0.4%</span>，最小提现金额为<span>200</span>人民币,单笔最大提现金额为<span>50000</span>人民币,24小时内到账<br/></i>
+                      <i>2.若在指定时间内仍未收到款项,请与客服联系,我们核实后会为您补发款项</i>
+                      </li>
+                       <li class="address">
+                           @Html.LabelFor(k => k.AddressNum, new { }) &nbsp;
+                           @Html.DropDownListFor(b => b.AddressNum, (List<SelectListItem>)ViewData["accountsBTC"], new {  })
+                           @Html.ValidationMessageFor(b => b.AddressNum)
+                           @Html.ActionLink("[添加地址]", "Index", new { id=3 }, new { @class = "address1" })</li>
+
+                       <li class="address4" style="margin-bottom:15px"><br/><strong>可提比特币</strong><i>@if (ViewData["BtcUsable"] != null)
+                            {<span style="color:red">@ViewData["BtcUsable"]</span>}</i>
+                       </li>
+                       <li class="address2">
+                           @Html.LabelFor(k => k.Num, new {  })
+                           @Html.TextBoxFor(b => b.Num, new { onMouseOut="this.style.border='1px solid #c2c2c2'", onMouseOver="this.style.border='1px solid #559be9'", style="border:1px solid #c2c2c2" })
+                           @Html.ValidationMessageFor(b => b.Num)
+                        </li>
+                        <li class="address2">
+                            @Html.LabelFor(k => k.Tradepwd, new { })
+                            @Html.PasswordFor(b => b.Tradepwd, new { onMouseOut = "this.style.border='1px solid #c2c2c2'", onMouseOver = "this.style.border='1px solid #559be9'", style = "border:1px solid #c2c2c2" })
+                            @Html.ValidationMessageFor(b => b.Tradepwd)
+                        </li>
+                        <li class="address3">
+                            @Html.LabelFor(k => k.PhoneCode, new { }) 
+                            @Html.TextBoxFor(b => b.PhoneCode, new { onMouseOut = "this.style.border='1px solid #c2c2c2'", onMouseOver = "this.style.border='1px solid #559be9'", style = "border:1px solid #c2c2c2" })
+                            @Html.ValidationMessageFor(b => b.PhoneCode)
+                        @*<i class="ipt1" style="padding-top: 5px;padding-bottom:5px" onclick="getOldCode2()" id="getCode2">&nbsp;点击获取&nbsp;</i>*@
+                            <input style=' background: url(../Content/images/btn.png) no-repeat; border: none; width: 180px; margin-top: 20px; font-family: "微软雅黑"; color: white; font-size: 14px; height: 30px; font-weight: bold; cursor: pointer;'
+                                    type="button" onclick="getOldCode2()" id="getCode2" value="点击获取" />
+
+                        </li>
+                        <li style=" margin-left:168px"><input type="submit" value="确认提交" id="button1">
+                            @if (ViewBag.msg2 != null)
+                            {
+                                <span style="color:red">  @ViewBag.msg2</span>
+                            }
+                            @if (ViewData["phone2"] != null)
+                            {
+                                <span style="display:none" id="phone2">@ViewData["phone2"]</span>
+                            }
+                        </li>
+
+               </ul>
+
+            </div>
+   
+        }
+        <table class="table table-striped" cellspacing="0">
+            <caption>
+                <div class="title">
+                    提现记录
+                </div>
+
+            </caption>
+            <tr>
+                <th>编号</th>
+                <th>时间</th>
+                <th>提现地址</th>
+                <th>提现金额</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            @if (ViewData["withdrawBTC"] != null)
+            {
+                foreach (var v in ViewData["withdrawBTC"] as List<BankRecord>)
+                {
+                    <tr>
+                        <td id="ID">@v.Id</td>
+                        <td>@v.When</td>
+                        <td>@v.AddressNum</td>
+                        <td id="Num">@v.Num</td>
+                        <td id="state">@(v.IsApproved ? "已审核" : "审核中")</td>
+                        <td><a onclick="Cancel(this)" style="cursor:pointer">撤销</a></td>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+    //获得验证码
+    function getOldCode2() {
+        $("#getCode2").removeAttr("onclick").css("cursor", "");
+        var phone = $("#phone2").html();
+        if (phone == "" || phone == null) {
+            alert("请进入安全中心绑定手机号");
+            return;
+        }
+        var securityToken = $('input[name=__RequestVerificationToken]').val();
+        $.post("/Cache/getOldCode", { __RequestVerificationToken: securityToken, "phone": phone }, function (d) {
+            time2($("#getCode2"));
+        });
+    }
+    var wait2 = 30;
+    function time2(o) {
+        if (wait2 == 0) {
+            o.attr("onclick", "getOldCode2()").css("cursor", "pointer");
+            o.val("点击获取");
+            wait2 = 30;
+        } else {
+            o.val("重新发送(" + wait2 + ")");
+            wait2--;
+            setTimeout(function () {
+                time2(o)
+            },
+        1000)
+        }
+    }
+    //撤销（已审核的不能撤销）
+    function Cancel(cur){
+        var state = $(cur).parent().siblings("#state").html();
+        var Num = $(cur).parent().siblings("#Num").html();
+        var id = $(cur).parent().siblings("#ID").html();
+        if (state == "已审核") {//此处也许是审核完成...
+            alert("已审核,不能撤销");
+            return;
+        }
+        alert(id);
+        $.post("/Cache/DeleteWithdarw", {"id":id, "Num": Num }, function (d) {
+            if (d) {
+                alert("撤销成功");
+            } else {
+                alert("撤销失败");
+            }
+        })
+
+        
+    }
+</script>

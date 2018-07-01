@@ -1,0 +1,37 @@
+﻿@using Com.BitsQuan.Option.Ui.Models 
+@model IEnumerable<Help>
+@{
+    Layout = null;
+}
+
+<div>
+    <div>
+        <div class="lead pull-left">
+            期权知识
+        </div>
+        <div class="pull-right">
+            @Html.ActionLink("More", "index", "NewNotices", new { type = (int)ContentType.期权知识 }, new { @class = "btn-link" })
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="row">
+                <p style="margin:0px;height:33px;color:#666;">
+                    @if (item.Htitle.Length < 20)
+                    { <a style=" font-family: '微软雅黑';" href="/NewNotices/New/@item.Id">@item.Htitle</a> }
+                    else
+                    {
+                        <a style=" font-family: '微软雅黑';" href="/NewNotices/New/@item.Id">@{@item.Htitle.Substring(0, 20)}...</a>
+                    }
+                </p>
+            </div>
+        }
+    }
+
+</div>
+
+
+

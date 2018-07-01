@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.Trader>
+<h3>
+    交易用户实时监控 共@(Model.Count())个交易用户
+
+    <span style="padding:10px;display:inline-block">
+        <input type="text" id="queryTrader" placeholder="请输入用户名查询" style="width:200px;" />
+        <a class="btn btn-primary" id="doit">查询</a>
+    </span>
+</h3>
+<div id="container">
+    @foreach (var v in Model)
+    {
+        @Html.Partial("Simple", v)
+    }
+</div>
+
+<script>
+    $(function () {
+        $("#doit").click(function () {
+            var key = $("#queryTrader").val();
+            $(".simple-trader").css("background-color", "transparent");
+            $("div[id*=" + key + "]").each(function (i, t) {
+                $(t).css("background-color", "lightgreen");
+                if (i == 0) {
+                    $("html,body").stop(true);
+                    $("html,body").animate({ scrollTop: $(t).offset().top-200 }, 0);
+                }
+            })
+                
+            
+        });
+    })
+</script>

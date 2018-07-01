@@ -1,0 +1,367 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+@using Com.BitsQuan.Option.Ui.Models;
+
+
+
+<style>
+    /*重置*/
+    * {
+        font-family: "微软雅黑";
+        font-size: 14px;
+        border: 0px;
+        text-decoration: none;
+        list-style: none;
+        margin: 0;
+        text-decoration: none;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+        color: #535353;
+    }
+
+    /**/
+    .title {
+        background-image: url(../Content/images/common-bg.png);
+        background-position: 10px -65px;
+        background-repeat: no-repeat;
+        width: 50%;
+        height: 25px;
+        line-height: 28px;
+        font-size: 14px;
+        margin: 10px 0 10px 0;
+        padding-left:80px;
+    }
+
+    .title1 {
+        font-size: 16px;
+        background-color: #90dfff;
+        line-height: 46px;
+        background-image: url(../Content/images/bbsicon.png);
+        background-repeat: no-repeat;
+        background-position: 23px 10px;
+        padding-left: 95px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .text div {
+        float: left;
+        font-size: 12px;
+    }
+
+    .text {
+        overflow: hidden;
+        line-height: 40px;
+        background-image: url(../Content/images/line.png);
+        background-repeat: repeat-x;
+        background-position: bottom;
+    }
+
+        .text .text1 {
+            margin-left: 5%;
+            width: 45%;
+            font-size:16px
+        }
+
+        .text .text2 {
+            width: 25%;
+            font-size: 16px;
+        }
+
+        .text .text3 {
+            width: 25%;
+            font-size: 16px;
+        }
+
+    .title2 div {
+        float: left;
+    }
+
+    .title2 {
+        overflow: hidden;
+        margin: 20px 0 20px 0;
+    }
+
+    .bbst a {
+        font-size: 16px;
+        color: #256a97;
+        line-height: 18px;
+        font-weight: bold;
+    }
+
+    .bbst1 {
+        font-size: 12px;
+        color: #000;
+        line-height: 18px;
+    }
+
+    .title2box {
+        width: 52%;
+        padding-left: 5%;
+        background-image: url(../Content/images/bbsicon.png);
+        background-repeat: no-repeat;
+        background-position: 18px -205px;
+    }
+
+    .bbst1 a {
+        font-size: 12px;
+        color: #245da3;
+        margin-left: 5px;
+        line-height: 18px;
+    }
+
+    .title3box {
+        width: 23%;
+        line-height: 54px;
+        color: #535353;
+        font-size: 12px;
+    }
+
+    .title4box p {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .sp1 {
+        color: #848586;
+    }
+
+    .sp2 {
+        color: #256a97;
+    }
+
+    .title4box p span {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .tt2 {
+        font-size: 16px;
+        background-color: #90dfff;
+        line-height: 46px;
+        background-image: url(../Content/images/bbsicon.png);
+        background-repeat: no-repeat;
+        background-position: 23px -62px;
+        padding-left: 95px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .tt3 {
+        font-size: 16px;
+        background-color: #90dfff;
+        line-height: 46px;
+        background-image: url(../Content/images/bbsicon.png);
+        background-repeat: no-repeat;
+        background-position: 23px -140px;
+        padding-left: 95px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .title1 {
+        background-color: #90dfff;
+        line-height: 46px;
+        color: white;
+        font-weight: bold;
+    }
+
+        .title1 i {
+            display: inline-block;
+            color: #535353;
+            text-align:center;
+            margin-right:4px
+
+        }
+
+        .title1 .i1 {
+            width: 31%;
+        }
+
+        .title1 .i2 {
+            width: 21%;
+        }
+
+        .title1 .i3 {
+            width: 21%;
+        }
+
+        .title1 .i4 {
+            width: 21%;
+        }
+
+    .title2 {
+        line-height: 46px;
+        background: url(../Content/images/line.png) repeat-x bottom;
+    }
+
+        .title2 span {
+            display: inline-block;
+            color: #666666;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .title2 .i1 {
+            width: 45%;
+            padding-left: 5%;
+            background: url(../Content/images/tell.png) no-repeat;
+            background-position: 5% 4px;
+        }
+
+        .title2 .i2 {
+            width: 20%;
+            color:orange;
+        }
+
+        .title2 .i3 {
+            width: 20%;
+        }
+
+        .title2 .i4 {
+            width: 20%;
+            color: #a9a9a9;
+        }
+    .subbtn {
+        border: 1px solid #5daaff;
+        margin-left: 6px;
+        background-color: #559be9;
+        color: white;
+        margin-bottom: 30px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+        margin-left: 26%;
+        width: 175px;
+        height:30px;
+    }
+
+    .subbtn2 {
+        border: 1px solid #5daaff;
+        margin-left: 6px;
+        background-color: #559be9;
+        color: white;
+        margin-bottom: 30px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+
+        width: 175px;
+        height: 30px;
+    }
+
+    .input {
+        border: 1px solid #808080;
+    }
+
+    .border {
+        border-bottom: 4px solid #666;
+        margin-bottom: 20px;
+        margin-top: 30px;
+    }
+</style>
+
+<div class="border"></div>
+<div style="width:1170px;margin:0px auto">
+    <div style="width: 19%;float:left;border:0px solid red;line-height:20px">
+        <img src=" ~/Content/images/home.gif" />&nbsp;<strong><a href="/FrontForum/Index">讨论区首页</a></strong>
+        <ul>
+            @{
+                ApplicationDbContext adb = new ApplicationDbContext();
+                var Bigs = adb.BigTypes.ToList();
+                if (Bigs != null)
+                {
+                    for (int j = 0; j < Bigs.Count(); j++)
+                    {
+                        var big = Bigs[j] as BigType;
+                        <li>
+                            <span style="margin-left:10%">
+                                @if (j == Bigs.Count() - 1)
+                                {
+                                    <img src="~/Content/images/tree-min-end.gif" onclick="CloseMi(this)" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/tree-min.gif" class="hh" onclick="CloseMi(this)" />
+                                }
+                                <img src=" ~/Content/images/open.gif" />&nbsp;
+                                <a href="/FrontForum/Index?id=@big.Id">@big.Name</a>
+                            </span><br />
+                            <div id="Sub_@j">
+                                @{ var Smalls = adb.SmallTypes.Where(a => a.BigType == big.Id).ToList();
+                                 if (Smalls == null) { continue; }
+                                 for (int i = 0; i < Smalls.Count(); i++)
+                                 {
+                                     var smaill = Smalls[i] as SmallType;
+                                    <span style="margin-left:10%">
+                                        @if (j != Bigs.Count() - 1)
+                                        {
+                                            <img src=" ~/Content/images/tree-line.gif" />
+                                        } &nbsp;
+                                        @if (i == Smalls.Count() - 1)
+                                        {
+                                            if (j == Bigs.Count() - 1)
+                                            { <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>}
+                                            
+                                           <img src=" ~/Content/images/tree-line-end.gif" />
+                                        }
+                                        else
+                                        {
+                                             if (j == Bigs.Count() - 1)
+                                            { <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>}
+                                            <img src=" ~/Content/images/tree-line-sel.gif" />
+                                        }
+
+                                        <img src=" ~/Content/images/sub.gif" />&nbsp;
+                                        <a href="/FrontForum/IndexList?tid=@smaill.Id">@smaill.Name</a>
+                                    </span><br />
+                                 }
+
+                                }
+                            </div>
+                        </li>
+                    }
+                }
+            }
+
+        </ul>
+    </div>
+    <div style="width: 80%;float:right;height:auto; ">
+        @RenderBody()
+
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        //$(".hh").click(function () {
+        //    alert($(this).parent().html());
+        //})
+    })
+    function CloseMi(curren) {
+       // alert("asbba:" + $(ss).parent().next().next().html());
+        $(curren).parent().next().next().attr("style", "display:none");
+        $(curren).attr("onclick", "OpenMi(this)");
+        if ($(curren).attr("src") == "/Content/images/tree-min-end.gif") {
+            $(curren).attr("src", "../Content/images/tree-max-end.gif");
+        } else {
+            
+            $(curren).attr("src", "../Content/images/tree-max.gif");
+        }
+    }
+
+    function OpenMi(curren) {
+        // alert("asbba:" + $(ss).parent().next().next().html());
+        $(curren).parent().next().next().attr("style", "display:block");
+        $(curren).attr("onclick", "CloseMi(this)");
+
+        if ($(curren).attr("src") == "../Content/images/tree-max-end.gif") {
+            $(curren).attr("src", "../Content/images/tree-min-end.gif");
+        } else {
+            $(curren).attr("src", "../Content/images/tree-min.gif");
+        }
+    }
+
+</script>

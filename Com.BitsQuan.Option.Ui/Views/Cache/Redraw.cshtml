@@ -1,0 +1,251 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@model Com.BitsQuan.Option.Ui.Models.BankOpModel
+
+<style>
+    * {
+        font-family: "微软雅黑";
+        font-size: 14px;
+        border: 0px;
+        text-decoration: none;
+        list-style: none;
+        margin: 0;
+        text-decoration: none;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+    }
+
+    .withdraw_cash .cash {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-size: 18px;
+        color: #666666;
+        display: block;
+        margin: 0 auto;
+        width: 60px;
+    }
+
+    .cashbox {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+        .cashbox a {
+            font-family: "微软雅黑";
+            color: #666666;
+            font-size: 14px;
+            line-height: 30px;
+            display: inline-block;
+            width: 136px;
+            text-align: center;
+        }
+
+    .withdraw_cash .cashbox .cny1 {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #e6e6e6;
+        margin-top: 20px;
+    }
+
+    .cashbox .cny1 .cny:hover {
+        background-color: #559be9;
+        color: white;
+    }
+
+    .cashbox .cny1 .btc:hover {
+        background-color: #559be9;
+        color: white;
+    }
+
+    .cashbox .cny1 .cny {
+        background-image: url(../Content/images/cnyborder.png);
+        background-repeat: no-repeat;
+        background-position: right;
+    }
+
+    .imgbox {
+        overflow: hidden;
+        margin-left: 20px;
+    }
+
+    .img {
+        float: left;
+        font-size: 12px;
+    }
+
+    .img1 {
+        float: left;
+        margin: 0px 0 0 0px;
+        font-size: 12px;
+    }
+
+    .p1 {
+        font-size: 12px;
+        color: #535353;
+    }
+
+    .p2 {
+        font-family: helvetica;
+        font-size: 30px;
+        color: #6d6d6d;
+        margin-top: 10px;
+    }
+
+    .title {
+        font-family: "微软雅黑";
+        color: #559be9;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 40px;
+        margin-top: 30px;
+    }
+
+    .record .title1 {
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        line-height: 28px;
+        background-color: #f2f2f2;
+        width: 130px;
+        text-align: center;
+        float: left;
+        border-top: 1px solid #c2c2c2;
+        border-left: 1px solid #c2c2c2;
+    }
+
+    .record {
+        overflow: hidden;
+        width: 782px;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+        .record .title2 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            background-color: #f2f2f2;
+            border-top: 1px solid #c2c2c2;
+        }
+
+        .record .title3 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            background-color: #f2f2f2;
+            border-top: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+        }
+
+        .record .title4 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-left: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .record .title5 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .record .title6 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+    .cashbox .cny1 {
+        width: 782px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    .manage_border {
+        margin: 30px 0 30px 0;
+    }
+
+    .leftnavbox {
+        float: left;
+    }
+
+    .withdraw_cash {
+        float: left;
+        margin-left: 18px;
+        margin-top: 10px;
+    }
+
+    .box {
+        overflow: hidden;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    #refill .table {
+        font-size: 12px;
+        font-family: "Microsoft YaHei";
+    }
+
+    #refill>div>div.tab-content .table {
+        margin-left: 20px;
+        width: 95%;
+    }
+
+    #refill>div>div.tab-content .table th, .table td {
+        text-align: center;
+    }
+</style>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<div data-cat="func" id="refill">
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" class="active">
+                <a href="#refillcache" aria-controls="refillcache" role="tab" data-toggle="tab" style="border-top:none;border-left:none">人民币充值</a>
+            </li>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <li role="presentation">
+                <a href="#refillbtc" aria-controls="refillbtc" role="tab" data-toggle="tab" style="border-top:none">比特币充值</a>
+            </li>
+}
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="refillcache">
+                @{ Html.RenderAction("RefillCache");}
+            </div>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <div role="tabpanel" class="tab-pane" id="refillbtc">
+                @{ Html.RenderAction("RedrawBTC");}
+            </div>
+}
+        </div>
+    </div>
+</div>

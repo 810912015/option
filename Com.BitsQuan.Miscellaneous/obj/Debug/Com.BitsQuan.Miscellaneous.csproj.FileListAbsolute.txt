@@ -1,0 +1,11 @@
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\bin\Debug\Com.BitsQuan.Miscellaneous.dll.config
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\bin\Debug\Com.BitsQuan.Miscellaneous.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\bin\Debug\Com.BitsQuan.Miscellaneous.pdb
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\bin\Debug\Com.BitsQuan.Option.Core.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\bin\Debug\Google.Authenticator.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\bin\Debug\MessagingToolkit.QRCode.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\bin\Debug\Newtonsoft.Json.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\bin\Debug\Com.BitsQuan.Option.Core.pdb
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\obj\Debug\Com.BitsQuan.Miscellaneous.csprojResolveAssemblyReference.cache
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\obj\Debug\Com.BitsQuan.Miscellaneous.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Miscellaneous\obj\Debug\Com.BitsQuan.Miscellaneous.pdb

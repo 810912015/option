@@ -1,0 +1,173 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.Upd_Phone
+
+<div id="bindphoneupd">
+    @using (Ajax.BeginForm("bindphoneupd", "secure", null, new AjaxOptions
+                {
+                    UpdateTargetId = "bindphoneupd",
+                    InsertionMode = InsertionMode.Replace
+                },
+                new { @class = "form-horizontal", role = "form" }))
+    {
+        <label>
+            您的手机号码
+        </label>
+        <div class="form-group form-group-lg">
+            <div class="col-xs-12">
+                @if (ViewData["Phone"] != null)
+                {
+                    <div class="input-group">
+                        <input disabled id="oldPhone" class="form-control" value="@ViewData["Phone"]" />
+                        <span class="input-group-btn">
+                            <input class="btn btn-default btn-lg" type="button" id="oldcode" onclick="getOldCode()" value="获取原手机验证码">
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+        @Html.LabelFor(a => a.Code, new { @class = "control-label" })
+        <div class="form-group form-group-lg">
+            <div class="col-xs-12">
+                @Html.TextBoxFor(a => a.Code, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="text-center">
+            @Html.ValidationMessageFor(a => a.Code)
+        </div>
+        @Html.LabelFor(a => a.newPhone, new { @class = "control-label" })
+        <div class="form-group form-group-lg">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    @Html.TextBoxFor(a => a.newPhone, new { @class = "form-control" })
+                    <div class="input-group-btn">
+                        <input class="btn btn-default btn-lg" type="button" value="获得验证码" id="newcode" onclick="getCode()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            @Html.ValidationMessageFor(a => a.newPhone)
+        </div>
+        @Html.LabelFor(a => a.newPhoneCode, new { @class = "control-label" })
+        <div class="form-group form-group-lg">
+            <div class="col-xs-12">
+                @Html.TextBoxFor(a => a.newPhoneCode, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="text-center">
+            @Html.ValidationMessageFor(a => a.newPhoneCode)
+        </div>
+        <div class="form-group form-group-lg">
+            <div class="col-xs-12">
+                <input class="btn btn-primary btn-block btn-lg" type="submit" value="确定修改" />
+            </div>
+        </div>
+        <div style="color:red;width:175px;margin-left:39%;" id="result">
+            @if (ViewData["massageUset"] != null)
+            {
+                @ViewData["massageUset"]
+            }
+        </div>
+    }
+</div>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    //获得验证码
+    function getOldCode() {
+        var o = $("#oldcode");
+        o.prop("disabled", true);
+        var phone = $("#oldPhone").html();
+        $.get("/Secure/getOldCode", { "phone": phone }, function (d) {
+            time(o);
+        });
+    }
+    var wait = 30;
+    function time(o) {
+        if (wait == 0) {
+            o.prop("disabled", false); //为了您的信息安全，以便于我们能及时通知到您，请绑定您的手机号码
+            o.val("获取原手机验证码");
+            wait = 30;
+        } else {
+            o.val("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function () {
+                time(o)
+            },
+        1000)
+        }
+    }
+
+    function getCode() {
+        var $btn = $("#newcode");
+        var phone = $("#newPhone").val();
+        if (phone == "") {
+            $("#result").html("请填写新手机号");
+            return;
+        }
+        var reg = /^1[3|5|7|8|][0-9]{9}/;
+        if (!reg.test(phone)) {
+            $("#result").html("手机号格式不正确");
+            return;
+        }
+        var validatePhone = "";
+        $.get("/Secure/getNewCode", { "phone": phone }, function (d) {
+            if (d == 1) {
+                alert("手机号码已被使用，请换个手机号码");
+            }
+            else {
+                $btn.prop("disabled", true);
+                time2($btn);
+            }
+        });
+    }
+
+    var wait2 = 30;
+    function time2(o) {
+        if (wait2 == 0) {
+            o.prop("disabled", false);
+            o.val("短信验证码");
+            wait2 = 30;
+        } else {
+            o.val("重新发送(" + wait2 + ")");
+            wait2--;
+            setTimeout(function () {
+                time2(o)
+            },
+        1000)
+        }
+    }
+
+    //////确认按钮
+    function IsOk() {
+        //输入的参数
+        var Ocode = $("#txtOcode").val();//原手机验证码
+        var Ncode = $("#txtNcode").val();//新手机验证码
+        var phone = $("#newPhone").val()//绑定的新手机
+        //  alert("输入旧验证:"+Ocode+"新验证："+Ncode);
+        //获得的验证码
+        var hidOcode = $("#hidOcode").val();//原
+        var hidNcode = $("#hidNcode").val();//新
+        //  alert("获得旧:" + hidOcode + "新验证：" + hidNcode);
+        if (Ocode == "" || Ncode == "" || phone == "") {
+            $("#result").html("请填写完整");
+            return;
+        }
+
+        //if (Ocode != hidOcode) {
+        //    $("#result").html("原手机验证码不正确");
+        //    return;
+        //}
+        //if (Ncode != hidNcode) {
+        //    $("#result").html("新手机验证码不正确");
+        //    return;
+        //}
+        $.get("/Secure/UpdatePhone", { "phone": phone }, function (d) {
+            if (d) {
+                $("#result").html("修改成功");
+            } else {
+                $("#result").html("修改失败");
+            }
+        });
+    }
+
+</script>

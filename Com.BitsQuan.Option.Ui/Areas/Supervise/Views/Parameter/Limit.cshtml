@@ -1,0 +1,67 @@
+﻿@model Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.LimitModel
+
+@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+
+<h4>
+    大户限仓参数设置
+</h4>
+
+@if (ViewBag.msg != null)
+    { <div style="color:red;">
+        @ViewBag.msg
+    </div>
+    <div class="lead">
+        当前大户限仓参数为:@Html.DisplayNameFor(m=>m.CountPerContractLimit)<strong>@Model.CountPerContractLimit</strong>
+        ,@Html.DisplayNameFor(m=>m.CountPerMinuteLimit)<strong>@Model.CountPerMinuteLimit</strong>,@Html.DisplayNameFor(m=>m.SpanInHours)<strong>@Model.SpanInHours</strong>
+    </div>
+    }
+    else
+    {
+using (Ajax.BeginForm("limit", null, ajo, new { role = "form", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SpanInHours, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.SpanInHours, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SpanInHours)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountPerMinuteLimit, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CountPerMinuteLimit, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CountPerMinuteLimit)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountPerContractLimit, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CountPerContractLimit, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CountPerContractLimit)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="保存" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+}
+}
+
+ 

@@ -1,0 +1,108 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.OrderDealModel
+<div id="orderdealpanel" style="height:400px;overflow-y:auto;">
+ 
+    
+     
+   
+    <table class="table table-striped">
+        <tr style="background-color:white;border-bottom:1px solid #ddd">
+            <td style="border:none">委托编号</td>
+            <td style="border:none">成交时间</td>
+            <td style="border:none">代码</td>
+            <td style="border:none">合约名称</td>
+            <td style="border:none">类型</td>
+            <td style="border:none">成交价格</td>
+            <td style="border:none">成交数量</td>
+
+            <th>成交金额</th>
+        </tr>
+        @if (Model != null && Model.Deals != null)
+        {
+            foreach (var v in Model.Deals)
+            {
+                <tr>
+                    <td>@v.MainOrderId</td>
+                    <td>@Html.DisplayFor(a => @v.DealTime)</td>
+
+                    <td>@v.Code</td>
+                    <td>@v.Name</td>
+
+                    <td>@(v.Direction + v.OrderType.ToString())</td>
+                    <td>@v.DealPrice.ToString("C2")</td>
+                    <td>@v.DealCount</td>
+
+                    <td>@((v.DealCount * v.DealPrice).ToString("C2"))</td>
+                </tr>
+            }
+        }
+    </table>
+    @if (ViewBag.msg != null)
+    {
+        <div class="lead">
+            @ViewBag.msg
+        </div>
+    }
+        @Html.HiddenFor(m => m.PageIndex, new { id = "thisPageIndex" })
+       
+    
+    <ul class="pagination">
+        @if (Model!=null&& Model.PageIndex > 1)
+        {
+            <li><a class="btn btn-primary" id="prepage">上一页</a></li>
+
+        }
+        else
+        {
+            <li><span>上一页</span></li>
+
+        }
+
+        @if (Model != null && Model.HasNext)
+        {
+            <li><a class="btn btn-primary" id="nextpage">下一页</a></li>
+
+        }
+        else
+        {
+            <li><span>下一页</span></li>
+
+        }
+        <li><a class="btn btn-primary" id="refreshorderdeal">刷新</a></li>
+    </ul>
+    <script>
+        $(function () {
+            var qfunc = function (pageIndex) {
+                $.get("/home/GetOrderDeal?pageIndex=" + pageIndex,
+                    function (d) {
+                        $("#orderdealpanel").html(d);
+                    }
+                );
+            };
+            var gindex = function () {
+                var pageIndex = $("#thisPageIndex").val();
+                var pi = parseInt(pageIndex, 0);
+                return pi;
+            }
+            var sindex = function (index) {
+                $("#thisPageIndex").val(index);
+            }
+            $("#prepage").click(function () {
+                var ci = gindex()-1;
+                qfunc(ci);
+                sindex(ci);
+            })
+            $("#nextpage").click(function () {
+                var ci = gindex() + 1;
+                qfunc(ci);
+                sindex(ci);
+            })
+            $("#refreshorderdeal").click(function () {
+                var ci = gindex();
+                qfunc(ci);
+            })
+
+            
+           
+        })
+    </script>
+</div>

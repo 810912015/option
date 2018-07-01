@@ -1,0 +1,238 @@
+﻿@{
+  
+}
+
+<h3>帮助管理</h3>
+<div class="row">
+    <div class="col-md-9">
+        <div id="contractquery">
+           
+            @{ Html.RenderAction("HelpList"); }
+        </div>
+    </div>
+    <div class="col-md-3">
+       
+        @{if (ViewData["hs"] != null) 
+            {
+              Html.RenderAction("UpdHelper");
+          } 
+          else {
+              Html.RenderAction("AddHelper"); }
+           }
+        
+
+
+    </div>
+</div>
+
+
+
+@section scripts{
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script>    
+    $(function () {
+        Load();
+        reset();
+        
+        Add();
+        Update();
+
+      
+    });
+
+
+    function Load() {
+        AddPage();
+        UpdatePage();
+        del();
+    }
+
+  
+    function reset(){
+    //重置
+        $("#reset").click(function () {
+            $("#title").val("");
+            $("#content").val("");
+        })
+    }
+
+    function AddPage() {
+
+        //添加传值
+        $(".AddPage").click(function () {
+            $.post("/Supervise/Helper/GetHelpByID", {
+                "id": 0
+            }, function (d) {
+                var arr = d.split(',');
+                $("#title").val("");
+                $("#content").val("");
+                $("#Add").attr("style", "display:block");
+                $("#Update").attr("style", "display:none");
+
+            });
+        })
+    }
+    function Add() {
+        $("#Add").click(function (event) {
+            var dataString;
+            event.preventDefault();
+            var action = $("#form0").attr("action");
+            if ($("#form0").attr("enctype") == "multipart/form-data") {
+                //this only works in some browsers.
+                //purpose? to submit files over ajax. because screw iframes.
+                //also, we need to call .get(0) on the jQuery element to turn it into a regular DOM element so that FormData can use it.
+                dataString = new FormData($("#form0").get(0));
+                contentType = false;
+                processData = false;
+            } else {
+                // regular form, do your own thing if you need it
+            }
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: dataString,
+                contentType: contentType,
+                processData: processData,
+                success: function (data) {
+                    $("#imgSrc").attr("src", "/Content/" + data).css("display", "block");
+                    //BTW, data is one of the worst names you can make for a variable
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    alert(textStatus);
+                    //do your own thing
+                    alert("fail");
+                }
+            });
+        });
+        $("#Update").click(function (event) {
+            var dataString;
+            event.preventDefault();
+            var action = "/Supervise/Helper/UpdateMethod";
+            if ($("#form0").attr("enctype") == "multipart/form-data") {
+                //this only works in some browsers.
+                //purpose? to submit files over ajax. because screw iframes.
+                //also, we need to call .get(0) on the jQuery element to turn it into a regular DOM element so that FormData can use it.
+                dataString = new FormData($("#form0").get(0));
+                contentType = false;
+                processData = false;
+            } else {
+                // regular form, do your own thing if you need it
+            }
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: dataString,
+                contentType: contentType,
+                processData: processData,
+                success: function (data) {
+                    $("#imgSrc").attr("src", "/Content/" + data).css("display", "block");
+                    alert("修改成功");
+                    //BTW, data is one of the worst names you can make for a variable
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    alert(textStatus);
+                    //do your own thing
+                    alert("fail");
+                }
+            });
+        });
+        //添加
+        //$("#Add").click(function () {
+        //    var title = $("#title").val();
+        //    var content = $("#content").val();
+        //    var type = $("#type").val();
+        //    var ckeShow = $("input[type='checkbox']").is(':checked');
+        //    $.post("/Supervise/Helper/AddMethod", {
+        //        "title": title,
+        //        "content": content,
+        //        "ckeShow": ckeShow,
+        //        "type": type
+        //    }, function (d) {
+        //        if (d > 0) {
+        //            alert("添加成功");
+        //        } else {
+        //            alert("添加失败");
+        //        }
+        //        DataBind();
+        //    });
+        //})
+    }
+       
+       
+    var id = 0;
+    var UpdatePage = function () { }
+       
+    function Update() {
+    }
+
+    function del() {
+        //删除操作
+        $(".del").click(function () {
+            var id = $(this).next("span").html();
+            $.post("/Supervise/Helper/DeleteMethod", {
+                "id": id,
+            }, function (d) {
+                if (d == true || d == "True") {
+                    alert("删除成功");
+                } else {
+                    alert("删除失败");
+                }
+                DataBind();
+
+            });
+        })
+    }
+
+    function DataBind() {
+        $.post("/Supervise/Helper/HelpList", {},
+            function (d) {
+                $("#contractquery").html(d);
+                Load();
+            });
+    }
+    function ooh() {
+        var type = $("#SelectByType").val();
+        $.post("/Supervise/Helper/HelpList", {
+            "pageIndex":1,
+            "type": type
+        },
+           function (d) {
+               $("#contractquery").html(d);
+               $("#SelectByType").val(type);
+               Load();
+           })
+    }
+    ////根据类型查询
+    //$("#SelectByType").change(function () {
+    //  ;
+    //})
+    $(function () {
+        UpdatePage = function (id) {
+            //修改传值
+
+           
+            $.post("/Supervise/Helper/GetHelpByID", {
+                "id": id
+            }, function (d) {
+                $("#imgSrc").attr("src", "/Content/" + d.imgSrc);
+                $("#urlPath").val(d.imgSrc);
+                $("#id").val(id);
+                $("#title").val(d.Htitle);
+                $("#content").val(d.Hcontent);
+                $("#type").val(d.type);
+                $("#publishName").val(d.Hperson);
+                $("#ReadTime").val(d.ReadTime);
+                $("#Update").attr("style", "display:block");
+                $("#Add").attr("style", "display:none");
+
+            });
+
+        };
+    })
+
+ </script>  
+}

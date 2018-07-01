@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Ui.Models.ApplicationUser>
+
+<table class="table table-bordered">
+    @if (Model != null)
+    {
+        <tr>
+            <th>用户名</th>
+            <th>真实姓名</th>
+            <th>手机号</th>
+            <th>手机号已验证</th>
+            <th>邮箱</th>
+            <th>邮箱已验证</th>
+            <th>身份证号</th>
+            <th>注册时间</th>
+            <th>是否允许交易</th>
+            <th>操作</th>
+        </tr>
+        foreach (var v in Model)
+        {
+            <tr> 
+                <td>@v.UserName</td>
+                <td>@v.RealityName</td>
+                <td>@v.PhoneNumber</td>
+                <td>@v.PhoneNumberConfirmed</td>
+                <td>@v.Email</td>
+                <td>@v.EmailConfirmed</td>
+                <td>@v.IdNumber</td>
+                <td>@Html.DisplayFor(a=>v.RegisterTime)</td>
+                <td id="td_@v.Id">@if (v.IsAllowToTrade)
+                    {
+                        <div>用户已可交易</div>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger btn-xs" data-id="@v.Id" data-cat="allow-trade" onclick="makeAllow('@v.Id')">允许交易</a>
+                    }
+                </td>
+                <td>
+                    <a href="javascript:UpdatePage123()" class="UpdatePage">修改</a><span style="display:none">@v.Id</span>
+                </td>
+            </tr>
+        }
+    }
+</table>
+@{
+    Html.RenderPartial("_Pager", ViewData["pager"]);
+}
+
+<div> <strong>全站注册总人数:@if (ViewData["Count"] != null) { @ViewData["Count"] }</strong>
+      <strong style="padding-left:50px">今日注册人数：@if (ViewData["todayCount"] != null){ @ViewData["todayCount"] }
+                                               else { <span>0</span>}
+          @ViewData["time"]                 
+    </strong> 
+</div>

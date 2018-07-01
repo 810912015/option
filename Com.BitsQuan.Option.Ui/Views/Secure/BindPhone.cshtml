@@ -1,0 +1,8 @@
+﻿@if (ViewData["Phone_jue"] != null && ViewData["Phone_jue"] != "")
+{
+    Html.RenderAction("BindPhoneUpd");//修改
+}
+else
+{
+    Html.RenderAction("BindPhoneSet");//设置
+}

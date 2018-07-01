@@ -1,0 +1,40 @@
+﻿
+<p class="Biao"><span class="possword"></span>修改交易密码</p>
+<div class="posswordbox_td">
+    <ul>
+        <li class="title_td"><p>为确保您的账户财产安全，请牢记您的邮箱且不要轻易泄漏给他人</p></li>
+        <li class="title1_td"><p>
+              原始邮箱<span id="oldEmail"></span>
+        </p></li>
+        <li class="title2_td"><p>
+              输入新邮箱
+               <input type="text" id="newEmail" />
+        </p></li>
+        <li class="title2_td"><p>
+                邮箱验证码
+                <input type="text" id="emailCode" />
+                <input type="hidden" id="hidCode" />
+        </p></li>
+        <li class="tiele4_td"><input class="tiele4_ld" type="submit" value="确定" onclick="EmailIsOk()" /></li>
+        <li style="text-align:center">
+             <span style="color:red;width:200px;margin:0 auto" id="result"></span>
+        </li>  
+    </ul>
+</div>
+
+<script>
+    function EmailIsOk() {
+       
+        var newEmail=$("#newEmail").val();
+        var emailCode = $("#emailCode").val();
+        var hidCode = $("#hidCode").val();
+        $.get("/Secure/updateEmail", { "email": newEmail }, function (d) {
+            if (d) {
+                $("#result").html("修改成功");
+            } else {
+                $("#result").html("修改失败");
+            }
+        });
+    }
+
+</script>

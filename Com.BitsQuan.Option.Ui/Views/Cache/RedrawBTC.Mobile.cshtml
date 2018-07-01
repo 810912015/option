@@ -1,0 +1,65 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@model Com.BitsQuan.Option.Ui.Models.OpModelBTCr
+
+<div>
+    <div id="RedrawBTC">
+        @using (Ajax.BeginForm("RedrawBTC", "cache", null, new AjaxOptions
+                        {
+                            UpdateTargetId = "RedrawBTC",
+                            InsertionMode = InsertionMode.Replace
+                        },
+        new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="cashbox">
+                <ul>
+                    <li class="cny1"></li>
+                </ul>
+                <div class="imgbox">
+                    <div class="img"><img alt="" src="/cache/image" /></div>
+                    <div class="img1">
+                        <p class="p1">这是我们的BTC充值地址，请将您的比特币转入此地址</p>
+                        <p class="p2"><strong>1HsuNyJ6QUnepAgZavznDM5PfAPQMGMTUt</strong></p>
+                    </div>
+                    <div class="img1" style="width:80%;">
+                        转入说明：<br />
+                        1.转入是自动的，比特币转账需要整个比特币网络进行确认，达到1个确认后您的比特币会自动充值到您的账户中<br />
+                        2.此地址是您的唯一且独自使用的转入地址，您可以同时进行多次充值，也可将此地址做为您在矿池的付款地址<br />
+                    </div>
+                    <div style="float:left;font-size:18px;">
+                        比特币钱包地址
+                    </div>
+                </div>
+            </div>
+        }
+
+        <table class="table table-striped">
+            <caption>
+                <div class="title">
+                    充值记录
+                </div>
+
+            </caption>
+            <tr>
+                <th>充值地址</th>
+                <th>充值数量</th>
+                <th>转入时间</th>
+                <th>充值状态</th>
+            </tr>
+            @if (ViewData["refillsCurren"] != null)
+            {
+                foreach (var v in ViewData["refillsCurren"] as List<BankRecord>)
+                {
+                    <tr>
+                        <td>@v.Address</td>
+                        <td>@v.Delta</td>
+                        <td>@v.When</td>
+                        <td>@(v.IsApproved ? "已审核" : "审核中")</td>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+
+
+</div>

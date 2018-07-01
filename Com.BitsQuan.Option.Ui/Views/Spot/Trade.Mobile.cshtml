@@ -1,0 +1,318 @@
+﻿ @{
+     ViewBag.Title = "比特币交易-最好的比特币期权交易平台";
+ }
+@if (Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true))
+{
+    <h1>
+        暂不提供虚拟币交易业务.
+    </h1>
+}
+else {
+<div>
+    <div class="row" >
+        <div class="col-md-2 col-xs-6" >
+            最新价&nbsp;&nbsp;<strong id="newestprice"></strong>
+        </div>
+        <div class="col-md-2 col-xs-6">
+            最高价&nbsp;&nbsp;<strong id="max24"></strong>
+        </div>
+        <div class="col-md-2 col-xs-6">
+            最低价&nbsp;&nbsp;<strong id="min24"></strong>
+        </div>
+        <div class="col-md-2 col-xs-6">
+            成交量&nbsp;&nbsp;<strong id="totalcount"></strong>
+        </div>
+        <div class="col-md-2 col-xs-6">
+            买一价&nbsp;&nbsp;<strong id="b1price"></strong>
+        </div>
+        <div class="col-md-2 col-xs-6">
+            卖一价&nbsp;&nbsp;<strong id="s1price"></strong>
+        </div>
+    </div>
+        
+    <div class="row" style="margin-top: 5px;padding-top:5px;padding-bottom:5px; border-bottom: 4px solid #7a4562; ">
+        <div class="col-md-5">
+
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div id="spotcurrent">
+                        @{
+                            Html.RenderAction("GetCurrent");
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div id="spotdeals">
+                        @{
+                            Html.RenderAction("gethotdeals");
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-7">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#kline" aria-controls="kline" role="tab" data-toggle="tab">行情图表</a></li>
+                <li role="presentation"><a href="#marketdeep" aria-controls="marketdeep" role="tab" data-toggle="tab">市场深度</a></li>
+
+            </ul>
+            <div class="tab-content">
+                <div id="kline" role="tabpanel" class="tab-pane active" style="height: 400px; border: 1px solid lightgray; ">
+                    <div id="container" style="min-height: 358px;">
+
+                    </div>
+                    
+                </div>
+
+
+                <div id="marketdeep" role="tabpanel" class="tab-pane">
+                   
+                        <div id="mdcontainer">
+                        </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 5px;padding-top:5px;">
+        <div class="col-md-4">
+
+            <ul class="nav nav-tabs" role="tablist" style="border-bottom:none">
+                <li role="presentation" class="active"><a href="#border" aria-controls="border" role="tab" data-toggle="tab" style="color:red">买入比特币</a></li>
+                <li role="presentation"><a href="#sellBTC" aria-controls="border2" role="tab" data-toggle="tab" style="color:green">卖出比特币</a></li>
+
+            </ul>
+            <div class="tab-content">
+                <div id="border" role="tabpanel" class="tab-pane active" style="border: 1px solid lightgray; ">
+                  
+                    <div style="height:60px;color:red;margin:10px 0px 0px 30px;line-height:25px">
+                        <strong> 最佳买价:</strong>&nbsp;<span id="buytrue"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">
+                            CNY/BTC
+                        </span> &nbsp;&nbsp;&nbsp;<a href="../Cache/Index/1" style="display:inline-block;height:20px;line-height:20px;text-align:center;width:40px;background-color:#559BE9;color:white">充值</a><br />
+                        @if (ViewData["Cnybalance"] != null)
+                        { <strong> 当前余额:</strong> <span id="buybalance">@ViewData["Cnybalance"] &nbsp;&nbsp;<span style="color: #888888">CNY</span></span>}
+
+                    </div>
+                    <div style="height:300px;border-top:1px solid #ddd;padding-left:25px">
+                        <div style="padding-top:18px;">
+                            <div class="row" style="width:345px">
+                                <div class="col-xs-3">
+                                    <label for="mprice" class="pull-right" style="margin-top:5px;">买入价</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="number" min="0.01" max="10000.00" step="0.01" id="mprice" class="form-control" placeholder="输入价格" onblur="sumMoney()" />
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top:18px;">
+                            <div class="row" style="width:345px">
+                                <div class="col-xs-3">
+                                    <label for="mcount" class="pull-right" style="margin-top:5px;">买入量</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="number" min="0.01" max="10000.00" step="0.01" value="0.01" id="mcount" class="form-control" placeholder="输入数量" onblur="sumMoney()" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="padding-top:18px;">
+                            <div class="row" style="width:345px">
+                                <div class="col-xs-3">
+                                    <label for="mcount" class="pull-right" style="margin-top:5px;">总金额</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="number" min="0.01" max="10000.00" step="0.01" id="buysum" disabled="disabled" class="form-control" placeholder="总金额" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="padding-top:18px;">
+                            <div class="row" style="width:345px">
+                                <div class="col-xs-3">
+                                    <label for="mcount" class="pull-right" style="margin-top:5px;">下单方式</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <select class="form-control" id="policy" data-cat="policy" data-tar="mprice">
+                                        <option value="1" selected>限价GFD</option>
+                                        <option value="2">市价IOC</option>
+                                        <option value="3">市价剩余转限价GFD</option>
+                                        <option value="4">限价FOK</option>
+                                        <option value="5">市价FOK</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="padding-top:18px;">
+                            <div class="btn-group btn-group-justified" style="width:200px;text-align:center;margin:0px auto">
+
+                                <a class="btn btn-danger" data-dir="orderbuy" data-op="1" id="buyorder">买入</a>
+                            </div>
+                        </div>
+
+                        <div style="padding-top:18px;">
+                            <div class="lead" id="mresult">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sellBTC" role="tabpanel" class="tab-pane" style="border: 1px solid lightgray; ">
+                    <div style="height:60px;color:green; margin:10px 0px 0px 30px;line-height:25px">
+                        <strong> 最佳卖价:</strong>&nbsp;<span id="selltrue"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">
+                            CNY/BTC
+                        </span>&nbsp;&nbsp;&nbsp;<a href="../Cache/Index/1" style="display:inline-block;height:20px;line-height:20px;text-align:center;width:40px;background-color:#559BE9;color:white">转入</a><br />
+                        @if (ViewData["BTCbalance"] != null)
+                        {<strong> 当前余额:</strong> <span id="sellbalance">@ViewData["BTCbalance"]  &nbsp;&nbsp;<span style="color: #888888">BTC</span></span>}
+
+                    </div>
+                    <div style="height:300px;border-top:1px solid #ddd;padding-left:25px">
+                        <div style="padding-top:18px;">
+                            <div class="row" style="width:345px">
+                                <div class="col-xs-3">
+                                    <label for="mprice2" class="pull-right" style="margin-top:5px;">卖出价</label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <input type="number" min="0.01" max="10000.00" step="0.01" id="mprice2" class="form-control" placeholder="输入价格" onblur="sumMoney2()" />
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top:18px;">
+                            <div class="row" style="width:345px">
+                                <div class="col-xs-3">
+                                    <label for="mcount2" class="pull-right" style="margin-top:5px;">卖出量</label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <input type="number" min="0.01" max="10000.00" step="0.01" value="0.01" id="mcount2" class="form-control" placeholder="输入数量" onblur="sumMoney2()" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="padding-top:18px;">
+                            <div class="row" style="width:345px">
+                                <div class="col-xs-3">
+                                    <label for="mcount2" class="pull-right" style="margin-top:5px;">总金额</label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <input type="number" min="0.01" max="10000.00" step="0.01" id="sellsum" disabled="disabled" class="form-control" placeholder="总金额" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="padding-top:18px;">
+                            <div class="row" style="width:345px">
+                                <div class="col-xs-3">
+                                    <label for="mcount2" class="pull-right" style="margin-top:5px;">下单方式</label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <select class="form-control" id="policy2" data-cat="policy" data-tar="mprice2">
+                                        <option value="1" selected>限价GFD</option>
+                                        <option value="2">市价IOC</option>
+                                        <option value="3">市价剩余转限价GFD</option>
+                                        <option value="4">限价FOK</option>
+                                        <option value="5">市价FOK</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="padding-top:18px;">
+                            <div class="btn-group btn-group-justified" style="width:200px;text-align:center;margin:0px auto">
+                                <a class="btn btn-success" data-dir="ordersell" data-op="2" id="sellorder">卖出</a>
+                            </div>
+                        </div>
+
+                        <div style="padding-top:18px;">
+                            <div class="lead" id="mresult2">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-8">
+            <ul class="nav nav-tabs" role="tablist" id="spotorders" style="border-bottom:none">
+                <li role="presentation" class="active"><a href="#optionpanel" aria-controls="optionpanel" role="tab" data-toggle="tab"> 可撤委托</a></li>
+                <li role="presentation"><a href="#coinpanel" aria-controls="coinpanel" role="tab" data-toggle="tab"> 历史委托</a></li>
+                <li role="presentation"><a href="#dealpanel" aria-controls="dealpanel" role="tab" data-toggle="tab"> 成交记录</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="optionpanel" role="tabpanel" class="tab-pane active" style="border:1px solid lightgray;border-top:none">
+                    <div style="height:370px;overflow-y:auto;" id="mycurspotpanel">
+                        <table class="table table-striped">
+                            <tr id="curheader" style="background-color:white;border-bottom:1px solid #ddd;text-align:center;">
+                                <td>委托编号</td>
+                                <td>委托时间</td>
+                                <td>币种</td>
+                                <td>类型</td>
+                                <td>委托价格</td>
+                                <td>委托数量</td>
+                                <td>尚未成交</td>
+                                <td>成交量</td>
+                                <td>操作</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div id="coinpanel" role="tabpanel" class="tab-pane" style="border:1px solid lightgray;border-top:none">
+                    @{
+                        Html.RenderAction("myhistoryorder");
+                    }
+                </div>
+                <div id="dealpanel" role="tabpanel" class="tab-pane" style="border:1px solid lightgray;border-top:none">
+                    @{
+                        Html.RenderAction("myspotorderdeal");
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="mybox" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="box">
+
+                <div class="closeicon" data-dismiss="modal"
+                     aria-hidden="true"><img src="~/Content/images/closeicon.png"></div>
+
+                <div class="test">
+                    您尚未绑定手机，为了您的资金安全，<br />
+                    建议您绑定
+                </div>
+
+
+                <div class="btn"><input type="submit" value="点击前往" id="bindphone"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/mustache.js"></script>
+<script src="~/Scripts/hs/highstock.js"></script>
+<script src="~/Scripts/trade/ohlc.js"></script>
+<script src="~/Scripts/trade/deep.js"></script>
+
+
+<script src="~/Scripts/trade/spot.js"></script>
+}
+
+
+
+
+
+
+

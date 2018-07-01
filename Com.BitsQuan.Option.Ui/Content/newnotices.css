@@ -1,0 +1,162 @@
+﻿
+        /*内容*/
+
+        .box {
+            overflow: hidden;
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .leftnavbox {
+            float: left;
+            background-color: #F7F6F2;
+        }
+
+        .rightbox {
+            float: left;
+            margin-left: 18px;
+            width: 820px;
+        }
+        /*左侧导航*/
+        .leftnav {
+            width: 158px;
+            height: 330px;
+        }
+
+            .leftnav li {
+                background-repeat: no-repeat;
+                background-position: bottom;
+                padding-left:20px;
+            }
+
+                .leftnav li .funds_center {
+                    font-family: "微软雅黑";
+                    font-size: 16px;
+                    color: #535353;
+                    line-height: 50px;
+                }
+
+                .nav-top{
+                    border-top:2px solid #aa5800;
+                    border-bottom: 1px solid #dddbd4;
+                }
+
+            .nav-normal {
+                color:#000000;
+                width: 158px;
+                display: block;
+                font-family: "微软雅黑";
+                font-size: 14px;
+                line-height: 40px;
+            }
+
+                .nav-normal:hover {
+                    color:#aa5800;
+                    text-decoration: underline;
+                }
+
+                .nav-selected{
+                    color:#aa5800;
+                    background-image: url(images/nav-arrow.png);
+                    background-repeat: no-repeat;
+                    background-position: 110px 15px;
+                }
+        /*右侧内容*/
+        .news {
+            width: 100px;
+            margin: 0 auto;
+            line-height: 30px;
+            font-size: 16px;
+        }
+
+        .news-head{
+            background-image: url(images/news_list_separator.png);
+            background-repeat:repeat-x;
+            background-position: 0 30px;
+            font-size: 18px;
+            font-weight: bold;
+            font-family:"Microsoft YaHei";
+            line-height: 1em;
+            margin-bottom: 5px;
+            padding-bottom: 15px;
+        }
+
+        .news-list-title{
+            color:#aa5800;
+        }
+        .news-list-title:hover{
+            text-decoration: underline;
+            color:#aa5800;
+        }
+
+        .title {
+            font-size: 16px;
+            color: #8e681e;
+            line-height: 40px;
+            font-family: "微软雅黑";
+        }
+
+        .title1 {
+            color: #888888;
+            font-size: 12px;
+            font-family: "Microsoft YaHei";
+            line-height: 20px;
+        }
+
+        .rightbox .title2box .title2 {
+            font-size: 12px;
+            font-family: "Microsoft YaHei";
+            line-height: 20px;
+            color: #666666;
+        }
+
+        .title2box {
+            /*padding: 10px 0 10px 0;*/
+            background-image: url(images/news_list_separator.png);
+            background-repeat:repeat-x;
+            background-position: 0 50px;
+            height:55px;
+        }
+
+        .a1 {
+            color: #438ad9;
+            background-color: #f6f9fd;
+            display: inline-block;
+            width: 34px;
+            line-height: 34px;
+            border: 1px solid #e1e2e3;
+            font-size: 12px;
+            font-family: Arial;
+            text-align: center;
+            margin: 0 8px 0 8px;
+        }
+
+        .a2 {
+            color: #438ad9;
+            background-color: #f6f9fd;
+            width: 60px;
+            line-height: 34px;
+            ;
+            border: 1px solid #e1e2e3;
+            display: inline-block;
+            font-size: 12px;
+            font-family: "宋体";
+            display: inline-block;
+            text-align: center;
+            margin: 0 8px 0 8px;
+        }
+
+        .nextbtn {
+            margin-top: 20px;
+            margin-borrom: 20px;
+            float: right;
+        }
+
+        .rightbox li:hover {
+            background-color: #fafafa;
+            border: none;
+        }
+
+        .nextbtn a:hover {
+            border: 1px solid #39F;
+        }      

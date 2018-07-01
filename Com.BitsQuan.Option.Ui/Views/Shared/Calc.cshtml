@@ -1,0 +1,211 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    #CalcTop {
+        position: fixed;
+        border-radius: 4px 0px 0px 4px;
+        font-family: "Microsoft YaHei";
+        background-color: #fff;
+        color:#636363;
+    }
+    #CalcTop>table{
+        margin:0;
+    }
+    #CalcTop>table th{
+        background-color: #f3f3f3;
+    }
+    .vertical {
+        width: 20px;
+        display: inline-block;
+        word-wrap: break-word;
+        letter-spacing: 10px;
+        cursor: pointer;
+        padding: 5px;
+        margin: 5px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #0e4579;
+    }
+
+    #CalcTop input {
+        width: 80px;
+        height: 20px;
+    }
+
+    #CalcTop tr > td:nth-child(2n+1) {
+        font-weight: 500;
+    }
+
+    #btn-close {
+        color:#ff0000;
+    }
+</style>
+<div id="CalcTop" style="display:none;">
+    <table class="table" style="width:auto;">
+        <tr id="calcheader">
+            <th colspan="2">期权理论值计算器</th>
+            <th colspan="2">合约单位0.1比特币</th>
+            <th><a class="pull-right" id="btn-close" href="javascript:;">关闭</a></th>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">欧式期权</th>
+            <td></td>
+            <td class="text-center">
+                认购
+            </td>
+            <td class="text-center">
+                认沽
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-right">
+                比特币价格&nbsp;&nbsp;
+                <input id="s0t" type="text" value="100.000" />
+            </td>
+            <td class="text-right">期权价格</td>
+            <td><input type="text" id="ct" disabled /></td>
+            <td><input type="text" id="pt" disabled /></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-right">
+                行权价&nbsp;&nbsp;
+                <input id="kt" type="text" value="100.000" />
+            </td>
+            <td class="text-right">DELTA</td>
+            <td><input type="text" id="dct" disabled /></td>
+            <td><input type="text" id="dpt" disabled /></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-right">
+                波动率%&nbsp;&nbsp;
+                <input id="rot" type="text" value="35.000" />
+            </td>
+            <td class="text-right">GAMMA</td>
+            <td><input type="text" id="gct" disabled /></td>
+            <td><input type="text" id="gpt" disabled /></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-right">
+                利率%&nbsp;&nbsp;
+                <input id="rt" type="text" value="6.000" />
+            </td>
+            <td class="text-right">VEGA</td>
+            <td><input type="text" id="vct" disabled /></td>
+            <td><input type="text" id="vpt" disabled /></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-right">
+                剩余天数&nbsp;&nbsp;
+                <input id="tt" type="text" value="29.000" />
+            </td>
+            <td class="text-right">1-THETA</td>
+            <td><input type="text" id="tct" disabled /></td>
+            <td><input type="text" id="tpt" disabled /></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center"><a class="btn btn-info btn-sm" id="calit">开始计算</a></td>
+            <td style="text-align:right;">RHO</td>
+            <td style="text-align:left;"><input type="text" id="rct" disabled /></td>
+            <td style="text-align:right;"><input type="text" id="rpt" disabled /></td>
+        </tr>
+    </table>
+</div>
+<script>
+    function normalcdf(X) {   //HASTINGS.  MAX ERROR = .000001
+        var T = 1 / (1 + .2316419 * Math.abs(X));
+        var D = .3989423 * Math.exp(-X * X / 2);
+        var Prob = D * T * (.3193815 + T * (-.3565638 + T * (1.781478 + T * (-1.821256 + T * 1.330274))));
+        if (X > 0) {
+            Prob = 1 - Prob;
+        }
+        return Prob;
+    }
+
+    function compute(v) {
+        Z = v
+        M = 0
+        SD = 1
+        with (Math) {
+            if (SD < 0) {
+                alert("The standard deviation must be nonnegative.")
+            } else if (SD == 0) {
+                if (Z < M) {
+                    Prob = 0
+                } else {
+                    Prob = 1
+                }
+            } else {
+                Prob = normalcdf((Z - M) / SD);
+                Prob = round(10000000 * Prob) / 10000000;
+            }
+        }
+        return Prob;
+    }
+
+    var e = 2.7182818;
+
+    function calfunc(s0, k, ro, r, t) {
+        var d1 = (Math.log(s0 / k) + (r + ro * ro / 2) * t) / (ro * Math.pow(t, 0.5));
+        var d2 = (Math.log(s0 / k) + (r - ro * ro / 2) * t) / (ro * Math.pow(t, 0.5));
+
+        c = s0 * compute(d1) - k * compute(d2) / Math.pow(e, r * t);
+        p = k * compute(d2 * -1) / Math.pow(e, r * t) - s0 * compute(d1 * -1);
+        return [c, p];
+    }
+
+    function caldelta(s0, k, ro, r, t) {
+        var result = calfunc(s0, k, ro, r, t);
+        var dr = calfunc(s0 + 1, k, ro, r, t);
+        var dc = dr[0] - result[0]; var dp = dr[1] - result[1];
+        return [dc, dp];
+    }
+
+    $(function () {
+        $("#calit").click(function () {
+            var s0 = parseFloat($("#s0t").val());//比特币价格
+            var k = parseFloat($("#kt").val());//行权价
+            var ro = parseFloat($("#rot").val()) / 100;//波动率
+            var r = parseFloat($("#rt").val()) / 100;//利率
+            var t = parseFloat($("#tt").val()) / 365;//剩余年数,即天数/365
+
+            var result = calfunc(s0, k, ro, r, t);
+
+            $("#ct").val(Math.round(result[0] * 1000) / 1000);//认购期权价格
+            $("#pt").val(Math.round(result[1] * 1000) / 1000);//认沽期权价格
+
+            var delta = caldelta(s0, k, ro, r, t);
+
+
+
+
+            $("#dct").val(Math.round(delta[0] * 1000) / 1000);
+            $("#dpt").val(Math.round(delta[1] * 1000) / 1000);
+
+
+            var delta2 = caldelta(s0 + 1, k, ro, r, t);
+            var gct = Math.abs(delta2[0] - delta[0]); var gpt = Math.abs(delta2[1] - delta[1]);
+
+            $("#gct").val(Math.round(gct * 1000) / 1000);
+            $("#gpt").val(Math.round(gpt * 1000) / 1000);
+
+            var ro1 = (ro * 100 + 1) / 100;
+            var vega = calfunc(s0, k, ro1, r, t);
+
+            $("#vct").val(Math.round((vega[0] - result[0]) * 1000) / 1000);
+            $("#vpt").val(Math.round((vega[1] - result[1]) * 1000) / 1000);
+
+            var t1 = (t * 365 - 1) / 365;
+            var theta = calfunc(s0, k, ro, r, t1);
+
+            $("#tct").val(Math.round((theta[0] - result[0]) * 1000) / 1000);
+            $("#tpt").val(Math.round((theta[1] - result[1]) * 1000) / 1000);
+
+            var r1 = (r * 100 + 1) / 100;
+            var rho = calfunc(s0, k, ro, r1, t);
+
+            $("#rct").val(Math.round((rho[0] - result[0]) * 1000) / 1000);
+            $("#rpt").val(Math.round((rho[1] - result[1]) * 1000) / 1000);
+        })
+    })
+</script>

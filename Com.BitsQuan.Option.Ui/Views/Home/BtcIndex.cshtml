@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @Styles.Render("~/content/btcindex.css")
+</head>
+<body>
+
+    <div class="border"></div>
+    <div class="box">
+        <!--比特币指数-->
+        <div>
+            <div class="title">比特币指数</div>
+            <div class="mainbox">
+                <ul class="main">
+                    <li class="btcnumber">@ViewBag.Current</li>
+                    <li class="max">
+                        <p>当前最高价</p>
+                        <p style="color:#ff0000;font-weight:bold">@ViewBag.Max</p>
+                    </li>
+                    <li class="min">
+                        <p>当前最低价</p>
+                        <p style="color:#5a9d3d;font-weight:bold">@ViewBag.Min</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--数据来源-->
+        <div>
+            <div class="title" style="margin-top:40px">数据来源</div>
+            <div>
+                <table class="tablebox">
+                    <tr>
+                        <td class="tabletitle">现货交易所</td>
+                        <td class="tabletitle">最新成交价</td>
+                        <td class="tabletitle">当前最高价</td>
+                        <td class="tabletitle">当前最低价</td>
+                        <td class="tabletitle">交易所权重</td>
+                    </tr>
+                    @foreach (var i in ViewBag.OtherMarkets)
+                    {
+                        <tr>
+                            <td>@i.Name</td>
+                            <td>@i.NewDealPrice.ToString("F2")</td>
+                            <td>@i.MaxPrice.ToString("F2")</td>
+                            <td>@i.MinPrice.ToString("F2")</td>
+                            <td>@i.Percent.ToString("p0")</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+        <!--比特币价格指数说明-->
+        <div class="textbox">
+            <div class="title" style="margin-top:40px">比特币价格指数说明</div>
+            <div style="width:960px;margin:0 auto; padding-bottom:30px">
+                <p class="text">比特币价格指数是通过采集3家比特币现货交易所的比特币最新成交价格，按照根据各个纳入交易所的综合影响力所确定的固定权重，统计出来的一个公允比特币价格指标，可以反映当前的比特币价格运行状况。比权网比特币期权合约将以该指数为标的，对比特币期权合约进行合约到期的交割。<br />交易所选择标准：在中国范围内，每3个月选择一次标的交易所。</p>
+                <p class="text">
+                    <strong>入选需要同时满足如下要求：</strong><br />1、日均公允比特币成交量连续3个月在5000币以上；<br />
+                    2、平台3个月内未发生重大交易事故；<br />
+                    3、平台未发现经营风险；<br />
+                    4、未出现其他可能影响该交易所稳定运行的情形；<br />
+                </p>
+                <p class="text">
+                    <strong>交易所剔除的情形：</strong><br />日均公允比特币成交量连续3个月在5000币以下；<br />
+                    1、平台近3个月内发生重大交易事故超过1次；<br />
+                    2、平台出现经营风险；<br />
+                    3、平台出现其他我们认为可能影响该交易所稳定运行的情形；<br />
+                    计价单位：统一折算成人民币;<br />
+                    计算模型：采用纳入指标计算的各个平台实时最新成交价固定加权平均价。<br />
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

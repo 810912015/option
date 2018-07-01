@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/content/simulation.css")
+    <title>比权网期权模拟大赛</title>
+</head>
+<body>
+    <!--头部-->
+    <div><img class="headimg" src="~/content/images/simulation/head.png"></div>
+    <!--内容-->
+    <div class="mainbox">
+        <img src="~/content/images/simulation/main.png">
+    </div>
+
+    <!--数据表-->
+    <div class="table">
+        <div>
+            <p class="tabletitle"><img src="~/content/images/simulation/titlebg.png"></p>
+            <ul class="date">
+                <li class="first" style="font-weight:bold">排名</li>
+                <li class="second" style="font-weight:bold">账户</li>
+                <li class="third" style="font-weight:bold">资金</li>
+                <!-- ko foreach: theTopOfDay -->
+                <li class="first" data-bind="text:'No.' + ($index() + 1)"></li>
+                <li class="second" data-bind="text:$data.name"></li>
+                <li class="third" data-bind="text:$data.money"></li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <div>
+            <div style=" position:relative">
+                <input class="leftbtn" data-bind="click:getHistoryBack" type="button" style="position:absolute;left:43px;top:176px;background:url(@Url.Content("~/content/images/simulation/lbtn.png")) no-repeat;width:37px;height:70px; cursor:pointer">
+                <input class="rightbtn" data-bind="click:getHistoryForward,visible:!historyDateReachCeiling()" type="button" style="position:absolute;right:43px;top:176px;background:url(@Url.Content("~/content/images/simulation/rbtn.png")) no-repeat;width:37px;height:70px; cursor:pointer">
+            </div>
+
+            <p class="tabletitle"><img src="~/content/images/simulation/titlebg1.png"></p>
+            <ul class="date1">
+                <li class="first1" style="font-weight:bold">日期</li>
+                <li class="second1" style="font-weight:bold">排名</li>
+                <li class="third1" style="font-weight:bold">账户</li>
+                <li class="fourth1" style="font-weight:bold">资金</li>
+                <!-- ko foreach: theTopOfHistory -->
+                <li class="first1" data-bind="text:$root.historyDate().format('YYYY-MM-D')"></li>
+                <li class="second1" data-bind="text:'No.' + ($index() + 1)"></li>
+                <li class="third1" data-bind="text:$data.name"></li>
+                <li class="fourth1" data-bind="text:$data.money"></li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <div class="returnbox"><a class="return" href="@Url.Action("index","home")">返回首页</a></div>
+
+    </div>
+
+    @Scripts.Render("~/scripts/knockout.min.js", "~/bundles/j1", "~/scripts/moment.min.js")
+    <script>
+        var ViewModel = function () {
+            var self = this;
+            self.theTopOfDay = ko.observable([]);
+            self.theTopOfHistory = ko.observable([]);
+            self.historyDate = ko.observable(moment().add(-1, "days"));
+            self.historyDate.subscribe(function () {
+                self.getTopOfHistory();
+            });
+            self.historyDateReachCeiling = ko.pureComputed(function () {
+                return self.historyDate().diff(moment(), 'days') == -1;
+            });
+
+            self.getTopOfDay = function () {
+                $.getJSON("@Url.Action("GetTopTradersOfSomeDay","home")", { "date": moment().format("YYYY-MM-DD") }, function (data) {
+                    self.theTopOfDay(data);
+                });
+            };
+            self.getTopOfHistory = function () {
+                $.getJSON("@Url.Action("GetTopTradersOfSomeDay","home")", { "date": self.historyDate().format("YYYY-MM-DD") }, function (data) {
+                    self.theTopOfHistory(data);
+                });
+            };
+            self.getHistoryForward = function () {
+                self.historyDate(self.historyDate().add(1, "days"));
+            };
+            self.getHistoryBack = function () {
+                self.historyDate(self.historyDate().add(-1, "days"));
+            };
+        };
+        var vm = new ViewModel();
+        ko.applyBindings(vm);
+
+        var refresh = function () {
+            vm.getTopOfDay();
+            vm.getTopOfHistory();
+        };
+        refresh();
+        setInterval(refresh, 5000);
+    </script>
+</body>
+</html>

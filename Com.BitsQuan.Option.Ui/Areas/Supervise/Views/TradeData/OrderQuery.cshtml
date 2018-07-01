@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.Order>
+
+ <input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)" />
+<table class="table table-striped">
+    @if (Model != null)
+    {
+        <tr>
+            <th>编号</th>
+            <th>用户姓名</th>
+            <th>合约代码</th>
+            <th>合约名称</th>
+            <th>合约类型</th>
+            <th>期权类型</th>
+            <th>买卖</th>
+            <th>开平</th>
+            <th>策略</th>
+            <th>持仓类型</th>
+            <th>价格</th>
+            <th>数量</th>
+            <th>成交数量</th>
+            <th>委托时间</th>
+            <th>挂单状态</th>
+            <th>当前状态</th>
+            <th>最后成交价</th>
+            <th>累计成交数量</th>
+            <th>累计成交金额</th>
+            <th>报单数量</th>
+            <th>系统单</th>
+            <th>备注</th>
+            
+        </tr>
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Id</td>
+                <td>@v.Trader.Name</td>
+                <td>@Html.DisplayFor(m=>v.Contract.Code)</td>
+                <td>@Html.DisplayFor(m => v.Contract.Name)</td>
+                <td>@Html.DisplayFor(m => v.Contract.ContractType)</td>
+                <td>@Html.DisplayFor(m => v.Contract.OptionType)</td>
+                <td>@v.Direction</td>
+                <td>@v.OrderType</td>
+                <td>@v.OrderPolicy</td>
+                <td>@v.PositionType</td>
+                <td>@v.Price</td>
+                <td>@v.Count</td>
+                <td>@v.DoneCount</td>
+                <td>@v.OrderTime</td>
+                <td>@v.RequestStatus</td>
+                <td>@v.State</td>
+                <td>@v.DonePrice</td>
+                <td>@v.TotalDoneCount</td>
+                <td>@v.TotalDoneSum</td>
+                <td>@v.ReportCount</td>
+                <td>@v.IsBySystem</td>
+                <td>@Html.DisplayFor(a=>v.Detail)</td>
+            </tr>
+        }
+    }
+</table> 

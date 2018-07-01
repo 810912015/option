@@ -1,0 +1,534 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Ui.Models.BankAccount>
+
+<script src="~/Scripts/mustache.js"></script>
+<style>
+    .bar{
+
+    }
+    .bar:hover{
+        background-color:lightgreen;
+    }
+    .emphis {
+        background-color: green;
+    }
+
+    /*右侧内容*/
+    .withdraw_cash .cash_ba {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-size: 18px;
+        color: #666666;
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+    }
+
+    .cashbox {
+        border: 1px solid #c2c2c2;
+        margin-top: 10px;
+        width: 780px;
+    }
+
+        .cashbox a {
+            font-family: "微软雅黑";
+            color: #666666;
+            font-size: 14px;
+            line-height: 30px;
+            display: inline-block;
+            width: 136px;
+            text-align: center;
+        }
+
+    .tb {
+        margin: 20px 20px 0 20px;
+        background-color: #f2f2f2;
+        height: 30px;
+        border-bottom: 1px solid #c2c2c2;
+    }
+
+        .tb a {
+            line-height: 30px;
+            display: inline-block;
+            width: 135px;
+            text-align: center;
+            color: #535353;
+            background-image: url(@Url.Content("~/Content/images/cnyborder.png"));
+            background-position: right;
+            background-repeat: no-repeat;
+        }
+
+            .tb a:hover {
+                color: white;
+                background-color: #559be9;
+            }
+
+    .mycard1 {
+        font-weight: bold;
+        line-height: 28px;
+    }
+
+    .mycard2 {
+        line-height: 35px;
+        border: 1px solid #c2c2c2;
+        width: 300px;
+        /*background-image: url(../Content/images/closd.png);*/
+        background-repeat: no-repeat;
+        background-position: top right;
+    }
+
+        .mycard2 p {
+            margin-left: 20px;
+        }
+
+    .mycard3 p {
+        margin-left: 20px;
+    }
+
+    .mycard4 p {
+        margin-left: 20px;
+    }
+
+    .mycard3 {
+        border-left: 1px solid #c2c2c2;
+        line-height: 32px;
+        border-right: 1px solid #c2c2c2;
+        padding-top: 20px;
+        width: 300px;
+    }
+
+    .mycard4 {
+        border-left: 1px solid #c2c2c2;
+        line-height: 32px;
+        border-right: 1px solid #c2c2c2;
+        width: 300px;
+    }
+
+    .mycard5 {
+        border-left: 1px solid #c2c2c2;
+        line-height: 32px;
+        width: 300px;
+        border-bottom: 1px #c2c2c2 solid;
+        padding-top: 30px;
+        border-right: 1px solid #c2c2c2;
+    }
+
+        .mycard5 a {
+            color: #666666;
+            font-size: 12px;
+            display: block;
+            width: 300px;
+            text-align: center;
+        }
+
+            .mycard5 a:hover {
+                color: red;
+            }
+
+    .card {
+        padding-bottom: 60px;
+        margin-top: 20px;
+    }
+
+    .cashbox .address {
+        line-height: 36px;
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        margin-bottom: 10px;
+        margin-left: 110px;
+        margin-top: 20px;
+    }
+
+    .cashbox input {
+        line-height: 30px;
+        margin-left: 10px;
+        width: 175px;
+        height: 30px;
+    }
+
+    .cashbox .address .address1 {
+        font-family: "宋体";
+        color: red;
+        font-size: 12px;
+        width: 80px;
+        text-align: center;
+    }
+
+    .cashbox .address2 {
+        line-height: 36px;
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        margin-bottom: 10px;
+        margin-left: 97px;
+    }
+
+    .choose_select1 {
+        border: 1px solid #c2c2c2;
+        height: 30px;
+        margin-left: 10px;
+        width: 178px;
+        line-height: 30px;
+    }
+
+    .choose_select2 {
+        border: 1px solid #c2c2c2;
+        height: 30px;
+        margin-left: 10px;
+        width: 82px;
+        line-height: 30px;
+    }
+
+    .button1 {
+        background: url(@Url.Content("~/Content/images/btn.png")) no-repeat;
+        width: 180px;
+        margin-top: 5px;
+        font-family: "微软雅黑";
+        color: white;
+        font-size: 14px;
+        height: 30px;
+        margin-bottom: 30px;
+        cursor: pointer;
+    }
+
+    .title {
+        font-family: "微软雅黑";
+        color: #559be9;
+        font-size: 14px;
+        line-height: 40px;
+        margin-top: 30px;
+    }
+
+    .record .title1 {
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        line-height: 28px;
+        background-color: #f2f2f2;
+        width: 130px;
+        text-align: center;
+        float: left;
+        border-top: 1px solid #c2c2c2;
+        border-left: 1px solid #c2c2c2;
+    }
+
+    .record {
+        overflow: hidden;
+        width: 782px;
+        margin: 0 auto;
+    }
+
+        .record .title2 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            background-color: #f2f2f2;
+            border-top: 1px solid #c2c2c2;
+        }
+
+        .record .title3 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            background-color: #f2f2f2;
+            border-top: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+        }
+
+        .record .title4 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-left: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .record .title5 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .record .title6 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+
+
+    .leftnavbox {
+        float: left;
+    }
+
+    .withdraw_cash {
+        float: left;
+        margin-left: 18px;
+        margin-top: 10px;
+    }
+
+    .box {
+        overflow: hidden;
+        width: 1000px;
+        margin: 0 auto;
+    }
+</style>
+
+
+<div class="row">
+
+    <div class="col-md-7">
+
+        <!--右侧内容-->
+        <div class="withdraw_cash">
+            <div class="cashbox">
+
+                <ul>
+                    <li class="address">
+                        选择银行<select id="babank" class="choose_select1">
+                            <option>中国工商银行</option>
+                            <option>中国农业银行</option>
+                            <option>中国建设银行</option>
+                            <option>招商银行</option>
+                            <option>中国交通银行</option>
+                            <option>中信实业银行</option>
+                            <option>上海浦东发展银行</option>
+                            <option>深圳发展银行</option>
+                            <option>中国民生银行</option>
+                            <option>其他</option>
+                        </select>
+                    </li>
+                    <li id="li-other-bank" class="address" style="display:none;">
+                        银行名称<input type="text" id="txt-other-bank" />
+                    </li>
+                    <li class="address">
+                        开户地址<select name="baagent" id="baagent" style="width:180px" class="choose_select2">  </select>
+                        <select name="bacity" id="bacity" style="width:120px" class="choose_select2">  </select>
+
+
+                    </li>
+                    <li class="address">开户支行<input type="text" id="SOname" onfocus="SalesOffice()" style="border:1px solid #c2c2c2"></li>
+                    <li class="address2">银行卡户名<input type="text" id="baname" style="border:1px solid #c2c2c2"></li>
+                    <li class="address">银行卡号<input type="text" id="banumber" name="交易密码" onmouseout="this.style.border='1px solid #c2c2c2'" onmouseover="this.style.border='1px solid #559be9'" style="border:1px solid #c2c2c2"></li>
+                    @*<li class="address">确认卡号<input type="text" name="交易密码" onmouseout="this.style.border='1px solid #c2c2c2'" onmouseover="this.style.border='1px solid #559be9'" style="border:1px solid #c2c2c2"></li>*@
+
+                    <li style="margin-left:166px">
+                        <input class="button1" type="submit" value="保&nbsp;&nbsp;存" id="saveba"><span style="color:red" id="validate"></span>
+                        @*<span style="color:red" id="result"></span>*@
+                    </li>
+                </ul>
+
+            </div>
+            <div id="showBank">
+                @foreach (var item in Model)
+                {
+
+
+                    <div class="card" style="float: left; margin-right: 10%; ">
+                        <ul class="mycard">
+                            <li class="mycard1">我的银行卡</li>
+                            <li class="mycard2">
+                                <p>
+                                    @Html.DisplayFor(modelItem => item.BankName)<span style="border: 0px solid red; width: 20px; height: 60px; margin-left: 60%;">
+                                        <img src="~/Content/images/closd.png" onclick="delBank(this)" /><span id="aa" style="display:none">@item.Number</span>
+                                    </span>
+                                </p>
+                            </li>
+                            <li class="mycard3"><p>卡户名：@Html.DisplayFor(modelItem => item.Name)</p></li>
+                            <li class="mycard4"><p>银行卡：@item.Number</p></li>
+                            <li class="mycard5">@*<a href="#">提现到该卡</a>*@</li>
+                        </ul>
+                    </div>
+                }
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+    //================================>省市联动
+
+    provinceArray = new Array("北京市", "上海市", "天津市", "重庆市", "河北省", "山西省", "内蒙古自治区", "辽宁省", "吉林省", "黑龙江省", "江苏省", "浙江省", "安徽省", "福建省", "江西省", "山东省", "河南省", "湖北省", "湖南省", "广东省", "广西壮族自治区", "海南省", "四川省", "贵州省", "云南省", "西藏自治区", "陕西省", "甘肃省", "宁夏回族自治区", "青海省", "新疆维吾尔族自治区", "香港特别行政区", "澳门特别行政区", "台湾省", "其它");
+
+    //定义 城市 数据数组
+    cityArray = new Array();
+    cityArray[0] = new Array("北京市", "东城|西城|崇文|宣武|朝阳|丰台|石景山|海淀|门头沟|房山|通州|顺义|昌平|大兴|平谷|怀柔|密云|延庆");
+    cityArray[1] = new Array("上海市", "黄浦|卢湾|徐汇|长宁|静安|普陀|闸北|虹口|杨浦|闵行|宝山|嘉定|浦东|金山|松江|青浦|南汇|奉贤|崇明");
+    cityArray[2] = new Array("天津市", "和平|东丽|河东|西青|河西|津南|南开|北辰|河北|武清|红挢|塘沽|汉沽|大港|宁河|静海|宝坻|蓟县");
+    cityArray[3] = new Array("重庆市", "万州|涪陵|渝中|大渡口|江北|沙坪坝|九龙坡|南岸|北碚|万盛|双挢|渝北|巴南|黔江|长寿|綦江|潼南|铜梁 |大足|荣昌|壁山|梁平|城口|丰都|垫江|武隆|忠县|开县|云阳|奉节|巫山|巫溪|石柱|秀山|酉阳|彭水|江津|合川|永川|南川");
+    cityArray[4] = new Array("河北省", "石家庄|邯郸|邢台|保定|张家口|承德|廊坊|唐山|秦皇岛|沧州|衡水");
+    cityArray[5] = new Array("山西省", "太原|大同|阳泉|长治|晋城|朔州|吕梁|忻州|晋中|临汾|运城");
+    cityArray[6] = new Array("内蒙古自治区", "呼和浩特|包头|乌海|赤峰|呼伦贝尔盟|阿拉善盟|哲里木盟|兴安盟|乌兰察布盟|锡林郭勒盟|巴彦淖尔盟|伊克昭盟");
+    cityArray[7] = new Array("辽宁省", "沈阳|大连|鞍山|抚顺|本溪|丹东|锦州|营口|阜新|辽阳|盘锦|铁岭|朝阳|葫芦岛");
+    cityArray[8] = new Array("吉林省", "长春|吉林|四平|辽源|通化|白山|松原|白城|延边");
+    cityArray[9] = new Array("黑龙江省", "哈尔滨|齐齐哈尔|牡丹江|佳木斯|大庆|绥化|鹤岗|鸡西|黑河|双鸭山|伊春|七台河|大兴安岭");
+    cityArray[10] = new Array("江苏省", "南京|镇江|苏州|南通|扬州|盐城|徐州|连云港|常州|无锡|宿迁|泰州|淮安");
+    cityArray[11] = new Array("浙江省", "杭州|宁波|温州|嘉兴|湖州|绍兴|金华|衢州|舟山|台州|丽水");
+    cityArray[12] = new Array("安徽省", "合肥|芜湖|蚌埠|马鞍山|淮北|铜陵|安庆|黄山|滁州|宿州|池州|淮南|巢湖|阜阳|六安|宣城|亳州");
+    cityArray[13] = new Array("福建省", "福州|厦门|莆田|三明|泉州|漳州|南平|龙岩|宁德");
+    cityArray[14] = new Array("江西省", "南昌市|景德镇|九江|鹰潭|萍乡|新馀|赣州|吉安|宜春|抚州|上饶");
+    cityArray[15] = new Array("山东省", "济南|青岛|淄博|枣庄|东营|烟台|潍坊|济宁|泰安|威海|日照|莱芜|临沂|德州|聊城|滨州|菏泽");
+    cityArray[16] = new Array("河南省", "郑州|开封|洛阳|平顶山|安阳|鹤壁|新乡|焦作|濮阳|许昌|漯河|三门峡|南阳|商丘|信阳|周口|驻马店|济源");
+    cityArray[17] = new Array("湖北省", "武汉|宜昌|荆州|襄樊|黄石|荆门|黄冈|十堰|恩施|潜江|天门|仙桃|随州|咸宁|孝感|鄂州");
+    cityArray[18] = new Array("湖南省", "长沙|常德|株洲|湘潭|衡阳|岳阳|邵阳|益阳|娄底|怀化|郴州|永州|湘西|张家界");
+    cityArray[19] = new Array("广东省", "广州|深圳|珠海|汕头|东莞|中山|佛山|韶关|江门|湛江|茂名|肇庆|惠州|梅州|汕尾|河源|阳江|清远|潮州|揭阳|云浮");
+    cityArray[20] = new Array("广西壮族自治区", "南宁|柳州|桂林|梧州|北海|防城港|钦州|贵港|玉林|南宁地区|柳州地区|贺州|百色|河池");
+    cityArray[21] = new Array("海南省", "海口|三亚");
+    cityArray[22] = new Array("四川省", "成都|绵阳|德阳|自贡|攀枝花|广元|内江|乐山|南充|宜宾|广安|达川|雅安|眉山|甘孜|凉山|泸州");
+    cityArray[23] = new Array("贵州省", "贵阳|六盘水|遵义|安顺|铜仁|黔西南|毕节|黔东南|黔南");
+    cityArray[24] = new Array("云南省", "昆明|大理|曲靖|玉溪|昭通|楚雄|红河|文山|思茅|西双版纳|保山|德宏|丽江|怒江|迪庆|临沧");
+    cityArray[25] = new Array("西藏自治区", "拉萨|日喀则|山南|林芝|昌都|阿里|那曲");
+    cityArray[26] = new Array("陕西省", "西安|宝鸡|咸阳|铜川|渭南|延安|榆林|汉中|安康|商洛");
+    cityArray[27] = new Array("甘肃省", "兰州|嘉峪关|金昌|白银|天水|酒泉|张掖|武威|定西|陇南|平凉|庆阳|临夏|甘南");
+    cityArray[28] = new Array("宁夏回族自治区", "银川|石嘴山|吴忠|固原");
+    cityArray[29] = new Array("青海省", "西宁|海东|海南|海北|黄南|玉树|果洛|海西");
+    cityArray[30] = new Array("新疆维吾尔族自治区", "乌鲁木齐|石河子|克拉玛依|伊犁|巴音郭勒|昌吉|克孜勒苏柯尔克孜|博尔塔拉|吐鲁番|哈密|喀什|和田|阿克苏");
+    cityArray[31] = new Array("香港特别行政区", "香港特别行政区");
+    cityArray[32] = new Array("澳门特别行政区", "澳门特别行政区");
+    cityArray[33] = new Array("台湾省", "台北|高雄|台中|台南|屏东|南投|云林|新竹|彰化|苗栗|嘉义|花莲|桃园|宜兰|基隆|台东|金门|马祖|澎湖");
+    cityArray[34] = new Array("其它", "北美洲|南美洲|亚洲|非洲|欧洲|大洋洲");
+
+    function initProvince() {
+        document.all.baagent.length = 0;
+        for (i = 0; i < provinceArray.length; i++) {
+            document.all.baagent.options[i] = new Option(provinceArray[i], provinceArray[i]);
+        }
+        getCity(document.all.baagent.options[0].value)
+    }
+
+    function getCity(currProvince) {
+        //当前 所选择 的 省
+        var currProvincecurrProvince = currProvince;
+        var i, j, k;
+        //清空 城市 下拉选单
+        document.all.bacity.length = 0;
+        for (i = 0; i < cityArray.length; i++) {
+            //得到 当前省 在 城市数组中的位置
+            if (cityArray[i][0] == currProvince) {
+                //得到 当前省 所辖制的 地市
+                tmpcityArray = cityArray[i][1].split("|")
+                for (j = 0; j < tmpcityArray.length; j++) {
+                    //填充 城市 下拉选单
+                    document.all.bacity.options[document.all.bacity.length] = new Option(tmpcityArray[j], tmpcityArray[j]);
+                }
+            }
+        }
+    }
+    function SalesOffice() {
+        var sn = $("#SOname").val("");
+    }
+
+    var curNum = "";
+
+
+    var baTemp = "<div class='card' style='float:left;margin-right:10%;'>\
+                     <ul class='mycard'>\
+                         <li class='mycard1'>我的银行卡</li>\
+                         <li class='mycard2'><p>{{Bank}}<span style='border: 0px solid red; width: 20px; height: 60px; margin-left: 60%;'>\
+                          <img src='/Content/images/closd.png' onclick='delBank(this)' /><span id='aa' style='display:none'>{{Number}}</span></span></p></li>\
+                         <li class='mycard3'><p>卡户名：{{Name}}</p></li>\
+                         <li class='mycard4'><p>银行卡：{{Number}}</p></li>\
+                         <li class='mycard5'></li>\
+                     </ul>\
+                 </div>"
+
+    $(function () {
+        $("#babank").change(function () {
+            var $this = $(this);
+            if ($this.val() == '其他')
+                $("#li-other-bank").show();
+            else
+                $("#li-other-bank").hide();
+        });
+
+        initProvince();
+
+
+        $("#baagent").change(function () {
+            //console.log(this);{City}{SalesOfficeName}
+            getCity(this.options[this.selectedIndex].value);
+        })
+
+
+        $("#saveba").click(function () {
+            $("#validate").text("");
+            var bn = $("#baname").val();
+            var ba = $("#baagent").val()
+            var bc = $("#bacity").val();
+            var ban = $("#banumber").val();
+            var bb = $("#li-other-bank").is(":visible") ? $("#txt-other-bank").val() : $("#babank").val();
+            var sn = $("#SOname").val();
+            if (bn == "" || ba == "" || ban == "" || bb == "" || sn == "" || sn == "银行营业部名称") {
+                $("#validate").text("参数不能为空"); return;
+            }
+            if (!/^\d{15,20}$/g.test(ban)) {
+                $("#validate").text("卡号格式错误"); return;
+            }
+            {
+                var securityToken = $('input[name=__RequestVerificationToken]').val();
+                $.post("/cache/AddBankAccount", {
+                    "Number": ban, "Bank": bb, "Province": ba, "Name": bn, "City": bc, "SalesOfficeName": sn
+                }, function (d) {
+                    $("#validate").text(d.Desc);
+                    if (d.ResultCode == 0) {
+                        var r = Mustache.render(baTemp, d.BackAccount);
+                        $(r).appendTo($("#showBank"));
+                    }
+                })
+            }
+        });
+        $(".bar").click(function () {
+            curNum = $(this).data("id");
+            $(this).toggleClass("emphis");
+
+        })
+    })
+
+    function delBank(curNum) {
+        // alert(curNum);
+        var num = $(curNum).siblings().html();
+        //   alert($(curNum).parents('.card').html());
+        var r = confirm("确定要删除？");
+        if (r) {
+            if (num != "") {
+                var securityToken = $('input[name=__RequestVerificationToken]').val();
+                $.post("/cache/DelBankAccount", { __RequestVerificationToken: securityToken, "number": num }, function (d) {
+                    if (d.ResultCode == 0) {
+                        $(curNum).parents('.card').attr("style", "display:none");
+                    }
+                })
+            }
+        }
+    }
+</script>

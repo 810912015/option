@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.SysAccountRecord>
+
+<style>
+    #flowaa>div>div.tab-content .table {
+        margin: 10px 10px 0 10px;
+        width: 97%;
+        text-align: center;
+    }
+
+    #flowaa>div>div.tab-content .table th {
+        background-color: #F2F2F2;
+        text-align: center;
+    }
+</style>
+<div data-cat="func" id="flowaa">
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" class="active"><a href="#homeaa" aria-controls="homeaa" role="tab" data-toggle="tab" style="border-top:none;border-left:none">用户行权记录</a></li>
+            <li role="presentation"><a href="#messagesaa" aria-controls="messagesaa" role="tab" data-toggle="tab" style="border-top:none;">已行权记录</a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="homeaa">
+                @{
+                    Html.RenderAction("UserExecuteRecord", new { pageIndex = 1 });
+                }
+            </div>
+            <div role="tabpanel" class="tab-pane" id="messagesaa">
+                @{
+                    Html.RenderAction("ExecutedRecord", new { pageIndex = 1 });
+                }
+            </div>
+        </div>
+
+    </div>
+</div> 
+
+@*<table class="table table-striped">
+    <tr>
+        <th>编号</th>
+        <th>用户</th>
+        <th>类型</th>
+        <th>金额</th>
+        <th>系统当前余额</th>
+        <th>用户保证金余额</th>
+        <th>发生时间</th>
+        <th>委托</th>
+    </tr>
+    @if (Model != null)
+    {
+
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>
+                    @v.Id
+                </td>
+                <td>@v.Who.Name</td>
+                <td>@(v.ChangedType)</td>
+                <td>@v.Delta.ToString("C2")</td>
+                <td>@v.Sum.ToString("C2")</td>
+                <td>@((((int)v.ChangedType) < 3) ? v.TraderSum.ToString("C2") : "")</td>
+                <td>@v.When.ToString("yyyy-MM-dd HH:mm:ss.fff")</td>
+                <td>@(v.Order == null ? "" : v.Order.ToShortString())</td>
+            </tr>
+
+        }
+
+    }
+</table>*@ 

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E5931F36-C5E1-443B-86D2-D97792FA27AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.BitsQuan.Option.Imp</RootNamespace>
+    <AssemblyName>Com.BitsQuan.Option.Imp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Other\BailAccontExtension.cs" />
+    <Compile Include="Other\InvitorFeeService.cs" />
+    <Compile Include="Other\InvitorFeeTrans.cs" />
+    <Compile Include="Other\CoinRepo.cs" />
+    <Compile Include="Other\AccountExtension.cs" />
+    <Compile Include="Other\TraderService.cs" />
+    <Compile Include="Other\GlobalPrmService.cs" />
+    <Compile Include="Order\OrderExtension.cs" />
+    <Compile Include="Order\OrderRepo.cs" />
+    <Compile Include="Order\IdService.cs" />
+    <Compile Include="Other\SystemAccount.cs" />
+    <Compile Include="Other\TraderExtension.cs" />
+    <Compile Include="Contract\ContractExtension.cs" />
+    <Compile Include="Contract\ContractRepo.cs" />
+    <Compile Include="Contract\ContractService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.BitsQuan.Miscellaneous\Com.BitsQuan.Miscellaneous.csproj">
+      <Project>{26baa888-6a10-4978-806d-2d0534fac1c0}</Project>
+      <Name>Com.BitsQuan.Miscellaneous</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Core\Com.BitsQuan.Option.Core.csproj">
+      <Project>{5bc39fd4-adbd-4a03-9d3b-f9f099f82b64}</Project>
+      <Name>Com.BitsQuan.Option.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Provider\Com.BitsQuan.Option.Provider.csproj">
+      <Project>{7ff99a41-9556-4bb9-95ec-174b8abf4b48}</Project>
+      <Name>Com.BitsQuan.Option.Provider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

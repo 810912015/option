@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB5D81A2-3D1E-4210-A1B4-29339CBD4785}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.BitsQuan.Option.Test</RootNamespace>
+    <AssemblyName>Com.BitsQuan.Option.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="cfuse\UnitTest1.cs" />
+    <Compile Include="ContractRepoTest.cs" />
+    <Compile Include="FuseTest.cs" />
+    <Compile Include="OhlcTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MatchServiceTest.cs" />
+    <Compile Include="OrderRepoTest.cs" />
+    <Compile Include="ModelTest.cs" />
+    <Compile Include="OptionModelTest.cs" />
+    <Compile Include="RechargeTest.cs" />
+    <Compile Include="TradeTest.cs" />
+    <Compile Include="UnitTest1.cs" />
+    <Compile Include="TradeTest3.cs" />
+    <Compile Include="TradeTest4.cs" />
+    <Compile Include="CFuseTest.cs" />
+    <Compile Include="SysShareTest.cs" />
+    <Compile Include="TradeMultiThreadTest.cs" />
+    <Compile Include="UnitTest2.cs" />
+    <Compile Include="EmailSenderTest.cs" />
+    <Compile Include="UnitTest3.cs" />
+    <Compile Include="PsTest.cs" />
+    <Compile Include="BtcPriceTest.cs" />
+    <Compile Include="AppSettingsReaderTest.cs" />
+    <Compile Include="GigantTest.cs" />
+    <Compile Include="HugeTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.BitsQuan.Miscellaneous\Com.BitsQuan.Miscellaneous.csproj">
+      <Project>{26baa888-6a10-4978-806d-2d0534fac1c0}</Project>
+      <Name>Com.BitsQuan.Miscellaneous</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Core\Com.BitsQuan.Option.Core.csproj">
+      <Project>{5bc39fd4-adbd-4a03-9d3b-f9f099f82b64}</Project>
+      <Name>Com.BitsQuan.Option.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Imp\Com.BitsQuan.Option.Imp.csproj">
+      <Project>{e5931f36-c5e1-443b-86d2-d97792fa27ae}</Project>
+      <Name>Com.BitsQuan.Option.Imp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Match\Com.BitsQuan.Option.Match.csproj">
+      <Project>{9a3e626f-f59b-43ee-93b6-06903db9d918}</Project>
+      <Name>Com.BitsQuan.Option.Match</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Provider\Com.BitsQuan.Option.Provider.csproj">
+      <Project>{7ff99a41-9556-4bb9-95ec-174b8abf4b48}</Project>
+      <Name>Com.BitsQuan.Option.Provider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Ui\Com.BitsQuan.Option.Ui.csproj">
+      <Project>{57cb7312-3d38-4de8-a811-76e2c213a2ab}</Project>
+      <Name>Com.BitsQuan.Option.Ui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

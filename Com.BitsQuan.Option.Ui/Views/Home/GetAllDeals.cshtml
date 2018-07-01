@@ -1,0 +1,74 @@
+﻿@using System.Collections.Generic
+@using Com.BitsQuan.Option.Core
+@model IEnumerable<Com.BitsQuan.Option.Core.Deal>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cl = (List<Contract>)ViewBag.cl;
+}
+
+<div style="padding-bottom:20px;margin-bottom:10px;">
+    <h3>
+        期权<span id="thiscode">@(ViewBag.contract)</span>成交记录
+        <a href="/home/trade" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-backward"></span> 返回交易页</a>
+    </h3>
+    <input type="hidden" value="@ViewBag.contract" id="con" />
+
+    <div class="pull-right">
+        <div>
+            <strong>选择期权</strong>
+            <select id="csel">
+                @foreach (var v in cl)
+                {
+                    <option value="@v.Name" @(v.Code == ViewBag.contract ? "selected" : "")>@v.Name</option>
+                }
+            </select>
+
+            <strong style="margin-left:20px;">刷新频率</strong>
+            <select id="fsel">
+                <option value="1000">1秒</option>
+                <option value="3000" selected>3秒</option>
+                <option value="5000">5秒</option>
+                <option value="10000">10秒</option>
+                <option value="30000">30秒</option>
+                <option value="60000">60秒</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div style="min-height:500px;display:block;"> 
+    <div id="allorders">
+        @{
+            Html.RenderAction("AllDealsPartial");
+        }
+    </div>
+   
+</div>
+<script>
+    var code = "115001";
+    var interval = 3000;
+    var handle = 0;
+    var getAllOsFunc = function (c) {
+        $.get("/home/AllDealsPartial?contractName=" + c, function (d) {
+            $("#allorders").html(d);
+        });
+
+    }
+    $(function () {
+        code = $("#con").val();
+        handle = setInterval("getAllOsFunc('" + code + "');", interval);
+        $("#csel").change(function () {
+            var cc = $("#csel").val();
+            $("#thiscode").text(cc);
+            code = cc;
+            clearInterval(handle);
+            handle = setInterval("getAllOsFunc('" + code + "');", interval);
+        });
+        $("#fsel").change(function () {
+            var ff = $("#fsel").val();
+            interval = parseInt(ff);
+            clearInterval(handle);
+            handle = setInterval("getAllOsFunc('" + code + "');", interval);
+        })
+    })
+</script>

@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "_right.cshtml";
+}
+@using Com.BitsQuan.Option.Ui.Models;
+
+
+<div>
+    <ul style="width:100%">
+
+        <li class="title"><a href="/FrontForum/Index">讨论区首页</a></li>
+        <li class="title1">@if (ViewData["BigTiTile"] != null)
+        {@ViewData["BigTiTile"]}
+        else
+        { <span>比权网客服</span> }</li>
+        <li class="text">
+            <div class="text1">论坛</div><div class="text2">主贴/回帖数</div><div class="text3">最后更新</div>
+
+        </li>
+        @if (ViewData["SmaillType"] != null)
+        {
+
+            foreach (var item in ViewData["SmaillType"] as List<SmallType>)
+            {
+
+
+                <li class="title2">
+                    <div class="title2box">
+                        <p class="bbst">
+                            @Html.ActionLink(item.Name, "IndexList")
+                        </p>
+                        <p class="bbst1">
+                            @item.Explain
+                        </p>
+                        <p class="bbst1">版主:<a href="#">@item.EditionUser</a></p>
+                    </div>
+                    <div class="title3box">
+                        @if (ViewData["smaillCount" + item.Id] != null)
+                        {@ViewData["smaillCount" + item.Id]}
+                        else
+                        {<span>0/0</span>}
+                </div>
+                <div class="title4box">
+
+                    @if (ViewData["LastContent"] != null)
+                    {
+                        var last = ViewData["LastContent"] as ForumHost;
+                        <p>@last.Fname</p>
+                        <p><span class="sp1">by</span> <span class="sp2">@last.FuserName</span></p>
+                    }
+                </div>
+            </li>
+            }
+        }
+    </ul>
+</div>
+
+@{
+    if (ViewData["SmaillPage"] != null)
+    {
+        Html.RenderPartial("_Pager", ViewData["SmaillPage"]);
+    }
+}

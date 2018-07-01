@@ -1,0 +1,103 @@
+﻿@model Com.BitsQuan.Option.Match.Dto.D2Model
+
+@{
+     
+}
+ <style>
+    .mp {
+        border: 1px solid lightgray;
+        height: @(Model.Count*50)px;
+             border-top:none;
+     font-family: '微软雅黑'
+    }
+
+    .mp-part {
+        height: 200px;
+          font-family: '微软雅黑';
+     font-size:12px;
+    }
+
+
+    .elment {
+        line-height: 1.2em;
+        font-size: 1.2em;
+        margin: 2px 0px;
+    }
+
+        .elment div {
+            display: inline-block;
+            padding: 1px 0px;
+        }
+
+            .elment div:nth-child(2n+1) {
+                width: 15%;
+            }
+
+         .elment div:nth-child(2n+3) {
+             width: 15%;
+             text-align: right;
+         }
+
+            .elment div:nth-child(2n+2) {
+                width: 30%;
+                
+            }
+
+            .elment div:last-child {
+                height: 10px; 
+            }
+</style>
+
+
+ <div class="elment1" style="color:black;padding:0px;background-color:#f2f2f2;margin:0px;height:30px; border: 1px solid lightgray;border-bottom:none">
+        <div style="width:50%;padding-left:10px;float:left;height:30px;line-height:30px">买卖盘</div>
+        <div style="width:50%;text-align:right;padding-right:10px;float:right;height:30px;line-height:30px"><a href="javascript:void(0)" onclick="moredetail();">更多</a></div>
+        <div style="clear:both"></div>
+    </div>
+    <div class="elment1" style="color:black;padding-bottom:0px; border: 1px solid lightgray;margin:0px;padding:0px;border-bottom:none;padding-left:10px;height:30px;line-height:30px;padding-bottom:-1px">
+        <div style="width:25%;float:left;font-family: '微软雅黑';">类型</div>
+        <div style="width:25%;float:left;font-family: '微软雅黑';">价格</div>
+        <div style="width:25%;float:left;font-family: '微软雅黑';">数量</div>
+        <div></div>
+    </div>
+    <div class="mp">
+
+    @if (Model != null)
+    {
+        if (Model.D1 != null)
+        {
+            var t = Model.D1.Count;
+            <div class="mp-part" style="padding-top: @(t<=Model.Count?(Model.Count-t)*25:0)px;margin-left:10px">
+                @for (int i = 0; i < Model.D1.Count; i++)
+                {
+                    var d = Model.D1[i];
+                    <div class="elment" style="color:green;">
+                        <div>卖@(t - i)</div>
+                        <div>￥@d.Price</div>
+                        <div>@d.Count</div>
+                        <div style="background-color:#2bb643;width:@(((double)d.Count/(double)Model.D1Count)*30)%"></div>
+                    </div>
+                }
+            </div>
+        }
+    <div style="height:1px;background-color:#DDD;margin-top:-0px;margin-bottom:5px;"></div>
+        if (Model.D2 != null)
+        {
+            <div class="mp-part" style="margin-top:0px;margin-left:10px">
+                @for (int i = 0; i < Model.D2.Count; i++)
+                {
+                    var d = Model.D2[i];
+                    <div class="elment" style="color:red;">
+
+                        <div>买@(i + 1)</div>
+                        <div>￥@d.Price</div>
+                        <div>@d.Count</div>
+                        <div style="background-color:red;width:@(((double)d.Count/(double)Model.D2Count)*30)%"></div>
+                    </div>
+                }
+            </div>
+        }
+    }
+
+</div>
+ 

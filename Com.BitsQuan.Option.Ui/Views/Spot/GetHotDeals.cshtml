@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.Spot.SpotDeal>
+ <style>
+     .di{
+         padding-left:10px;
+         font-size:16px
+     }
+     .di div{
+         display:inline-block;
+          
+         padding-top:10px;
+         padding-bottom:2px;
+         font-size:0.8em;
+         line-height:1em;
+
+     }
+         .di div:nth-child(2n+1) {
+             width: 25%;
+         }
+         .di div:nth-child(2n+2) {
+             width: 25%;
+         }
+         .di div:nth-child(2n+3) {
+             width: 25%;
+             text-align:center;
+         }
+         .di div:nth-child(2n+4) {
+             width: 18%;
+             text-align: center;
+         }
+
+     .dih{
+         padding:3px;
+     }
+     .dih div{
+         display: inline-block; 
+         padding-left:3px;
+     }
+
+     .dih div:nth-child(2n+1) {
+         width: 25%;
+     }
+
+     .dih div:nth-child(2n+2) {
+         width: 25%;
+     }
+
+         .dih div:nth-child(2n+3) {
+             width: 25%;
+             text-align: center;
+         }
+
+         .dih div:nth-child(2n+4) {
+             width: 18%;
+             text-align: center;
+         }
+ </style>
+<div class="elment1" style="color:black;padding:0px;background-color:#f2f2f2;margin:0px;height:30px; border: 1px solid lightgray;border-bottom:none">
+    <div style="width:50%;padding-left:10px;float:left;height:30px;line-height:30px">买卖盘</div>
+    <div style="width:50%;text-align:right;padding-right:10px;float:right;height:30px;line-height:30px"><a href="/spot/btcmarketdetail">更多</a></div>
+    <div style="clear:both"></div>
+</div>
+<div class="dih" style="color:black;padding-bottom:0px; border: 1px solid lightgray;margin:0px;padding:0px;border-bottom:none;padding-left:10px;height:30px;line-height:30px">
+    <div>时间</div>
+    <div>成交价</div>
+    <div>成交量</div>
+    <div>类型</div>
+</div>
+    <div style="border:1px solid lightgray;height:406px;border-top:none;">
+        @if (Model != null)
+        {
+            foreach (var v in Model)
+            {
+                <div class="di">
+                    <div>@v.When.ToString("HH:mm:ss")</div>
+                    <div>@v.Price.ToString("C2")</div>
+                    <div>@v.Count</div>
+                    <div>@v.MainOrderDir</div>
+                </div>
+            }
+        }
+    </div>
+ 

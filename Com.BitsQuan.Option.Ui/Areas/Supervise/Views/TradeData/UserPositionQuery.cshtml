@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.UserPosition>
+
+@{
+    foreach (var v in Model)
+    {
+        if (v.Order != null) { continue; }
+        var vv = MvcApplication.OptionService.Matcher.Container.GetOrderById(v.OrderId);
+        v.Order = vv;
+    }
+}
+
+<input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)" />
+
+<table class="table table-striped">
+    <tr>
+        <th>编号</th>
+        <th>用户</th>
+        <th>合约</th>
+        <th>数量</th>
+        <th>时间</th>
+        <th>委托编号</th>
+        <th>委托描述</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>
+                    @v.Id
+                </td>
+                <td>@v.Trader.Name</td>
+                <td>@if(v.Order!=null){@v.Order.Contract.Code}</td>
+                <td>@v.Count</td>
+                <td>@v.DealTime</td>
+                <td>@v.OrderId</td> 
+                <td>@if(v.Order!=null){@v.Order.ToShortString()}</td>
+            </tr> 
+        
+        }
+    }
+</table> 

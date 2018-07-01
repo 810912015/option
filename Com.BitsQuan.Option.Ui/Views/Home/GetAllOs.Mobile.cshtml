@@ -1,0 +1,238 @@
+﻿@using System.Collections.Generic
+@using Com.BitsQuan.Option.Core
+@model Com.BitsQuan.Option.Match.Dto.D2Model
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cl = (List<Contract>)ViewBag.cl;
+    ViewBag.Title = "期权合约市场详情-最好的比特币期权交易平台";
+}
+<div class="border"></div>
+<div style="padding-bottom:20px;margin-bottom:10px;">
+   
+    <input type="hidden" value="@ViewBag.contract" id="con" />
+    <input type="hidden" value="@ViewBag.contractName" id="cname"/>
+    
+</div>
+<div class="container">
+    <div class="row" style="margin-top:25px;margin:15px auto">
+        <div class="col-md-1 col-xs-6" >
+            <span id="curbtc">比特币</span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            <span id="curtotal">成交</span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            <span id="curpos">持仓</span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            <span id="curexe" title="距离行权日期的时间">行权</span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            <span id="anewest">最新报价</span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            <span id="araise" title="上涨熔断价：为应对价格剧烈波动，系统设置的最高买开/买平委托价格，为5分钟内最低价的1.5倍。">上涨熔断价</span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            <span id="afall" title="下跌熔断价：为应对价格剧烈波动，系统设置的最低卖开/卖平委托价格，为5分钟内最高价的0.5倍。">下跌熔断价</span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            <span id="afusetime">熔断时间</span>
+        </div>
+      
+    </div>
+    <div class="row" style="padding:10px;">
+        <div class="pull-right">
+            <div>
+                <span>
+                    代码<strong id="thiscode">@(ViewBag.contract)</strong>
+                    名称<strong id="thisname">@(ViewBag.contractName)</strong>
+                </span>
+                <strong>选择期权</strong>
+                <select id="csel">
+                    @foreach (var v in cl)
+                    {
+                        <option value="@v.Code" @(v.Code == ViewBag.contract ? "selected" : "")>@v.Name</option>
+                    }
+                </select>
+
+                <strong style="margin-left:20px;">刷新频率</strong>
+                <select id="fsel">
+                    <option value="1000">1秒</option>
+                    <option value="3000" selected>3秒</option>
+                    <option value="5000">5秒</option>
+                    <option value="10000">10秒</option>
+                    <option value="30000">30秒</option>
+                    <option value="60000">60秒</option>
+                </select>
+            </div>
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#kline" aria-controls="kline" role="tab" data-toggle="tab"  style="font: 16px/36px 微软雅黑,黑体;">行情图表</a></li>
+            <li role="presentation"><a href="#marketdeep" aria-controls="marketdeep" role="tab" data-toggle="tab" style="font: 16px/36px 微软雅黑,黑体;">市场深度</a></li>
+
+        </ul>
+        
+        <div class="tab-content">
+            <div id="kline" role="tabpanel" class="tab-pane active" style="height: 408px; border: 1px solid lightgray; ">
+                <div id="container" style="min-height: 370px;">
+
+                </div>
+
+            </div>
+
+
+            <div id="marketdeep" role="tabpanel" class="tab-pane" style="height: 400px;  border: 1px solid lightgray;">
+                <div id="mdcontainer" style="min-height: 370px;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row" style="text-align:center;padding:10px;"><strong>比特币期权买卖盘</strong></div>
+            <div class="row" id="allorders">
+                @Html.Partial("getos")
+            </div>
+        </div>
+        <div class="col-md-6">
+            
+            <div class="row" style="text-align:center;padding:10px;"><strong>比特币期权实时成交</strong></div>
+            <div class="row" id="alldeals">
+                @{
+                    Html.RenderAction("AllDealsPartial");
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/hs/highstock.js"></script>
+<script src="~/Scripts/trade/ohlc.js"></script>
+<script src="~/Scripts/trade/deep.js"></script> 
+ 
+<script>
+    $(function () {
+        $.get("/home/fakekline?code="+code, function (d) {
+            klinedata = d;
+            drawChart("M5", "/home/getnow","期权"+curCName);
+        })
+ 
+
+        //更新深度图之前设置深度图宽度
+        var cw = $("#container").css("width");
+        var mw = $("#mdcontainer").css("width");
+        if (cw != mw) {
+            $("#mdcontainer").css("width", cw);
+        }
+        depthCal("/home/getdeepth?contractName=" + curCName);
+    });
+</script>
+
+
+
+<script>
+    var code = $("#thiscode").text();// "115001";
+    var curCName = $("#thisname").text();// "BTC20150212购100";
+    var interval = 3000;
+    var handle = 0;
+    var handle2 = 0;
+    var getAllOsFunc = function (c) {
+        $.get("/home/getos", { "contractCode":c,"ts":Math.random()}, function (d) {
+            $("#allorders").html(d);
+        });
+        
+    }
+    var getMarket = function () { }
+    var getAllOsFunc2 = function (c) {
+        $.get("/home/AllDealsPartial",{"contractName":c,"ts":Math.random()}, function (d) {
+            $("#alldeals").html(d);
+        });
+
+    }
+    $(function () {
+        code = $("#con").val();
+        curCName = $("#cname").val();
+        handle = setInterval(function () { getAllOsFunc( code  )}, interval);
+        handle2 = setInterval(function () { getAllOsFunc2(curCName) }, interval);
+        $("#csel").change(function () {
+            var cc = $("#csel").val();
+            $("#thiscode").text(cc);
+            code = cc;
+            var cn = $('#csel option:selected').text();
+            curCName = cn;
+
+            $.get("/home/fakekline?code=" + code, function (d) {
+                klinedata = d;
+                drawChart("M5", "/home/getnow", "期权" + curCName);
+            })
+
+            $('#redraw > a').click(function () {
+                var th = $(this);
+                var ct = th.data("ct");
+                drawChart(ct, "/home/getnow", "期权" + curCName);
+                $("#redraw > a").each(function (i, e) {
+                    $(e).removeClass("btn-danger");
+                });
+                th.addClass("btn-danger");
+            })
+            depthCal("/home/getdeepth?contractName=" + curCName);
+
+            $("#thisname").text(cn);
+            clearInterval(handle);
+            handle = setInterval(function () { getAllOsFunc(code) }, interval);
+            clearInterval(handle2);
+            handle2 = setInterval(function () { getAllOsFunc2(curCName) }, interval);
+        });
+        $("#fsel").change(function () {
+            var ff = $("#fsel").val();
+            interval = parseInt(ff);
+            clearInterval(handle);
+            handle = setInterval(function () { getAllOsFunc(code) }, interval);
+            clearInterval(handle2);
+            handle2 = setInterval(function () { getAllOsFunc2(curCName) }, interval);
+        })
+        getMarket = function () {
+            $.get("/home/QueryMarket", { "cname": curCName }, function (data) {
+                $("#curbtc").text("比特币指数:" + data.BtcCur);
+                if (data.Main != null) {
+                    var d = data.Main;
+                    $("#anewest").text("最新成交价:¥" + d.NewestDealPrice);
+                    $("#lraise").html(d.Raise);
+                    $("#lfall").html(d.Fall);
+                    $("#araise").text("上限:¥" + d.Raise);
+                    $("#afall").text("下限:¥" + d.Fall);
+                    if (d.FuseSeconds > 0) {
+                        $("#afusetime").text("距离熔断结束:" + d.FuseSeconds + "秒");
+                    }
+                    else {
+                        $("#afusetime").text("熔断未启动");
+                    }
+
+                    $("#asell").text("卖1:¥" + d.Sell1Price);
+                    $("#lsell").text(d.Sell1Price);
+                    $("#lsellcount").text(d.Sell1Count);
+                    $("#lbuy").text(d.Buy1Price);
+                    $("#lbuycount").text(d.Buy1Count);
+                    $("#abuy").text("买1:¥" + d.Buy1Price);
+                    $("#curtotal").text("成交量:" + d.Times);
+                    $("#curpos").text("持仓量:" + d.PositionTotal);
+                    $("#curexe").text("距行权时间:" + d.CurExe);
+
+                    //总开仓,24小时:开仓,平仓,净开仓
+                    $("#postotal").text(d.OpenTotal);
+                    $("#open24").text(d.Open24);
+                    $("#close24").text(d.Close24);
+                    $("#pure24").text(d.Pure24);
+                }
+
+            })
+            setTimeout("getMarket();", 2000);
+        }
+
+
+
+        getMarket();
+    })
+</script>

@@ -1,0 +1,60 @@
+﻿<style>
+    .txt {
+    width:300px;
+    height:25px
+    
+    }
+
+</style>
+
+<div style="margin:50px;line-height:50px">
+    <table>
+        <tr>
+            <td><span class="btn btn-danger">版权</span></td>
+            <td><input class="txt" id="par1" type="text" /></td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">meta描述</span></td>
+            <td><input class="txt" id="par2" type="text" /></td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">meta关键词</span></td>
+            <td><input class="txt" id="par3" type="text" /></td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">网站名称</span></td>
+            <td><input class="txt" id="par4" type="text" /></td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">网站url</span></td>
+            <td><input class="txt" id="par5" type="text" />
+           <input type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="button" value="保存" class="btn btn-danger" onclick="Save()" /></td>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+    function Save() {
+        var par1 = $("#par1").val();
+        var par2 = $("#par2").val();
+        var par3 = $("#par3").val();
+        var par4 = $("#par4").val();
+        var par5 = $("#par5").val();
+        $.get("/Supervise/SiteParameter/UpdateSiteAll", { "par1": par1, "par2": par2, "par3": par3, "par4": par4, "par5": par5}, function (d) {
+            if (d) {
+                alert("设置成功");
+            } else {
+                alert("设置失败");
+            }
+        })
+    }
+
+   
+
+</script>

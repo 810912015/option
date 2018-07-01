@@ -1,0 +1,92 @@
+﻿@{ 
+   Layout = "_right.cshtml";
+    }
+@using Com.BitsQuan.Option.Ui.Models;
+
+
+<div>
+    <div>
+        <ul>
+            <li class="title" style=" float: left"><a href="/FrontForum/Index">讨论区首页  </a>
+            @*如果大类型不为空并且为一个大类型，则代表点击了大类型*@
+            @if (ViewData["BigTiTile"] != null)
+            {
+                if ((ViewData["BigTiTile"] as List<BigType>).Count == 1)
+                {
+                     foreach (var Bigs in ViewData["BigTiTile"] as List<BigType>)
+                        {
+                          <span>&gt;&gt;</span>   <a href="/FrontForum/Index?id=@Bigs.Id"> @Bigs.Name</a>
+                        }
+                }
+            }
+
+             </li>
+           
+
+        </ul>
+
+    </div>
+    <ul style="width: 100%; border: 1px solid #b3e5f9; background-color: #faf9f8" >
+        @if (ViewData["BigTiTile"] != null)
+        {
+            foreach (var Bigs in ViewData["BigTiTile"] as List<BigType>)
+            {
+
+
+           <li class="title1">
+                @*@Bigs.Name*@
+               &nbsp;&nbsp;&nbsp;&nbsp;
+            </li>
+    <li class="text">
+        <div class="text1">论坛</div><div class="text2">主贴/回帖数</div><div class="text3">最后更新</div>
+    </li>
+            
+                if (ViewData["SmaillType" + Bigs.Id] != null)
+                {
+
+                    foreach (var item in ViewData["SmaillType" + Bigs.Id] as List<SmallType>)
+                    {
+
+
+                        <li class="title2">
+                                <div class="title2box" style="padding-left: 12%; " >
+                                    <p class="bbst">
+                                        @Html.ActionLink(item.Name, "IndexList", new { tid = item.Id })
+                                    </p>
+                                    <p class="bbst1">
+                                        @item.Explain
+                                    </p>
+                                    <p class="bbst1">版主:<a href="#">@item.EditionUser</a></p>
+                                </div>
+                                <div class="title3box">
+                                    @if (ViewData["smaillCount" + item.Id] != null)
+                                    {@ViewData["smaillCount" + item.Id]}
+                                    else
+                                    {<span>0/0</span>}
+                                </div>
+
+                                <div class="title4box">
+
+                                    @if (ViewData["LastContent" + item.Id] != null)
+                                    {
+                                        var last = ViewData["LastContent" + item.Id] as ForumHost;
+                                        <p>
+                                            @Html.ActionLink("" + (((last.Fname.Length > 10) ? last.Fname.Substring(0, 10) : last.Fname) as System.Collections.IEnumerable) + "", "ReplyList", new { fid = last.Id })
+                                        </p>
+                                        <p><span class="sp1">by</span> <span class="sp2">@last.FuserName</span></p>
+                                        <p><span class="sp1">by</span> <span class="sp2">@last.FDate</span></p>
+                                    }
+                                </div>
+                        </li>
+                    }
+                }
+            }
+        }
+    </ul>
+</div>
+
+
+@{
+    if (ViewData["SmaillPage"]!=null){
+    Html.RenderPartial("_Pager", ViewData["SmaillPage"]);}
+}

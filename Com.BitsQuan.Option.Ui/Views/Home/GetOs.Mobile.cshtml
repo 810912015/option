@@ -1,0 +1,51 @@
+﻿@model Com.BitsQuan.Option.Match.Dto.D2Model
+ 
+ 
+
+<div class="row" >
+    <div class="col-md-6">
+        <table class="table">
+
+
+            <tr style="background-color:#fafafa;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                <td>方向</td>
+                <td>数量</td>
+                <td>价格</td>
+
+            </tr>
+            @for (int i = Model.D1.Count - 1; i > 0; i--)
+            {
+                <tr style="background-color:white;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                    <td>卖@(Model.D1.Count - i)</td>
+                    <td>@Model.D1[i].Count</td>
+                    <td>@Model.D1[i].Price.ToString("C2")</td>
+
+                </tr>
+            }
+        </table>
+    </div>
+        
+     
+    <div class="col-md-6">
+        <table class="table">
+
+                <tr style="background-color:#fafafa;border-bottom:1px solid #ddd;height:35px;text-align:center">
+
+                    <td>价格</td>
+                    <td>数量</td>
+                    <td>方向</td>
+                </tr>
+
+            @for (int i = 0; i < Model.D2.Count; i++)
+            {
+                <tr style="background-color:white;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                    <td>@Model.D2[i].Price.ToString("C2")</td>
+                    <td>@Model.D2[i].Count</td>
+
+                    <td>买@(1 + i)</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

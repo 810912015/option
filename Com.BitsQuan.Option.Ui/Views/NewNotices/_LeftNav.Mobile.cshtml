@@ -1,0 +1,17 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+    @{
+        var chooseClass = new Func<ContentType, string>((_type) => { if (_type == ViewBag.Type)return "nav-normal nav-selected"; else return "nav-normal"; });
+        var ajo = new AjaxOptions
+        {
+            UpdateTargetId = "maincontent",
+            InsertionMode = InsertionMode.Replace
+        };
+    }
+<div class="row">
+    <div class="btn-group btn-group-justified">
+        @Html.ActionLink("新闻资讯", "Index", new { type = 1 }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("网站公告", "Index", new { type = 2 }, new { @class = "btn btn-success" })
+        @Html.ActionLink("期权知识", "Index", new { type = 4 }, new { @class = "btn btn-danger" })
+    </div>
+</div>
+

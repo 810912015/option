@@ -1,0 +1,84 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.BankAccount
+@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+
+ 
+
+@if (ViewBag.msg != null)
+{ <div style="color:red;">
+        @ViewBag.msg
+    </div>
+    
+}
+else
+{
+    using (Ajax.BeginForm("bank", null, ajo, new { role = "form", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+         
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Number, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Number)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Name, new { @class="form-control"})
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BankName, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.BankName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BankName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Province, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Province, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Province)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.City)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SalesOfficeName, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.SalesOfficeName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SalesOfficeName)
+            </div>
+        </div> 
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <input type="submit" value="保存" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+}

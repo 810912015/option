@@ -1,0 +1,183 @@
+﻿@{
+    Layout = "_right.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <style>
+        /*重置*/
+        * {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            border: 0px;
+            text-decoration: none;
+            list-style: none;
+            margin: 0;
+            text-decoration: none;
+            padding-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0;
+            color: #535353;
+        }
+
+        i {
+            font-style: normal;
+        }
+
+
+
+        .tex4 {
+            color: #000;
+            font-weight: 400;
+            line-height: 26px;
+            margin-left: 5%;
+        }
+
+            .tex4 span {
+                color: #f7b33d;
+            }
+
+
+        .title3 {
+            background-color: #90dfff;
+            height: 36px;
+        }
+
+            .title3 select {
+                height: 22px;
+                margin-top: 12px;
+                border: 1px solid #56a8ca;
+                margin-left: 5%;
+            }
+
+        .ipt input {
+            width: 25px;
+            line-height: 25px;
+            background-color: #FFF;
+            border: 1px solid #c2c2c2;
+            color: #535353;
+            margin-left: 6px;
+            cursor: pointer;
+        }
+
+        .ipt .ipt1 {
+            width: 37px;
+        }
+
+        .ipt {
+            padding-left: 5%;
+            margin-top: 20px;
+        }
+
+            .ipt input:hover {
+                border: 1px solid #56a8ca;
+                color: #56a8ca;
+            }
+
+            .ipt .ipt2 {
+                background-color: #f7a20e;
+                color: #fff;
+                width: 110px;
+                height: 40px;
+                border: none;
+                background: url(../Content/images/button.png) no-repeat;
+                margin-left: 68%;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+                .ipt .ipt2:hover {
+                    border: none;
+                    color: #fff;
+                }
+
+      
+    </style>
+
+    <div>
+        <ul style="width:100%">
+            <li class="title"><a href="/FrontForum/Index">讨论区首页</a> &gt;&gt;
+                                 @if (ViewData["BigTypeName"] != null)
+                                {
+                                    <a href='/FrontForum/Index?id=@ViewData["BigTypeId"]'> @ViewData["BigTypeName"]</a>
+                                } &gt;&gt;
+                                 @if (ViewData["SmalTypeName"] != null){
+                                    <a href="#"> @ViewData["SmalTypeName"]</a>
+                                 }
+            </li>
+
+
+            <li class="tex4" style="margin-bottom:10px">@if (ViewData["SmalTypeName"] != null)
+                             {@ViewData["SmalTypeName"]}&nbsp;&nbsp;【<span> @if (ViewData["SmalTypeName"] != null){@ViewData["SmalHost"]} </span> 主题 /<span> @if (ViewData["SmalRely"] != null)
+                             {@ViewData["SmalRely"]} </span> 回复 】
+            </li>
+            <li style="margin-left:80%;height:35px;margin-top:5px"><a href="/FrontForum/MyForumIndex">  <input type="submit" value="发帖" class="subbtn2" style="border-radius:5px" /></a></li>
+            <li class="title1"><i class="i1">标题</i><i class="i2">作者</i><i class="i3">回复</i><i class="i4">最后发表</i></li>
+        @if (ViewData["Forum"] != null)
+        {
+            foreach (var item in ViewData["Forum"] as List<Com.BitsQuan.Option.Ui.Models.ForumHost>)
+            {
+            <li class="title2">
+                <span class="i1">@Html.ActionLink("" + (((item.Fname.Length > 10) ? item.Fname.Substring(0, 10) : item.Fname) as System.Collections.IEnumerable) + "", "ReplyList", new { fid = item.Id })</span>
+                <span class="i2">@item.FuserName</span>
+                <span class="i3"> &nbsp;@if(ViewData["RelyCount" + item.Id]!=null){@ViewData["RelyCount" + item.Id]}</span>
+                <span  class="i4">@item.FDate</span>
+            </li>
+            }
+        }        
+    <li class="title3" style="padding-top:5px;padding-left:10px">
+        <strong> 排序方式 : &nbsp;&nbsp;</strong>
+        @if (ViewData["FDate"] != null)
+        {
+            @Html.ActionLink("发布时间2", "IndexList", new { where = ViewData["FDate"] })<span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>  
+        }else{
+            @Html.ActionLink("发布时间", "IndexList", new { where = "1" })<span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>  
+          }
+        @if (ViewData["replyCount"]!=null){
+            @Html.ActionLink("回复数量2", "IndexList", new { where = ViewData["replyCount"] })<span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+        }else{
+            @Html.ActionLink("回复数量", "IndexList", new { where = "2" })
+        }
+        @*<select id="sortSel"><option>排序方式</option><option value="1"><a href="/FrontForum/IndexList?where=1">发布时间</a></option><option value="2"><a href="/FrontForum/IndexList?where=2">回复数量</a></option></select>*@
+            </li>
+            @*<li class="ipt">
+                <input type="submit" value="1"><input type="submit" value="2"><input type="submit" value="3"><input type="submit" value="4"><input type="submit" value=">"><input class="ipt1" type="submit" value="尾页">
+                <input class="ipt2" type="submit" value="发帖">
+            </li>*@
+            <li style="margin-left:80%;height:35px;margin-top:5px"><a href="/FrontForum/MyForumIndex">  <input type="submit" value="发帖" class="subbtn2" style="border-radius:5px" /></a></li>
+        </ul>
+    </div>
+
+    @{
+        if (ViewData["Hpager"] != null)
+        {
+            Html.RenderPartial("_Pager", ViewData["Hpager"]);
+        }
+    }
+
+<script>
+    $("#hhh").click(function () {
+       
+        //$("#hhh").attr("style", "display:none");
+        //$("#hhh2").attr("style", "display:block");
+      //  alert($("#hhh").attr("href"));
+      //  $("#hhh").attr("href", "FrontForum/IndexList?where=3")
+    })
+    //$("#sortSel").change(function () {
+    //    var select = $(this).val();
+    //    if (select == "排序方式") {
+    //        return;
+    //    }
+    //    //if (select == "发布时间") {
+    //    //    select = "FDate";
+    //    //} else {
+    //    //    select = "FDate";
+    //    //}
+    //    alert($(this).val());
+    //    $.get("/FrontForum/IndexList", { "where": select }, function (d) { })
+
+    //})
+
+</script>

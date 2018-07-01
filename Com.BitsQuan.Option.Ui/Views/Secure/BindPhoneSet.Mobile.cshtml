@@ -1,0 +1,77 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.setPhoneModel
+
+<div id="bindphoneset">
+    @using (Ajax.BeginForm("bindphoneset", "secure", null, new AjaxOptions
+                {
+                    UpdateTargetId = "bindphoneset",
+                    InsertionMode = InsertionMode.Replace
+                },
+                new { @class = "form-horizontal", role = "form" }))
+    {
+
+        <div class="container">
+            <div class="text-center row">为了您的信息安全，以便于我们能及时通知到您，请绑定您的手机号码</div>
+            <div class="row">
+                @Html.LabelFor(a => a.Phone)
+                @Html.TextBoxFor(a => a.Phone, new { @class = "form-control" })
+            </div>            @Html.ValidationMessageFor(a => a.Phone)
+            <div class="row">
+                @Html.LabelFor(a => a.Code)
+                <div class="input-group">
+                    @Html.TextBoxFor(a => a.Code, new { @class = "form-control" })
+                    <span class="input-group-btn">
+                        <input id="code_set" onclick="getOldCode()" class="btn btn-default" type="button" value="短信验证码">
+                    </span>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(a => a.Code)
+            <div class="row">
+                <input class="btn btn-primary btn-block" type="submit" value="确定" />
+            </div>
+            <div style="color:red;width:175px;margin-left:39%;" id="result">
+                @if (ViewData["massagePset"] != null)
+                {
+                    @ViewData["massagePset"]
+                }
+            </div>
+        </div>
+    }
+</div>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    @if(ViewBag.Success != null && ViewBag.Success)
+    {
+        @Html.Raw(string.Format("setTimeout(function(){{location='{0}';}},500);",Url.Content("~/Home/Trade")));
+    }
+    //获得验证码
+    function getOldCode() {
+        var $btn = $("#code_set");
+        $btn.prop("disabled", true);
+        var phone = $("#Phone").val();
+        $.get("/Secure/getCodeFirst", { "phone": phone }, function (d) {
+            if (d == 1) {
+                alert("手机号码已被使用，请换个手机号码");
+            }
+            else {
+                time($btn);
+            }
+        });
+    }
+    var wait = 30;
+    function time(o) {
+        if (wait == 0) {
+            o.prop("disabled", false);
+            o.val("获取原手机验证码");
+            wait = 30;
+        } else {
+            o.val("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function () {
+                time(o)
+            },
+        1000)
+        }
+    }
+
+</script>

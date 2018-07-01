@@ -1,0 +1,100 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.UpdL_PwdModel
+
+@Styles.Render("~/content/site.css")
+<div id="tradepwdupd">
+    @using (Ajax.BeginForm("tradepwdupd", "secure", null, new AjaxOptions
+    {
+        UpdateTargetId = "tradepwdupd",
+        InsertionMode = InsertionMode.Replace
+    },
+        new { id = "form1", @class = "form-horizontal", role = "form" }))
+    {
+        <div class="container">
+            <div class="text-center">为确保您的账户财产安全，请牢记您的交易密码且不要轻易泄漏给他人</div>
+            @Html.LabelFor(a => a.Lnpwd)
+            <div class="form-group form-group-lg">
+                <div class="col-xs-12">
+                    @Html.PasswordFor(a => a.Lnpwd, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="text-center">
+                <span>
+                    @Html.ValidationMessageFor(m => m.Lnpwd)
+                </span>
+            </div>
+            @Html.LabelFor(a => a.Lnpwd2)
+            <div class="form-group form-group-lg">
+                <div class="col-xs-12">
+                    @Html.PasswordFor(a => a.Lnpwd2, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="text-center">
+                <span>
+                    @Html.ValidationMessageFor(m => m.Lnpwd2)
+                </span>
+            </div>
+            @Html.LabelFor(a => a.Code)
+            <div class="form-group form-group-lg">
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        @Html.TextBoxFor(a => a.Code, new { @class = "form-control" })
+                        <div class="input-group-btn">
+                            <input type="button" id="getCode_td" value="点击获取" class="btn btn-default btn-lg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <span>
+                    @Html.ValidationMessageFor(m => m.Code)
+                </span>
+            </div>
+            <div style="height:20px;"></div>
+            <input type="button" onclick="$('#form1').submit();" class="btn btn-primary btn-block btn-lg" value="保存" />
+            @if (ViewBag.msg != null)
+            {
+                <p style="color:red;width:150px"> @ViewBag.msg</p>
+            }
+            @if (ViewData["Phone_td"] != null)
+            {
+                <span id="Phone_td" style="color:white">@ViewData["Phone_td"]</span>
+            }
+        </div>}
+</div>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function () {
+        $("#getCode_td").bind("click", function () { getOldCode(); });
+    });
+    //获得验证码
+    function getOldCode() {
+        var $btn = $("#getCode_td");
+        $btn.unbind("click");
+        var phone = $("#Phone_td").html();//手机号
+        if (phone == null || phone == "") {
+            alert("请先绑定手机号");
+            return;
+        }
+
+        $.get("/Secure/getOldCode", { "phone": phone }, function (d) {
+            time($("#getCode_td"));
+        });
+    }
+    var wait = 30;
+    function time(o) {
+        if (wait == 0) {
+            o.bind("click", function () { getOldCode(); });
+            o.val("点击获取");
+            wait = 30;
+        } else {
+            o.val("等待(" + wait + ")");
+
+            wait--;
+            setTimeout(function () {
+                time(o)
+            },
+        1000)
+        }
+    }
+</script>

@@ -1,0 +1,1077 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{57CB7312-3D38-4DE8-A811-76E2C213A2AB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.BitsQuan.Option.Ui</RootNamespace>
+    <AssemblyName>Com.BitsQuan.Option.Ui</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>App_Data\Com.BitsQuan.Option.Ui.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
+    <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
+    <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageConfigurationExtensions.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\Models\HelpPageApiModel.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ImageSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\InvalidSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
+    <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\Supervise\Controllers\AppUsersController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\AttachController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\AuditController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\CoinController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\ContractsController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\ForumController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\HelperController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\MainController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\NewController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\ParameterController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\SecurityController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\SiteParameterController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\SnapController.cs" />
+    <Compile Include="Areas\Supervise\Controllers\TradeDataController.cs" />
+    <Compile Include="Areas\Supervise\Data\BackDBServer.cs" />
+    <Compile Include="Areas\Supervise\Data\DbBackModel.cs" />
+    <Compile Include="Areas\Supervise\Data\IDbBackModel.cs" />
+    <Compile Include="Areas\Supervise\Data\IRecharge.cs" />
+    <Compile Include="Areas\Supervise\Data\IWithdraw.cs" />
+    <Compile Include="Areas\Supervise\Data\Recharge.cs" />
+    <Compile Include="Areas\Supervise\Data\RegExp.cs" />
+    <Compile Include="Areas\Supervise\Data\SuperviseModel.cs" />
+    <Compile Include="Areas\Supervise\Data\Withdraw.cs" />
+    <Compile Include="Areas\Supervise\ISuperviseModel.cs" />
+    <Compile Include="Areas\Supervise\Models\ContractModel.cs" />
+    <Compile Include="Areas\Supervise\Other\CreateIDService.cs" />
+    <Compile Include="Areas\Supervise\SuperviseAreaRegistration.cs" />
+    <Compile Include="ClientValidation\ModelClientValidationRule.cs" />
+    <Compile Include="ClientValidation\NotEqualAttribute.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CacheController.cs" />
+    <Compile Include="Controllers\FrontForumController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewNoticesController.cs" />
+    <Compile Include="Controllers\SecureController.cs" />
+    <Compile Include="Controllers\SpotController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\TradeController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\WebHelperController.cs" />
+    <Compile Include="CreatCode\VerifyCode.cs" />
+    <Compile Include="Extensions\MvcExtension.cs" />
+    <Compile Include="Extensions\SystemExtension.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Hubs\TradeHub.cs" />
+    <Compile Include="MarketService.svc.cs">
+      <DependentUpon>MarketService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BigType.cs" />
+    <Compile Include="Models\CacheModels.cs" />
+    <Compile Include="Models\ContentType.cs" />
+    <Compile Include="Models\D2Model.cs" />
+    <Compile Include="Models\ForumHost.cs" />
+    <Compile Include="Models\ForumReply.cs" />
+    <Compile Include="Models\Help.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InvitorFeeMgr.cs" />
+    <Compile Include="Models\ITradeManager.cs" />
+    <Compile Include="Models\OrderDeal.cs" />
+    <Compile Include="Models\Pager.cs" />
+    <Compile Include="Models\Query\QueryEngine.cs" />
+    <Compile Include="Models\Security\AuthViaMenu.cs" />
+    <Compile Include="Models\Security\LogAttribute.cs" />
+    <Compile Include="Models\Security\MenuExtension.cs" />
+    <Compile Include="Models\SiteParameter .cs" />
+    <Compile Include="Models\SmallType.cs" />
+    <Compile Include="Models\TradeManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="TradeService.svc.cs">
+      <DependentUpon>TradeService.svc</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Com.BitsQuan.Option.Ui.XML">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\activity\styles\index.css" />
+    <Content Include="Content\autoaddbail.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\btcindex.css" />
+    <Content Include="Content\helper\about.png" />
+    <Content Include="Content\helper\banner.png" />
+    <Content Include="Content\helper\bb3.png" />
+    <Content Include="Content\helper\bbsicon.png" />
+    <Content Include="Content\helper\bg.png" />
+    <Content Include="Content\helper\boofborder.png" />
+    <Content Include="Content\helper\border.png" />
+    <Content Include="Content\helper\border1.png" />
+    <Content Include="Content\helper\border2.png" />
+    <Content Include="Content\helper\border3.png" />
+    <Content Include="Content\helper\btn.png" />
+    <Content Include="Content\helper\btn1.png" />
+    <Content Include="Content\helper\btn2.png" />
+    <Content Include="Content\helper\button.png" />
+    <Content Include="Content\helper\closd.png" />
+    <Content Include="Content\helper\cnyborder.png" />
+    <Content Include="Content\helper\common-bg.png" />
+    <Content Include="Content\helper\contact.png" />
+    <Content Include="Content\helper\enroll.png" />
+    <Content Include="Content\helper\googel.png" />
+    <Content Include="Content\helper\headbg.png" />
+    <Content Include="Content\helper\icon.png" />
+    <Content Include="Content\helper\icon2.png" />
+    <Content Include="Content\helper\icon3png.png" />
+    <Content Include="Content\helper\icon4.png" />
+    <Content Include="Content\helper\icon5.png" />
+    <Content Include="Content\helper\icon6.png" />
+    <Content Include="Content\helper\icon7.png" />
+    <Content Include="Content\helper\icon8.png" />
+    <Content Include="Content\helper\iconbg.png" />
+    <Content Include="Content\helper\icon_gd.png" />
+    <Content Include="Content\helper\icon_gs.png" />
+    <Content Include="Content\helper\icon_js.png" />
+    <Content Include="Content\helper\icon_jt.png" />
+    <Content Include="Content\helper\icon_ms.png" />
+    <Content Include="Content\helper\icon_ny.png" />
+    <Content Include="Content\helper\icon_pf.png" />
+    <Content Include="Content\helper\icon_xy.png" />
+    <Content Include="Content\helper\icon_zg.png" />
+    <Content Include="Content\helper\icon_zs.png" />
+    <Content Include="Content\helper\icon_zx.png" />
+    <Content Include="Content\helper\img1.png" />
+    <Content Include="Content\helper\img2.png" />
+    <Content Include="Content\helper\img3.png" />
+    <Content Include="Content\helper\img4.png" />
+    <Content Include="Content\helper\indexicon.png" />
+    <Content Include="Content\helper\leftbtn.png" />
+    <Content Include="Content\helper\leftbtn1.png" />
+    <Content Include="Content\helper\line.png" />
+    <Content Include="Content\helper\logging.png" />
+    <Content Include="Content\helper\logo.png" />
+    <Content Include="Content\helper\logoimg.jpg" />
+    <Content Include="Content\helper\logoimg.png" />
+    <Content Include="Content\helper\lond.png" />
+    <Content Include="Content\helper\main.png" />
+    <Content Include="Content\helper\manage_border.png" />
+    <Content Include="Content\helper\map.png" />
+    <Content Include="Content\helper\modifiedline.png" />
+    <Content Include="Content\helper\nav_border.png" />
+    <Content Include="Content\helper\newspic.png" />
+    <Content Include="Content\helper\pic.png" />
+    <Content Include="Content\helper\qq.png" />
+    <Content Include="Content\helper\qq11.png" />
+    <Content Include="Content\helper\rightbtn.png" />
+    <Content Include="Content\helper\rightbtn1.png" />
+    <Content Include="Content\helper\subbg.png" />
+    <Content Include="Content\helper\tell.png" />
+    <Content Include="Content\helper\top.png" />
+    <Content Include="Content\helper\weibo.png" />
+    <Content Include="Content\helper\weix.png" />
+    <Content Include="Content\helper\weixin.png" />
+    <Content Include="Content\helper\交易_03.png" />
+    <Content Include="Content\images\about.png" />
+    <Content Include="Content\activity\images\banner.png" />
+    <Content Include="Content\activity\images\bg.png" />
+    <Content Include="Content\activity\images\five.png" />
+    <Content Include="Content\activity\images\inputbg.png" />
+    <Content Include="Content\images\banner.png" />
+    <Content Include="Content\images\bb3.png" />
+    <Content Include="Content\images\bbsicon.png" />
+    <Content Include="Content\images\bg.png" />
+    <Content Include="Content\images\bgc.png" />
+    <Content Include="Content\images\boofborder.png" />
+    <Content Include="Content\images\border.png" />
+    <Content Include="Content\images\border1.png" />
+    <Content Include="Content\images\border2.png" />
+    <Content Include="Content\images\border3.png" />
+    <Content Include="Content\images\btn.png" />
+    <Content Include="Content\images\btn1.png" />
+    <Content Include="Content\images\btn2.png" />
+    <Content Include="Content\images\btn_register.png" />
+    <Content Include="Content\images\button.png" />
+    <Content Include="Content\images\change_pwd_btn.png" />
+    <Content Include="Content\images\closd.png" />
+    <Content Include="Content\images\closeicon.png" />
+    <Content Include="Content\images\cnyborder.png" />
+    <Content Include="Content\images\codebg1.png" />
+    <Content Include="Content\images\codebg2.png" />
+    <Content Include="Content\images\codebg3.png" />
+    <Content Include="Content\images\common-bg.png" />
+    <Content Include="Content\images\contact.png" />
+    <Content Include="Content\images\err\bg.png" />
+    <Content Include="Content\images\err\bg1.png" />
+    <Content Include="Content\images\err\error-img.png" />
+    <Content Include="Content\images\googel.png" />
+    <Content Include="Content\images\headbg.png" />
+    <Content Include="Content\images\help\payflow.jpg" />
+    <Content Include="Content\images\help\withdrawflow.jpg" />
+    <Content Include="Content\images\home.gif" />
+    <Content Include="Content\images\icon.png" />
+    <Content Include="Content\images\icon1.png" />
+    <Content Include="Content\images\icon2.png" />
+    <Content Include="Content\images\icon3.png" />
+    <Content Include="Content\images\icon3png.png" />
+    <Content Include="Content\images\icon4.png" />
+    <Content Include="Content\images\iconbg.png" />
+    <Content Include="Content\images\icon_gd.png" />
+    <Content Include="Content\images\icon_gs.png" />
+    <Content Include="Content\images\icon_js.png" />
+    <Content Include="Content\images\icon_jt.png" />
+    <Content Include="Content\images\icon_ms.png" />
+    <Content Include="Content\images\icon_ny.png" />
+    <Content Include="Content\images\icon_pf.png" />
+    <Content Include="Content\images\icon_xy.png" />
+    <Content Include="Content\images\icon_zg.png" />
+    <Content Include="Content\images\icon_zs.png" />
+    <Content Include="Content\images\icon_zx.png" />
+    <Content Include="Content\images\img1.png" />
+    <Content Include="Content\images\img2.png" />
+    <Content Include="Content\images\img3.png" />
+    <Content Include="Content\images\img4.png" />
+    <Content Include="Content\images\indexicon.png" />
+    <Content Include="Content\images\leftbtn.png" />
+    <Content Include="Content\images\leftbtn1.png" />
+    <Content Include="Content\images\Lightcodebg.png" />
+    <Content Include="Content\images\line.png" />
+    <Content Include="Content\images\Login.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logoimg.jpg" />
+    <Content Include="Content\images\logoimg.png" />
+    <Content Include="Content\images\lond.png" />
+    <Content Include="Content\images\main.png" />
+    <Content Include="Content\images\manage_border.png" />
+    <Content Include="Content\images\map.png" />
+    <Content Include="Content\images\nav-arrow.png" />
+    <Content Include="Content\images\nav_border.png" />
+    <Content Include="Content\images\newspic.png" />
+    <Content Include="Content\images\news_list_separator.png" />
+    <Content Include="Content\images\open.gif" />
+    <Content Include="Content\images\option123.png" />
+    <Content Include="Content\images\option_clause.jpg" />
+    <Content Include="Content\images\p2p_sprite.png" />
+    <Content Include="Content\images\passed.png" />
+    <Content Include="Content\images\pic.png" />
+    <Content Include="Content\images\qq.jpg" />
+    <Content Include="Content\images\qq.png" />
+    <Content Include="Content\images\qq11.png" />
+    <Content Include="Content\images\qq12.jpg" />
+    <Content Include="Content\images\rightbtn.png" />
+    <Content Include="Content\images\rightbtn1.png" />
+    <Content Include="Content\images\simulation\bluebg.png" />
+    <Content Include="Content\images\simulation\head.png" />
+    <Content Include="Content\images\simulation\lbtn.png" />
+    <Content Include="Content\images\simulation\leftbtn.png" />
+    <Content Include="Content\images\simulation\main.png" />
+    <Content Include="Content\images\simulation\rbtn.png" />
+    <Content Include="Content\images\simulation\rightbtn.png" />
+    <Content Include="Content\images\simulation\titlebg.png" />
+    <Content Include="Content\images\simulation\titlebg1.png" />
+    <Content Include="Content\images\smenu_icons.jpg" />
+    <Content Include="Content\images\sub.gif" />
+    <Content Include="Content\images\subbg.png" />
+    <Content Include="Content\images\submit-blue_09.png" />
+    <Content Include="Content\images\submit_06.png" />
+    <Content Include="Content\images\switch.png" />
+    <Content Include="Content\images\switch2.png" />
+    <Content Include="Content\images\tbg.png" />
+    <Content Include="Content\images\tell.png" />
+    <Content Include="Content\images\top.png" />
+    <Content Include="Content\images\tree-line-end.gif" />
+    <Content Include="Content\images\tree-line-sel.gif" />
+    <Content Include="Content\images\tree-line.gif" />
+    <Content Include="Content\images\tree-max-end.gif" />
+    <Content Include="Content\images\tree-max.gif" />
+    <Content Include="Content\images\tree-min-end.gif" />
+    <Content Include="Content\images\tree-min.gif" />
+    <Content Include="Content\images\weibo.png" />
+    <Content Include="Content\images\weix.png" />
+    <Content Include="Content\images\weixin.png" />
+    <Content Include="Content\images\交易_03.png" />
+    <Content Include="Content\img\about.png" />
+    <Content Include="Content\img\ajaxloader.gif" />
+    <Content Include="Content\img\banner.png" />
+    <Content Include="Content\img\banner1.png" />
+    <Content Include="Content\img\banner2.png" />
+    <Content Include="Content\img\banner3.png" />
+    <Content Include="Content\img\banner4.png" />
+    <Content Include="Content\img\boofborder.png" />
+    <Content Include="Content\img\border.png" />
+    <Content Include="Content\img\border1.png" />
+    <Content Include="Content\img\border2.png" />
+    <Content Include="Content\img\border3.png" />
+    <Content Include="Content\img\bq.png" />
+    <Content Include="Content\img\contact.png" />
+    <Content Include="Content\img\del.png" />
+    <Content Include="Content\img\icon_new.jpg" />
+    <Content Include="Content\img\img1.png" />
+    <Content Include="Content\img\img2.png" />
+    <Content Include="Content\img\img3.png" />
+    <Content Include="Content\img\img4.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\money.jpg" />
+    <Content Include="Content\img\rolling_h.png" />
+    <Content Include="Content\img\rolling_n.png" />
+    <Content Include="Content\newnotices.css" />
+    <Content Include="Content\img\pic.png" />
+    <Content Include="Content\img\qq11.png" />
+    <Content Include="Content\img\success.jpg" />
+    <Content Include="Content\img\t1.jpg" />
+    <Content Include="Content\img\t2.jpg" />
+    <Content Include="Content\img\t3.jpg" />
+    <Content Include="Content\img\weixin.png" />
+    <Content Include="Content\img\首页---副本_11.png" />
+    <Content Include="Content\Index.css" />
+    <Content Include="Content\Secure.css" />
+    <Content Include="Content\simulation.css" />
+    <Content Include="Content\test.css" />
+    <Content Include="Content\trade.css" />
+    <Content Include="Content\webhelper.css" />
+    <Content Include="Error.htm" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="MarketService.svc" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Areas\Supervise\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Supervise\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Supervise\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Supervise\Views\Contracts\Query.cshtml" />
+    <Content Include="Areas\Supervise\Views\Contracts\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\Contracts\Create.cshtml" />
+    <Content Include="Areas\Supervise\Views\Helper\AddHelper.cshtml" />
+    <Content Include="Areas\Supervise\Views\Helper\HelpIndex.cshtml" />
+    <Content Include="Areas\Supervise\Views\Helper\HelpList.cshtml" />
+    <Content Include="Areas\Supervise\Views\Auth\Query.cshtml" />
+    <Content Include="Areas\Supervise\Views\Auth\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\Coin\AddAndUpdCoin.cshtml" />
+    <Content Include="Areas\Supervise\Views\Coin\CoinIndex.cshtml" />
+    <Content Include="Areas\Supervise\Views\Coin\CoinList.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\OrderQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\Orders.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\AccountTradeRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\AccountTradeRecordQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\Deals.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\DealQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\BlastRecordQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\BlastRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\FuseRecordQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\FuseRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\Main\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\BlastOpQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\BlastOps.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\TraderMsgQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\SysAccountRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\Audit\BankRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\Audit\BankRecordQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\Audit\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\Audit\AuditIt.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Web.config" />
+    <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TextSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\SimpleTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Parameters.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ModelDescriptionLink.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\InvalidSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ImageSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\EnumTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Supervise\Views\New\AddNew.cshtml" />
+    <Content Include="Areas\Supervise\Views\New\NewIndex.cshtml" />
+    <Content Include="Areas\Supervise\Views\New\NewList.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Supervise\Views\Forum\ForumIndex.cshtml" />
+    <Content Include="Areas\Supervise\Views\Forum\ShowForumReply.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\SysAccountQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\TraderMsgRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\UserPositionRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\UserPositionQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\Forum\host.cshtml" />
+    <Content Include="Areas\Supervise\Views\Forum\Reply.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\CerQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\CerRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\Forum\DeleteHost.cshtml" />
+    <Content Include="Areas\Supervise\Views\Forum\DeleteReply.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\CreateRole.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\CreateUser.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\DeleteRole.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\EditRole.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\EditUser.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\EditUserRole.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\Roles.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\Users.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\_ARole.cshtml" />
+    <Content Include="Areas\Supervise\Views\Security\_PartialMenuSelect.cshtml" />
+    <Content Include="Areas\Supervise\Views\Attach\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\Attach\BankManege.cshtml" />
+    <Content Include="Areas\Supervise\Views\Parameter\Blast.cshtml" />
+    <Content Include="Areas\Supervise\Views\Parameter\Execute.cshtml" />
+    <Content Include="Areas\Supervise\Views\Parameter\Fee.cshtml" />
+    <Content Include="Areas\Supervise\Views\Parameter\Fuse.cshtml" />
+    <Content Include="Areas\Supervise\Views\Parameter\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\Parameter\Limit.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Complex.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Manual.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\SdQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\SdRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\SOQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\SORecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\WebSiteSet.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\StateSet.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\tradeSet.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\UserSet.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\EmailServerSet.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\EmailNotice.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\MassegeNotice.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\PaySet.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\LogQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\LogRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\Audit\Bank.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\AdvImgs.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\FriendlyLinks.cshtml" />
+    <Content Include="Areas\Supervise\Views\SiteParameter\WebHelper.cshtml" />
+    <Content Include="Areas\Supervise\Views\Auth\UpdateUser.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Simple.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Real.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Cache.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Coin.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Pos.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\OptionTop.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\UserDynamicPositionRecords.cshtml" />
+    <Content Include="Areas\Supervise\Views\TradeData\UserDynamicPositionQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Bail.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\Orders.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\CorrectFrozen.cshtml" />
+    <Content Include="Areas\Supervise\Views\AppUsers\Summary.cshtml" />
+    <Content Include="Areas\Supervise\Views\AppUsers\Users.cshtml" />
+    <Content Include="Areas\Supervise\Views\AppUsers\UserQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\AppUsers\Index.cshtml" />
+    <Content Include="Areas\Supervise\Views\Snap\OrdersQuery.cshtml" />
+    <Content Include="Areas\Supervise\Views\Parameter\SetBtcPrice.cshtml" />
+    <Content Include="Areas\Supervise\Views\Parameter\InvitorFee.cshtml" />
+    <None Include="Properties\PublishProfiles\11-24-2.pubxml" />
+    <None Include="Properties\PublishProfiles\adsfa.pubxml" />
+    <None Include="Properties\PublishProfiles\asd.pubxml" />
+    <None Include="Properties\PublishProfiles\asdf.pubxml" />
+    <None Include="Properties\PublishProfiles\biauu.pubxml" />
+    <None Include="Properties\PublishProfiles\biquan.pubxml" />
+    <None Include="Properties\PublishProfiles\bitsquan.pubxml" />
+    <None Include="Properties\PublishProfiles\df.pubxml" />
+    <None Include="Properties\PublishProfiles\dsfg.pubxml" />
+    <None Include="Properties\PublishProfiles\hg.pubxml" />
+    <None Include="Properties\PublishProfiles\jk.pubxml" />
+    <None Include="Properties\PublishProfiles\kjh.pubxml" />
+    <None Include="Properties\PublishProfiles\p.pubxml" />
+    <None Include="Properties\PublishProfiles\Prof1.pubxml" />
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
+    <None Include="Properties\PublishProfiles\sadf.pubxml" />
+    <None Include="Properties\PublishProfiles\sdf.pubxml" />
+    <None Include="Properties\PublishProfiles\ZXC.pubxml" />
+    <Content Include="Scripts\bs-3.3.4\css\bootstrap-theme.css.map" />
+    <Content Include="Scripts\bs-3.3.4\css\bootstrap.css.map" />
+    <Content Include="Scripts\bs-3.3.4\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\bs-3.3.4\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\bs-3.3.4\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\bs-3.3.4\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bs-3.3.4\css\bootstrap-theme.css" />
+    <Content Include="Scripts\bs-3.3.4\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\bs-3.3.4\css\bootstrap.css" />
+    <Content Include="Scripts\bs-3.3.4\css\bootstrap.min.css" />
+    <Content Include="Scripts\bs-3.3.4\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bs-3.3.4\js\bootstrap.js" />
+    <Content Include="Scripts\bs-3.3.4\js\bootstrap.min.js" />
+    <Content Include="Scripts\bs-3.3.4\js\npm.js" />
+    <Content Include="Scripts\bstimepicker\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bstimepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\bstimepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bstimepicker\bootstrap-datetimepicker.zh-CN.js" />
+    <Content Include="Scripts\draggable.js" />
+    <Content Include="Scripts\extension.js" />
+    <Content Include="Scripts\FontRoll.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\hs\adapters\standalone-framework.js" />
+    <Content Include="Scripts\hs\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\hs\highcharts-3d.js" />
+    <Content Include="Scripts\hs\highcharts-3d.src.js" />
+    <Content Include="Scripts\hs\highcharts-more.js" />
+    <Content Include="Scripts\hs\highcharts-more.src.js" />
+    <Content Include="Scripts\hs\highstock.js" />
+    <Content Include="Scripts\hs\highstock.src.js" />
+    <Content Include="Scripts\hs\modules\canvas-tools.js" />
+    <Content Include="Scripts\hs\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\hs\modules\data.js" />
+    <Content Include="Scripts\hs\modules\data.src.js" />
+    <Content Include="Scripts\hs\modules\drilldown.js" />
+    <Content Include="Scripts\hs\modules\drilldown.src.js" />
+    <Content Include="Scripts\hs\modules\exporting.js" />
+    <Content Include="Scripts\hs\modules\exporting.src.js" />
+    <Content Include="Scripts\hs\modules\funnel.js" />
+    <Content Include="Scripts\hs\modules\funnel.src.js" />
+    <Content Include="Scripts\hs\modules\heatmap.js" />
+    <Content Include="Scripts\hs\modules\heatmap.src.js" />
+    <Content Include="Scripts\hs\modules\no-data-to-display.js" />
+    <Content Include="Scripts\hs\modules\no-data-to-display.src.js" />
+    <Content Include="Scripts\hs\modules\solid-gauge.js" />
+    <Content Include="Scripts\hs\modules\solid-gauge.src.js" />
+    <Content Include="Scripts\hs\themes\dark-blue.js" />
+    <Content Include="Scripts\hs\themes\dark-green.js" />
+    <Content Include="Scripts\hs\themes\dark-unica.js" />
+    <Content Include="Scripts\hs\themes\gray.js" />
+    <Content Include="Scripts\hs\themes\grid-light.js" />
+    <Content Include="Scripts\hs\themes\grid.js" />
+    <Content Include="Scripts\hs\themes\sand-signika.js" />
+    <Content Include="Scripts\hs\themes\skies.js" />
+    <Content Include="Scripts\jq\jquery.1.11.2.js" />
+    <Content Include="Scripts\knockout.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\mustache.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\SendEmail.js" />
+    <Content Include="Scripts\simplepopup.js" />
+    <Content Include="Scripts\tablesortor\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\tablesortor\jquery.tablesorter.widgets.min.js" />
+    <Content Include="Scripts\tablesortor\theme.default.css" />
+    <Content Include="Scripts\test.js" />
+    <Content Include="Scripts\trade\cookie.js" />
+    <Content Include="Scripts\trade\deep.js" />
+    <Content Include="Scripts\trade\jquery-migrate-1.2.1.js" />
+    <Content Include="Scripts\trade\market.js" />
+    <Content Include="Scripts\trade\model.js" />
+    <Content Include="Scripts\trade\ohlc.js" />
+    <Content Include="Scripts\trade\option.js" />
+    <Content Include="Scripts\trade\order.js" />
+    <Content Include="Scripts\trade\sclient.js" />
+    <Content Include="Scripts\trade\sel.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\trade\spot.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="TradeService.svc" />
+    <Content Include="Views\Spot\BtcMarketDetail.cshtml" />
+    <Content Include="Views\Spot\BtcMarketDetail.Mobile.cshtml" />
+    <Content Include="Views\Spot\GetCurrent.cshtml" />
+    <Content Include="Views\Spot\GetCurrent.Mobile.cshtml" />
+    <Content Include="Views\Spot\GetHotDeals.cshtml" />
+    <Content Include="Views\Spot\GetHotDeals.Mobile.cshtml" />
+    <Content Include="Views\Spot\MyCurrent.cshtml" />
+    <Content Include="Views\Spot\MyHistoryOrder.cshtml" />
+    <Content Include="Views\Spot\MySpotOrderDeal.cshtml" />
+    <Content Include="Views\Spot\Trade.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Spot\Trade.Mobile.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Cache\General.cshtml" />
+    <Content Include="Views\Cache\CacheFlow.cshtml" />
+    <Content Include="Views\Cache\Index.cshtml" />
+    <Content Include="Views\Shared\_Pager.cshtml" />
+    <Content Include="Views\Cache\FreezeFlow.cshtml" />
+    <Content Include="Views\Cache\TradeFlow.cshtml" />
+    <Content Include="Views\Home\Trade.cshtml">
+      <LastGenOutput>Trade.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\GetCurrentDequeue.cshtml" />
+    <Content Include="Views\Home\GetDeals.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial2.cshtml" />
+    <Content Include="Views\Shared\_Query.cshtml" />
+    <Content Include="Views\Home\Index.cshtml">
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cache\BankAccounts.cshtml" />
+    <Content Include="Views\Cache\RefillCache.cshtml" />
+    <Content Include="Views\Cache\WithdrawCny.cshtml" />
+    <Content Include="Views\Home\GetNews.cshtml" />
+    <Content Include="Views\Home\GetNotice.cshtml" />
+    <Content Include="Views\Home\GetOption.cshtml" />
+    <Content Include="Views\Cache\Bail.cshtml" />
+    <Content Include="Views\Cache\StreamShow.cshtml" />
+    <Content Include="Views\Cache\RedrawBTC.cshtml" />
+    <Content Include="Views\Cache\WithdrawBTC.cshtml" />
+    <Content Include="Views\Cache\CurrenAddress.cshtml" />
+    <Content Include="Views\Cache\Withdraw.cshtml" />
+    <Content Include="Views\Cache\Redraw.cshtml" />
+    <Content Include="Views\FrontForum\FrontHost.cshtml" />
+    <Content Include="Views\FrontForum\FrontReply.cshtml" />
+    <Content Include="Views\FrontForum\FrontForumReply.cshtml" />
+    <Content Include="Views\FrontForum\MyForumIndex.cshtml" />
+    <Content Include="Views\FrontForum\Index.cshtml" />
+    <Content Include="Views\FrontForum\ReplyList.cshtml" />
+    <Content Include="Views\NewNotices\Index.cshtml" />
+    <Content Include="Views\Home\GetOrderDeal.cshtml" />
+    <Content Include="Views\Home\GetHistoryOrder.cshtml" />
+    <Content Include="Views\Secure\AccountInfo.cshtml" />
+    <Content Include="Views\Secure\BindPhone.cshtml" />
+    <Content Include="Views\Secure\BindPhoneSet.cshtml" />
+    <Content Include="Views\Secure\BindPhoneUpd.cshtml" />
+    <Content Include="Views\Secure\Index.cshtml" />
+    <Content Include="Views\Secure\LoginPwd.cshtml" />
+    <Content Include="Views\Secure\LoginPwdUpd.cshtml" />
+    <Content Include="Views\Secure\TradePwd.cshtml" />
+    <Content Include="Views\Secure\TradePwdSet.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Secure\TradePwdUpd.cshtml" />
+    <Content Include="Views\Secure\EmailUpd.cshtml" />
+    <Content Include="Views\NewNotices\New.cshtml" />
+    <Content Include="Views\FrontForum\DeleteHost.cshtml" />
+    <Content Include="Views\FrontForum\DeleteReply.cshtml" />
+    <Content Include="Views\FrontForum\_right.cshtml" />
+    <Content Include="Views\FrontForum\IndexList.cshtml" />
+    <Content Include="Views\FrontForum\IndexHome.cshtml" />
+    <Content Include="Views\Account\SendEmail.cshtml" />
+    <Content Include="Views\Secure\TradeInputSet.cshtml" />
+    <Content Include="Views\Account\FindPassword.cshtml" />
+    <Content Include="Views\Secure\AccountIdentifi.cshtml" />
+    <Content Include="Views\Account\SetLoginPass.cshtml" />
+    <Content Include="Views\Home\AllDealsPartial.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Home\GetAllDeals.cshtml" />
+    <Content Include="Views\Home\GetAllOs.cshtml" />
+    <Content Include="Views\Home\GetOs.cshtml">
+      <LastGenOutput>GetOs.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Secure\GoogleValidate.cshtml" />
+    <Content Include="Views\Secure\GoogleValidate2.cshtml" />
+    <Content Include="Views\Cache\BtcTradeFlow.cshtml" />
+    <Content Include="Views\WebHelper\Index.cshtml" />
+    <Content Include="Views\WebHelper\Law.cshtml" />
+    <Content Include="Views\WebHelper\Service.cshtml" />
+    <Content Include="Views\WebHelper\Fee.cshtml" />
+    <Content Include="Views\Shared\Calc.cshtml" />
+    <Content Include="Views\Cache\LossRecord.cshtml" />
+    <Content Include="Views\Account\RegisterSuccess.cshtml" />
+    <Content Include="Views\Cache\UserExecuteRecord.cshtml" />
+    <Content Include="Views\Cache\ExecutedRecord.cshtml" />
+    <Content Include="Views\NewNotices\_LeftNav.cshtml" />
+    <Content Include="Views\WebHelper\about.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\WebHelper\Faq.cshtml" />
+    <Content Include="Views\Home\Activity.cshtml" />
+    <Content Include="Views\Account\EmailContent.cshtml" />
+    <Content Include="Views\Account\ConfirmRegisterEmailContent.cshtml" />
+    <Content Include="Views\Shared\SideMenu.cshtml" />
+    <Content Include="Views\WebHelper\Rules.cshtml" />
+    <Content Include="Views\Home\Index.Mobile.cshtml">
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
+    <Content Include="Views\Home\GetOption.Mobile.cshtml" />
+    <Content Include="Views\Shared\Footer.Mobile.cshtml" />
+    <Content Include="Views\Home\GetNews.Mobile.cshtml" />
+    <Content Include="Views\Home\GetNotice.Mobile.cshtml" />
+    <Content Include="Views\Account\Login.Mobile.cshtml" />
+    <Content Include="Views\Account\Register.Mobile.cshtml" />
+    <Content Include="Views\Home\Trade.Mobile.cshtml" />
+    <Content Include="Views\WebHelper\Service.Mobile.cshtml" />
+    <Content Include="Views\Home\GetHistoryOrder.Mobile.cshtml" />
+    <Content Include="Views\Home\GetOrderDeal.Mobile.cshtml" />
+    <Content Include="Views\Home\GetCurrentDequeue.Mobile.cshtml" />
+    <Content Include="Views\Home\GetDeals.Mobile.cshtml" />
+    <Content Include="Views\Cache\Index.Mobile.cshtml" />
+    <Content Include="Views\Home\GetAllOs.Mobile.cshtml" />
+    <Content Include="Views\Home\GetOs.Mobile.cshtml">
+      <LastGenOutput>GetOs.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Secure\AccountIdentifi.Mobile.cshtml" />
+    <Content Include="Views\Secure\Index.Mobile.cshtml" />
+    <Content Include="Views\Secure\AccountInfo.Mobile.cshtml" />
+    <Content Include="Views\Secure\LoginPwdUpd.Mobile.cshtml" />
+    <Content Include="Views\Cache\Index.Mobile.cshtml" />
+    <Content Include="Views\Cache\Bail.Mobile.cshtml" />
+    <Content Include="Views\Cache\BankAccounts.Mobile.cshtml" />
+    <Content Include="Views\Cache\BtcTradeFlow.Mobile.cshtml" />
+    <Content Include="Views\Cache\CacheFlow.Mobile.cshtml" />
+    <Content Include="Views\Cache\CurrenAddress.Mobile.cshtml" />
+    <Content Include="Views\Cache\ExecutedRecord.Mobile.cshtml" />
+    <Content Include="Views\Cache\FreezeFlow.Mobile.cshtml" />
+    <Content Include="Views\Cache\General.Mobile.cshtml" />
+    <Content Include="Views\Cache\LossRecord.Mobile.cshtml" />
+    <Content Include="Views\Cache\Redraw.Mobile.cshtml" />
+    <Content Include="Views\Cache\RedrawBTC.Mobile.cshtml" />
+    <Content Include="Views\Cache\RefillCache.Mobile.cshtml" />
+    <Content Include="Views\Cache\StreamShow.Mobile.cshtml" />
+    <Content Include="Views\Cache\TradeFlow.Mobile.cshtml" />
+    <Content Include="Views\Cache\UserExecuteRecord.Mobile.cshtml" />
+    <Content Include="Views\Cache\Withdraw.Mobile.cshtml" />
+    <Content Include="Views\Cache\WithdrawBTC.Mobile.cshtml" />
+    <Content Include="Views\Cache\WithdrawCny.Mobile.cshtml" />
+    <Content Include="Views\Home\Activity.Mobile.cshtml" />
+    <Content Include="Views\Cache\_PartialWhereModel.Mobile.cshtml" />
+    <Content Include="Views\Secure\TradePwdUpd.Mobile.cshtml" />
+    <Content Include="Views\NewNotices\_LeftNav.Mobile.cshtml" />
+    <Content Include="Views\NewNotices\Index.Mobile.cshtml" />
+    <Content Include="Views\NewNotices\New.Mobile.cshtml" />
+    <Content Include="Views\WebHelper\about.Mobile.cshtml" />
+    <Content Include="Views\WebHelper\Faq.Mobile.cshtml" />
+    <Content Include="Views\WebHelper\Fee.Mobile.cshtml" />
+    <Content Include="Views\WebHelper\Index.Mobile.cshtml" />
+    <Content Include="Views\WebHelper\Law.Mobile.cshtml" />
+    <Content Include="Views\WebHelper\Rules.Mobile.cshtml" />
+    <Content Include="Views\Secure\BindPhoneUpd.Mobile.cshtml" />
+    <Content Include="Views\Secure\BindPhoneSet.Mobile.cshtml" />
+    <Content Include="Views\Account\SendEmail.Mobile.cshtml" />
+    <Content Include="Views\Secure\TradeInputSet.Mobile.cshtml" />
+    <Content Include="Views\Account\FindPassword.Mobile.cshtml" />
+    <Content Include="Views\Account\SetLoginPass.Mobile.cshtml" />
+    <Content Include="Views\Home\Simulation.cshtml" />
+    <Content Include="Views\Home\Market.cshtml" />
+    <Content Include="Views\Home\BtcIndex.cshtml" />
+    <Content Include="Views\WebHelper\OptionClause.cshtml" />
+    <Content Include="Views\WebHelper\PayAndWithdraw.cshtml" />
+    <Content Include="Views\Cache\Invitation.cshtml" />
+    <Content Include="Views\WebHelper\TheoryPriceExplain.cshtml" />
+    <Content Include="Views\WebHelper\BtcOptionExplain.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.BitsQuan.Boss.Core\Com.BitsQuan.Boss.Core.csproj">
+      <Project>{a3aded71-d5f7-4ec8-889f-7c5d8e94a668}</Project>
+      <Name>Com.BitsQuan.Boss.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Miscellaneous\Com.BitsQuan.Miscellaneous.csproj">
+      <Project>{26baa888-6a10-4978-806d-2d0534fac1c0}</Project>
+      <Name>Com.BitsQuan.Miscellaneous</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Core\Com.BitsQuan.Option.Core.csproj">
+      <Project>{5bc39fd4-adbd-4a03-9d3b-f9f099f82b64}</Project>
+      <Name>Com.BitsQuan.Option.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Imp\Com.BitsQuan.Option.Imp.csproj">
+      <Project>{e5931f36-c5e1-443b-86d2-d97792fa27ae}</Project>
+      <Name>Com.BitsQuan.Option.Imp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Match\Com.BitsQuan.Option.Match.csproj">
+      <Project>{9a3e626f-f59b-43ee-93b6-06903db9d918}</Project>
+      <Name>Com.BitsQuan.Option.Match</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Provider\Com.BitsQuan.Option.Provider.csproj">
+      <Project>{7ff99a41-9556-4bb9-95ec-174b8abf4b48}</Project>
+      <Name>Com.BitsQuan.Option.Provider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Service\Com.BitsQuan.Service.csproj">
+      <Project>{63f278e2-9f30-47a9-92ab-ee6eae9f706e}</Project>
+      <Name>Com.BitsQuan.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10636</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10636/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

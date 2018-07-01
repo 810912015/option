@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{63F278E2-9F30-47A9-92AB-EE6EAE9F706E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.BitsQuan.Service</RootNamespace>
+    <AssemblyName>Com.BitsQuan.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Imp\TcpSvcBase.cs" />
+    <Compile Include="Imp\TradeSvc.cs" />
+    <Compile Include="Infra\ConnectionMgr.cs" />
+    <Compile Include="Infra\SubscribeMgr.cs" />
+    <Compile Include="Infra\MarketOrder.cs" />
+    <Compile Include="Imp\MarketSvc.cs" />
+    <Compile Include="Interface\IConnectionMgr.cs" />
+    <Compile Include="Interface\ITrade.cs" />
+    <Compile Include="Interface\ISubscribeMgr.cs" />
+    <Compile Include="Interface\IMarketSvc.cs" />
+    <Compile Include="Interface\IMarketCallBack.cs" />
+    <Compile Include="Interface\ITradeCallBack.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Core\Com.BitsQuan.Option.Core.csproj">
+      <Project>{5bc39fd4-adbd-4a03-9d3b-f9f099f82b64}</Project>
+      <Name>Com.BitsQuan.Option.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Imp\Com.BitsQuan.Option.Imp.csproj">
+      <Project>{e5931f36-c5e1-443b-86d2-d97792fa27ae}</Project>
+      <Name>Com.BitsQuan.Option.Imp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Match\Com.BitsQuan.Option.Match.csproj">
+      <Project>{9a3e626f-f59b-43ee-93b6-06903db9d918}</Project>
+      <Name>Com.BitsQuan.Option.Match</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,41 @@
+﻿@using Com.BitsQuan.Option.Match.Imp
+@model List<Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.OptionTopModel>
+
+<h3>期权交易排行榜</h3>
+
+@if (Model == null || Model.Count == 0)
+{
+    <div></div>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th width="6%">位次</th>
+            <th width="10%">用户</th>
+            <th width="10%">总价值</th>
+            <th width="10%">账户总额</th>
+            <th>持仓情况</th>
+        </tr>
+        @for (int i = 0; i < Model.Count; i++)
+        { 
+            <tr>
+                <td>@(i+1)</td>
+                <td>@Model[i].Trader.Name</td>
+                <td>@Model[i].Sum</td>
+                <td>@Model[i].Trader.Account.BailAccount.Total.ToString("C2")</td>
+                <td>
+                    @foreach (var v in Model[i].Trader.GetPositionSummaries())
+                    {
+                        if (v.Count <= 0) { continue; }
+                        <span>
+                            <span>@v.CName @v.PositionType</span>:<strong>@v.Count</strong>个,价值<span>@v.TotalValue.ToString("C2")</span> |
+                        </span>
+                    }
+                </td>
+            </tr>
+
+        }
+    </table>
+   
+}

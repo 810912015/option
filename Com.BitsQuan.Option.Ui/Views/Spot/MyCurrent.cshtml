@@ -1,0 +1,64 @@
+﻿@model System.Collections.Generic.List<Com.BitsQuan.Option.Ui.Models.SpotOrderDto>
+<div style="height:370px;overflow-y:auto;" id="mycurspotpanel">
+    <div class="btn-group btn-group-justified btn-group-xs" >
+        <a class="btn btn-info" id="refreshspot">刷新</a> 
+    </div>
+   
+    <table class="table table-striped" >
+       <tr>
+                <th>委托编号</th>
+                <th>委托时间</th>
+                <th>币种</th>
+                <th>类型</th> 
+                <th>委托价格</th>
+                <th>委托数量</th>
+                <th>尚未成交</th>
+                <th>成交量</th> 
+                <th>操作</th> 
+            </tr>
+        @if (Model != null)
+        {
+            foreach (var v in Model)
+            {
+                <tr id="curspot_@v.Id">
+                    <td>@v.Id</td>
+                    <td>@Convert.ToDateTime(v.OrderTime).ToString("yyyy-MM-dd  HH:mm")</td>
+                    <td>@v.Coin</td>
+                    <td>@(v.Direction)</td> 
+                    <td>@v.Price</td>
+                    <td>@v.ReportCount</td>
+                    <td>@(v.ReportCount - v.TotalDoneCount)</td>
+                    <td>@v.TotalDoneCount</td> 
+                   
+                    <td><a class=" btn btn-danger btn-xs" data-op="redo" data-id="@v.Id">撤销</a></td> 
+                </tr>
+            }
+        }
+    </table>
+
+</div>
+<script>
+    $("#refreshspot").click(function () {
+        $.get("/spot/mycurrent", function (d) { $("#mycurspotpanel").html(d); })
+    });
+    $('#spotorders a[href="#optionpanel"]').click(function (e) {
+        e.preventDefault();
+        $("#refreshspot").trigger("click");
+        $(this).tab('show')
+    });
+    $('a[data-op="redo"]').click(function () {
+        alert("nm");
+        var tid = $(this).data("id");
+        //confirmPwd.next = function () {
+            $.get("/spot/redo?soid=" + tid, function (d) {
+                if (d.ResultCode == 0) {
+                    $("#curspot_" + tid).empty();
+                }
+                else {
+                    alert(d.Desc);
+                }
+            })
+        //};
+        //confirmPwd.confirm("curspot_" + tid);
+    });
+</script>

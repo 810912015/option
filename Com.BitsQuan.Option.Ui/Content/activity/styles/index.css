@@ -1,0 +1,48 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/*重置*/
+*{border:none;font-style:normal;font-family:"微软雅黑"; font-size:14px;border:0px;text-decoration:none;list-style:none;margin:0;text-decoration:none;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;}
+
+
+/*第一部分*/
+.head img{width:100%;display:block}
+.head input{
+    color:white;
+    width:180px;
+    height:40px;
+    background-image:url(../images/inputbg.png);
+    background-repeat:no-repeat;
+    font-size:20px;
+    position:absolute;
+    left:300px;
+    top:350px;
+    background-color:transparent;
+    cursor:pointer;
+}
+.head{
+    position:relative;
+}
+
+/*第二部分*/
+.textbox{ background-color:#cfa972;padding-bottom:50px; }
+.text{ background-color:white;width:1000px; margin:0 auto; }
+.p1{ line-height:24px; font-size:24px;color:#15a83a;padding-top:30px;width:128px; float:left;font-weight:bold}
+.p2{color:#15a83a;line-height:24px; border-bottom:1px solid #15a83a;float:left;padding-top:30px;width:790px}
+.p3{color:#444444;width:926px; margin:0 auto;padding:10px 0 20px 0;line-height:24px}
+
+/*第三部分*/
+.text1box{ background-color:#a7d451}
+.text1{;width:1000px; margin:0 auto; }
+.title{line-height:24px; font-size:24px;color:white;padding-top:30px;width:118px; float:left;font-weight:bold}
+.title1{color:white;height:24px; border-bottom:1px solid #FFF;float:left;padding-top:30px;width:800px}
+.fivebox img{ display:block}
+.fivebox{width:920px;margin:0 auto;margin-top:50px;padding-bottom:50px}
+/*页脚*/
+
+.foot a{color:#cccccc; font-size:16px; display:inline-block;width:64px;margin-right:53px;line-height:55px;padding-top:16px}
+.foot{background-color:#535353;width:100%}
+.copyright{color:#cccccc; font-size:14px;line-height:14px; text-align:center;line-height:60px}
+.msg{width:704px;margin:0 auto;}
+.msgbox{width:1000px;margin:0 auto; border-bottom:1px solid #cccccc;}
+

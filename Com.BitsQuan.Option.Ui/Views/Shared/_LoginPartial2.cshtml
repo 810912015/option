@@ -1,0 +1,151 @@
+﻿@using Microsoft.AspNet.Identity
+ 
+<div id="loginpanel">
+
+    @if (Request.IsAuthenticated)
+    {
+         @Html.ActionLink("你好 " + User.Identity.GetUserName() + "!", "index", "Cache", routeValues: null, htmlAttributes: new { title = "管理" })
+         <a href="#" onclick='logOff();'>退出</a> 
+    }
+    else
+    {
+         @Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) 
+        @Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        @*<a id="loginLink" data-placement="bottom" style="cursor:pointer">登录</a>*@ 
+        <div class="hidden popover-content">
+            <div id="lform" style="border:1px solid lightgreen;">
+                <a><span class="glyphicon glyphicon-remove pull-right" title="关闭" onclick="closeLoginPanel();" style="cursor:pointer"></span></a>
+                <h4>请输入用户名和密码</h4>
+
+                <hr />
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        @Html.Label("用户名", new { @class = "col-md-3 control-label", @for = "un" })
+                        <div class="col-md-9">
+                            <input type="text" id="un" name="un" class="form-control" onchange="upChanged(0,this.value);" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("密码", new { @class = "col-md-3 control-label", @for = "pwd" })
+                        <div class="col-md-9">
+                            @Html.Password("pwd", "", new { @class = "form-control", id = "pwd", onchange = "upChanged(1,this.value);" })
+                        </div>
+                    </div>
+                </form>
+                <div id="loginresult"></div>
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-success" id="ajaxLogin" onclick="logFunc();">登录</a>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+
+    <script>
+        var logOff = function () { };
+        var closeLoginPanel = function () { }
+        var logFunc = function () { }
+        var upChanged = function (t, v) { }
+        var upv = ["", ""];
+
+        $(function () {
+            logOff = function () {
+                var securityToken = $('input[name=__RequestVerificationToken]').val();
+                $.ajax({
+                    type: "post",
+                    dataType: "html",
+                    url: "/account/logoff",
+                    data: { __RequestVerificationToken: securityToken },
+                    success: function (response) {
+                        window.location.href = "/home/Index";
+                    }
+                });
+                //            $.post("/account/logoff", function () {
+                //                $("#loginpanel").html('<div id="loginpanel">\
+                // <a href="/Account/Register" id="registerLink">注册</a>\
+                // <a id="loginLink" data-placement="bottom" data-original-title="" title="">登录</a>\
+                //    <div class="hidden popover-content">\
+                //        <div id="lform" style="border:1px solid lightgreen;">\
+                //            <a><span class="glyphicon glyphicon-remove pull-right" title="关闭" onclick="closeLoginPanel();"></span></a>\
+                //            <h4>请输入用户名和密码</h4>\
+                //            <hr>\
+                //            <form class="form-horizontal">\
+                //                <div class="form-group">\
+                //                    <label class="col-md-3 control-label" for="un">用户名</label>\
+                //                    <div class="col-md-9">\
+                //                        <input type="text" id="un" name="un" class="form-control" onchange="upChanged(0,this.value);">\
+                //                    </div>\
+                //                </div>\
+                //                <div class="form-group">\
+                //                    <label class="col-md-3 control-label" for="pwd">密码</label>\
+                //                    <div class="col-md-9">\
+                //                        <input class="form-control" id="pwd" name="pwd" onchange="upChanged(1,this.value);" type="password" value="">\
+                //                    </div>\
+                //                </div>\
+                //            </form>\
+                //            <div id="loginresult"></div>\
+                //            <div class="btn-group btn-group-justified">\
+                //                <a class="btn btn-success" id="ajaxLogin" onclick="logFunc();">登录</a>\
+                //            </div>\
+                //        </div>\
+                //    </div>\
+                //</div>');
+
+
+                //                $("#loginLink").popover({
+                //                    html: true, content: $("#lform").html(),
+                //                    viewport: { selector: 'body', padding: 0 },
+                //                    container: 'body'
+                //                });
+                //            });
+            }
+            closeLoginPanel = function () {
+                $("#loginLink").trigger("click");
+            }
+            upChanged = function (t, v) {
+                upv[t] = v;
+                //if (upv[0] != "" && upv[1] != "") {
+                //    logFunc();
+                //    $("#loginLink").trigger("click");
+                //}
+            }
+            //$("#loginLink").popover({
+            //    html: true, content: $("#lform").html(),
+            //    viewport: { selector: 'body', padding: 0 },
+            //    container: 'body'
+            //});
+            logFunc = function () {
+                var securityToken = $('input[name=__RequestVerificationToken]').val();
+                $.ajax({
+                    type: "post",
+                    dataType: "html",
+                    url: "/account/ajaxLogin",
+                    data: { __RequestVerificationToken: securityToken, "userName": upv[0], "pwd": upv[1] },
+                    success: function (d) {
+                        //console.log(d);
+                        if (d == 0) {
+                            document.location.reload();
+                            @*$("#loginLink").trigger("click");
+                            $("#loginpanel").html('@Html.AntiForgeryToken() <a href="/Cache/index">欢迎您 ' + upv[0]
+                                + '</a><a onclick="javascript:logOff();">注销</a>');
+                            if (typeof InitFunc === 'undefined') return;
+                            if ($.isFunction(InitFunc)) {
+                                InitFunc();
+                            }*@
+                            }
+                        else if (d == 2)
+                        {
+                            alert("密码错误次数过多，请两个小时以后再次登录!");
+                        }
+                        else {
+                            alert("用户名或密码错误!");
+                        }
+                    }
+                });
+               
+            };
+        })
+    </script>
+
+
+

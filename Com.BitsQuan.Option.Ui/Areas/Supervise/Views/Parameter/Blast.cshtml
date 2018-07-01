@@ -1,0 +1,81 @@
+﻿@model Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.BlastModel 
+@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+<h4>
+    爆仓参数设置
+</h4>
+
+    @if (ViewBag.msg != null)
+    { <div style="color:red;">
+        @ViewBag.msg
+    </div>
+        <div class="lead">
+            当前爆仓参数为:正常阀值<strong>@Model.NormalMaintainRatio</strong>
+            ,警告阀值<strong>@Model.AlarmMaintainRatio</strong>,爆仓阀值<strong>@Model.BlastMaintainRatio</strong>,阶梯阀值<strong>@Model.BlastOnceRatio</strong>
+        </div>
+    }
+    else
+    {
+using (Ajax.BeginForm("blast", null,ajo, new { role = "form", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+         
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NormalMaintainRatio,"正常阀值", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.NormalMaintainRatio, new { @class="form-control"})
+                @Html.ValidationMessageFor(model => model.NormalMaintainRatio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AlarmMaintainRatio,"警告阀值", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.AlarmMaintainRatio, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AlarmMaintainRatio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BlastMaintainRatio,"爆仓阀值", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.BlastMaintainRatio, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BlastMaintainRatio)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BlastOnceRatio, "阶梯阀值", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.BlastOnceRatio, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BlastOnceRatio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxCountPerSell, "平仓份数最大值", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.MaxCountPerSell, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaxCountPerSell)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="保存修改" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+}
+}
+    
+
+

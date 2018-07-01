@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<div class="row">
+    <div class="col-md-2">
+        <div class=" panel panel-info" style="margin-top:20px;">
+            @*<div class=" panel panel-heading">
+                    <h3 style="text-align:center;">交易数据查看</h3>
+                </div>*@
+            <div class="panel panel-body" style="padding:0;margin:0;">
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("网站设置", "WebSiteSet", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("状态", "StateSet", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("交易", "tradeSet", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("用户", "UserSet", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("邮件服务器", "EmailServerSet", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("邮件通知", "EmailNotice", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("短信通知", "MassegeNotice", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="btn-group btn-group-justified">
+                            @Ajax.ActionLink("支付", "PaySet", null, ajo, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="btn-group btn-group-justified">
+                                @Ajax.ActionLink("首页图片轮循", "AdvImgs", null, ajo, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="btn-group btn-group-justified">
+                                @Ajax.ActionLink("首页友情链接", "FriendlyLinks", null, ajo, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="btn-group btn-group-justified">
+                                @Ajax.ActionLink("网站帮助列表", "WebHelper", null, ajo, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="col-md-10" id="maincontent"></div>
+</div>

@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9A3E626F-F59B-43EE-93B6-06903DB9D918}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.BitsQuan.Option.Match</RootNamespace>
+    <AssemblyName>Com.BitsQuan.Option.Match</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dtos\ContractDto.cs" />
+    <Compile Include="Dtos\PositionSummaryDto.cs" />
+    <Compile Include="Dtos\D2Model.cs" />
+    <Compile Include="Dtos\MarketDto.cs" />
+    <Compile Include="Dtos\OrderDto.cs" />
+    <Compile Include="Imp\Arrange\Arrange.cs" />
+    <Compile Include="Imp\Arrange\PriceArrange.cs" />
+    <Compile Include="Imp\Arrange\MarketIocArrange.cs" />
+    <Compile Include="Imp\Arrange\MIocThenPriceArrange.cs" />
+    <Compile Include="Imp\Arrange\PriceFokArrange.cs" />
+    <Compile Include="Imp\Arrange\MarketFokArrange.cs" />
+    <Compile Include="Imp\Blast\Blaster.cs" />
+    <Compile Include="Imp\Blast\BlastSellor.cs" />
+    <Compile Include="Imp\Blast\BlastExecutor.cs" />
+    <Compile Include="Imp\Blast\SysPrm.cs" />
+    <Compile Include="Imp\Blast\OrderMonitorParam.cs" />
+    <Compile Include="Imp\Collection\IOrderPack.cs" />
+    <Compile Include="Imp\Collection\OrderLifeManager.cs" />
+    <Compile Include="Imp\Data\AccountUpdator.cs" />
+    <Compile Include="Imp\Data\OptionModel.cs" />
+    <Compile Include="Imp\Data\ModelInitor.cs" />
+    <Compile Include="Imp\Data\EntityFactory.cs" />
+    <Compile Include="Imp\Data\SysAccountChangeHandler.cs" />
+    <Compile Include="Imp\Data\AccountChangeHandler.cs" />
+    <Compile Include="Imp\Fuse\FuseBoundary.cs" />
+    <Compile Include="Imp\MarketPlace\NumOfPast24Hour.cs" />
+    <Compile Include="Imp\Saver\BlastSaver.cs" />
+    <Compile Include="Imp\Saver\SysAccountRecodeSaver.cs" />
+    <Compile Include="Imp\Saver\OrderSaverBase.cs" />
+    <Compile Include="Imp\Saver\OrderSaver.cs" />
+    <Compile Include="Imp\Execute\OrderExecutor.cs" />
+    <Compile Include="Imp\Extension\TraderNotifyExtension.cs" />
+    <Compile Include="Imp\Extension\OnceEveryDay.cs" />
+    <Compile Include="Imp\Extension\MyProperty.cs" />
+    <Compile Include="Imp\Extension\TraderBorrowExtension.cs" />
+    <Compile Include="Imp\Blast\WatchTrader.cs" />
+    <Compile Include="Imp\Blast\Watcher.cs" />
+    <Compile Include="Imp\Extension\PosExtension2.cs" />
+    <Compile Include="Imp\Blast\ReorderItem.cs" />
+    <Compile Include="Imp\Blast\ReorderCollection.cs" />
+    <Compile Include="Imp\Blast\OrderMonitor.cs" />
+    <Compile Include="Imp\Blast\DutyBlaster.cs" />
+    <Compile Include="Imp\Blast\RightBlaster.cs" />
+    <Compile Include="Imp\Deep\DeepDataPool.cs" />
+    <Compile Include="Imp\Data\IDbModel.cs" />
+    <Compile Include="Imp\Saver\BulkSaver.cs" />
+    <Compile Include="Imp\Saver\AccountRecordSaver.cs" />
+    <Compile Include="Imp\Saver\DealSaver.cs" />
+    <Compile Include="Imp\Saver\OhlcSaver.cs" />
+    <Compile Include="Imp\Saver\TraderMsgSaver.cs" />
+    <Compile Include="Imp\Saver\BlastOperationSaver.cs" />
+    <Compile Include="Imp\Saver\FuseSaver.cs" />
+    <Compile Include="Imp\Saver\ContractExeSaver.cs" />
+    <Compile Include="Imp\Saver\TempOrderSaver.cs" />
+    <Compile Include="Imp\Data\DBServer.cs" />
+    <Compile Include="Imp\Data\DbProvider.cs" />
+    <Compile Include="Imp\Saver\UserPositionSaver.cs" />
+    <Compile Include="Imp\Deep\DeepItem.cs" />
+    <Compile Include="Imp\Deep\DeepItemCollection.cs" />
+    <Compile Include="Imp\Deep\DeepLeftBuy.cs" />
+    <Compile Include="Imp\Deep\DeepRightSell.cs" />
+    <Compile Include="Imp\Deep\DeepData.cs" />
+    <Compile Include="Imp\Extension\OrderArrangeExtension.cs" />
+    <Compile Include="Imp\Fuse\FuseExcutor.cs" />
+    <Compile Include="Imp\Fuse\IContractFuse.cs" />
+    <Compile Include="Imp\Fuse\FuseExtrem.cs" />
+    <Compile Include="Imp\MarketPlace\MarketItem.cs" />
+    <Compile Include="Imp\MarketPlace\Market.cs" />
+    <Compile Include="Imp\Data\IOptionModel.cs" />
+    <Compile Include="Imp\MarketPlace\OhlcMaker.cs" />
+    <Compile Include="Imp\Match\OrderMatcher.cs" />
+    <Compile Include="Imp\Pre\OrderPreHandler.cs" />
+    <Compile Include="Imp\Share\SysShare.cs" />
+    <Compile Include="Imp\Extension\TraderShareExtension.cs" />
+    <Compile Include="Imp\Share\SpotTimer.cs" />
+    <Compile Include="Imp\Extension\BooleanProperty.cs" />
+    <Compile Include="Imp\Extension\TraderBlastExtension.cs" />
+    <Compile Include="Imp\Extension\TraderBailExtension.cs" />
+    <Compile Include="Imp\Extension\TraderPosExtension.cs" />
+    <Compile Include="Imp\Collection\IContainer.cs" />
+    <Compile Include="Imp\Collection\IMatch.cs" />
+    <Compile Include="Imp\Collection\IMatcherDataContainer.cs" />
+    <Compile Include="Imp\Collection\IOrderContainer.cs" />
+    <Compile Include="Imp\Collection\OrderCollection.cs" />
+    <Compile Include="Imp\Collection\OrderContainer.cs" />
+    <Compile Include="Imp\Blast\OrderMonitorHandler.cs" />
+    <Compile Include="Imp\Arrange\Arranger.cs" />
+    <Compile Include="Imp\Fuse\ContractFuse.cs" />
+    <Compile Include="Imp\MarketPlace\MarketDeals.cs" />
+    <Compile Include="Imp\Data\LegacyOrders.cs" />
+    <Compile Include="Imp\Pos\PositionSummaryCollection.cs" />
+    <Compile Include="Service\ArrangeChecker.cs" />
+    <Compile Include="Service\OrderSvcImp.cs" />
+    <Compile Include="Service\PositionSvcImp.cs" />
+    <Compile Include="Service\SvcImpBase.cs" />
+    <Compile Include="Service\EntitySvcImp.cs" />
+    <Compile Include="Service\KlineDataPoolInitor.cs" />
+    <Compile Include="Service\IMatchService.cs" />
+    <Compile Include="Service\MatchService.cs" />
+    <Compile Include="Service\MatchParams.cs" />
+    <Compile Include="Imp\Execute\CExeRecHandler.cs" />
+    <Compile Include="Imp\Blast\BlasterPrePare.cs" />
+    <Compile Include="Imp\Post\OrderPostHandler.cs" />
+    <Compile Include="Imp\Extension\TraderOrderExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spot\Arrange\SpotArranger.cs" />
+    <Compile Include="Spot\Arrange\SpotPriceFok.cs" />
+    <Compile Include="Spot\Arrange\SpotPrice.cs" />
+    <Compile Include="Spot\Arrange\SpotMIocThenPrice.cs" />
+    <Compile Include="Spot\Arrange\SpotMarketIoc.cs" />
+    <Compile Include="Spot\Arrange\SpotMarketFok.cs" />
+    <Compile Include="Spot\Arrange\SpotArrange.cs" />
+    <Compile Include="Spot\Extension\CoinAccount.cs" />
+    <Compile Include="Spot\Extension\SpotOrderExtension.cs" />
+    <Compile Include="Spot\Extension\TraderSpotExtension.cs" />
+    <Compile Include="Spot\ISpotService.cs" />
+    <Compile Include="Spot\Match\SpotMarketItem.cs" />
+    <Compile Include="Spot\Match\SpotMarket.cs" />
+    <Compile Include="Spot\Match\CoinOrderContainer.cs" />
+    <Compile Include="Spot\Match\SpotOrderContainer.cs" />
+    <Compile Include="Spot\Saver\SpotDealSaver.cs" />
+    <Compile Include="Spot\Saver\SpotOrderSaver.cs" />
+    <Compile Include="Spot\SpotOrderResult.cs" />
+    <Compile Include="Spot\SpotModel.cs" />
+    <Compile Include="Spot\Extension\CoinPriceExtension.cs" />
+    <Compile Include="Spot\SpotOrderCreator.cs" />
+    <Compile Include="Spot\SpotPre.cs" />
+    <Compile Include="Spot\SpotPost.cs" />
+    <Compile Include="Spot\Match\SpotMatch.cs" />
+    <Compile Include="Spot\SpotService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.BitsQuan.Miscellaneous\Com.BitsQuan.Miscellaneous.csproj">
+      <Project>{26baa888-6a10-4978-806d-2d0534fac1c0}</Project>
+      <Name>Com.BitsQuan.Miscellaneous</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Core\Com.BitsQuan.Option.Core.csproj">
+      <Project>{5bc39fd4-adbd-4a03-9d3b-f9f099f82b64}</Project>
+      <Name>Com.BitsQuan.Option.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Imp\Com.BitsQuan.Option.Imp.csproj">
+      <Project>{e5931f36-c5e1-443b-86d2-d97792fa27ae}</Project>
+      <Name>Com.BitsQuan.Option.Imp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.BitsQuan.Option.Provider\Com.BitsQuan.Option.Provider.csproj">
+      <Project>{7ff99a41-9556-4bb9-95ec-174b8abf4b48}</Project>
+      <Name>Com.BitsQuan.Option.Provider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

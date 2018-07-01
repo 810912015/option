@@ -1,0 +1,148 @@
+﻿
+<h3>货币管理</h3>
+<div class="row">
+    <div class="col-md-9">
+        <div id="contractquery" >
+            @{ Html.RenderAction("CoinList"); }
+
+        </div>
+    </div>
+    <div class="col-md-3" >
+
+        @{ Html.RenderAction("AddAndUpdCoin"); }
+
+
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        $(function () {
+            load();
+            Add();
+            Update();
+            reset();
+        });
+        function load() {
+           
+            AddPage();
+            UpdatePage();
+            del();
+            btnNameSel();
+        }
+
+        function reset() {
+            //重置
+            $("#reset").click(function () {
+                $("input[type='text']").val("");
+            })
+        }
+        function AddPage() {
+            //添加传值
+            $(".AddPage").click(function () {
+                $.post("/Supervise/Helper/GetHelpByID", {
+                    "id": 0
+                }, function (d) {
+                    var arr = d.split(',');
+                    $("input[type='text']").val("");
+                    $("#Add").attr("style", "display:block");
+                    $("#Update").attr("style", "display:none");
+
+                });
+            })
+        }
+        function Add() {
+            //添加操作
+            $("#Add").click(function () {
+                var Name = $("#Name").val();
+                var Code = $("#Code").val();
+                var MainBailRatio = $("#MainBailRatio").val();
+                var MainBailTimes = $("#MainBailTimes").val();
+                $.post("/Supervise/Coin/AddMethod", {
+                    "name": Name,
+                    "Code": Code,
+                    "mainBailRatio": MainBailRatio,
+                    "mainBailTimes": MainBailTimes
+                }, function (d) {
+                    alert(d);
+                    DataBind();
+                });
+            })
+        }
+        var id = 0;
+        function UpdatePage() {
+            //修改传值
+            $(".UpdatePage").click(function () {
+
+                id = $(this).next("a").next("span").html();
+                $.post("/Supervise/Coin/GetCoinByID", {
+                    "id": id
+                }, function (d) {
+                    var arr = d.split(',');
+                    $("#Name").val(arr[0]);
+                    $("#Code").val(arr[1]);
+                    $("#MainBailRatio").val(arr[2]);
+                    $("#MainBailTimes").val(arr[3]);
+                    $("#Update").attr("style", "display:block");
+                    $("#Add").attr("style", "display:none");
+                });
+            })
+        }
+        function Update() {
+            //修改操作
+            $("#Update").click(function () {
+                var Name = $("#Name").val();
+                var Code = $("#Code").val();
+                var MainBailRatio = $("#MainBailRatio").val();
+                var MainBailTimes = $("#MainBailTimes").val();
+                $.post("/Supervise/Coin/UpdateMethod", {
+                    "id": id,
+                    "name": Name,
+                    "Code": Code,
+                    "mainBailRatio": MainBailRatio,
+                    "mainBailTimes": MainBailTimes
+                }, function (d) {
+                    alert(d);
+                    DataBind();
+                });
+            })
+        }
+        function del() {
+            //删除操作
+            $(".del").click(function () {
+                id = $(this).next("span").html();
+                $.post("/Supervise/Coin/DeleteMethod", {
+                    "id": id
+                }, function (d) {
+                    alert(d);
+                    DataBind();
+                });
+            })
+        }
+
+        function btnNameSel() {
+            //名称模糊查询
+            $("#btnNameSel").click(function () {
+                name = $("#NameSel").val();
+                $.post("/Supervise/Coin/CoinList", {
+                    "name": name
+                }, function (d) {
+                    $("#contractquery").html(d);
+                    load();
+                });
+            })
+        }
+
+            function DataBind() {
+                $.post("/Supervise/Coin/CoinList", {},
+                    function (d) {
+                        $("#contractquery").html(d);
+                        load();
+                    });
+            }
+       
+        
+    </script>
+    }

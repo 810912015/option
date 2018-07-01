@@ -1,0 +1,401 @@
+﻿@{
+    var fc = MvcApplication.OptionService.Model.Contracts.Where(a => a.IsNotInUse == false && a.IsDel == false && a.ExcuteTime > DateTime.Now.Date).FirstOrDefault();
+    ViewBag.Title = "期权交易-最好的比特币期权交易平台";
+}
+@model Com.BitsQuan.Option.Core.Trader
+
+<div class="row">
+    <div class="col-md-2 col-xs-12" >
+        <div class="btn-group btn-group-justified">
+            <a class="btn btn-primary" data-placement="bottom" id="selectOption">
+                选择期权
+            </a>
+        </div>
+        <div class="hidden">
+            <div id="contracts">
+                <div style="display:block;height:300px;overflow:auto">
+                    <div class="list-group" style="padding:0px">
+                        @{
+                            int cindex = 0;
+                        }
+                        @foreach (var v in MvcApplication.OptionService.Model.Contracts.Where(a => a.IsNotInUse == false && a.IsDel == false && a.ExcuteTime > DateTime.Now.Date))
+                        {
+                            <div class="list-group-item @(cindex++%2==0 ? "list-group-item-info " : "list-group-item-success ")"
+                                 id="scc_@v.Code" data-cat="contract" data-code="@v.Code" data-name="@v.Name"
+                                 title="@v.GetDesc()"
+                                 style="cursor:pointer;padding-top:10px;padding-bottom:10px;margin-top:5px;background-color:white;color:black;" onclick="selfunc('@v.Code','@v.Name');">
+                                <strong style="font-weight:normal">@v.Code</strong>
+                                <em>@v.Name</em>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 col-xs-12">
+        <div class="col-md-1 col-xs-6" >
+            比特币指数<span id="curbtc"></span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            成交量<span id="curtotal"></span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            持仓量<span id="curpos"></span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            距行权时间<span id="curexe"></span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            最新价<span id="anewest"></span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            上涨熔断<span id="araise"></span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            下跌熔断<span id="afall"></span>
+        </div>
+        <div class="col-md-1 col-xs-6">
+            <span id="afusetime"></span>
+        </div>
+    </div>
+</div>
+
+<div>
+     
+        <div class="row" style="margin-top: 5px;padding-top:5px;">
+            <div class=" col-md-5 col-sm-5 col-xs-12">
+
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div style="height:468px;overflow-y:auto;">
+                            <div id="curDequeuePanel">
+                                @{
+                                    Html.RenderAction("GetCurrentDequeue");
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                        <div style="height:428px;overflow-y:auto; padding-bottom:10px;border:1px solid lightgray;">
+                            <div id="curDealPanel">
+                                @{
+                                    Html.RenderAction("GetDeals");
+                                }
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-7  col-sm-7 col-xs-12">
+
+                <ul class="nav nav-tabs" role="tablist" id="charts">
+                    <li role="presentation" class="active"><a href="#kline" aria-controls="kline" role="tab" data-toggle="tab" id="akline">行情图表</a></li>
+                    <li role="presentation"><a href="#marketdeep" aria-controls="marketdeep" role="tab" data-toggle="tab" id="adeep">市场深度</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div id="kline" role="tabpanel" class="tab-pane active" style="height: 380px; border: 1px solid lightgray;">
+
+                        <div id="container">
+
+                        </div>
+                    </div>
+
+
+                    <div id="marketdeep" role="tabpanel" class="tab-pane" style="height: 380px; border: 1px solid lightgray;">
+
+                        <div id="mdcontainer">
+
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+     
+
+    
+    <div class="row" style="margin-top:0px;font: 14px/28px 微软雅黑,黑体;" id="operatepanel">
+        <div class="col-md-4 col-xs-12" style="height: 510px;">
+            <div>
+                <ul class="nav nav-tabs" role="tablist" style="border-bottom:none">
+                    <li role="presentation" class="active"><a href="#orderpanel" class="btn-info" aria-controls="home"
+                                                               role="tab" data-toggle="tab" style="color:red" data-cat="order" data-tag="买" data-target="sell" id="buy">买入期权</a></li>
+                    <li role="presentation"><a href="#sellOption" aria-controls="border2" role="tab" data-toggle="tab"
+                                                style="color:green" data-cat="order" data-tag="卖" data-target="buy" id="sell">卖出期权</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div style="height:445px;  border: 1px solid lightgray;" role="tabpanel" class="tab-pane active" id="orderpanel">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="btn-group">
+                                    <a class=" btn btn-xs  btn-info" data-cat="order" data-tag="开仓" data-target="close" id="open" style="width:42px">开仓</a>
+                                    <a class=" btn btn-xs btn-default" data-cat="order" data-tag="平仓" data-target="open" id="close" style="width:42px">平仓</a>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    @if(fc != null){
+                                    <div class="col-md-5">
+                                        <span id="code">@fc.Code</span>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span id="cname"> @fc.Name</span>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="margin-left:15px;padding:6px">
+                            <div style="float:left;height:24px;line-height:24px;padding-right:20px">自动追加保证金</div>
+                            @{
+                                var au = !User.Identity.IsAuthenticated;
+                                var tr = User.GetTrader();
+                                var t = tr == null ? false : tr.IsAutoAddBailFromCache;
+                            }
+                            <div id="autoConvertSwitch" class="btn @(au ? "disabled" : "")" style="float:left;width:52px;height:24px;background-image:url(@Url.Content("~/content/images/switch.png"));@(t ? "background-position:-1px -1px" : "background-position:-1px -27px")"></div>
+                        </div>
+                        <div style="margin-top:10px;border-top:1px solid #ddd;padding-left:25px">
+                            <div style="padding-top:18px;">
+                                <div class="row" >
+                                    <div class="col-xs-3">
+                                        <label for="mprice" class="pull-right" style="margin-top:5px;">买入价</label>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <input type="number" min="0.01" max="10000.00" step="0.01" id="price" value="1" class="form-control" placeholder="输入价格" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding-top:18px;">
+                                <div class="row" >
+                                    <div class="col-xs-3">
+                                        <label for="mcount" class="pull-right" style="margin-top:5px;">买入量</label>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <input type="number" min="1" max="10000.00" step="1" value="1" id="count" class="form-control" placeholder="输入数量" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div style="padding-top:18px;">
+                                <div class="row" >
+                                    <div class="col-xs-3">
+                                        <label class="pull-right" style="margin-top:5px;">下单方式</label>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <select class="form-control" id="policy" data-cat="policy" data-tar="mprice">
+                                            <option value="1" selected>限价GFD</option>
+                                            <option value="2">市价IOC</option>
+                                            <option value="3">市价剩余转限价GFD</option>
+                                            <option value="4">限价FOK</option>
+                                            <option value="5">市价FOK</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div style="margin-top:18px; padding:5px;">
+                            <div class="btn-group btn-group-justified btn-group-xs" style="width:200px;text-align:center;margin:0px auto;height:34px">
+                                <a class="btn btn-danger" id="order" data-dir="买" data-openclose="开仓">下单(买 开仓)</a>
+                            </div>
+                        </div>
+                        <div style="margin-top:10px; padding:5px;" class="lead" id="orderResult">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-xs-12" style="height: 510px;font: 12px/28px 微软雅黑,黑体; ">
+            <div class="row pull-right">
+                <div style="display:block;overflow-y:auto;height:39px;" id="srvtip"></div>
+            </div>
+            <ul class="nav nav-tabs" role="tablist" id="myposandorder" style="border-bottom:none">
+                <li role="presentation" class="active"><a href="#tpositions" aria-controls="tpositions" role="tab" data-toggle="tab">持仓合约</a></li>
+                <li role="presentation"><a href="#tredo" aria-controls="tredo" role="tab" data-toggle="tab">可撤委托</a></li>
+                <li role="presentation"><a href="#thistorypanel" aria-controls="thistorypanel" role="tab" data-toggle="tab">历史委托</a></li>
+                <li role="presentation"><a href="#dealpanel" aria-controls="dealpanel" role="tab" data-toggle="tab">成交记录</a></li>
+
+            </ul>
+            <script>
+                $(function () {
+                    $("#autoConvertSwitch").click(function () {
+                        var disabled = $("#autoConvertSwitch").hasClass("disabled");
+                        if (disabled) return;
+                        $.post("/cache/autoConvert", {}, function (d) {
+                            if ($("#autoConvertSwitch").css("background-position") == "0% 0%" || $("#autoConvertSwitch").css("background-position") == "-1px -1px") {
+                                $("#autoConvertSwitch").css("background-position", "-1px -27px");
+                            }
+                            else {
+                                $("#autoConvertSwitch").css("background-position", "-1px -1px");
+                            }
+                            //var r = d ? "关闭保证金自动转入" : "开启保证金自动转入";
+                            //$("#bailop").text(r);
+
+                        });
+                    })
+                })
+
+            </script>
+            <div class="tab-content" style="height:443px; border:1px solid lightgray;">
+                <div role="tabpanel" class="tab-pane active" id="tpositions">
+                    <div id="myindex" style="background-color:white;min-height:30px;padding-top:5px;font-weight:normal">
+                        @*<a class="btn btn-primary btn-xs" id="refreshbail" onclick="getBail();">刷新资金</a>*@
+                        <em id="refreshtime" style="cursor:help;" title="资金信息最后刷新时间.每30秒刷新一次;您也可以手动点击刷新."></em>
+                        <span style="cursor:help; border-bottom:1px dotted #999;" title="平仓盈亏：平仓成交后发生盈亏数量。
+权利仓的平仓盈亏=(卖平价-买开价)*数量
+义务仓的平仓盈亏=(卖开价-买平价)*数量
+">平仓盈亏</span><span id="mycloseprofit">4</span>
+                        <span style="cursor:help;border-bottom:1px dotted #999;" title="浮动盈亏：当前持有合约实时盈亏数量。
+权利仓的浮动盈亏=合约市值-买入成本
+义务仓的浮动盈亏=合约市值+买入成本
+">浮动盈亏</span><span id="myfloatprofit">5</span>
+                        <span style="cursor:help;border-bottom:1px dotted #999;" title="实时保证金：当前用户保证金帐户中拥有的保证金总额.
+实时保证金=维持保证金总额+可用保证金总额+冻结保证金总额">实时保证金</span><span id="myrealbail">6</span>
+                        <span style="cursor:help;border-bottom:1px dotted #999;" title="维持保证金：当任一期权合约价格发生变动时，客户为了保证继续持有合约，必须使其保证金帐户内拥有的最低保证金金额。
+维持保证金=认购期权维持保证金+认沽期权维持保证金
+BTC认购期权维持保证金=max{3X认购期权，（认购期权+10%X比特币）}
+BTC认沽期权维持保证金=min{行权价，max[3X认沽期权，（认沽期权+10%X行权价）]}
+维持保证金=认购期权维持保证金+认沽期权维持保证金
+">维持保证金</span><span id="mymainbail">7</span>
+                        <span style="cursor:help;border-bottom:1px dotted #999;" title="保证率=(期权保证金-保证金冻结)/维持保证金，开仓后，必须保证保证率大于等于1.2。">保证率</span><span id="mymainratio">8</span>
+                        <span style="cursor:help;border-bottom:1px dotted #999;" title="可用保证金=可开仓保证金=期权保证金-维持保证金*1.2-保证金冻结">可用保证金</span><span id="myclosablebail">9</span>
+                    </div>
+                    <div style="height: 370px;  padding: 0; overflow-y: auto; overflow-x: auto;" id="mypositions">
+
+                        <table class="table table-striped" id="position-table">
+                            <tr class="t-row" id="position-header" style="background-color:white;border-bottom:1px solid #ddd">
+                                <td class="t-cell">代码</td>
+                                <td class="t-cell">合约名称</td>
+                                <td class="t-cell">持仓类型</td>
+                                <td class="t-cell">持仓</td>
+                                <td class="t-cell">可平</td>
+                                <td class="t-cell" style="cursor:help;" title="买入成本价=买入成本/持仓数"><span style="border-bottom:1px dotted #999;">买入成本价</span></td>
+                                <td class="t-cell" style="cursor:help;" title="买入成本=每笔持仓数量*开仓价格/持仓数量总和。"><span style="border-bottom:1px dotted #999;">买入成本</span> </td>
+                                <td class="t-cell">浮动盈亏</td>
+                                <td class="t-cell">平仓盈亏</td>
+                                <td class="t-cell">维持保证金</td>
+                                <td class="t-cell">合约市值</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tredo">
+                    <div style="display:block;height: 370px; padding: 0; overflow-y: auto; overflow-x: auto;">
+                        <div id="redotiptarget"></div>
+                        <table class="table table-striped" id="tredo-table">
+
+                            <tr id="tredo-header" style="background-color:white;border-bottom:1px solid #ddd">
+                                <td>委托编号</td>
+                                <td>委托时间</td>
+                                <td>代码</td>
+                                <td>合约名称</td>
+
+                                <td>类型</td>
+                                <td>下单方式</td>
+                                <td>委托价格</td>
+                                <td>委托数量</td>
+                                <td>成交量</td>
+                                <td>未成交</td>
+                                <td>操作</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="tcondition">
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="thistorypanel">
+                    @{
+                        Html.RenderAction("GetHistoryOrder");
+                    }
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="dealpanel">
+                    @*@{
+                        Html.RenderAction("GetOrderDeal");
+                    }*@
+                </div>
+                <script>
+                    $(function () {
+                        var qfunc = function (pageIndex) {
+                            $.get("/home/GetOrderDeal?pageIndex=0",
+                                function (d) {
+                                    $("#dealpanel").html(d);
+                                }
+                            );
+                        };
+
+                        $('#myposandorder a[href="#dealpanel"]').click(function (e) {
+                            e.preventDefault();
+                            qfunc(1);
+                            $(this).tab('show')
+                        })
+
+                    })
+                </script>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="mybox" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="box">
+
+                <div class="closeicon" data-dismiss="modal"
+                     aria-hidden="true"><img src="~/Content/images/closeicon.png"></div>
+
+                <div class="test">
+                    您尚未绑定手机，为了您的资金安全，<br />
+                    建议您绑定
+                </div>
+
+
+                <div class="btn"><input type="submit" value="点击前往" id="bindphone"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @*@Scripts.Render("~/bundles/option");*@
+
+    <script src="~/Scripts/mustache.js"></script>
+    <script src="~/Scripts/hs/highstock.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script src="~/Scripts/bstimepicker/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/bstimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link href="~/Scripts/bstimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/trade/cookie.js"></script>
+    <script src="~/Scripts/trade/ohlc.js"></script>
+    <script src="~/Scripts/trade/deep.js"></script>
+    <script src="~/Scripts/trade/model.js"></script>
+    <script src="~/Scripts/trade/order.js"></script>
+    <script src="~/Scripts/trade/sel.js"></script>
+    <script src="~/Scripts/trade/sclient.js"></script>
+    <script src="~/Scripts/trade/option.js"></script>
+
+}

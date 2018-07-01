@@ -1,0 +1,108 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.SpotOrderDealModel
+<div id="orderdealpanel" style="height:370px;overflow-y:auto;">
+    @if (ViewBag.msg != null)
+    {
+        <div class="lead" style="border-top:1px solid #ddd">
+            @ViewBag.msg
+        </div>
+    }
+
+
+    @if (Model != null && Model.Deals != null)
+    {
+        <table class="table table-striped">
+            <tr style="background-color:white;border-bottom:1px solid #ddd;text-align:center;">
+                <td>委托编号</td>
+                <td>成交时间</td>
+                <td>类型</td>
+                <td>成交价格</td>
+                <td>成交数量</td>
+                <td>成交金额</td>
+
+            </tr>
+            @foreach (var v in Model.Deals)
+            {
+                <tr>
+                    <td>@v.MainOrderId</td>
+                    <td>
+                        @Convert.ToDateTime(v.DealTime).ToString("yyyy-MM-dd  HH:mm")
+                    </td>
+                    @*<td>@Html.DisplayFor(a => v.ReportCount)</td>*@
+                    <td>@*@Html.DisplayFor(a => @v.Direction)*@
+                        @(v.Direction == Com.BitsQuan.Option.Core.TradeDirectType.买 ? "买入" : "卖出")
+                    </td>  
+                    <td>@v.DealPrice.ToString("C2")</td> 
+                    <td>@v.DealCount</td>
+                    <th>@((v.DealPrice * v.DealCount).ToString("C2"))</th>
+                </tr>
+            }
+        </table>
+
+        @Html.HiddenFor(m => m.PageIndex, new { id = "thisPageIndex" })
+
+    }
+    <ul class="pagination">
+        @if (Model != null && Model.PageIndex > 1)
+        {
+            <li><a class="btn btn-primary" id="prepage">上一页</a></li>
+
+        }
+        else
+        {
+            <li><span>上一页</span></li>
+
+        }
+
+        @if (Model != null && Model.HasNext)
+        {
+            <li><a class="btn btn-primary" id="nextpage">下一页</a></li>
+
+        }
+        else
+        {
+            <li><span>下一页</span></li>
+
+        }
+        <li><a class="btn btn-primary" id="refreshorderdeal">刷新</a></li>
+    </ul>
+    <script>
+        $(function () {
+            var qfunc = function (pageIndex) {
+                $.get("/spot/myspotorderdeal?pageIndex=" + pageIndex,
+                    function (d) {
+                        $("#orderdealpanel").html(d);
+                    }
+                );
+            };
+            var gindex = function () {
+                var pageIndex = $("#thisPageIndex").val();
+                var pi = parseInt(pageIndex, 0);
+                return pi;
+            }
+            var sindex = function (index) {
+                $("#thisPageIndex").val(index);
+            }
+            $("#prepage").click(function () {
+                var ci = gindex() - 1;
+                qfunc(ci);
+                sindex(ci);
+            })
+            $("#nextpage").click(function () {
+                var ci = gindex() + 1;
+                qfunc(ci);
+                sindex(ci);
+            })
+            $("#refreshorderdeal").click(function () {
+                var ci = gindex();
+                qfunc(ci);
+            })
+
+            $('#spotorders a[href="#dealpanel"]').click(function (e) {
+                e.preventDefault();
+                qfunc(1);
+                $(this).tab('show')
+            })
+
+        })
+    </script>
+</div>

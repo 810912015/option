@@ -1,0 +1,18 @@
+﻿@using  Com.BitsQuan.Option.Match.Imp
+@using Com.BitsQuan.Option.Match.Spot
+@using Com.BitsQuan.Option.Core
+@model Com.BitsQuan.Option.Core.Trader
+
+<a href="/supervise/snap/complex/@Model.Id">
+    <div class="simple-trader" id="@Model.Name.ToLower()">
+        <div class="lead"><em>@Model.Id</em>  <strong>@Model.Name</strong></div>
+        <div>@Model.Account.ToString()</div>
+        <div>未成交期权委托数:@Model.Orders().Count</div>
+        @{
+            var ps = Model.GetSpotOrders();
+            var ps1 = Model.GetPositionSummaries();
+        }
+        <div>未成交现货委托数:@(ps == null ? 0 : ps.Count)</div>
+        <div>期权持仓数:@(ps1 == null ? 0 : ps1.Count)</div>
+    </div>
+</a>

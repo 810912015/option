@@ -1,0 +1,238 @@
+﻿@using Com.BitsQuan.Option.Match.Imp
+@using Com.BitsQuan.Option.Core
+
+@{
+    var snap = (MyBailAccount)ViewData["snap"];
+    var isSimu = Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isSimulate", true);
+}
+<style>
+    * {
+        font-style: normal;
+        font-family: "微软雅黑";
+        font-size: 14px;
+        text-decoration: none;
+        list-style: none;
+        margin: 0;
+        text-decoration: none;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+        color: #535353;
+    }
+
+    /*右侧内容*/
+    .title {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-size: 18px;
+        color: #666666;
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+        margin-top: 10px;
+    }
+
+    .rb {
+        border: 1px solid #c2c2c2;
+        margin-top: 10px;
+        width: 780px;
+        margin: 0 auto;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
+
+    .tb {
+        margin: 20px 20px 0 20px;
+        background-color: #f2f2f2;
+        height: 30px;
+        border-bottom: 1px solid #c2c2c2;
+    }
+
+        .tb a {
+            line-height: 30px;
+            display: inline-block;
+            width: 135px;
+            text-align: center;
+            color: #535353;
+            background-image: url(../Content/images/cnyborder.png);
+            background-position: right;
+            background-repeat: no-repeat;
+        }
+
+            .tb a:hover {
+                color: white;
+                background-color: #559be9;
+            }
+
+    .text {
+        margin-left: 40px;
+    }
+
+    .t1 {
+        font-size: 16px;
+        line-height: 60px;
+        font-weight: 300;
+        color: #535353;
+    }
+
+    .t2 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+        .t2 span {
+            margin-left: 10px;
+        }
+
+    .t3 {
+        font-size: 14px;
+        line-height: 20px;
+        color: #ea0000;
+    }
+
+    .t4 {
+        font-size: 14px;
+        line-height: 20px;
+        margin-top: 10px;
+    }
+
+        .t4 input {
+            width: 180px;
+            margin-left: 10px;
+            border: 1px solid #c2c2c2;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .t4 .sub1 {
+            width: 80px;
+            height: 30px;
+            color: #fff;
+            font-weight: bold;
+            background: url(/Content/images/btn1.png) no-repeat;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+</style>
+<div data-cat="func" id="bail">
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" class="active">
+                <a href="#tobail" aria-controls="tobail" role="tab" data-toggle="tab" style="border-top:none;border-left:none">现金转保证金</a>
+            </li>
+            <li role="presentation">
+                <a href="#frombail" aria-controls="frombail" role="tab" data-toggle="tab" style="border-top:none">保证金转现金</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tobail">
+              <p class="title">保证金操作</p>
+                    <div class="rb">
+                        <ul class="text">
+                            <li class="t1">将资金从现金账户中转入到保证金账户中，虚拟币交易所涉及的资金全部通过现金账户。</li>
+                            @if(ViewBag.CacheAccount != null){
+                                <li class="t2">人民币金额：<span>@Math.Round(ViewBag.CacheAccount.CnyAccount.Sum,2).ToString("C2")</span></li>
+                                <li class="t2">比特币金额：<span>฿@Math.Round(ViewBag.CacheAccount.BtcAccount.Sum,4).ToString("N4")</span></li>
+                                <li class="t2">总金额：<span>@Math.Round(ViewBag.CacheAccount.Total,2).ToString("C2")</span></li>
+                            }
+                            <li class="t3">保证金根据虚拟币价格和期权价格变动;您可能需要刷新才能看到最新金额</li>
+                            <li class="t4"><label for="innum">请输入要转入的金额</label><input id="innum" type="number"></li>
+                            <li class="t4"><label for="innum" style="margin-left:70px">交易密码</label><input id="tradePwd" type="password"></li>
+                            <li class="t4">
+                            @if (!isSimu) { 
+                            <input class="sub1" type="submit" id="inbtn" style="margin-left:25%" value="确定转入">
+                            }
+                            else
+                            {
+                                <strong>测试期间资金暂时不能进行划转</strong>
+                            }
+                            </li>
+                            <li class="t4" style="margin-left:25%"><span id="inresult" class="lead" style="color:red"></span></li>
+                        </ul>
+
+
+                    </div>
+
+
+                <script>
+                    $(function () {
+                        $("#inbtn").click(function () {
+                            var inv = $("#innum").val();
+                            var trade = $("#tradePwd").val();
+                            console.log(inv);
+                            if (inv <= 0) {
+                                $("#inresult").text("金额不能小于等于0")
+                            }
+                            else {
+                                // var securityToken = $('input[name=__RequestVerificationToken]').val();__RequestVerificationToken: securityToken,
+                                $.post("/cache/intobail", {  "count": inv, "trade": trade }, function (d) {
+                                    $("#inresult").text(d.Desc);
+                                    $("#innum").val("");
+                                    $("#tradePwd").val("");
+                                })
+                            }
+                        })
+
+                    })
+                </script>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="frombail">
+                    <p class="title">保证金操作</p>
+                    <div class="rb">
+                        
+                        <ul class="text">
+                            <li class="t1">将资金从保证金账户中转入到现金账户中，期权交易所涉及的资金全部通过保证金账户。</li>
+                    @if (snap != null)
+                    {
+                            <li class="t2">保证金总额:<span>@snap.Total.ToString("C2")</span></li>
+                            <li class="t2">维持保证金总额:<span>@snap.Maintain.ToString("C2")</span></li>
+                            <li class="t2">可用保证金总额:<span>@snap.Usable.ToString("C2")</span></li>
+                        }
+                            <li class="t3">保证金根据虚拟币价格和期权价格变动;您可能需要刷新才能看到最新金额</li>
+                            <li class="t4"><label>请输入要转出的金额</label><input type="number" id="outnum"></li>
+                            <li class="t4"><label for="innum" style="margin-left:70px">交易密码</label><input id="tradePwd2" type="password"></li>
+                            <li class="t4"> 
+                            @if (!isSimu) { 
+                            <input class="sub1" type="submit" value="确定转出" style="margin-left:25%" id="outbtn">
+                            }
+                            else
+                            {
+                                <strong>测试期间资金暂时不能进行划转</strong>
+                            }
+                            </li>
+                            <li class="t4" style="margin-left:23%;"><span id="outresult" class="lead" style="color:red"></span></li>
+                        </ul>
+                        
+                       
+
+
+                    </div>
+                <script>
+                    $(function () {
+                        $("#outbtn").click(function () {
+                            var inv = $("#outnum").val();
+                            var trade = $("#tradePwd2").val();
+                            if (inv <= 0) {
+                                $("#outresult").text("金额不能小于等于0")
+                            }
+                            else {
+                                //var securityToken = $('input[name=__RequestVerificationToken]').val(); __RequestVerificationToken: securityToken,
+                                $.post("/cache/outfrombail", { "count": inv, "trade": trade }, function (d) {
+                                    $("#outresult").text(d.Desc);
+                                    $("#outnum").val("");
+                                    $("#tradePwd2").val("");
+                                })
+                            }
+                        })
+
+                    }) 
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+

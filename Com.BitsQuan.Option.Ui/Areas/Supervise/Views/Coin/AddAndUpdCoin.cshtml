@@ -1,0 +1,52 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style>
+        .td_right {
+            text-align: right;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h4>新建货币</h4>
+        <hr />
+        <table border="0" style="width:90%">
+            <tr>
+                <td class="td_right">货币合约代码：</td>
+                <td><input type="text" id="Code" style="width:100%" /></td>
+            </tr>
+            <tr>
+                <td class="td_right">货币名称：</td>
+                <td>
+                    <input type="text" id="Name" style="width: 100%;margin-top:15px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td_right">维持保证金率：</td>
+                <td><input type="text" id="MainBailRatio" style="width: 100%;margin-top:15px" /></td>
+            </tr>
+            <tr>
+                <td class="td_right">期权价值倍数：</td>
+                <td><input type="text" id="MainBailTimes" style="width: 100%; margin-top: 15px" /></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <div style="float: left;margin-top: 15px">
+                        <input class="btn btn-default" type="button" value="修改" id="Update" style="display:none" />
+                        <input class="btn btn-default" type="button" value="添加" id="Add" />
+                    </div>
+                    <input class="btn btn-default" type="button" value="重置" id="reset" style="float: right; margin-top: 15px" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.RegisterViewModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/scripts/bs-3.3.4/css/bootstrap.css", "~/content/site.css")
+    <script src="~/Scripts/trade/jquery-migrate-1.2.1.js"></script>
+    <title>用户注册-最好的比特币期权交易平台</title>
+</head>
+
+<body>
+    <div class="box">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal container", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div>
+                <div>
+                    <div style="color:red" id="pwderror"></div>
+                </div>
+                <h1 class="text-center" style="font-family:'Microsoft YaHei'">欢迎注册</h1>
+                @Html.LabelFor(m => m.UserName)：
+                <div class="form-group form-group-lg">
+                    <div class="col-xs-12">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div>@Html.ValidationMessageFor(m => m.UserName)</div>
+                @Html.LabelFor(m => m.Password)：
+                <div class="form-group form-group-lg">
+                    <div class="col-xs-12">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div>@Html.ValidationMessageFor(m => m.Password)</div>
+                @Html.LabelFor(m => m.TradePassword)：
+                <div class="form-group form-group-lg">
+                    <div class="col-xs-12">
+                        @Html.PasswordFor(m => m.TradePassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div>@Html.ValidationMessageFor(m => m.TradePassword)</div>
+                @Html.LabelFor(m => m.Email)：
+                <div class="form-group form-group-lg">
+                    <div class="col-xs-12">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div>@Html.ValidationMessageFor(m => m.Email)</div>
+                <div class="text-center form-group form-group-lg">
+                    <label for="Ischeckbox">
+                        <input id="Ischeckbox" name="IsCheck" type="checkbox" style="font-family:微软雅黑;">我已阅读并同意
+                    </label>
+                    <a href="/WebHelper/service">《比权网络注册协议》</a>
+                </div>
+                <div class="form-group form-group-lg">
+                    <div class="col-xs-12">
+                        <input type="button" id="btn-register" class="btn btn-block btn-primary btn-lg" value="立即注册" />
+                    </div>
+                </div>
+                <div class="text-center form-group form-group-lg">
+                    我已经注册，现在就&nbsp;<strong>@Html.ActionLink("登录", "Login", "Account")</strong>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    $(function () {
+        $("#Ischeckbox").on("click", function () {
+            if (!$(this).prop("checked")) {
+                alert("请选择同意条款，否则将无法注册！");
+            }
+        });
+
+        $("#btn-register").on("click", function () {
+            if ($("#Ischeckbox").prop("checked"))
+                document.forms[0].submit();
+            else
+                alert("请先选择同意服务条款！");
+        });
+    });
+    function fun() {
+        $("#img")[0].src = $("#img")[0].src + "?" + Math.random;
+    }
+    //$.validator.addMethod('notequal', function (value, element, params) {
+    //    return value != params['value'];
+    //});
+    //$.validator.unobtrusive.adapters.add("notequal", ['other'], function (options) {
+
+    //    options.rules["notequal"] = {
+    //        value: options.params.other
+    //    };
+    //    options.messages["notequal"] = options.message;
+    //});
+
+    $.validator.addMethod('notequal', function (value, element, params) {
+        //return value != params['value'];
+        return value != $("input[id='" + params['value'] + "']").val();
+    });
+
+    $.validator.unobtrusive.adapters.add("notequal", ['other'], function (options) {
+        options.rules["notequal"] = {
+            value: options.params.other
+        };
+        options.messages["notequal"] = options.message;
+    });
+
+    $(function () {
+        @if(ViewBag.Errors != null && ViewBag.Errors.Count > 0){
+        @:var errors = [];
+                               foreach (var i in ViewBag.Errors) {
+            @:errors.push("@i");
+                               }
+        @:alert(errors.join('\n'));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       }
+    });
+</script>

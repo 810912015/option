@@ -1,0 +1,6 @@
+﻿<div style="border:1px solid #808080;width:80%; margin:0 auto">
+
+    @{Html.RenderAction("host", new { fid = ViewData["HostId"] });}
+    <br /><br />
+    @{Html.RenderAction("Reply", new { fid = ViewData["HostId"] });}
+</div>

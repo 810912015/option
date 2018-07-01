@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+ 
+<div>
+    <ul style="font-family:'Microsoft YaHei';font-size:20px;">
+        <li class="btc">期权合约</li>
+        <li class="code" style="width:143px">代码</li>
+        <li style="width:143px">合约名称</li>
+        <li>最新价</li>
+        <li>最高价</li>
+        <li>最低价</li>
+        <li>成交量</li>
+        <li class="quantum">持仓量</li>
+        @if (Model != null)
+        {
+            foreach (var v in Model)
+            {
+
+                <li class="code" style="width:143px">@v.Code</li>
+                <li style="width:143px">@v.Name</li>
+                if (v.IsAdd)
+                {
+                    <li><span style="color:red">@v.NewestDealPrice</span></li>
+                }
+                else
+                {
+                    <li><span style="color:green">@v.NewestDealPrice</span></li>
+                }
+
+                <li>@v.HitPrice</li>
+                <li>@v.LowPrice</li>
+                <li>@v.Times</li>
+                <li class="quantum">@v.PositionTotal</li>
+            }
+        }
+
+    </ul>
+</div>
+
+    <div style="clear:both;height:1px;border-top:1px solid #c2c2c2;width:996px">
+</div>
+

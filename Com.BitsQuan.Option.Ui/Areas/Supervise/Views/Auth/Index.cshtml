@@ -1,0 +1,77 @@
+﻿
+<h3>注册用户审核</h3>
+
+
+
+<div class="row">
+    <div class="col-md-9">
+            <div id="userquery">
+                @{
+                    Html.RenderAction("query");
+                }
+            </div>
+    </div>
+    <div class="col-md-3">
+
+        @{ Html.RenderAction("UpdateUser"); }
+
+    </div>
+</div>
+@section scripts{
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        var makeAllow=function(){}
+        $(function () {
+            makeAllow = function (a) {
+                var id = a;
+                $.post("/supervise/auth/allowtrade", { "uid": id }, function (d) {
+                    console.log(d);
+                    if (d.ResultCode == 0) {
+                        $("#td_"+id).text("已允许交易");
+                    }
+                    else $("#td_" + id).text(d.Desc);
+                })
+            }
+                       
+            $(".UpdatePage").click(UpdatePage123())
+            $("#Update").click(function () {
+                var id=$("#Id").val();
+                var UserName=$("#UserName").val();
+                var IdNumber=$("#IdNumber").val();
+                var TradePwd=$("#TradePwd").val();
+                var Email=$("#Email").val();
+                var PhoneNumber=$("#PhoneNumber").val();
+                var PasswordHash=$("#PasswordHash").val();
+                $.post("/Supervise/Auth/UpdateMethod", {
+                    "id": id,
+                    "UserName": UserName,
+                    "IdNumber": IdNumber,
+                    "TradePwd": TradePwd,
+                    "Email": Email,
+                    "PhoneNumber": PhoneNumber,
+                    "PasswordHash": PasswordHash
+                }, function (d) {
+                    alert(d);
+                    DataBind();
+                });
+            })
+        })
+        function UpdatePage123() {
+            $(".UpdatePage").click(function () {
+                id = $(this).next("span").html();
+                $.post("/Supervise/Auth/GetAuthByID", {
+                    "id": id
+                }, function (d) {
+                    $("#Id").val(d["Id"]);
+                    $("#UserName").val(d["UserName"]);
+                    $("#IdNumber").val(d["IdNumber"]);
+                    $("#TradePwd").val(d["TradePwd"]);
+                    $("#Email").val(d["Email"]);
+                    $("#PhoneNumber").val(d["PhoneNumber"]);
+                    $("#PasswordHash").val(d["PasswordHash"]);
+                }, "json");
+            })
+        }
+    </script>
+}

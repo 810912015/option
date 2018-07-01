@@ -1,0 +1,9 @@
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\bin\Debug\Com.BitsQuan.Boss.Core.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\bin\Debug\Com.BitsQuan.Boss.Core.pdb
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\bin\Debug\Com.BitsQuan.Option.Core.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\bin\Debug\Newtonsoft.Json.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\bin\Debug\Com.BitsQuan.Option.Core.pdb
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\bin\Debug\Newtonsoft.Json.xml
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\obj\Debug\Com.BitsQuan.Boss.Core.csprojResolveAssemblyReference.cache
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\obj\Debug\Com.BitsQuan.Boss.Core.dll
+E:\proj\bqworks-6-10\bqworks-6-10\option-6-10\Com.BitsQuan.Boss.Core\obj\Debug\Com.BitsQuan.Boss.Core.pdb

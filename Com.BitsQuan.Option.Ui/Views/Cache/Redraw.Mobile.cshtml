@@ -1,0 +1,30 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@model Com.BitsQuan.Option.Ui.Models.BankOpModel
+
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<div data-cat="func" id="refill">
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" class="active">
+                <a href="#refillcache" aria-controls="refillcache" role="tab" data-toggle="tab" style="border-top:none;border-left:none">人民币充值</a>
+            </li>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <li role="presentation">
+                <a href="#refillbtc" aria-controls="refillbtc" role="tab" data-toggle="tab" style="border-top:none">比特币充值</a>
+            </li>
+}
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="refillcache">
+                @{ Html.RenderAction("RefillCache");}
+            </div>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <div role="tabpanel" class="tab-pane" id="refillbtc">
+                @{ Html.RenderAction("RedrawBTC");}
+            </div>
+}
+        </div>
+    </div>
+</div>

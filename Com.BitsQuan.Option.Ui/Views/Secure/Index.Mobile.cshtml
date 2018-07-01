@@ -1,0 +1,50 @@
+﻿@{
+     
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+ 
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+@Styles.Render("~/content/site.css")
+
+<div class="row">
+    <div class="col-md-2 col-xs-12" >
+        <!-- Split button -->
+        <div class="btn-group" style="padding-bottom:10px;">
+            <button type="button" class="btn btn-primary">安全中心</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>@Ajax.ActionLink("实名认证", "AccountIdentifi", null, ajo, new {  })</li>
+                <li>@Ajax.ActionLink("修改登录密码", "LoginPwd", null, ajo, new {   })</li>
+                <li>@Ajax.ActionLink("修改交易密码", "TradePwd", null, ajo, new {   })</li>
+                <li class="divider"></li>
+                <li>@Ajax.ActionLink("绑定手机", "BindPhone", null, ajo, new {   })</li>
+                <li>@Ajax.ActionLink("交易密码输入设置", "TradeInputSet", null, ajo, new {  })</li>
+            </ul>
+        </div>
+       
+    </div>
+    <div class="col-md-10 col-xs-12" id="maincontent">
+        @{
+            if (ViewData["AccNum"] == "1")
+            {
+                Html.RenderAction("BindPhoneSet");
+            }
+            else if (ViewData["AccNum"] != null && ViewData["AccNum"] != "1")
+            {
+                Html.RenderAction("AccountInfo");
+            }
+            else
+            {
+                Html.RenderAction("AccountIdentifi");
+            }
+        }
+    </div>
+</div>
+

@@ -1,0 +1,113 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.setPhoneModel
+
+<style>
+    li.title1_pd, li.tiele2_pd {
+        height: 50px;
+    }
+
+    #bindphoneset table {
+        font-family:"Microsoft YaHei";
+        font-size:14px;
+        margin:50px auto;
+        border-collapse:collapse;
+    }
+
+    #bindphoneset table td{
+        height:45px;
+    }
+  
+    #bindphoneset table td:first-child{
+        text-align:right;
+    }
+
+    #bindphoneset input[type=button],#bindphoneset input[type=submit]{
+        color:#ffffff;
+    }
+</style>
+
+<div id="bindphoneset">
+    @using (Ajax.BeginForm("bindphoneset", "secure", null, new AjaxOptions
+                {
+                    UpdateTargetId = "bindphoneset",
+                    InsertionMode = InsertionMode.Replace
+                },
+                new { @class = "form-horizontal", role = "form" }))
+    {
+
+        <div class="phonebox_ps">
+
+            <p style="width:80%;text-align:center;margin-top:15px">为了您的信息安全，以便于我们能及时通知到您，请绑定您的手机号码</p>
+            <table cellpadding="10">
+                <tr>
+                    <td>
+                        @Html.LabelFor(a => a.Phone)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Phone, new { @class = "input" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(a => a.Phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(a => a.Code)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Code, new { @class = "input" })
+                        <input id="code_set" onclick="getOldCode()" class="submit2_ps input" style="color:#ffffff" type="button" value="短信验证码">
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(a => a.Code)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input class="submit3_ps input" type="submit" style="color:#ffffff" value="确定" />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <div style="color:red;width:175px;margin-left:39%;" id="result">
+                @if (ViewData["massagePset"] != null)
+                {
+                    @ViewData["massagePset"]
+                }
+            </div>
+        </div>
+    }
+</div>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    //获得验证码
+    function getOldCode() {
+        var $btn = $("#code_set");
+        $btn.prop("disabled", true);
+        var phone = $("#Phone").val();
+        $.get("/Secure/getCodeFirst", { "phone": phone }, function (d) {
+            if (d == 1) {
+                alert("手机号码已被使用，请换个手机号码");
+            }
+            else {
+                time($btn);
+            }
+        });
+    }
+    var wait = 30;
+    function time(o) {
+        if (wait == 0) {
+            o.prop("disabled", false);
+            o.val("获取原手机验证码");
+            wait = 30;
+        } else {
+            o.val("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function () {
+                time(o)
+            },
+        1000)
+        }
+    }
+</script>

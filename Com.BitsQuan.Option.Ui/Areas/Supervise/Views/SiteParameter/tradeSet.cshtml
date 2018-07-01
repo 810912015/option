@@ -1,0 +1,50 @@
+﻿<style>
+    .txt {
+        width: 300px;
+        height: 25px;
+    }
+</style>
+
+<div style="margin:50px;line-height:50px">
+    <table>
+        <tr>
+            <td><span class="btn btn-danger">交易室使用交易密码</span></td>
+            <td><select id="par1" class="txt">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><span class="btn btn-danger">开启交易密码</span></td>
+            <td><select id="par2" class="txt">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="button" value="保存" class="btn btn-danger" onclick="Save()" /></td>
+        </tr>
+    </table>
+
+
+
+</div>
+<script>
+    function Save() {
+        var par1 = $("#par1").val();
+        var par2 = $("#par2").val();
+        $.get("/Supervise/SiteParameter/UpdateSiteAll3", { "par1": par1, "par2": par2}, function (d) {
+            if (d) {
+                alert("设置成功");
+            } else {
+                alert("设置失败");
+            }
+        })
+    }
+
+
+
+</script>
+

@@ -1,0 +1,50 @@
+﻿@using Com.BitsQuan.Option.Ui.Extensions
+
+<div id="div-invitation">
+    @if (ViewBag.User.IsInvitor)
+    {
+        <h1>把下面链接发给你的好友</h1>
+        <div>@(Url.ContentFullPath("~/Account/Register?inviteby=") + Url.Encode(ViewBag.InviteCode))</div>
+        <h1>成功推荐用户</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <td>用户名</td>
+                    <td>注册时间</td>
+                </tr>
+            </thead>
+            @foreach (var i in @ViewBag.Invited)
+            {
+                <tr>
+                    <td>
+                        @i.UserName
+                    </td>
+                    <td>
+                        @if (i.RegisterTime != null)
+                        {
+                            @i.RegisterTime.ToString()
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <input id="btn-beinvitor" type="button" value="申请为经理人" />
+    }
+</div>
+<script>
+    $("#btn-beinvitor").click(function () {
+        $.getJSON(
+            '@Url.Content("~/cache/beinvitor")',
+            function (data) {
+                if (data.result) {
+                    alert(data.result);
+                } else {
+                    alert("申请成功");
+                    $("#div-invitation").load("@Request.Url.AbsoluteUri");
+                }
+            });
+    });
+</script>

@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Ui.Models.CurrenAddress>
+     
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="baagent" class="control-label col-md-2 col-xs-4">钱包别名</label>
+        <div class="col-md-2 col-xs-8">
+            <input type="text" name="钱包别名" id="name" class="form-control"/>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="baagent" class="control-label col-md-2 col-xs-4">钱包别名</label>
+        <div class="col-md-2 col-xs-8">
+            <input type="text" name="钱包地址" id="Caddress" class="form-control" />
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-4">
+            <input class="btn btn-primary" type="submit" value="确定提交" id="saveba2">
+        </div>
+        <span style="color:red" id="validate2"></span><span style="color:red" id="result2"></span>
+    </div>
+</div>
+            <!--右侧内容-->
+            <div class="withdraw_cash"> 
+                <div id="show_ca">
+
+                    @foreach (var item in Model)
+{
+
+    <div class="card_ca" style="float:left;margin-right:10%;">
+        <ul class="mycard">
+            <li class="mycard1">我的BTC地址</li>
+            <li class="mycard2_ca">
+                <p>
+                    比特币<span style="border: 0px solid red; width: 20px; height: 60px; margin-left: 70%;">
+                        <img src="~/Content/images/closd.png" onclick="delAddress(this)" /><span id="aa" style="display:none">@item.Id</span>
+                    </span>
+                </p>
+            </li>
+            <li class="mycard3"><p>别名：@Html.DisplayFor(modelItem => item.Name)</p></li>
+            <li class="mycard4"><p>地址：@Html.DisplayFor(modelItem => item.Address)</p></li>
+            <li class="mycard5">@*<a href="#">转到该地址</a>*@</li>
+        </ul>
+    </div>
+}
+
+                    
+
+                </div>
+            </div>
+
+
+<script>
+
+    var Id = "";
+
+
+    //   var baTemp2 = "<tr id='ba_{{Id}}' class='bar'><td>{{Id}}</td><td>{{Name}}</td><td>{{Address}}</td><td>{{Coin}}</td></tr>";
+    var baTemp2 = "<div class='card_ca' style='float:left;margin-right:10%;'>\
+                        <ul class='mycard'>\
+                            <li class='mycard1'>我的BTC地址</li>\
+                            <li class='mycard2_ca'><p>比特币<span style='border: 0px solid red; width: 20px; height: 60px; margin-left: 70%;'>\
+                                <img src='/Content/images/closd.png' onclick='delAddress(this)' /><span id='aa' style='display:none'>{{Id}}</span>\
+                            </span></p></li>\
+                            <li class='mycard3'><p>名称：{{Name}}</p></li>\
+                            <li class='mycard4'><p>地址：{{Address}}</p></li>\
+                            <li class='mycard5'></li>\
+                        </ul>\
+                    </div>";
+    $("#saveba2").click(function () {
+        $("#result2").text("");
+        $("#validate2").text("");
+
+        var name = $("#name").val();
+        var Caddress = $("#Caddress").val()
+        var coin = "BTC"; //$("#coin").val();
+        if (name == "" || Caddress == "" || coin == "") {
+            $("#validate2").text("参数不能为空"); return;
+        }
+
+        var re = /^[A-Za-z0-9]{1,50}$/;
+        var result = re.exec(Caddress);
+        if (!result) {
+            $("#validate2").text("钱包地址最多为50个数字和字符"); return;
+        }
+
+        var securityToken = $('input[name=__RequestVerificationToken]').val();
+        //__RequestVerificationToken: securityToken, 
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/cache/AddCurrenAddress",
+            data: { "Name": name, "Address": Caddress, "coin": coin },
+            success: function (d) {
+                $("#result2").text(d.Desc);
+                if (d.ResultCode == 0) {
+                    var r2 = Mustache.render(baTemp2, d.CurrenAddress);
+                    $(r2).appendTo($("#show_ca"));
+                }
+                else {
+                    alert("有错");
+                }
+            }
+        });
+    });
+
+    $(".bar").click(function () {
+        Id = $(this).data("id");
+
+    })
+
+    function delAddress(curNum) {
+        // alert(curNum);
+        var num = $(curNum).siblings().html();
+        var r = confirm("确定要删除？");
+        if (r) {
+            if (num != "") {
+                var securityToken = $('input[name=__RequestVerificationToken]').val();
+                $.post("/cache/DelCurrenAddress", { __RequestVerificationToken: securityToken, "Id": num }, function (d) {
+                    if (d.ResultCode == 0) {
+                        //   $(curNum).parents('.card_ca').html("");
+                        $(curNum).parents('.card_ca').attr("style", "display:none");
+                    }
+                })
+            }
+        }
+    }
+</script>
+

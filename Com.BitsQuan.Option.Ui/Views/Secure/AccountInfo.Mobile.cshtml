@@ -1,0 +1,21 @@
+﻿@using Com.BitsQuan.Option.Ui.Models;
+@using Com.BitsQuan.Option.Ui.Extensions;
+<div>
+    @if (ViewData["Users"] != null) { 
+       var item = ViewData["Users"] as ApplicationUser;
+        
+    <div>
+        <div class="lead">
+            <img src="@Url.Content("~/content/images/passed.png")" alt="">&nbsp;&nbsp;
+            <span>实名制信息已通过</span>
+        </div>
+        @*<li>您的身份信息&nbsp;&nbsp;&nbsp;ID <span>@item.UserName</span></li>*@
+
+        <div>姓名： @item.RealityName &nbsp;&nbsp;证件类型：@item.IdNumberType</div>
+        <div>证件号 <span>@item.IdNumber.Replace(3, item.IdNumber.Length - 5, '*')</span></div>
+        <div>认证时间 @item.IdentiTime</div>
+        <div>邮箱 <span>@item.Email.Replace(1, item.Email.IndexOf('@') - 3, '*')</span></div>
+        <div class="titlen2">如需更改实名认证信息，请联系客服</div>
+    </div>
+    }
+</div>

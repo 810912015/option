@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.SignalR.SystemWeb.zh-Hans</id>
+    <version>2.1.2</version>
+    <title>Microsoft ASP.NET SignalR SystemWeb 简体中文资源</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/net_library_eula_CHS.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/signalR</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>此程序包包含适用于 ASP.NET SignalR SystemWeb 的简体中文附属程序集。</description>
+    <summary>适用于 Microsoft.AspNet.SignalR.SystemWeb 程序包的简体中文资源</summary>
+    <language>zh-Hans</language>
+    <tags>Microsoft AspNet SignalR AspNetSignalR SystemWeb</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.SignalR.SystemWeb" version="[2.1.2]" />
+    </dependencies>
+  </metadata>
+</package>

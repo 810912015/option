@@ -1,0 +1,71 @@
+﻿@{Layout = null;}
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <title>比权网 - 最好的比特币期权交易平台</title>
+    <meta name="description" content="比权网是中国最专业的比特币期权交易平台,我们采用ssl、冷存储、gslb、分布式服务器等先进技术，确保比特币交易的安全、快捷、稳定。致力于打造最专业的比特币中国期权交易平台" />
+    <meta name="keywords" content="比权网,比特币期权,比特币交易,比特币期权交易,比特币期权交易平台,比特币交易平台,比特币行情,比特币交易,BTC" />
+
+    @Styles.Render("~/content/activity/styles/index.css")
+
+</head>
+
+<body>
+    <!--第一部分-->
+    <div class="head">
+        <img id="img-banner" src="@Url.Content("~/content/activity/images/banner.png")" />
+        <div><input id="btn_jump" type="button" value="点击进入模拟盘" onclick="location='@Url.Action("index","home")'"></div>
+
+    </div>
+
+
+
+    <!--第二部分-->
+    <div class="textbox">
+        <div class="text">
+            <div style="width:920px; margin:0 auto; overflow:hidden">
+                <p class="p1">关于比权网</p>
+                <p class="p2">为了让客户更好的熟悉期权的玩法，我们推出比特币期权模拟盘交易</p>
+            </div>
+            <p class="p3">比权网是国内首家比特币期权交易平台，平台旨在为用户提供安全、便捷、可靠的虚拟货币现货、期权交易服务，用户可在比权网进行比特币交易不同期权合约套利等操作，体验一站式期权交易服务。</p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!--第三部分-->
+    <div class="text1box">
+        <div class="text1">
+            <div style="width:920px; margin:0 auto; overflow:hidden">
+                <p class="title">五大创新</p>
+                <p class="title1"></p>
+            </div>
+
+            <div class="fivebox"><img src="@Url.Content("~/content/activity/images/five.png")"></div>
+
+
+        </div>
+
+
+    </div>
+
+    <!--页脚-->
+    @Html.Partial("Footer")
+    @Scripts.Render("~/bundles/j1")
+    <script>
+        $(function(){
+            $(window).on("resize", function () {
+                var heightOffset = $('#img-banner').height() - 60;
+                var $btn = $("#btn_jump");
+                $btn.css("left", (document.body.clientWidth - $btn.outerWidth()) / 2 + "px").css('top', heightOffset + 'px');
+            }).trigger("resize");
+        });
+    </script>
+</body>
+</html>

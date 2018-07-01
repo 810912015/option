@@ -1,0 +1,61 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.Account_iden
+<style>
+    .submit3_ai {
+        background-color: #559be9;
+        color: white;
+        border: 1px solid #5daaff;
+        margin-bottom: 30px;
+        cursor: pointer;
+    }
+    .selType {
+        width:175px;
+        height:30px;
+    }
+
+    .titlen_ai {
+        line-height:30px;
+    
+    }
+</style>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@{
+    if (ViewData["AccNum"] != null)
+    {
+        Html.RenderAction("AccountInfo");
+    }
+    else
+    {
+       <div id="accountIdentifi">
+            @using (Ajax.BeginForm("accountIdentifi", "secure", null, new AjaxOptions
+                {
+                    UpdateTargetId = "accountIdentifi",
+                    InsertionMode = InsertionMode.Replace
+                },
+                new { @class = "form-horizontal", role = "form" }))
+            {
+                @*<p class="Biao"><span class="cash">实名制认证</span></p>*@
+                <div class="nameboxn">
+                    <p style="width:80%;margin:20px">根据 <span style="color:red">国家相关规定</span>，比特币交易需进行实名登记，请填写您的真实身份信息，感谢您的理解与支持！</p>
+                    <ul class="titlen">
+
+                        <li style="margin-bottom:20px">
+                            @Html.LabelFor(a => a.IdentityType, new { style = "font-weight:600" })&nbsp;&nbsp;
+                            @Html.DropDownListFor(a => a.IdentityType, (List<SelectListItem>)ViewData["type"], new { @class = "selType",style="margin-left:-3px;" })
+                            @Html.ValidationMessageFor(a => a.IdentityType)
+                        </li>
+                        <li>@Html.LabelFor(a => a.RealityName, new { style = "font-weight:600" })@Html.TextBoxFor(a => a.RealityName, new { @class="input"})<span style="color:red"> @Html.ValidationMessageFor(a => a.RealityName,"", new { style="color:red" })</span></li>
+                        <li>@Html.LabelFor(a => a.IdentityId, new { style = "font-weight:600" })@Html.TextBoxFor(a => a.IdentityId, new { @class = "input" }) @Html.ValidationMessageFor(a => a.IdentityId, "", new { style = "color:red" })
+                         <span>@if (ViewData["errorSe"] != null){   @ViewData["errorSe"] }</span></li>
+                        <li><input class="input submit3_ai" style="margin:0 0 0 66px;" type="submit" value="确定">
+                           
+                        </li>
+                        <li class="titlen1"></li>
+                    </ul>
+
+                </div>}
+        </div>
+    }
+}
+
+

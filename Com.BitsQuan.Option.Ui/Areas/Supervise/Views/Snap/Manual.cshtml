@@ -1,0 +1,82 @@
+﻿@model Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.ManualModel
+
+@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+
+<h4>
+    手动调整用户资金--慎重操作!
+   
+</h4>
+@if (Model.TraderId == -100)
+{
+    <h4 style="color:red">
+        <strong>将对所有账户执行同样的操作--慎重操作!!!</strong>
+    </h4>
+    <h4>
+        <strong>操作冻结无意义,因此不会起作用</strong>
+    </h4>
+}
+@if (ViewBag.msg != null)
+{ <div style="color:red;">
+        @ViewBag.msg
+    </div>
+} 
+else
+{
+    using (Ajax.BeginForm("Manual", null, ajo, new { role = "form", @class = "form-horizontal" }))
+    { 
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal" style="border:1px solid lightgray;padding:10px;">
+       
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m=>m.TraderId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManualType, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EnumDropDownListFor(m=>m.ManualType,new{@class="form-control"}) 
+                @Html.ValidationMessageFor(model => model.ManualType)
+            </div>
+         
+            @Html.LabelFor(model => model.Delta, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Delta,new{@class="form-control"})
+                @Html.ValidationMessageFor(model => model.Delta)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsAddTo, new { @class = "control-label col-md-4" })
+            <div class="col-md-2">
+                @Html.CheckBoxFor(model => model.IsAddTo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IsAddTo)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.IsAboutFreeze, new { @class="control-label col-md-4"})
+            <div class="col-md-2">
+                @Html.CheckBoxFor(m => m.IsAboutFreeze, new { @class="form-control"})
+            </div>
+            @Html.LabelFor(m => m.IsFreeze, new { @class = "control-label col-md-4" })
+            <div class="col-md-2">
+                @Html.CheckBoxFor(m => m.IsFreeze, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+           
+            <div class="col-md-offset-2 col-md-4">
+                
+                    <input type="submit" value="调整" class="btn btn-primary" />
+                
+                
+            </div>
+        </div>
+    </div>
+}
+}
+
+ 

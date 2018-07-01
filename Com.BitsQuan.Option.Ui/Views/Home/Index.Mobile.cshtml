@@ -1,0 +1,153 @@
+﻿@using Com.BitsQuan.Option.Ui.Models;
+@using System.Text.RegularExpressions;
+ 
+<style>
+    .titlebox {
+        background-color: #FFF;
+        border: 1px solid #E5E5E5;
+        margin: 20px 20px 0px 0px;
+    }
+    i {
+        font-family: "微软雅黑";
+        font-size: 22px;
+        color: #24A9E1;
+        font-weight: bold;
+        line-height: 75px;
+        text-align: center;
+        display: block;
+        background-image: url("/Content/images/icon1.png");
+        background-repeat: no-repeat;
+        background-position: 2px 20px;
+    }
+
+    .titlebox:nth-child(2n+1) > i {
+        background-image: url("/Content/images/icon1.png");
+    }
+
+    .titlebox:nth-child(2n+2) > i {
+        background-image: url("/Content/images/icon2.png");
+    }
+
+    .titlebox:nth-child(2n+3) > i {
+        background-image: url("/Content/images/icon3.png");
+    }
+
+    .titlebox:nth-child(2n+4) > i {
+        background-image: url("/Content/images/icon4.png");
+    }
+
+    .titlebox p {
+        margin: 0px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+        color: #666;
+        line-height: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="titlebox">
+                <div><i>安全</i></div>
+                <div>
+                    <p>银行系统级SSL安全连接</p>
+                    <p>多重加密，短信身份验证以及冷</p>
+                    <p>存储机制</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="titlebox">
+                <div><i>可靠</i></div>
+                <div>
+                    <p>离线BTC钱包、服务器SLB均衡</p>
+                    <p>与实时备份，冷存储备份全球分</p>
+                    <p>钟级别备份</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="titlebox">
+                <div><i>免费</i></div>
+                <div>
+                    <p>BTC充值0手续费</p>
+                    <p>BTC交易0手续费</p>
+                    <p>人民币汇款充值0手续费</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="titlebox">
+                <div><i>贴心</i></div>
+                <div>
+                    <p>7×24小时400电话服务</p>
+                    <p>7×24小时在线企业客服</p>
+                    <p>7×24小时技术支持</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+
+        <tr>
+            <th colspan="2">比特币</th>
+        </tr>
+
+        <tr>
+            <th>虚拟币</th>
+            <th>详情</th>
+        </tr>
+        <tr>
+            <td>900001 <strong>比特币</strong></td>
+            <td>
+                最新价:0,最低价:0,最高价:0,成交量:0
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderAction("GetOption");}
+    <div class="row">
+        <div class="col-md-8 ">
+            <div class="container">
+
+
+                <div class="row">
+
+
+                    <div class="pull-left lead">
+                        新闻中心
+                    </div>
+                    <div class="pull-right">
+                        <a href="/NewNotices/index/1" class="more">More</a>
+                    </div>
+                </div>
+                @foreach (Help h in ViewBag.News)
+                {
+                    <div class="row">
+                        
+                            <a href="/NewNotices/New/@h.Id">
+                                @if (h.Htitle.Length <= 25)
+                                { @h.Htitle }
+                                else
+                                {@Html.Raw(Regex.Replace(Regex.Replace(Regex.Replace(h.Htitle, "&nbsp;", " "), "<.+?>", " "), "<br>", " ", RegexOptions.IgnoreCase).Substring(0, 25) + "...");
+                                }
+                            </a>
+
+                       
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-8 col-xs-6">
+            <div class="container">
+                @{Html.RenderAction("GetNotice"); }
+            </div>
+            <div class="container">
+                @{Html.RenderAction("GetNews"); }
+            </div>
+        </div>
+    </div>
+</div>

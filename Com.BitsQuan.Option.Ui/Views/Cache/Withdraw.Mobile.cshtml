@@ -1,0 +1,49 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@model Com.BitsQuan.Option.Ui.Models.BankOpModel
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@if (ViewBag.msg11 == "请到安全中心实名认证")
+{
+    <script>alert("您没有实名认证");
+        window.location = "/Secure/Index";
+    </script>
+
+}
+else
+{
+
+<div data-cat="func" id="redraw">
+    <div role="tabpanel">
+      
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" id="wCNY" class="active">
+                <a href="#redrawcache" aria-controls="redrawcache" role="tab" data-toggle="tab" style="border-top:none;border-left:none">人民币提现</a>
+            </li>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <li role="presentation" id="wBTC">
+                <a href="#redrawbtc" aria-controls="redrawbtc" role="tab" data-toggle="tab" style="border-left:none">比特币提现</a>
+            </li>
+}
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="redrawcache">
+              
+                  @{  Html.RenderAction("WithdrawCny");}
+           
+            </div>
+           @if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+            <div role="tabpanel" class="tab-pane" id="redrawbtc">
+             
+               @{     Html.RenderAction("WithdrawBTC");}
+             
+
+
+            </div>
+           }
+        </div>
+    </div>
+</div>
+}
+
+

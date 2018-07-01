@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.SysAccountRecord>
+
+
+<div data-cat="func" id="flowaa">
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="background-color: #F7F7F7">
+            <li role="presentation" class="active"><a href="#homeaa" aria-controls="homeaa" role="tab" data-toggle="tab" style="border-top:none;border-left:none">用户行权记录</a></li>
+            <li role="presentation"><a href="#messagesaa" aria-controls="messagesaa" role="tab" data-toggle="tab" style="border-top:none;">已行权记录</a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="homeaa">
+                @{
+                    Html.RenderAction("UserExecuteRecord", new { pageIndex = 1 });
+                }
+            </div>
+            <div role="tabpanel" class="tab-pane" id="messagesaa">
+                @{
+                    Html.RenderAction("ExecutedRecord", new { pageIndex = 1 });
+                }
+            </div>
+        </div>
+
+    </div>
+</div> 

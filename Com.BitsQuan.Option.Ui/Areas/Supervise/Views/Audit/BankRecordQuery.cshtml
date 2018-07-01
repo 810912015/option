@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Ui.Models.BankRecord>
+
+ <input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)" />
+<div id="divbank">
+    <table class="table table-striped">
+        @if (Model != null)
+        {
+            <tr>
+                <th>编号</th>
+                <th>地址</th>
+                <th>用户</th>
+                <th>用户UID</th>
+                <th>操作类型</th>
+                <th>金额</th>
+                <th>请求时间</th>
+                <th>实际金额</th>
+                <th>办理时间</th>
+                <th>是否已办理</th>
+                <th>办理结果</th>
+                <th>结果描述</th>
+                <th>经手人</th>
+                <th>系统银行卡</th>
+            </tr>
+            foreach (var v in Model)
+            {
+
+
+                if (v.coin == "CNY")
+                {
+                    <tr>
+                        <td>
+                            @v.Id
+                        @if (v.IsApproved == false)
+                        {
+                            <a class="btn btn-primary btn-xs" onclick="Audit(@v.Id);">办理</a>
+                        }
+
+                    </td>
+                    <td>@v.Account.BankName - @v.Account.Number - @v.Account.Province @v.Account.City - @v.Account.Name</td>
+                    <td>@v.Account.Uname</td>
+                    <th>@v.Uid</th>
+                    <td>@v.coin @v.BankRecordType</td>
+                    <td>@v.Delta</td>
+                    <td>@v.When</td>
+                    <td>@v.ActualDelta</td>
+                    <td>@v.AuditTime</td>
+                    <td>@v.IsApproved</td>
+                    <td>@v.ApprovedResult</td>
+                    <td>@v.ByWho</td>
+                    <td>@User.Identity.Name</td>
+                        <td>@(v.SysRecord==null?"":v.SysRecord.Account.Number)</td>
+                </tr>
+                }
+                else if (v.coin == "BTC")
+                {
+                    <tr>
+                        <td>
+                            @v.Id
+                        @if (v.IsApproved == false)
+                        {
+                            <a class="btn btn-primary btn-xs" onclick="Audit(@v.Id);">办理</a>
+                        }
+
+                    </td>
+                    <td>@v.Address.</td>
+                    <td>@v.AppUserName</td>s
+                    <td>@v.coin @v.BankRecordType</td>
+                    <td>@v.Num</td>
+                    <td>@v.When</td>
+                    <td>@v.ActualDelta</td>
+                    <td>@v.AuditTime</td>
+                    <td>@v.IsApproved</td>
+                    <td>@v.ApprovedResult</td>
+                    <td>@v.ByWho</td>
+                    <td>@v.AppUserName</td>
+                </tr>
+                }
+
+            }
+        }
+    </table>
+</div>

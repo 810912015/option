@@ -1,0 +1,37 @@
+﻿<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@{
+    
+}
+
+ 
+<div class="row">
+    <div class="col-md-10">
+        @{
+            Html.RenderAction("BankRecords");
+        }
+    </div>
+   
+</div>
+<div style="position:fixed;display:block;top:100px;right:5px;width:16%;">
+    @Ajax.ActionLink("添加系统银行卡", "bank", null, new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   }, new { @class = "btn btn-primary btn-xs" })
+    <div id="maincontent">
+     
+    </div>
+   
+    @{
+        Html.RenderAction("AuditIt");
+    }
+</div>
+
+<script>
+    var Audit = function (id) {
+        $("#BrId").val(id);
+    }
+</script>
+

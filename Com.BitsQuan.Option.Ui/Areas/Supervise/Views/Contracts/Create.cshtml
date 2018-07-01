@@ -1,0 +1,65 @@
+﻿@model Com.BitsQuan.Option.Ui.Areas.Supervise.Models.ContractModel
+
+@{
+    var coins = new List<SelectListItem> { new SelectListItem { Text = "比特币", Value = "btc", Selected = true }, new SelectListItem { Text = "莱特币", Value = "ltc" } };
+    var options = new List<SelectListItem>{
+        new SelectListItem{ Text="认购期权", Value="1",Selected=true},
+        new SelectListItem{ Text="认沽期权",Value="2"}
+    };
+}
+
+@using (Ajax.BeginForm("Create", null, new AjaxOptions { UpdateTargetId="createResult",InsertionMode=InsertionMode.Replace }, new { role = "form", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>新建合约</h4>
+        <h5>合约的代码和名称自动生成</h5>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CoinName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.CoinName, coins, new { @class="form-control"})
+                @Html.ValidationMessageFor(model => model.CoinName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.OptionType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.OptionType, options, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OptionType)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExecuteTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ExecuteTime, new { @class = "form-control", id = "ExecuteTime" })
+                @Html.ValidationMessageFor(model => model.ExecuteTime)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CoinCount, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CoinCount, new { @class = "form-control", id = "ExecuteTime" })
+                @Html.ValidationMessageFor(model => model.CoinCount)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExecutePrice, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ExecutePrice, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ExecutePrice)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-2">
+                <input type="submit" value="保存" class="btn btn-default" />
+            </div>
+            <div id="createResult" class="lead col-md-2"></div>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,34 @@
+﻿@using Com.BitsQuan.Option.Models.Security
+@model Com.BitsQuan.Option.Ui.Models.Menu
+
+@if (Model.SubMenus == null||Model.SubMenus.Count==0)
+{
+    <li>
+        <div>
+            <input type="checkbox" data-tag="@Model.Id" 
+                   data-cat="suber" id="cb_@Model.Id" 
+                   data-belong="@Model.GetBlongToStr()"/>
+            <strong>@Model.Name</strong>
+        </div>
+        
+    </li>
+}
+else{
+    <li>
+            <div>
+                <a href="#" class="glyphicon glyphicon-plus" id="btn_@Model.Id" data-tag="sub_@Model.Id"></a> 
+                <input type="checkbox" data-tag="@Model.Id"
+                       data-belong="@Model.GetBlongToStr()"
+                       data-cat="super" id="cb_@Model.Id" />
+                <strong>@Model.Name</strong>
+            </div>
+     
+        <ul id="sub_@Model.Id" class="hidden">
+            @foreach (var v in Model.SubMenus)
+            {
+                @Html.Partial("_PartialMenuSelect",v)
+            }
+        </ul>
+    </li>
+   
+}

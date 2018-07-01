@@ -1,0 +1,45 @@
+﻿<style>
+    .email{
+        margin:10px;padding:10px;
+    }
+        .email div {
+            margin: 10px;
+            padding: 10px;
+        }
+    div span{
+        display:inline-block;
+        width:160px;
+        text-align:right;
+        font-weight:bold;
+    }
+    div input{
+        width:200px;
+        margin-left:10px;
+    }
+</style>
+<h4>
+    将要改变的是用来给用户发邮件的邮件服务器设置.设置有将重新初始化邮件设置.请慎重操作.
+</h4>
+<div class="email">
+    <div><span>邮箱地址</span><input id="email" type="text" value="@Com.BitsQuan.Miscellaneous.QQExMailSender.FromAddr" />
+    </div>
+    <div><span>密码</span><input id="pwd" type="text" value="@Com.BitsQuan.Miscellaneous.QQExMailSender.Pwd" /></div>
+    <div><span>Smtp服务器地址</span><input id="addr" type="text" value="@Com.BitsQuan.Miscellaneous.QQExMailSender.Smtp" /></div>
+    <div><span></span><input type="button" value="保存" class="btn btn-danger" onclick="Save()" /></div>
+</div>
+
+
+<div id="result">
+
+</div>
+
+<script>
+    function Save() {
+        var email = $("#email").val();
+        var pwd = $("#pwd").val();
+        var smtp = $("#addr").val(); 
+        $.get("/Supervise/SiteParameter/SetEmail", { "from": email, "pwd": pwd, "smtp": smtp}, function (d) {
+            $("#result").text(d);
+        })
+    }
+</script>

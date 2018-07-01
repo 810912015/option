@@ -1,0 +1,92 @@
+﻿
+<style>
+    .main{
+        margin-top:10px;
+        border:1px solid lightgreen;
+    }
+        .main > div {
+            padding: 10px;
+            border-bottom: 3px solid lightgreen;
+        }
+</style>
+<div class="main">
+    <div>
+        <h2>
+            经理人手续费返还
+        </h2>
+        <div class="h4">
+            <div>用户推荐的用户交易手续费可以按比例返还给推荐人.</div>
+            <div>通过->用户->修改信息可以修改用户的推荐人和返还比例,用户通过->财务中心->经理人可以进行推广(要求被推荐人注册).</div> 
+            <div>当前手动返还.点击下面的按钮可以为所有推荐人返还手续费.每次返还从上次返还的时间开始计算</div>
+            <div>用户可通过->资金中心->流水查询看到返还记录.</div>
+            <div>管理员可通过->数据->资金流水看到所有的返还划入用户账户记录,通过->数据->系统资金流水看到划出记录.</div>
+        </div>
+        <div>
+            <a id="testIfBtn" class="btn btn-primary">点击执行手续费返还</a>
+        </div>
+        <div class="lead" id="tifresult"></div>
+    </div>
+    <div>
+        <h2>奖金设置</h2>
+        <div class="h4">每成功推荐一个用户,给推荐人的奖金数(人民币,元)</div>
+        <div>
+            <input type="number" id="bonus" placeholder="请输入要设置的奖金数字,当前为@(Com.BitsQuan.Option.Imp.InvitorFeeService.InvitorBonusInCny)" value="" class=" form-control" style="width:300px" />
+            <a id="setbonus" class="btn btn-primary">点击设置奖金数</a>
+        </div>
+        <div id="bonusresult" class="lead"></div>
+    </div>
+    <div>
+        <h2>推荐人关系</h2>
+        @{
+        var invitors = MvcApplication.ifm.Init();
+        }
+        <table class="table">
+            <tr>
+                <th>推荐人</th>
+                <th width="200px;">推荐信息</th>
+                <th>被推荐人列表</th>
+            </tr>
+            @foreach (var v in invitors)
+        {
+                <tr>
+                    <td>@v.Key.UserName</td>
+                    <td>
+                        推荐人数: @v.Value.Count|
+                        获取手续费总数: @Html.DisplayFor(a => v.Key.InviteFeeSum)|
+                        获取奖金总数: @Html.DisplayFor(a => v.Key.InviteBonusSum)|
+                        最后手续费划转时间:  @Html.DisplayFor(a => v.Key.LastTransferFeeTime)|
+                    </td>
+                    <td>
+
+                        @foreach (var s in v.Value)
+{
+                            <span style="padding:2px;border-bottom:1px solid lightgreen;margin:8px;">
+
+
+                                <em>
+                                    @s.UserName
+                                </em> <strong>@s.RealityName</strong>
+                            </span>
+}
+                    </td>
+                </tr>
+        }
+        </table>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#testIfBtn").click(function () {
+            $.get("OperateInvitorFee", function (d) {
+                $("#tifresult").text(d);
+            })
+        });
+        $("#setbonus").click(function () {
+            $.post("setBonus", { "bonus": $("#bonus").val() }, function (d) {
+                $("#bonusresult").html(d);
+            })
+        })
+    })
+    
+</script>
+

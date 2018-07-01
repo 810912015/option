@@ -1,0 +1,194 @@
+﻿@model Com.BitsQuan.Option.Ui.Controllers.BtcMarketDetailModel
+
+@{
+    ViewBag.Title = "比特币市场详情-最好的比特币期权交易平台";
+}
+<div class="border"></div>
+<div class="container" style="width:1130px;margin:0px auto;">
+
+
+    @*<h5>比特币市场行情<a href="/spot/trade" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-backward"></span> 返回交易页</a></h5>*@
+
+    <div>
+
+        <div class="row" style="margin-top:10px;">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#kline" aria-controls="kline" role="tab" data-toggle="tab" style=" font: 16px/36px 微软雅黑,黑体;">BTC&nbsp;行情图</a></li>
+                <li role="presentation"><a href="#marketdeep" aria-controls="marketdeep" role="tab" data-toggle="tab" style=" font: 16px/36px 微软雅黑,黑体;">BTC&nbsp;深度图</a></li>
+
+            </ul>
+            <div class="row" style="margin-top:25px;margin:15px auto">
+                <div class="btn-group btn-group-justified btn-group-sm">
+                    <table style="width:100%;border:1px solid #ddd;height:40px;text-align:center;font-weight:bold;font: 16px/36px 微软雅黑,黑体;">
+                        <tr>
+                            <td style="border-left:1px solid #ddd;width:25%">实时行情<span id="newestprice"></span></td>
+                            <td style="border-left:1px solid #ddd;width:25%">最高价<span id="max24"></span></td>
+                            <td style="border-left:1px solid #ddd;width:25%">最低价<span id="min24"></span></td>
+                            <td style="border-left:1px solid #ddd;width:25%">成交量<span id="totalcount"></span></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div class="tab-content">
+                <div id="kline" role="tabpanel" class="tab-pane active" style="height: 408px; border: 1px solid lightgray; ">
+                    <div id="container" style="min-height: 370px; ">
+
+                    </div>
+                    <div style="text-align:center;">
+                        <div class="btn-group btn-group-sm" id="redraw" style="margin-top:5px;">
+                            <a class="btn btn-info btn-danger" data-ct="M5">5分钟线</a>
+                            <a class="btn btn-info" data-ct="M15">15分钟线</a>
+                            <a class="btn btn-info" data-ct="M30">30分钟线</a>
+                            <a class="btn btn-info" data-ct="M60">1小时线</a>
+                            <a class="btn btn-info" data-ct="M480">8小时线</a>
+                            <a class="btn btn-info" data-ct="M1440">日线</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div id="marketdeep" role="tabpanel" class="tab-pane" style="height: 400px; min-width: 310px; border: 1px solid lightgray;">
+
+                    <div id="mdcontainer" style="width:60%;">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;font: 16px/36px 微软雅黑,黑体;">
+            <div class="col-md-8">
+                <div class="row">
+                    <div style="text-align:center;padding:10px;">
+                        <strong>比特币买卖盘</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="margin-right:0px;padding:0px;float:left">
+                        @if (Model != null && Model.BuyOrders != null)
+                        {
+                            <table style="border:1px solid #ddd;width:370px">
+                                <tr style="background-color:#fafafa;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                                    <td>方向</td>
+                                    <td>数量</td>
+                                    <td>价格</td>
+                                </tr>
+                                @for (int i = 0; i < Model.BuyOrders.Count; i++)
+                                {
+                                    <tr style="background-color:white;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                                        <td>买@(i + 1)</td>
+                                        <td>@Model.BuyOrders[i].Count</td>
+                                        <td>@Model.BuyOrders[i].Price.ToString("C2")</td>
+
+                                    </tr>
+                                }
+                            </table>
+                        }
+
+
+                    </div>
+                    <div style="margin-left:0px;padding:0px;float:left">
+
+
+                        @if (Model != null && Model.SellOrders != null)
+                        {
+                            <table style="border:1px solid #ddd;width:370px;border-left:0px">
+                                <tr style="background-color:#fafafa;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                                    <td>价格</td>
+                                    <td>数量</td>
+                                    <td>方向</td>
+                                </tr>
+                                @for (int i = 0; i < Model.SellOrders.Count; i++)
+                                {
+                                    <tr style="background-color:white;border-bottom:1px solid #ddd;height:35px;text-align:center">
+
+                                        <td>@Model.SellOrders[i].Price.ToString("C2")</td>
+                                        <td>@Model.SellOrders[i].Count</td>
+                                        <td>卖@(i + 1)</td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div style="text-align:center;padding:10px;">
+                    <strong>比特币实时成交</strong>
+                </div>
+
+                @if (Model != null && Model.Deals != null)
+                {
+
+                    <table style="border:1px solid #ddd;width:350px">
+                        <tr style="background-color:#fafafa;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                            <td>时间</td>
+                            <td>价格</td>
+                            <td>交易量</td>
+                            <td>类型</td>
+                        </tr>
+                        @foreach (var v in Model.Deals)
+                        {
+                            <tr style="background-color:white;border-bottom:1px solid #ddd;height:35px;text-align:center">
+                                <td>@v.When.ToString("HH:mm:ss")</td>
+                                <td>@v.Price.ToString("C2")</td>
+                                <td>@v.Count</td>
+                                <td>@v.MainOrderDir</td>
+                            </tr>
+                        }
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/hs/highstock.js"></script>
+<script src="~/Scripts/trade/ohlc.js"></script>
+<script src="~/Scripts/trade/deep.js"></script>
+
+<script>
+    $(function () {
+        $.get("/spot/GetBtcKline", function (d) {
+            klinedata = d;
+            drawChart("M5", "/spot/GetBtcKlinenow", "BTC行情图");
+        })
+
+        $('#redraw > a').click(function () {
+            var th = $(this);
+            var ct = th.data("ct");
+            drawChart(ct, "/spot/GetBtcKlinenow", "BTC行情图");
+            $("#redraw > a").each(function (i, e) {
+                $(e).removeClass("btn-danger");
+            });
+            th.addClass("btn-danger");
+        })
+    });
+</script>
+
+
+
+<script>
+    $(function () {
+        depthCal("/spot/getdeepth?coinName=BTC");
+    })
+</script>
+<script>
+    var getMarket = function () {
+        $.get("/spot/getmarket", function (d) {
+            $("#newestprice").text(d.NewBtc);
+            $("#s1price").text(d.S1Price);
+            $("#b1price").text(d.B1Price);
+            $("#max24").text(d.Max24);
+            $("#min24").text(d.Min24);
+            $("#totalcount").text(d.Total24);
+        });
+        setTimeout("getMarket();", 3000);
+    };
+    $(function () {
+        getMarket();
+    })
+</script>

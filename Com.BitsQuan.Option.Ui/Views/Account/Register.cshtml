@@ -1,0 +1,837 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.RegisterViewModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #F2F2F2;
+        }
+
+        body, h1, h2, h3, h4, blockquote, p, dl, dt, dd, ul, ol, li, th, td, form, fieldset, legend, button, input, textarea {
+            margin: 0;
+            padding: 0;
+        }
+
+        body, button, input, select, textarea {
+            font: 12px/1.75 \5b8b\4f53,arial,sans-serif;
+        }
+
+        button, input, select, textarea, h1, h2, h3, h4 {
+            font-size: 100%;
+        }
+
+        em, i {
+            font-style: normal;
+        }
+
+        ol, ul {
+            list-style: none;
+            list-style-position: outside;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        img, fieldset {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        .clearfix:after {
+            content: "\20";
+            clear: both;
+            height: 0;
+            display: block;
+            overflow: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clear {
+            font-size: 0;
+            line-height: 0;
+            height: 0;
+            overflow: hidden;
+            clear: both;
+            visibility: hidden;
+        }
+
+        a {
+            color: #777;
+            text-decoration: none;
+            outline: none;
+        }
+
+            a:hover {
+                color: #f60;
+                text-decoration: underline;
+            }
+
+        .wrap {
+            color: #777;
+        }
+
+        .main {
+            width: 990px;
+            margin: 0 auto;
+            font-family: "微软雅黑";
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 10px 0;
+            min-height: 400px;
+            _height: 400px;
+        }
+
+        .blue, .blue a {
+            color: #639bd4;
+        }
+
+            .blue:hover, .blue a:hover {
+                color: #f60;
+            }
+
+        .logobox {
+            width: 100%;
+            background-repeat: repeat-x;
+            height: 100px;
+        }
+
+        .logo {
+            width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+            .logo img {
+                margin-top: 20px;
+            }
+
+            .logo .logoli1 {
+                font-size: 14px;
+                float: right;
+                line-height: 100px;
+                color: #535353;
+                font-family: 'Microsoft YaHei';
+            }
+
+                .logo .logoli1 .btn {
+                    font-weight: bold;
+                    color: #666;
+                    height: 32px;
+                    width: 64px;
+                    border: none;
+                    background-image: url(../Content/images/lond.png);
+                }
+
+            .logo .logoli {
+                float: left;
+            }
+
+
+
+
+
+        .inp {
+            height: 30px;
+            border: 1px solid #D2D2D2;
+            padding: 0 5px;
+            width: 255px;
+            -moz-border-radius: 1px;
+            -webkit-border-radius: 1px;
+            border-radius: 1px;
+            line-height: 29px\9;
+            _line-height: 30px;
+            font-family: "微软雅黑";
+        }
+
+        .err {
+            border-color: #d84b4b;
+        }
+
+        .inpBtn {
+            background: url(../Content/images/main.png) repeat-x 0 -57px;
+            height: 38px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #e9880e;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            font-family: "微软雅黑";
+        }
+
+        a.inpBtn {
+            display: inline-block;
+            text-align: center;
+            line-height: 38px;
+        }
+
+            a.inpBtn:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+
+        /*信息*/
+        .infoBox {
+            line-height: 28px;
+            margin: 62px 0 0 250px;
+        }
+
+            .infoBox:after {
+                content: "\20";
+                clear: both;
+                height: 0;
+                display: block;
+                overflow: hidden;
+            }
+
+            .infoBox .icon {
+                background: url(%E6%9C%9F%E6%9D%83%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F1/images/main.png) no-repeat;
+                float: left;
+                height: 54px;
+                width: 54px;
+                margin-right: 13px;
+            }
+
+            .infoBox .emailIcon {
+                background-position: -60px -182px;
+            }
+
+            .infoBox .succeedIcon {
+                background-position: 0 -182px;
+            }
+
+            .infoBox .infoTxt {
+                overflow: hidden;
+                zoom: 1;
+            }
+
+            .infoBox .tit {
+                font-weight: 700;
+                font-size: 18px;
+                color: #333;
+                padding-left: 70px;
+                background: url(../Content/images/icon3png.png) no-repeat;
+                line-height: 54px;
+            }
+
+            .infoBox .f14 {
+                color: #333;
+                font-weight: 700;
+            }
+
+            .infoBox .email {
+                color: #ff8100;
+                font-weight: 400;
+            }
+
+            .infoBox .meg, .infoBox .subTit {
+                font-size: 14px;
+            }
+
+            .infoBox .subTit {
+                font-weight: 700;
+            }
+
+            .infoBox .inpBtn {
+                width: 128px;
+                margin-right: 10px;
+                vertical-align: middle;
+            }
+
+            .infoBox a.inpBtn {
+                display: inline-block;
+                text-align: center;
+                line-height: 38px;
+            }
+
+                .infoBox a.inpBtn:hover {
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+            .infoBox .subMeg {
+                line-height: 32px;
+                padding-left: 13px;
+                text-indent: -13px;
+            }
+
+            .infoBox .dBtn {
+                margin: 13px 0 20px;
+            }
+
+
+
+
+
+
+
+
+        .footer {
+            overflow: hidden;
+            width: 1000px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .about {
+            float: left;
+            width: 284px;
+        }
+
+            .about p {
+                font-family: "宋体";
+                font-size: 12px;
+                line-height: 26px;
+                color: white;
+                padding-top: 18px;
+            }
+
+        .boofborder {
+            float: left;
+            margin: 0 10px 0 10px;
+        }
+
+        .weixin {
+            float: left;
+            width: 232px;
+        }
+
+        .footer img {
+            display: block;
+            padding-right: 40px;
+        }
+
+        .contact li {
+            font-family: "宋体";
+            font-size: 12px;
+            color: #e4e4e4;
+            line-height: 26px;
+        }
+
+        .footerbox {
+            background-color: #535353;
+            margin-top: 180px;
+        }
+
+        .contact .help li a {
+            font-family: "宋体";
+            font-size: 12px;
+            color: #e4e4e4;
+            line-height: 40px;
+            margin-right: 12px;
+        }
+
+        .contact .help li {
+            float: left;
+        }
+
+        .contact .contactimg {
+            display: block;
+            padding-bottom: 14px;
+        }
+
+        .qq a {
+            float: left;
+            font-size: 12px;
+            font-family: "宋体";
+        }
+
+        .qq {
+            overflow: hidden;
+        }
+
+        .border {
+            width: 1000px;
+            margin: 0 auto;
+            border: 1px solid #CDCDCD;
+            background-color: #ffffff;
+        }
+    </style>
+    @*@Styles.Render("~/Content/css")*@
+    @Styles.Render("~/Content/site.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/trade/jquery-migrate-1.2.1.js"></script>
+    <style>
+        /*注册*/
+        .box {
+            overflow: hidden;
+            margin: 0 auto;
+            position:relative;
+            top:0;
+            left:290px;
+        }
+
+        .tt {
+            margin-top: 50px;
+            float: left;
+            border-left: #c2c2c2 1px solid;
+            height: 468px;
+        }
+
+        .input {
+            width: 270px;
+            height: 38px;
+            border: 1px solid #c2c2c2;
+            margin: 0 0 15px 10px;
+        }
+
+        .sumbit {
+            border-radius: 2px;
+            background-color: #fe7701;
+            color: white;
+            width: 255px;
+            line-height: 40px;
+            margin: 20px 0 0 70px;
+        }
+
+        .register {
+            padding-top: 20px;
+            float: left;
+        }
+
+            .register ul li {
+                height: 70px;
+                color: #999999;
+                font-size: 14px;
+            }
+
+        .mm {
+            margin-left: 1px;
+        }
+
+        .username {
+            margin-left: 14px;
+        }
+
+        .email {
+            margin-left: 28px;
+        }
+
+        .yzm {
+            margin-left: 14px;
+            overflow: hidden;
+        }
+
+        .input1 {
+            float: left;
+            width: 155px;
+            height: 30px;
+            border: 1px solid #c2c2c2;
+            margin-left: 12px;
+        }
+
+        .yzmimg {
+            float: left;
+            width: 80px;
+            height: 32px;
+            background-color: #f2f2f2;
+            margin-left: 10px;
+        }
+
+        .change {
+            float: left;
+            line-height: 32px;
+            margin-left: 8px;
+        }
+
+            .change a {
+                font-size: 12px;
+                color: #639bd4;
+            }
+
+        .yzm p {
+            float: left;
+            line-height: 32px;
+        }
+
+        .checkbox a {
+            color: #639bd4;
+        }
+
+        .checkbox input {
+            margin-left: 70px;
+            vertical-align: middle;
+        }
+
+
+        .title {
+            font-size: 20px;
+            color: #549133;
+        }
+
+            .title a {
+                display: inline-block;
+                width: 6px;
+                height: 6px;
+                background-color: #549133;
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+
+        .title1 {
+            font-size: 20px;
+            color: #ab2121;
+        }
+
+            .title1 a {
+                display: inline-block;
+                width: 6px;
+                height: 6px;
+                background-color: #ab2121;
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+
+        .title2 {
+            font-size: 20px;
+            color: #e99144;
+        }
+
+            .title2 a {
+                display: inline-block;
+                width: 6px;
+                height: 6px;
+                background-color: #e99144;
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+
+        .text {
+            font-size: 12px;
+            color: #535353;
+            margin-bottom: 20px;
+        }
+
+        .tt div {
+            margin: 00px 0 0 80px;
+        }
+
+        .phone {
+            color: #8b8b8b;
+            font-weight: bolder;
+            font-size: 16px;
+            width: 200px;
+            line-height: 30px;
+            background-color: #e6e6e6;
+            text-align: center;
+            border-radius: 6px;
+        }
+
+        .footer {
+            overflow: hidden;
+            width: 1000px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .about {
+            float: left;
+            width: 284px;
+        }
+
+            .about p {
+                font-family: "宋体";
+                font-size: 12px;
+                line-height: 26px;
+                color: white;
+                padding-top: 18px;
+            }
+
+        .boofborder {
+            float: left;
+            margin: 0 10px 0 10px;
+        }
+
+        .weixin {
+            float: left;
+            width: 232px;
+        }
+
+        .footer img {
+            display: block;
+            padding-right: 40px;
+        }
+
+        .contact li {
+            font-family: "宋体";
+            font-size: 12px;
+            color: #e4e4e4;
+        }
+
+        .contact .help li a {
+            font-family: "宋体";
+            font-size: 12px;
+            color: #e4e4e4;
+            line-height: 40px;
+            margin-right: 12px;
+        }
+
+        .contact .help li {
+            float: left;
+        }
+
+        .contact .contactimg {
+            display: block;
+            padding-bottom: 14px;
+        }
+
+        .qq a {
+            float: left;
+            font-size: 12px;
+            font-family: "宋体";
+        }
+
+        .qq {
+            overflow: hidden;
+        }
+
+        .lable {
+        }
+
+        .register-title {
+            font-size: 24px;
+            font-family: 'Microsoft YaHei';
+            text-align: center;
+            width:434px;
+        }
+        .register-submit{
+            background-image:url(@Url.Content("~/content/images/btn_register.png"));
+            background-repeat:no-repeat;
+            width:270px;
+            height:40px;
+            color:#ffffff;
+            text-align:center;
+            font-size:16px;
+            font-family:"Microsoft YAHEI";
+            cursor:pointer;
+            margin-left:89px;
+            padding-top:5px;
+        }
+        .logoli1 a {
+            color: #438ACA;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>用户注册-最好的比特币期权交易平台</title>
+</head>
+
+<body>
+    <div class="logobox">
+        <ul class="logo">
+            <a href="@Url.Action("index","home")">
+                <li class="logoli"><img src="../Content/images/logo.png"></li>
+            </a>
+            <li class="logoli1">我已经注册，现在就&nbsp;@*<button class="btn">登入</button>*@<strong> <a href="/Cache/index">登录</a></strong> </li>
+        </ul>
+    </div>
+    <div class="border">
+        <div class="box">
+            @*<h2 style="font-size:35px;text-align:center;margin-top:20px;">@ViewBag.Title</h2>*@
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="register">
+                    <div class="register-title">欢迎注册</div>
+                    <div style="height:30px;"></div>
+                    <ul style="padding:0px;margin:0px">
+                        <li class="username">
+                            @Html.LabelFor(m => m.UserName, new { @class = "lable" })：
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
+                            <span class="span123"> @Html.ValidationMessageFor(m => m.UserName)</span>
+                        </li>
+                        <li class="mm">
+
+                            @Html.LabelFor(m => m.Password, new { @class = "lable" })：
+                            @Html.PasswordFor(m => m.Password, new { @class = "input", type = "password" })
+                            <span class="span123"> @Html.ValidationMessageFor(m => m.Password)</span>
+                        </li>
+                        @*<li class="mm">
+
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "lable" })
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input", type = "password" })
+                                <span class="span123">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
+
+                            </li>*@
+                        <li class="mm">
+
+                            @Html.LabelFor(m => m.TradePassword, new { @class = "lable" })：
+                            @Html.PasswordFor(m => m.TradePassword, new { @class = "input", type = "password" })
+                            <span class="span123"> @Html.ValidationMessageFor(m => m.TradePassword)</span><span style="color:red" id="pwderror"></span>
+                        </li>
+                        @*<li class="mm">
+
+                                @Html.LabelFor(m => m.TradeConfirmPassword, new { @class = "lable" })
+                                @Html.PasswordFor(m => m.TradeConfirmPassword, new { @class = "input", type = "password" })
+                                <span class="span123">@Html.ValidationMessageFor(m => m.TradeConfirmPassword)</span>
+
+                            </li>*@
+                        <li class="email" style="margin-left:29px;">
+
+                            @Html.LabelFor(m => m.Email, new { @class = "lable" })：
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input" })
+                            <span class="span123">@Html.ValidationMessageFor(m => m.Email)</span>
+                        </li>
+                        @*<li class="yzm" style="padding-left:5px;height:52px">
+                                <p>@Html.LabelFor(m => m.Code, new { @class = "lable" })</p>
+                                @Html.TextBoxFor(m => m.Code, new { @class = "input" })
+                                <img alt="验证码图片" id="img" src="/Account/getCode" style="width: 60px; height: 28px; border: 1px solid #ddd; " />
+                                <a href="#" onclick="fun()" style="color: #1b66c7">换一张</a>
+                                <span class="span123">@Html.ValidationMessageFor(m => m.Code)</span>
+                            </li>*@
+                        <li class="checkbox" style="width:350px;padding-left:60px;font-size:12px;color:#000000;margin-left:24px;height:30px;">
+                            <input class="checkbox" id="Ischeckbox" name="IsCheck" type="checkbox" style="font-family:微软雅黑;margin-left:5px">&nbsp;<label for="Ischeckbox">我已阅读并同意</label><a href="/WebHelper/service" style="display:inline">《比权网络注册协议》</a><br /><br />
+                        </li>
+                        <li style="height:65px">
+                            <div class="register-submit"><span>立即注册</span></div>
+                        </li>
+                    </ul>
+                </div>}
+            @*<div class="tt" >
+                    <div style="padding-top:80px">
+                        <p class="title"><a></a>全方位安全保障</p>
+                        <p class="text">
+                            先进的安全技术体系,全面保护客户信息</br>
+                            完善的运维监测体系,全面保障用户资金
+                        </p>
+
+                        <p class="title1"><a></a>高收益灵活买卖</p>
+                        <p class="text">
+                            成本小，获利高</br>
+                            套期保值,涨跌可赚
+                        </p>
+
+                        <p class="title2"><a></a>全平台信息透明</p>
+                        <p class="text">
+                            安全可靠，规则透明</br>
+                            每天提供全平台最新数据
+                        </p>
+
+                        <p class="phone">客服热线&nbsp;400-001-0672</p>
+
+                    </div>
+                </div>*@
+
+        </div>
+    </div>
+
+    <div class="footerbox">
+        <div class="footer">
+
+            @*       <!--关于我们-->
+                    <div class="about">
+                        <img src="../Content/images/about.png">
+                        <p>
+                            比权网（www.bitsquan.com ）是由比权网络科<br>
+                            技（上海）有限公司承办的比特币期权交易平台，<br>
+                            公司于2014年初在中国上海创办，10月正式上<br>
+                            线，是全球领先的比特币期权交易平台，平台致<br>
+                            力于为投资者提供专业、安全、诚信的数字货币<br>
+                            交易服务。目前公司团队管理和工程师团队由各<br>
+                            行业的精英组成，他们都有着世界顶级院校的教<br>
+                            育背景；在世界顶尖的互联网、电子商务和支付<br>
+                            系统公司有多年的工作经验。
+                        </p>
+                    </div>
+                    <img class="boofborder" src="../Content/images/boofborder.png">
+
+
+                    <!--微信-->
+                    <div class="weixin"><img src="../Content/images/weixin.png"></div>
+                    <img class="boofborder" src="../Content/images/boofborder.png">
+
+                    <!--联系我们-->
+                    <div class="contact">
+                        <img class="contactimg" src="../Content/images/contact.png">
+                        <ul>
+                            <li>关注新浪微博：http://weibo.com/bitsquan</li>
+                            <li>投诉建议：tousu@bitsquan.com</li>
+                            <li>业务处理：service@bitsquan.com</li>
+                            <li class="qq"><a>群1</a><a href="#"><img src="../Content/images/qq11.png"></a><a>群2</a><a href="#"><img src="../Content/images/qq11.png"></a></li>
+                            <li>客服电话：400-001-0672（7*24小时）</li>
+
+                        </ul>
+                        <ul class="help">
+                            <li><a href="#">联系我们</a></li>
+                            <li><a href="#">交易规则</a></li>
+                            <li><a href="#">费用说明</a></li>
+                            <li><a href="#">法律声明</a></li>
+                            <li><a href="#">服务条款</a></li>
+                            <li><a href="#">帮助中心</a></li>
+                            <li>版权所有2014比权网络科技（上海）有限公司</li>
+                            <li>沪ICP备14004256号-1</li>
+                        </ul>
+                    </div>
+                </div>*@
+
+        </div>
+        @Html.Partial("Footer")
+</body>
+</html>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    $(function () {
+        $("#Ischeckbox").on("click", function () {
+            if (!$(this).prop("checked")) {
+                alert("请选择同意条款，否则将无法注册！");
+            }
+        });
+
+        $(".register-submit").on("click", function () {
+            if ($("#Ischeckbox").prop("checked"))
+                document.forms[0].submit();
+            else
+                alert("请先选择同意服务条款！");
+        });
+    });
+    function fun() {
+        $("#img")[0].src = $("#img")[0].src + "?" + Math.random;
+    }
+    //$.validator.addMethod('notequal', function (value, element, params) {
+    //    return value != params['value'];
+    //});
+    //$.validator.unobtrusive.adapters.add("notequal", ['other'], function (options) {
+
+    //    options.rules["notequal"] = {
+    //        value: options.params.other
+    //    };
+    //    options.messages["notequal"] = options.message;
+    //});
+
+    $.validator.addMethod('notequal', function (value, element, params) {
+        //return value != params['value'];
+        return value != $("input[id='" + params['value'] + "']").val();
+    });
+
+    $.validator.unobtrusive.adapters.add("notequal", ['other'], function (options) {
+        options.rules["notequal"] = {
+            value: options.params.other
+        };
+        options.messages["notequal"] = options.message;
+    });
+
+    $(function () {
+        @if(ViewBag.Errors != null && ViewBag.Errors.Count > 0){
+        @:var errors = [];
+                        foreach (var i in ViewBag.Errors) {
+            @:errors.push("@i");
+                        }
+        @:alert(errors.join('\n'));
+                               }
+    });
+</script>

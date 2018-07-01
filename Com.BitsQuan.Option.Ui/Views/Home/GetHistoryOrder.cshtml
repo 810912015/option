@@ -1,0 +1,116 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.HisOrderModel
+
+<div id="hisorderpanel" style="height:400px;overflow-y:auto;">
+
+  
+        @Html.HiddenFor(m => m.PageIndex, new { id = "hispindex" })
+    <table class="table table-striped">
+
+        <tr style="background-color:white;border-bottom:1px solid #ddd">
+            <td style="border:none">委托编号</td>
+            <td style="border:none">委托时间</td>
+            <td style="border:none">代码</td>
+            <td style="border:none">合约名称</td>
+            <td style="border:none">类型</td>
+            <td style="border:none">下单方式</td>
+            <td style="border:none">委托价格</td>
+            <td style="border:none">委托数量</td>
+            <td style="border:none">成交量</td>
+            <td style="border:none">未成交</td>
+            <td style="border:none">状态</td>
+
+        </tr>
+        @if (Model != null && Model.Orders != null)
+        {
+            foreach (var v in Model.Orders)
+            {
+                <tr>
+                    <td>@v.Id</td>
+                    <td>@v.OrderTime</td>
+                    <td>@v.Contract.Code</td>
+                    <td>@v.Contract.Name</td>
+                    <td>@(v.Direction + v.OrderType.ToString().Substring(0, 1))</td>
+                    <td>@v.OrderPolicy</td>
+                    <td>@v.Price</td>
+                    <td>@v.ReportCount</td>
+                    <td>@v.TotalDoneCount</td>
+                    <td>@(v.ReportCount - v.TotalDoneCount)</td>
+                    <td>@v.State</td>
+
+
+                </tr>
+            }
+
+
+        }
+    </table>
+    @if (ViewBag.msg != null)
+    {
+        <div class="lead">
+            @ViewBag.msg
+        </div>
+    }
+    <ul class="pagination">
+        @if (Model != null && Model.PageIndex > 1)
+        {
+            <li><a class="btn btn-primary" id="prehisorder">上一页</a></li>
+
+        }
+        else
+        {
+            <li><span>上一页</span></li>
+
+        }
+
+        @if (Model != null && Model.HasNext)
+        {
+            <li><a class="btn btn-primary" id="nexthisorder">下一页</a></li>
+
+        }
+        else
+        {
+            <li><span>下一页</span></li>
+
+        }
+        <li><a class="btn btn-primary" id="refhisorder">刷新</a></li>
+    </ul>
+    <script>
+        $(function () {
+            var getHisIndex = function () {
+                var hi = $("#hispindex").val();
+                var hii = parseInt(hi, 0);
+                return hii;
+            };
+            var setHisIndex = function (hi) {
+                $("#hispindex").val(hi);
+            };
+            var qhis = function (hi) {
+                $.get("/home/gethistoryorder?pageIndex=" + hi, function (d) {
+                    $("#hisorderpanel").html(d);
+                })
+            };
+            $("#prehisorder").click(function () {
+                var hi = getHisIndex() - 1;
+                qhis(hi);
+                setHisIndex(hi);
+            });
+            $("#nexthisorder").click(function () {
+                var hi = getHisIndex() + 1;
+                qhis(hi);
+                setHisIndex(hi);
+            });
+            $("#refhisorder").click(function () {
+                var hi = getHisIndex();
+                qhis(hi);
+            });
+
+            $('#myposandorder a[href="#thistorypanel"]').click(function (e) {
+                e.preventDefault();
+                qhis(1);
+                $(this).tab('show')
+            })
+        })
+    </script>
+
+
+</div>

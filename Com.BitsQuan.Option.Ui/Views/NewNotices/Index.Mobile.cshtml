@@ -1,0 +1,66 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "新闻公告-最好的比特币期权交易平台";
+}
+ 
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+ 
+<div >
+ 
+    <!--内容-->
+    <div  >
+        <!--左侧导航-->
+        @Html.Partial("_LeftNav")
+
+        <!--右侧内容-->
+        <div>
+            <div class="lead">@ViewBag.Type.ToString()</div>
+            @if (ViewBag.News != null)
+            {
+                foreach (Help item in ViewBag.News)
+                {
+                    <ul style="margin:0px;padding:0px">
+
+                        <li>
+                            <p style="text-align:left;padding-top:5px;font-size:16px">
+                                @Html.ActionLink(item.Htitle.Length > 30 ? item.Htitle.Substring(0, 30) : item.Htitle, "New", new { id = item.Id }, new { @class = "news-list-title" })
+                            </p>
+                            <p class="title2box">
+                                @if (item.Hcontent.Length < 100)
+                                { <a class="title2" href="/NewNotices/New/@item.Id">@Html.Raw(item.Hcontent)</a> }
+                                else
+                                {
+                                    <a class="title2" href="/NewNotices/New/@item.Id">@Html.Raw(Regex.Replace(Regex.Replace(Regex.Replace(item.Hcontent, "&nbsp;", " "), "<.+?>", " "), "<br>", " ", RegexOptions.IgnoreCase).Substring(0, 100))...</a>
+                                }
+                            </p>
+                        </li>
+                    </ul>
+                }
+                <div class="text-center">
+                    <ul class="pagination">
+                        <li @(ViewBag.Pager.PageIndex == 1 ? "class=disabled" : "")>
+                            <a href="@Url.Action("Index", new { id = ViewBag.Pager.PageIndex==1?1:ViewBag.Pager.PageIndex - 1,type=(int)ViewBag.Type })" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        @for (var i = 1; i <= ViewBag.Pager.PageCount; ++i)
+                        {
+                            <li @(i == ViewBag.Pager.PageIndex ? "class=active" : "")><a href="@Url.Action("Index", new { id = i,type=(int)ViewBag.Type })">@i</a></li>
+                        }
+                        <li @(ViewBag.Pager.PageIndex == ViewBag.Pager.PageCount ? "class=disabled" : "")>
+                            <a href="@Url.Action("Index", new { id = ViewBag.Pager.PageIndex == ViewBag.Pager.PageCount?ViewBag.Pager.PageCount:ViewBag.Pager.PageIndex + 1,type=(int)ViewBag.Type })" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+
+
+</div>

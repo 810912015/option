@@ -1,0 +1,569 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <style>
+        body, h1, h2, h3, h4, blockquote, p, dl, dt, dd, ul, ol, li, th, td, form, fieldset, legend, button, input, textarea {
+            margin: 0;
+            padding: 0;
+        }
+
+        body, button, input, select, textarea {
+            font: 12px/1.75 \5b8b\4f53,arial,sans-serif;
+        }
+
+        button, input, select, textarea, h1, h2, h3, h4 {
+            font-size: 100%;
+        }
+
+        em, i {
+            font-style: normal;
+        }
+
+        ol, ul {
+            list-style: none;
+            list-style-position: outside;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        img, fieldset {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        .clearfix:after {
+            content: "\20";
+            clear: both;
+            height: 0;
+            display: block;
+            overflow: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clear {
+            font-size: 0;
+            line-height: 0;
+            height: 0;
+            overflow: hidden;
+            clear: both;
+            visibility: hidden;
+        }
+
+        a {
+            color: #777;
+            text-decoration: none;
+            outline: none;
+        }
+
+            a:hover {
+                color: #f60;
+                text-decoration: underline;
+            }
+
+        .wrap {
+            color: #777;
+        }
+
+        .main {
+            width: 990px;
+            margin: 0 auto;
+            font-family: "微软雅黑";
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 10px 0;
+            min-height: 400px;
+            _height: 400px;
+        }
+
+        .blue, .blue a {
+            color: #639bd4;
+        }
+
+            .blue:hover, .blue a:hover {
+                color: #f60;
+            }
+
+        .logobox {
+            width: 100%;
+            background: url(../Content/images/headbg.png);
+            background-repeat: repeat-x;
+            height: 100px;
+        }
+
+        .logo {
+            width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+            .logo img {
+                margin-top: 20px;
+            }
+
+            .logo .logoli1 {
+                font-size: 12px;
+                float: right;
+                line-height: 100px;
+                color: #535353;
+                font-family: "宋体";
+            }
+
+                .logo .logoli1 .btn {
+                    font-weight: bold;
+                    color: #666;
+                    height: 32px;
+                    width: 64px;
+                    border: none;
+                    background-image: url(../Content/images/lond.png);
+                }
+
+            .logo .logoli {
+                float: left;
+            }
+
+
+
+
+
+        .inp {
+            height: 30px;
+            border: 1px solid #D2D2D2;
+            padding: 0 5px;
+            width: 255px;
+            -moz-border-radius: 1px;
+            -webkit-border-radius: 1px;
+            border-radius: 1px;
+            line-height: 29px\9;
+            _line-height: 30px;
+            font-family: "微软雅黑";
+        }
+
+        .err {
+            border-color: #d84b4b;
+        }
+
+        .inpBtn {
+            background: url(../Content/images/main.png) repeat-x 0 -57px;
+            height: 38px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #e9880e;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            font-family: "微软雅黑";
+        }
+
+        a.inpBtn {
+            display: inline-block;
+            text-align: center;
+            line-height: 38px;
+        }
+
+            a.inpBtn:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+
+        /*信息*/
+        .infoBox {
+            line-height: 28px;
+            margin: 62px 0 0 250px;
+        }
+
+            .infoBox:after {
+                content: "\20";
+                clear: both;
+                height: 0;
+                display: block;
+                overflow: hidden;
+            }
+
+            .infoBox .icon {
+                background: url(%E6%9C%9F%E6%9D%83%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F1/images/main.png) no-repeat;
+                float: left;
+                height: 54px;
+                width: 54px;
+                margin-right: 13px;
+            }
+
+            .infoBox .emailIcon {
+                background-position: -60px -182px;
+            }
+
+            .infoBox .succeedIcon {
+                background-position: 0 -182px;
+            }
+
+            .infoBox .infoTxt {
+                overflow: hidden;
+                zoom: 1;
+            }
+
+            .infoBox .tit {
+                font-weight: 700;
+                font-size: 18px;
+                color: #333;
+                padding-left: 70px;
+                background: url(../Content/images/icon3png.png) no-repeat;
+                line-height: 54px;
+            }
+
+            .infoBox .f14 {
+                color: #333;
+                font-weight: 700;
+            }
+
+            .infoBox .email {
+                color: #ff8100;
+                font-weight: 400;
+            }
+
+            .infoBox .meg, .infoBox .subTit {
+                font-size: 14px;
+            }
+
+            .infoBox .subTit {
+                font-weight: 700;
+            }
+
+            .infoBox .inpBtn {
+                width: 128px;
+                margin-right: 10px;
+                vertical-align: middle;
+            }
+
+            .infoBox a.inpBtn {
+                display: inline-block;
+                text-align: center;
+                line-height: 38px;
+            }
+
+                .infoBox a.inpBtn:hover {
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+            .infoBox .subMeg {
+                line-height: 32px;
+                padding-left: 13px;
+                text-indent: -13px;
+            }
+
+            .infoBox .dBtn {
+                margin: 13px 0 20px;
+            }
+
+
+
+
+
+
+
+
+        .footer {
+            overflow: hidden;
+            width: 1000px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .about {
+            float: left;
+            width: 284px;
+        }
+
+            .about p {
+                font-family: "宋体";
+                font-size: 12px;
+                line-height: 26px;
+                color: white;
+                padding-top: 18px;
+            }
+
+        .boofborder {
+            float: left;
+            margin: 0 10px 0 10px;
+        }
+
+        .weixin {
+            float: left;
+            width: 232px;
+        }
+
+        .footer img {
+            display: block;
+            padding-right: 40px;
+        }
+
+        .contact li {
+            font-family: "宋体";
+            font-size: 12px;
+            color: #e4e4e4;
+            line-height: 26px;
+        }
+
+        .footerbox {
+            background-color: #535353;
+            margin-top: 156px;
+        }
+
+        .contact .help li a {
+            font-family: "宋体";
+            font-size: 12px;
+            color: #e4e4e4;
+            line-height: 40px;
+            margin-right: 12px;
+        }
+
+        .contact .help li {
+            float: left;
+        }
+
+        .contact .contactimg {
+            display: block;
+            padding-bottom: 14px;
+        }
+
+        .qq a {
+            float: left;
+            font-size: 12px;
+            font-family: "宋体";
+        }
+
+        .qq {
+            overflow: hidden;
+        }
+
+    </style>
+    @*@Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Index.css")*@
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <meta charset="utf-8">
+    <title>用户注册-最好的比特币期权交易平台</title>
+</head>
+
+<body>
+    <div class="logobox">
+
+        <ul class="logo">
+            <li class="logoli"><img src="../Content/images/logo.png"></li>
+            <li class="logoli1">我已注册，现在就&nbsp;@*<button class="btn">登入</button>*@<strong> <a href="/Cache/index">登入</a></strong> </li>
+             
+        </ul>
+    </div>
+
+
+
+
+
+
+    <div class="wrap clearfix">
+        <div class="main clearfix content">
+            <div class="infoBox">
+
+                <div class="infoTxt">
+                    <p class="tit">
+                        验证邮件已经发送到您的邮箱：<span class="email" id="email">
+                            @if (ViewBag.msg != null)
+                            {
+                               @ViewBag.msg
+                            }
+                        </span>
+                    </p>
+                    <p class="meg" style="margin-left:70px">请登录您的邮箱，点击邮件中的确认链接激活帐号</p>
+                    <div class="dBtn">
+                        <input name="toEmail" class="inpBtn" value="登录该邮箱" id="loginBtn" type="button" style="margin-left:70px">
+                        @*邮箱写错了？ <a href="http://my.pcauto.com.cn/passport/edit_email.jsp" class="blue">换个邮箱</a>*@
+                    </div>
+                    <p class="subTit" style="margin-left:280px;font-size:16px;">
+                        <span>或去 </span><a href="/home/index" style="color:#874ebf;font-size:18px;">主页</a> 
+                    </p>
+                        
+                    <p class="subTit" style="margin-left:70px">没有收到验证邮件？</p>
+                    <p class="subMeg" style="margin-left:70px">到垃圾邮件目录找找，重新发送验证邮件请 <span class="blue" onclick="SendEmail2()" style="cursor:pointer ">点击这里</span></p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footerbox">
+        <div class="footer">
+
+            <!--关于我们-->
+            <div class="about">
+                <img src="../Content/images/about.png">
+                <p>
+                    比权网（www.bitsquan.com ）是由比权网络科<br>
+                    技（上海）有限公司承办的比特币期权交易平台，<br>
+                    公司于2014年初在中国上海创办，10月正式上<br>
+                    线，是全球领先的比特币期权交易平台，平台致<br>
+                    力于为投资者提供专业、安全、诚信的数字货币<br>
+                    交易服务。目前公司团队管理和工程师团队由各<br>
+                    行业的精英组成，他们都有着世界顶级院校的教<br>
+                    育背景；在世界顶尖的互联网、电子商务和支付<br>
+                    系统公司有多年的工作经验。
+                </p>
+            </div>
+            <img class="boofborder" src="../Content/images/boofborder.png">
+
+
+            <!--微信-->
+            <div class="weixin"><img src="../Content/images/weixin.png"></div>
+            <img class="boofborder" src="../Content/images/boofborder.png">
+
+            <!--联系我们-->
+            <div class="contact">
+                <img class="contactimg" src="../Content/images/contact.png">
+                <ul>
+                    <li>关注新浪微博：http://weibo.com/bitsquan</li>
+                    <li>投诉建议：tousu@bitsquan.com</li>
+                    <li>业务处理：service@bitsquan.com</li>
+                    <li class="qq"><a>群1</a><a href="#"><img src="../Content/images/qq11.png"></a><a>群2</a><a href="#"><img src="../Content/images/qq11.png"></a></li>
+                    <li>客服电话：400-001-0672（7*24小时）</li>
+
+                </ul>
+                <ul class="help">
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">交易规则</a></li>
+                    <li><a href="#">费用说明</a></li>
+                    <li><a href="#">法律声明</a></li>
+                    <li><a href="#">服务条款</a></li>
+                    <li><a href="#">帮助中心</a></li>
+                    <li>版权所有2014比权网络科技（上海）有限公司</li>
+                    <li>沪ICP备14004256号-1</li>
+                </ul>
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#loginBtn").click(function () {
+            var uurl = $.trim($("#email").text());
+            uurl = gotoEmail(uurl);
+            if (uurl != "") {
+                window.open("http://" + uurl);
+            } else {
+                alert("抱歉!未找到对应的邮箱登录地址，请自己登录邮箱查看邮件！");
+            }
+        });
+        var Request = new Object();
+        Request = GetRequest();
+        $('#email').text((Request['email']));
+    })
+
+
+
+    function GetRequest() {
+
+        var url = location.search; //获取url中"?"符后的字串
+
+        var theRequest = new Object();
+
+        if (url.indexOf("?") != -1) {
+
+            var str = url.substr(1);
+
+            strs = str.split("&");
+
+            for (var i = 0; i < strs.length; i++) {
+
+                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+
+            }
+
+        }
+
+        return theRequest;
+
+    }
+    //功能：根据用户输入的Email跳转到相应的电子邮箱首页
+    function gotoEmail(email) {
+
+        var $t = email.substring(email.indexOf('@@') + 1);
+        $t = $t.toLowerCase();;
+        if ($t == "163.com") {
+            return 'mail.163.com';
+        } else if ($t == 'vip.163.com') {
+            return 'vip.163.com';
+        } else if ($t == '126.com') {
+            return 'mail.126.com';
+        } else if ($t == 'qq.com' || $t == 'vip.qq.com' || $t == 'foxmail.com') {
+            return 'mail.qq.com';
+        } else if ($t == 'gmail.com') {
+            return 'mail.google.com';
+        } else if ($t == 'sohu.com') {
+            return 'mail.sohu.com';
+        } else if ($t == 'tom.com') {
+            return 'mail.tom.com';
+        } else if ($t == 'vip.sina.com') {
+            return 'vip.sina.com';
+        } else if ($t == 'sina.com.cn' || $t == 'sina.com') {
+            return 'mail.sina.com.cn';
+        } else if ($t == 'tom.com') {
+            return 'mail.tom.com';
+        } else if ($t == 'yahoo.com.cn' || $t == 'yahoo.cn') {
+            return 'mail.cn.yahoo.com';
+        } else if ($t == 'tom.com') {
+            return 'mail.tom.com';
+        } else if ($t == 'yeah.net') {
+            return 'www.yeah.net';
+        } else if ($t == '21cn.com') {
+            return 'mail.21cn.com';
+        } else if ($t == 'hotmail.com') {
+            return 'www.hotmail.com';
+        } else if ($t == 'sogou.com') {
+            return 'mail.sogou.com';
+        } else if ($t == '188.com') {
+            return 'www.188.com';
+        } else if ($t == '139.com') {
+            return 'mail.10086.cn';
+        } else if ($t == '189.cn') {
+            return 'webmail15.189.cn/webmail';
+        } else if ($t == 'wo.com.cn') {
+            return 'mail.wo.com.cn/smsmail';
+        } else if ($t == '139.com') {
+            return 'mail.10086.cn';
+        } else {
+            return '';
+        }
+        return '';
+    };
+
+    function SendEmail2() {
+        $.post("/Account/SendEmail2", {}, function () { })
+    }
+</script>

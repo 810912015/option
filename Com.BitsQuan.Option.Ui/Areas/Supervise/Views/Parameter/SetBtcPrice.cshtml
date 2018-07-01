@@ -1,0 +1,77 @@
+﻿@using Com.BitsQuan.Option.Core
+
+
+ <style>
+     #setcontainer{
+         width:800px;
+         margin:auto;
+         padding-top:20px;
+     }
+     #setcontainer div{
+     
+         margin:10px;
+     }
+ </style>
+
+
+<div  id="setcontainer">
+    <div class="lead">
+        <span class="glyphicon glyphicon-alert"> </span>比特币价格设置--仅供测试使用,请慎重操作!
+    </div>
+    <div >
+        <span class="lead">当前比特币价格调整模式为<span id="curbtcmode" >@(BtcPrice.IsAutoUpdateBtcPrice ? "自动调整" : "手动调整")</span></span>
+          
+       
+    </div>
+    <div>
+        <a class="btn btn-danger" id="setupdate">手动设置比特币指数</a>
+    </div>
+     
+        <div >
+            <strong><span>当前比特币指数为<strong id="cprice">@(BtcPrice.Current)</strong></span></strong>
+        </div>
+        <div >
+            <input type="number" style="width:300px;" id="price" class="form-control" placeholder="请输入要设置的比特币指数" />
+        </div>
+        <div>
+            <a class="btn btn-danger" id="set">设置</a>
+        </div>
+       
+   
+    <div class="lead" id="btcresult">
+
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#setupdate").click(function () {
+           
+            $.post("/supervise/parameter/SetBtcPriceUpdateState", function (d) {
+
+                if (d.ResultCode > 0) {
+                    $("#curbtcmode").html(d.ResultCode == 1 ? "自动调整模式" : "手动调整模式");
+                    $("#btcresult").html("比特币价格当前为" + (d.ResultCode == 1 ? "自动调整模式" : "手动调整模式"));
+                }
+                else {
+                    $("#btcresult").html("设置比特币价格变动模式失败:" + d.Desc);
+                }
+            })
+        });
+        $("#set").click(function () {
+            var p = $("#price").val();
+            if (isNaN(p)|| p <= 0) {
+                $("#btcresult").text("价格不能小于等于0");
+                return;
+            }
+            $.post("/supervise/parameter/SetBtcCurPrice", { "price": p }, function (d) {
+                if (d.ResultCode > 0) {
+                    $("#cprice").html(d.ResultCode);
+                    $("#btcresult").html("比特币价格设置成功");
+                }
+                else {
+                    $("#btcresult").html("设置比特币价格失败:" + d.Desc);
+                }
+            })
+        });
+    })
+</script>

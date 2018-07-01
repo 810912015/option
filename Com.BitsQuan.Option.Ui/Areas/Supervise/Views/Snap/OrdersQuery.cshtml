@@ -1,0 +1,99 @@
+﻿@model Com.BitsQuan.Option.Match.IOrderContainer
+
+@if (Model == null)
+{
+    <h3>
+        @ViewBag.name 当前没有委托
+    </h3>
+}
+else
+{
+     
+    var bq = Model.BuyQueue;
+    var sq = Model.SellQueue;
+            
+    <h3>
+        @(ViewBag.name) 共有卖单 @Model.SellOrderCount 个,买单 @Model.BuyOrderCount 个
+
+    </h3>
+    
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>编号</th>
+                <th>合约代码</th>
+                <th>合约名称</th>
+                <th>用户</th>
+                <th>方向</th>
+                <th>开平</th>
+                <th>下单方式</th>
+                <th>报单价格</th>
+                <th>报单量</th>
+                <th>未成交</th>
+                <th>成交量</th>
+                <th>报单时间</th>
+                <th>当前状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (sq != null)
+            {
+                for (int j = 0; j < sq.Count; j++)
+                {
+                    var i = sq[j];
+                    <tr id="@i.Trader.Name">
+                        <td>卖@(sq.Count - j)</td>
+                        <td>@i.Id</td>
+                        <td>@i.Contract.Code</td>
+                        <td>@i.Contract.Name</td>
+                        <td>@i.Trader.Name</td>
+                        <td>@i.Direction.ToString()</td>
+                        <td>@i.OrderType.ToString()</td>
+                        <td>@i.OrderPolicy.ToString()</td>
+                        <td>@i.Price</td>
+                        <td>@i.ReportCount</td>
+                        <td>@(i.ReportCount - i.TotalDoneCount)</td>
+                        <td>@i.TotalDoneCount</td>
+                        <td>@i.OrderTime</td>
+                        <td>@i.State.ToString()</td>
+                    </tr>
+                }
+            }
+            @if (bq != null)
+            {
+                for (int j = 0; j < bq.Count; j++)
+                {
+                    var i = bq[j];
+
+                    <tr id="@i.Trader.Name">
+                        <td>买@(j + 1)</td>
+                        <td>@i.Id</td>
+                        <td>@i.Contract.Code</td>
+                        <td>@i.Contract.Name</td>
+                        <td>@i.Trader.Name</td>
+                        <td>@i.Direction.ToString()</td>
+                        <td>@i.OrderType.ToString()</td>
+                        <td>@i.OrderPolicy.ToString()</td>
+                        <td>@i.Price</td>
+                        <td>@i.ReportCount</td>
+                        <td>@(i.ReportCount - i.TotalDoneCount)</td>
+                        <td>@i.TotalDoneCount</td>
+                        <td>@i.OrderTime</td>
+                        <td>@i.State.ToString()</td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+    
+    <link href="~/Scripts/tablesortor/theme.default.css" rel="stylesheet" />
+<script src="~/Scripts/tablesortor/jquery.tablesorter.min.js"></script>
+<script src="~/Scripts/tablesortor/jquery.tablesorter.widgets.min.js"></script>
+    <script>
+        $(function () {
+            $("table").tablesorter();
+        })
+    </script>
+}

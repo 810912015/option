@@ -1,0 +1,23 @@
+﻿@{ 
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<div class="container">
+
+
+    <div class="row" id="maincontent">
+    </div>
+    <div class="row">
+        @{Html.RenderAction("summary");}
+        @{Html.RenderAction("Users");}
+    </div>
+
+</div>  
+    
+ 
+
+

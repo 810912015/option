@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "_right.cshtml";
+}
+<style>
+
+    /*.title1 {
+        font-size: 16px;
+        background-color: #90dfff;
+        line-height: 46px;
+        background-image: url(../Content/images/bbsicon.png);
+        background-repeat: no-repeat;
+        background-position: 23px 10px;
+        padding-left: 95px;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }*/
+</style>
+@using Com.BitsQuan.Option.Ui.Models
+@model Com.BitsQuan.Option.Ui.Models.ReplyModel
+  <li class="title1">帖子详情</li>
+@if (ViewData["Host"] != null)
+{
+            var item = ViewData["Host"] as ForumHost;
+          <h1 style="text-align: center; font-family: 微软雅黑; ">@item.Fname</h1>
+            <div style="font-family: 微软雅黑">
+                @item.Fcontent
+            </div>
+}
+<br /><br />
+@using (Ajax.BeginForm("ReplyList", "FrontForum", null, new AjaxOptions
+        {
+            UpdateTargetId = "ReplyList",
+            InsertionMode = InsertionMode.Replace
+        },
+        new { @class = "form-horizontal", role = "form" }))
+        {
+
+            <div>
+                @Html.LabelFor(k => k.Rcontent, new { @class = "control-label col-md-2" })
+                @Html.TextAreaFor(k => k.Rcontent, new { @class = "input", cols = 100, rows = 8 })
+                @Html.TextBoxFor(k => k.fid, new { @class = "", value = ViewData["HostId"],style="display:none" })<br />
+
+                <input type="submit" onclick="AddReply()" value="回复" class="subbtn"  style="margin-top:5px"/>
+            </div>
+        }
+            <hr />
+
+<li class="title1"><i class="i1">回帖内容</i><i class="i2">作者</i><i class="i3">回帖时间</i></li>
+@if (ViewData["ReplyList"] != null)
+{
+    foreach (var item in ViewData["ReplyList"] as List<ForumReply>)
+    {
+        <li class="title2">
+            <span class="i1" style="word-break: normal; word-wrap: break-word;border:0px solid red;padding-left:65px">@item.Rcontent</span>
+            <span class="i2">@item.Uid</span>
+            <span class="i3"> &nbsp;@item.RDate</span>
+        </li>
+    }
+}
+
+
+
+

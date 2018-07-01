@@ -1,0 +1,329 @@
+﻿@{
+    Layout = null;
+}
+@model Com.BitsQuan.Option.Ui.Models.LoginViewModel
+@using Microsoft.AspNet.Identity
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        /*重置*/
+        * {
+            font-style: normal;
+            font-size: 14px;
+            font-family: "Microsoft YaHei";
+            border: 0;
+            text-decoration: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        /*页眉*/
+
+        .loding {
+            overflow: hidden;
+            background-color: #000;
+            height: 35px;
+            line-height: 35px;
+        }
+
+            .loding .neck {
+                width: 1000px;
+                margin: 0px auto;
+            }
+
+        #ulText {
+            width: 400px;
+        }
+
+        .loding div {
+            margin: 0 auto;
+        }
+
+        .loding p {
+            line-height: 36px;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            float: left;
+            width: 750px;
+            color: #FFF;
+            display: block;
+        }
+
+
+        .loding a {
+            font-family: "微软雅黑";
+            float: left;
+            margin-left: 110px;
+            color: #FFF;
+        }
+
+
+        .bannerbg img {
+            width: 100%;
+            display: block;
+        }
+
+        /*登录框*/
+        .loginbox {
+            background: url(/Content/images/bgc.png) no-repeat;
+            width: 500px;
+            height: 307px;
+            position: absolute;
+            top: 20%;
+        }
+
+        .title {
+            font-size: 20px;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            padding-top: 36px;
+        }
+
+        .input {
+            text-align: center;
+        }
+
+            .input input {
+                background: url(/Content/images/submit_06.png) no-repeat;
+                width: 285px;
+                height: 40px;
+                padding-left: 15px;
+                color: white;
+            }
+
+            .input .submit {
+                background: url(/Content/images/submit-blue_09.png) no-repeat;
+                width: 285px;
+                height: 40px;
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+                padding: 0;
+            }
+
+        .password {
+            width: 285px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .a1 {
+            color: white;
+            float: left;
+        }
+
+        .a2 {
+            color: white;
+            float: right;
+        }
+
+        /*页脚*/
+        .foot a {
+            color: #cccccc;
+            font-size: 16px;
+            display: inline-block;
+            width: 64px;
+            margin-right: 53px;
+            line-height: 55px;
+            padding-top: 16px;
+        }
+
+        .foot {
+            background-color: #535353;
+            width: 100%;
+        }
+
+        .copyright {
+            color: #cccccc;
+            font-size: 14px;
+            line-height: 14px;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .msg {
+            width: 704px;
+            margin: 0 auto;
+        }
+
+        .msgbox {
+            width: 1000px;
+            margin: 0 auto;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        #scrollText {
+            width: 420px;
+            margin-right: auto;
+            margin-left: auto;
+            float: left;
+            line-height: 35px;
+            height: 35px;
+            color: #e6e6e6;
+            font-family: "微软雅黑";
+            font-size: 14px;
+        }
+    </style>
+    @Scripts.Render("~/bundles/j1")
+    <script src="~/Scripts/FontRoll.js"></script>
+    <script>
+        $(function () {
+            @if(ViewBag.UserName == null){
+            @:$("#UserName").val("请输入用户名");
+            }
+            $("#Password").val("请输入密码");
+            $("#UserName").focus(function () {
+               if ($(this).val() == '请输入用户名') {
+                   $(this).val('');
+               }
+            });
+            $("#UserName").blur(function () {
+               if ($(this).val() == '') {
+                   $(this).val('请输入用户名');
+               }
+            });
+            $("#Password").focus(function () {
+               if ($(this).val() == '请输入密码') {
+                   $(this).val('');
+               }
+               $(this).attr("type", "password");
+            });
+            $("#Password").blur(function () {
+               if ($(this).val() == '') {
+                   $(this).val('请输入密码');
+                   $(this).attr("type", "text");
+               }
+            });
+        })
+    </script>
+
+    <script>
+        /**
+            让登录框居中
+         */
+        function centerLoginBox() {
+            $(".loginbox").css("left", (document.documentElement.scrollWidth - $(".loginbox").outerWidth()) / 2 + "px");
+        }
+
+        $(document).ready(function (e) {
+            ScrollText($('#scrollText'), 35, 400, '比特币指数 : <span style="color:#ff0000" id="span-btc-index">￥0</span> | 成交量 : <span style="color:#ff0000" id="span-total-deals"></span> | 持仓量 : <span style="color:#ff0000" id="span-total-positions"></span>', 'left', 1, 20);//滚动字幕
+            //ScrollText($('#scrollText'), 35, 400, '最新成交价BTC:<span style="color:#858c91" id="newestprice1">￥0</span> | 24小时成交量BTC:<span style="color:#858c91" id="totalcount1"> ฿0</span>', 'left', 1, 20);//滚动字幕
+            getMarket5();
+            $(window).on("resize", function () { centerLoginBox(); }).trigger("resize");
+        });
+        var getMarket5 = function () {
+            $.getJSON(
+                "@Url.Action("GetOptionMarket","Home")",
+                function (back) {
+                    $("#span-btc-index").text("￥" + back.btcIndex);
+                    $("#span-total-positions").text(back.positions);
+                    $("#span-total-deals").text(back.deals);
+                }
+            );
+            setTimeout("getMarket5();", 3000);
+        };
+        logOff = function () {
+            var securityToken = $('input[name=__RequestVerificationToken]').val();
+            $.ajax({
+                type: "post",
+                dataType: "html",
+                url: "/account/logoff",
+                data: { __RequestVerificationToken: securityToken },
+                success: function (response) {
+                    window.location.href = "/home/Index";
+                }
+            });
+        }
+    </script>
+
+    <meta charset="utf-8">
+    <title>用户登录-最好的比特币期权交易平台</title>
+</head>
+
+<body>
+
+    <!--页眉-->
+    <div class="loding">
+        <div class="neck">
+            <div id="scrollText"></div>
+            <div style="float:left;margin-left:100px">
+                @Html.AntiForgeryToken()
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("你好 " + User.Identity.GetUserName() + "!", "index", "Cache", routeValues: null, htmlAttributes: new { title = "管理" })
+                    <a href="#" onclick='logOff();'>注销</a>
+                }
+                else
+                {
+                    @Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                    @Html.ActionLink("登录", "login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <!--内容-->
+    <div class="bannerbg">
+        <img src="/Content/images/Login.png">
+
+
+    </div>
+    @using (Html.BeginForm("Login", "Account", new
+    {
+        ReturnUrl = ViewBag.ReturnUrl
+    }, FormMethod.Post, new
+    {
+        @class = "form-horizontal",
+        id = "thislogin",
+
+        role = "form"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="loginbox">
+            <p class="title" style="margin-bottom:20px">登录比权网</p>
+            <div class="input">@Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @AttributeValue = "请输入用户名", value = ViewBag.UserName})</div>
+            <div class="input" style="height:30px"><span>@Html.ValidationMessageFor(m => m.UserName)</span></div>
+            <div class="input">@Html.TextBoxFor(m => m.Password, new { @class = "form-control"})</div>
+            <div class="input" style="height:30px">@Html.ValidationMessageFor(m => m.Password)<span></span></div>
+
+            @*<div class="input"><input type="text" value="请输入用户名" name="UserName" style="padding-left:15px;color:white" onfocus="if (this.value == '请输入用户名') { this.value = ''; }" onblur="    if (this.value == '') { this.value = '请输入用户名'; }"></div>
+                <div class="input" style="height:30px"><span>@Html.ValidationMessageFor(m => m.UserName)</span></div>
+                <div class="input"><input type="text" value="请输入密码" name="Password" style="padding-left:15px;color:white" onfocus="if (this.value == '请输入密码') { this.value = ''; }" onblur="    if (this.value == '') { this.value = '请输入密码'; }"></div>
+                <div class="input" style="height:30px">@Html.ValidationMessageFor(m => m.Password)<span></span></div>
+                                    <a class="a1" href="#">忘记密码？</a>
+                    <a class="a2" href="#">注册</a>*@
+            @if (ViewBag.Error != null)
+            {
+                <div style="color:#ff0000;text-align:center;">@ViewBag.Error</div>
+            }
+            <div class="input"><input class="submit" type="submit" value="登录"></div>
+            <div class="password">
+                @Html.ActionLink("忘记密码", "FindPassword", null, new { @class = "a1" })
+                @Html.ActionLink("注册", "Register", null, new { @class = "a2" })
+            </div>
+        </div>
+    }
+    <!--页脚-->
+    <div class="foot">
+        <div class="msgbox">
+            <p class="msg" style="width:900px;margin:0px auto;text-align:center">
+                <a href="/WebHelper/about">关于我们</a>
+                <a href="/WebHelper/index">联系我们</a>
+                <a href="/WebHelper/fee">费率标准</a>
+                <a href="/WebHelper/rules">交易规则</a>
+                <a href="/WebHelper/faq">用户帮助</a>
+                <a href="/WebHelper/law">法律说明</a>
+                <a href="/WebHelper/service">服务条款</a>
+            </p>
+        </div>
+        <p class="copyright">CopyRight &copy;2015&nbsp;&nbsp;比权网络科技（上海）有限公司&nbsp;沪ICP备14004256号-1</p>
+    </div>
+
+
+
+</body>
+</html>

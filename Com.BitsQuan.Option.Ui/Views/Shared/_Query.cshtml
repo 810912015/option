@@ -1,0 +1,394 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.Query.QueryEngine
+@{
+    var queryOption = new AjaxOptions
+    {
+        UpdateTargetId = "divqueryresult",
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        OnBegin = "beginquery",
+        OnComplete = "queryEnd",
+        OnFailure = "queryFail",
+        OnSuccess = "querySucc"
+    };
+}
+
+
+
+<div class="panel" style="margin:0;padding:0;">
+    <input type="hidden" id="pageCount" value="@Model.PageCount" />
+    <div class="panel-heading">
+        <div class="row" style="margin:0;padding:0;">
+            <div class="col-md-3">
+                <div class="btn-group btn-group-sm">
+                    <input type="button" id="add" value="添加查询条件" class="btn btn-info btn-sm" />
+                    <input type="button" id="sub" value="去除最后一条" class="btn btn-success  btn-sm" />
+                    <input type="button" id="query" value="查询" class="btn btn-primary btn-sm" />
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div id="queryflag" class="hidden">
+                    <img id="querygo" width="30" height="30" />
+                </div>
+            </div>
+            <div class="col-md-1 h5" id="divqueryheader"></div>
+            <div class="col-md-4 col-md-offset-3">
+                <ul class="pagination center pull-right" id="pager" style="margin:0;">
+                    <li>
+                        <a href="#" data-tag="-2"><<</a>
+                    </li>
+                    <li>
+                        <a href="#" data-tag="-1"><</a>
+                    </li>
+
+                    <li><span id="totalpage">共@(Model.PageCount)页</span></li>
+                    <li><span id="curpage">当前是第@(Model.PageIndex)页</span></li>
+
+                    <li>
+                        <a href="#" data-tag="-3">></a>
+                    </li>
+                    <li>
+                        <a href="#" data-tag="-4">>></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div>
+            @using (Ajax.BeginForm(ViewData["action"].ToString(), ViewData["controller"].ToString(), queryOption, new { @class = "form-horizontal", id = "queryForm" }))
+            {
+                <input type="hidden" id="typestr" value="@Model.JsonString" />
+                <input type="hidden" id="qid" value="@Model.Args.Count" />
+                @Html.HiddenFor(m=>m.PageIndex)
+
+                <div id="qc">
+                    <div id="qa" class="hidden form-group">
+                        <div class="col-md-2">
+                            <select name="Name" id="Name" class="form-control">
+                                @foreach (var item in Model.Cols)
+                                {
+                                    <option value="@item.DisplayName">@item.DisplayName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="Relation" id="Relation" class="form-control">
+                                <option value="等于" selected="selected">等于</option>
+                                <option value="小于">小于</option>
+                                <option value="大于">大于</option>
+                                <option value="不等于">不等于</option>
+                                <option value="包含">包含</option>
+                                <option value="不包含">不包含</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input name="Value" id="Value" class="form-control" />
+                        </div>
+                        <div class="col-md-2">
+                            <select name="Next" id="Next" class="form-control">
+                                <option value="而且" selected>而且</option>
+                                <option value="或者">或者</option>
+                            </select>
+                        </div>
+                      
+                    </div>
+                    @if (Model.Args != null && Model.Args.Count > 0)
+                    {
+                        for (int i = 0; i < Model.Args.Count; i++)
+                        {
+                            <div id=@("qa"+i) class="form-group">
+                                <div class="col-md-2">
+                                    <select name=@("Args[" + i + "].Name") id=@("Name"+i) class="form-control">
+                                        @foreach (var item in Model.Cols)
+                                        {
+                                            <option value="@item.DisplayName" @(Model.Args[i].Name == item.DisplayName ? "selected" : "")>@item.DisplayName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select name=@("Args[" + i + "].Relation") id=@("Relation"+i) class="form-control">
+                                        <option value="等于" @(Model.Args[i].Relation == "等于" ? "selected" : "")>等于</option>
+                                        <option value="小于" @(Model.Args[i].Relation == "小于" ? "selected" : "")>小于</option>
+                                        <option value="大于" @(Model.Args[i].Relation == "大于" ? "selected" : "")>大于</option>
+                                        <option value="不等于" @(Model.Args[i].Relation == "不等于" ? "selected" : "")>不等于</option>
+                                        <option value="包含" @(Model.Args[i].Relation == "包含" ? "selected" : "")>包含</option>
+                                        <option value="不包含" @(Model.Args[i].Relation == "不包含" ? "selected" : "")>不包含</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input name=@("Args[" + i + "].Value") id=@("Value"+i) type="text" value="@Model.Args[i].Value" class="form-control" />
+                                </div>
+                                <div class="col-md-2">
+                                    <select name=@("Args[" + i + "].Next") id=@("Next"+i) class="form-control">
+                                        <option value="而且" @(Model.Args[i].Next == "而且" ? "selected" : "")>而且</option>
+                                        <option value="或者" @(Model.Args[i].Next == "或者" ? "selected" : "")>或者</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input name=@("Args[" + i + "].Value2") id=@("Value2"+i) type="text" value="@Model.Args[i].Value" class="form-control" />
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+        <div class="row" id="divqueryresult">
+
+        </div>
+    </div>
+</div>
+
+<link href="~/Scripts/bstimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+ 
+<script src="~/Scripts/bstimepicker/bootstrap-datetimepicker.js"></script>
+<script src="~/Scripts/bstimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
+<script>
+    var beginquery = function () {
+    };
+    var queryEnd = function () { };
+    var queryFail = function () { };
+    var querySucc = function () { };
+    var setTip = function (t) { }
+    $(function () {
+        beginquery = function () {
+            $("#querygo").attr("src", "/content/img/ajaxloader.gif");
+            $("#queryflag").removeClass("hidden");
+        };
+        queryEnd = function () {
+            try {
+                var apc = $("#ajaxpagecount").val();
+                $("#totalpage").html("共" + apc + "页");
+                $("#pageCount").val(apc);
+            }
+            catch (e) { }
+
+        };
+        queryFail = function () { $("#querygo").attr("src", "/content/img/del.png"); };
+        querySucc = function () { $("#querygo").attr("src", "/content/img/success.jpg"); };
+        setTip = function (t) { $("#divqueryheader").text(t); }
+    })
+
+    $(function () {
+
+        $("#pager a").each(function (i, e) {
+            $(e).click(function (e) {
+                var page = $("#PageIndex");
+                var pf = $("#queryForm");
+                var pt = $("#pageCount");
+                var thisIndex = parseInt($(this).data("tag"));
+                var total = pt.val();
+
+                var curIndex = parseInt(page.val());
+
+                switch (thisIndex) {
+                    case -1://前移
+                        if (curIndex > 1) {
+                            page.val(curIndex - 1);
+                            pf.submit();
+                            $("#curpage").text("当前是第" + (curIndex - 1) + "页")
+                        }
+                        break;
+                    case -2://最前
+                        if (curIndex != 1) {
+                            page.val(1);
+                            pf.submit();
+                            $("#curpage").text("当前是第1页")
+                        }
+                        break;
+                    case -3://后移
+                        if (curIndex < total) {
+                            page.val(curIndex + 1);
+                            pf.submit();
+                            $("#curpage").text("当前是第" + (curIndex + 1) + "页")
+                        }
+                        break;
+                    case -4://最后
+                        if (curIndex != total) {
+                            page.val(total);
+                            pf.submit();
+                            $("#curpage").text("当前是第" + total + "页")
+                        }
+                        break;
+
+
+                }
+
+                return false;
+            });
+        });
+
+    })
+
+    $(function () {
+        $("#query").click(function () {
+            $("#queryForm").submit();
+            return false;
+        });
+        $("#query").trigger("click");
+    })
+
+    var tpo = new Object();
+    $(function () {
+        typeobject = JSON.parse($("#typestr").val());
+        for (var i = 0; i < typeobject.length; i++) {
+            tpo[typeobject[i].DisplayName] = typeobject[i];
+        }
+        var changeValue = function (thisIndex) {
+
+            var thisIndexNum = thisIndex.substr(4);
+            var cv = "#Value" + thisIndexNum;
+            var cv2 = "#Value2"+ thisIndexNum;
+            var stxt = $("#Name" + thisIndexNum).val();
+            var ts = tpo[stxt];
+            var t = ts.TypeStr;
+            switch (t) {
+                case "datetime":
+                    {
+                        var ns = "<input name='Args[" + thisIndexNum + "].Value' id='Value" + thisIndexNum + "' type='text' value='' class='form-control' />";
+                        $(cv).replaceWith(ns);
+                        $(cv).datetimepicker({
+                            language: 'zh-CN',
+                            weekStart: 1,
+                            todayBtn: 1,
+                            autoclose: 'true',
+                            todayHighlight: 1,
+                            startView: 2,
+                            minView: 2,
+                            maxView: 2,
+                            forceParse: 0,
+                            format: 'yyyy-mm-dd',
+                            //startDate: new Date(),
+                            initialDate: new Date()
+                        });
+                        var ns2 = "<input name='Args[" + thisIndexNum + "].Value' id='Value2" + thisIndexNum + "' type='text' value='' class='form-control' />";
+                        $(cv2).replaceWith(ns2);
+                        $(cv2).datetimepicker({
+                            language: 'zh-CN',
+                            weekStart: 1,
+                            todayBtn: 1,
+                            autoclose: 'true',
+                            todayHighlight: 1,
+                            startView: 2,
+                            minView: 2,
+                            maxView: 2,
+                            forceParse: 0,
+                            format: 'yyyy-mm-dd',
+                            //startDate: new Date(),
+                            initialDate: new Date()
+                        });
+                    }
+                    break;
+                case "enum":
+                    {
+                        var sl = ts.ListItems;
+                        if (sl != undefined) {
+                            var se = "<select name='Args[" + thisIndexNum + "].Value' id='Value" + thisIndexNum + "' class='form-control'>";
+                            for (var index = 0; index < sl.length; index++) {
+                                se += "<option value=" + sl[index].Value + ">" + sl[index].Text + "</option>";
+                            }
+                            se += "</select>";
+                            $(cv).replaceWith(se);
+                        }
+                    }
+                    break;
+                default:
+                    var ns = "<input name='Args[" + thisIndexNum + "].Value' id='Value" + thisIndexNum + "' type='text' value='' class='form-control' />";
+                    $(cv).replaceWith(ns);
+
+                    break;
+            }
+        }
+
+        $("#add").click(function () {
+            var cur = $("#qid").val();
+            var nq = $("#qa").clone();
+            nq.attr("id", "qa" + cur);
+            nq.removeClass("hidden");
+            $("#qc").append(nq);
+            $("#qa" + cur + " select").each(function (i, j) {
+                $(j).attr("name", "Args[" + cur + "]." + $(j).attr("name"));
+                $(j).attr("id", $(j).attr("id") + cur);
+                var ts = tpo[$(j).val()];
+                if (ts != undefined) {
+                    $(j).change(function () {
+
+                        var thisIndex = $(j).attr("id");
+                        changeValue(thisIndex);
+                    });
+                }
+
+            });
+            $("#qa" + cur + " input").each(function (i, j) {
+                $(j).attr("name", "Args[" + cur + "]." + $(j).attr("name"));
+                $(j).attr("id", $(j).attr("id") + cur);
+            });
+            $("#qid").val(parseInt(cur) + 1);
+        });
+        $("#sub").click(function () {
+            var cur = parseInt($("#qid").val());
+            var cura = cur - 1;
+            $("#qa" + cura).remove();
+            $("#qid").val(cur - 1);
+        });
+
+
+
+        //查询后条件已经渲染了,添加事件
+        for (ei = 0; ei < $("#qid").val() ; ei++) {
+            //debugger;
+            var nt = "#Name" + ei;
+            var vt = "#Value" + ei;
+            var ntj = $(nt);
+            var vtj = $(vt);
+            //重新订阅事件
+            ntj.change(function () {
+                var thisIndex = $(this).attr("id");
+                changeValue(thisIndex);
+            });
+            //输入框绑定现有事件
+            var ctxt = $(nt + " option:selected").text();
+            var tt = tpo[ctxt];
+            switch (tt.TypeStr) {
+                case "datetime":
+                    {
+                        $(vt).datetimepicker({
+                            language: 'zh-CN',
+                            weekStart: 1,
+                            todayBtn: 1,
+                            autoclose: 'true',
+                            todayHighlight: 1,
+                            startView: 2,
+                            minView: 2,
+                            maxView: 2,
+                            forceParse: 0,
+                            format: 'yyyy-mm-dd',
+                            //startDate: new Date(),
+                            initialDate: new Date()
+                        });
+                    }
+                    break;
+                case "enum":
+                    {
+                        var sl = tt.ListItems;
+                        if (sl != undefined) {
+                            var se = "<select name='Args[" + ei + "].Value' id='Value" + ei + "' class='form-control'>";
+                            for (var index = 0; index < sl.length; index++) {
+                                se += "<option value=" + sl[index].Value + ">" + sl[index].Text + "</option>";
+                            }
+                            se += "</select>";
+                            $(vt).replaceWith(se);
+                        }
+                    }
+                    break;
+            }
+        }
+
+
+    })
+
+</script>

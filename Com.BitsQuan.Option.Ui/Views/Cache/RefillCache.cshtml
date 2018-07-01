@@ -1,0 +1,660 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@using Com.BitsQuan.Option.Ui.Controllers
+@model Com.BitsQuan.Option.Ui.Models.BankOpModel2
+
+<style>
+    .shuoming {
+        font-size: 12px;
+        margin-left: 20px;
+        line-height: 22px;
+        color: #535353;
+    }
+
+    .shuoming1 {
+        font-size: 12px;
+        padding-left: 20px;
+        line-height: 22px;
+        color: #535353;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #c2c2c2;
+    }
+
+    .withdraw_cash .cash {
+        font-family: "微软雅黑";
+        font-size: 16px;
+        color: #535353;
+        display: block;
+        margin: 0 auto;
+        width: 60px;
+    }
+
+    .cashbox_rc {
+        border: 1px solid #c2c2c2;
+        margin-top: 10px;
+        width: 780px;
+        height: 400px;
+    }
+
+        .cashbox_rc a {
+            font-family: "微软雅黑";
+            color: #666666;
+            font-size: 14px;
+            line-height: 30px;
+            display: inline-block;
+            width: 60px;
+            text-align: center;
+        }
+
+    .withdraw_cash .cashbox_rc .cny1 {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #e6e6e6;
+        margin-top: 20px;
+    }
+
+    .cashbox_rc .cny1 .cny:hover {
+        background-color: #559be9;
+        color: white;
+    }
+
+    .cashbox_rc .cny1 .btc:hover {
+        background-color: #559be9;
+        color: white;
+    }
+
+    .cashbox_rc .cny1 .cny {
+        background-image: url(@Url.Content("~/Content/images/cnyborder.png"));
+        background-repeat: no-repeat;
+        background-position: right;
+    }
+
+    .imgbox {
+        overflow: hidden;
+        margin-left: 20px;
+        font-family: "Microsoft YaHei";
+        font-size: 12px;
+    }
+
+    .img {
+        float: left;
+    }
+
+    .img1 {
+        float: left;
+        margin: 0px 0 0 30px;
+    }
+
+    .p1 {
+        font-size: 12px;
+        color: #535353;
+    }
+
+    .p2 {
+        font-family: helvetica;
+        font-size: 25px;
+        color: #61A4EA;
+        margin-top: 10px;
+    }
+
+    .record-title {
+        font-family: "微软雅黑";
+        color: #559be9;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+
+    .record .title1 {
+        font-family: "微软雅黑";
+        color: #535353;
+        font-size: 14px;
+        line-height: 28px;
+        background-color: #f2f2f2;
+        width: 130px;
+        text-align: center;
+        float: left;
+        border-top: 1px solid #c2c2c2;
+        border-left: 1px solid #c2c2c2;
+    }
+
+    .record {
+        overflow: hidden;
+        width: 782px;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+        .record .title2 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            background-color: #f2f2f2;
+            border-top: 1px solid #c2c2c2;
+        }
+
+        .record .title3 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            background-color: #f2f2f2;
+            border-top: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+        }
+
+        .record .title4 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-left: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .record .title5 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+        .record .title6 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-right: 1px solid #c2c2c2;
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+    .cashbox_rc .cny1 {
+        width: 792px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+
+    .manage_border {
+        margin: 30px 0 30px 0;
+    }
+
+    .rech {
+        margin: 20px 0 20px 20px;
+        color: #535353;
+        font-size: 14px;
+        line-height: 30px;
+    }
+
+    .leftnavbox {
+        float: left;
+    }
+
+    .withdraw_cash {
+        float: left;
+        margin-left: 18px;
+        margin-top: 10px;
+    }
+
+    .box {
+        overflow: hidden;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .bank {
+        margin-left: 20px;
+    }
+
+        .bank input {
+            /*line-height: 18px;
+            width: 20px;
+            height:20px;*/
+            margin-bottom: 10px;
+        }
+
+        .bank label {
+            height: 18px;
+            margin-left: 5px;
+        }
+
+        .bank .msyh {
+            margin-left: 65px;
+        }
+
+        .bank .xyyh {
+            margin-left: 65px;
+        }
+
+        .bank img {
+            margin-right: 4px;
+        }
+
+    .je {
+        margin-left: 20px;
+    }
+
+    .je1 {
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .je2 {
+        float: left;
+        line-height: 22px;
+        color: #535353;
+        margin-right: 6px;
+    }
+
+    .je3 {
+        float: left;
+    }
+
+        .je3 input {
+            border: 1px solid #c2c2c2;
+            height: 20px;
+            width: 94px;
+            font-size: 12px;
+            font-family: Arial;
+            margin-right: 10px;
+        }
+
+    .je4 {
+        float: left;
+    }
+
+        .je4 a {
+            display: block;
+            width: 92px;
+            margin-right: 10px;
+        }
+
+    .je5 {
+        float: left;
+        color: #0587ae;
+        font-weight: bold;
+        padding-top: 3px;
+    }
+
+    .bank .zxyh {
+        margin-left: 6px;
+    }
+
+    .bank .jsyh {
+        margin-left: 5px;
+    }
+
+    .btn2 {
+        display: block;
+        background-color: #559be9;
+        width: 60px;
+        color: white;
+        line-height: 22px;
+        border: 1px solid #5daaff;
+    }
+
+    /*第二段*/
+    .beizhu {
+        color: #ff0000;
+        line-height: 20px;
+    }
+
+    .cashbox .last {
+        width: 40px;
+    }
+
+    .cashbox .example {
+        width: 40px;
+    }
+
+    .huikuan {
+        font-family: "Microsoft YaHei";
+        font-size: 12px;
+        margin-left: 20px;
+        margin-top: 20px;
+        padding-left: 20px;
+        padding-left: 20px;
+        width: 737px;
+        padding-bottom: 10px;
+        background-color: #fafafa;
+    }
+
+        .huikuan .l1 {
+            line-height: 22px;
+        }
+
+        .huikuan .l2 {
+            line-height: 22px;
+            padding-top: 10px;
+            font-weight: bold;
+        }
+
+            .huikuan .l2 .btn2 {
+                margin-left: 6px;
+                background-color: #559be9;
+                width: 60px;
+                color: white;
+                line-height: 22px;
+                border: 1px solid #5daaff;
+            }
+
+    /*第三段*/
+
+    .hk {
+        border: 1px solid #c2c2c2;
+        margin: 20px 20px 10px 20px;
+        background-color: #fbfbfb;
+    }
+
+        .hk .hkt .hktt {
+            width: 100px;
+            border-right: 1px solid #c2c2c2;
+            display: inline-block;
+            line-height: 40px;
+            padding-left: 100px;
+        }
+
+        .hk .hkt {
+            border-bottom: 1px solid #c2c2c2;
+        }
+
+            .hk .hkt .money {
+                padding-left: 20px;
+            }
+
+            .hk .hkt a {
+                width: 40px;
+                line-height: 40px;
+                color: #97b356;
+            }
+
+    .hkleft {
+        float: left;
+        width: 140px;
+        border-right: 1px solid #c2c2c2;
+        line-height: 80px;
+        padding-left: 60px;
+    }
+
+    .hkright {
+        float: left;
+        padding-left: 20px;
+    }
+
+    .hkz {
+        overflow: hidden;
+    }
+
+    .hkright a {
+        width: 40px;
+        color: #97b356;
+    }
+
+    .hkright span {
+        color: red;
+        font-size: 12px;
+    }
+
+    .tit {
+        margin-left: 100px;
+        line-height: 28px;
+        font-size: 12px;
+    }
+
+    .btn2 {
+        border: 1px solid #5daaff;
+        background-color: #559be9;
+        width: 160px;
+        margin-top: 5px;
+        font-family: "微软雅黑";
+        color: white;
+        font-size: 14px;
+        line-height: 28px;
+    }
+</style>
+
+<div>
+
+
+
+    <div id="refillcache">
+        <div>
+            @using (Ajax.BeginForm("RefillCache", "cache", null, new AjaxOptions
+                        {
+                            UpdateTargetId = "refillcache",
+                            InsertionMode = InsertionMode.Replace
+                        },
+        new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken();
+                <div class="text-center"><a href="~/WebHelper/PayAndWithdraw?type=1">查看教程</a></div>
+                <ul style="border-bottom: 1px solid #c2c2c2;">
+                    <li class="shuoming" style="color:#000000;font-size:14px;font-weight:bold;margin-top:10px">充值说明</li>
+                    <li class="shuoming">
+                        1 为方便财务精准区分您的汇款信息，请您在汇款时确保汇款金额 <span style="color:#ff0000">保留到小数点后两位（例如：30,000.50人民币、50,000.72人民币）</span><br />
+                        2 每笔汇款充值金额要求 <span style="color:#ff0000">最低为100.01人民币（小于100.01人民币不予受理）</span><br />
+                        3 在进行连续多笔汇款时，<span style="color:#ff0000">请填写不同的汇款金额</span>以便财务能够清晰区分您的汇款信息<br />
+                    </li>
+                </ul>
+
+            <!--第一段-->
+                <div style="display:block" id="div_one">
+
+                    <div class="rech">
+                        充值方式<select style="color:#97b356;border:2px solid #b3d465;margin-left:8px;">
+                            <option style="color:#535353">银行卡</option>
+                            @*<option style="color:#535353">比权网充值卡</option>*@
+                        </select>
+                    </div>
+
+                    <div>
+                        <span style="padding-left: 28px;"> @Html.LabelFor(m => m.BankAccountId)</span>
+                        <select id="BankAccountId" name="BankAccountId" style="color:#97b356;border:2px solid #b3d465;margin-left:8px;">
+                            @foreach (var i in (IList<BankAccount>)ViewData["accounts"])
+                            {
+                                <option value="@i.Number" salesofficename="@i.SalesOfficeName" bankname="@i.BankName">@(i.BankName + "-" + i.Number)</option>
+                            }
+                        </select>
+                        <span style="color: #CA4A75" id="bankerr"></span>
+                        @Html.ValidationMessageFor(a => a.BankAccountId, "", new { style = "margin-right:10px" })
+
+                        @Html.ActionLink("[管理银行卡]", "Index", new { id = 2 }, new { style = "width:100px;color:red" })
+                        @*选择银行
+
+                            <label class="gsyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_gs.png">工商银行</label>
+                            <label class="zgyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_zg.png">中国银行</label>
+                            <label class="shyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_gd.png">光大银行</label>
+                            <label class="jtyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_jt.png">交通银行</label>
+                            <br>
+                            <label class="msyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_ms.png">民生银行</label>
+                            <label class="nyyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_ny.png">农业银行</label>
+                            <label class="zxyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_zx.png">中信银行</label>
+                            <label class="jsyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_js.png">建设银行</label>
+                            <br>
+                            <label class="xyyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_xy.png">兴业银行</label>
+                            <label class="zsyh"><input type="radio" name="1" value="单选" id=""><img src="../Content/images/icon_zs.png">招商银行</label>*@
+                    </div>
+                    <div class="je">
+                        <ul class="je1">
+                            <li class="je2">@Html.LabelFor(m => m.Delta)</li>
+                            <li class="je3">
+                                @Html.TextBoxFor(a => a.Delta, new { id = "txtnum", onmousedown = "blurVal()", style = "width:115px;height:23px" })
+                                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=@(CacheController.ServiceQQNumber)&site=qq&menu=yes"><img border="0" src="~/content/images/qq.png" alt="点击这里给我发消息" title="点击这里给我发消息" /></a>
+                                @Html.ValidationMessageFor(a => a.Delta)
+                                <span style="color: #CA4A75" id="error"></span>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div>
+                        <i class="ipt1" style="margin-left: 80px; padding: 5px 30px 5px 30px; background-color: #559BE9; cursor: pointer;color:white" onclick="next2()" id="getCode2">&nbsp;下一步&nbsp;</i>
+                    </div>
+
+                </div>
+
+                <!--第二段-->
+                <div class="huikuan" style="display:none;" id="div_two">
+                    <ul>
+                        <li>汇款金额 &nbsp;&nbsp;<span style="color:#ff0000;" id="money"></span></li>
+                        <li>汇款支行 &nbsp;&nbsp;<span id="salesofficename"></span></li>
+                        <li>汇款银行 &nbsp;&nbsp;<span id="bankName"></span></li>
+                        <li>汇款卡号 &nbsp;&nbsp;<span id="number"></span></li>
+                        <li>备注/附言/摘要 &nbsp;&nbsp;<span style="color:#ff0000;font-size:12px;" id="uid">@ViewData["Uid"]</span></li>
+                        <li style="color:#ff0000;">
+                            请务必在汇款时在“备注/附言/摘要”栏目写上您的UID
+                        </li>
+                        <li>
+                            附言中请不要填写除了数字以外的其它字符（比特币、莱特币等），否则不能及时到账！
+                        </li>
+                        <li>
+                            此数字每次提交时都会重新生成，为了您的到账速度，请务必在“备注”中认真填写
+                        </li>
+                        <li>
+                            <input class="btn2" type="submit" value="提交汇款信息">
+                        </li>
+                    </ul>
+                </div>
+            }
+
+        </div>
+
+        <table class="table table-striped">
+            <caption>
+                <div class="record-title">
+                    充值记录
+                </div>
+
+            </caption>
+            <tr>
+                <th>编号</th>
+                <th>时间</th>
+                <th>充值方式</th>
+                <th>充值金额</th>
+                <th>充值银行</th>
+                <th>状态</th>
+
+                @*<th width="8%">编号</th>
+                    <th width="20%">时间</th>
+                    <th width="6%">金额</th>
+                    <th width="20%">银行卡</th>
+                    <th width="8%">进度</th>
+                    <th width="15%">审核通过金额</th>
+                    <th width="12%">审核结果</th>
+                    <th width="20%">审核描述</th>*@
+            </tr>
+            @if (ViewData["refills"] != null)
+            {
+                foreach (var v in ViewData["refills"] as List<BankRecord>)
+                {
+                    <tr>
+                        @*<td>@v.Id</td>
+                            <td>@v.When</td>
+                            <td>@v.Delta</td>
+                            <td>@string.Format("{0}-{1}", v.Account.BankName, v.Account.Number)</td>
+                            <td>@(v.IsApproved ? "已审核" : "审核中")</td>
+                            <td>@v.ActualDelta</td>
+                            <td>@(v.ApprovedResult == null ? "" : (bool)v.ApprovedResult ? "成功" : "失败")</td>
+                            <td>@Html.DisplayFor(m => v.ApproveDesc)</td>*@
+
+                        <td>@v.Id</td>
+                        <td>@v.When</td>
+                        <td>银行汇款</td>
+                        <td>@v.Delta</td>
+                        <td>@v.Account.BankName</td>
+                        <td>@(v.IsApproved ? "已审核" : "审核中")</td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+
+</div>
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+<script>
+    @if(ViewBag.msg != null){
+        @:alert("@ViewBag.msg");
+                }
+
+    function blurVal() {
+        $("#error").html("");
+    }
+    function next2() {
+        $("#bankerr").html("");
+        var num = $("#txtnum").val(); //金额
+        var NumError = $("#txtnum-error").html();//文本提示错误信息
+
+        //  alert("mes"+mes);
+        var bank = $("#BankAccountId").val();//银行卡
+        if (bank == "" || bank == null) {
+            $("#bankerr").html("不能为空!");
+            return;
+        }
+        if (NumError != "" && NumError != null && NumError != "undefined") {
+            return;
+        }
+        var r = $("#error").html();
+        if (num == "" || num == null) {
+            $("#error").html("请填写充值金额");
+            return;
+        }
+        if (num < 100.01) {
+            $("#error").html("小于100.01人民币不予受理");
+            return;
+        }
+        if (r != "" && r != null) {
+            return;
+        }
+
+        $("#money").html(num);
+        $("#money2").html(num);
+        var $selectedBankAccount = $("#BankAccountId>option:selected");
+        $("#salesofficename").text($selectedBankAccount.attr("salesofficename"));
+        $("#bankName").text($selectedBankAccount.attr("bankname"));
+        $("#number").text($selectedBankAccount.val());
+
+        $("#div_one").attr("style", "display:none");
+        $("#div_two").attr("style", "display:block");
+
+
+    }
+
+    function next3() {
+        $("#error").html("");
+        $("#div_two").attr("style", "display:none");
+        $("#div_three").attr("style", "display:block");
+    }
+    function back2() {
+        $("#error").html("");
+        $("#div_one").attr("style", "display:block");
+        $("#div_two").attr("style", "display:none");
+    }
+
+    function back3() {
+        $("#error").html("");
+        $("#div_two").attr("style", "display:block");
+        $("#div_three").attr("style", "display:none");
+    }
+
+</script>

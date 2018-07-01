@@ -1,0 +1,153 @@
+﻿@using Com.BitsQuan.Option.Ui.Models;
+@{
+    var tid = User.GetTraderId();
+    var os = MvcApplication.OptionService.Model.Traders.Where(a => a.Id == tid).FirstOrDefault();
+    ViewData["ActCapital"] = os;
+    ApplicationDbContext dbm = new ApplicationDbContext();
+
+    ViewData["a"] = dbm.AdvImgs.OrderBy(f => f.SortId).Take(15).ToList();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@(ViewBag.Title == null ? "比权网-最好的比特币期权交易平台" : ViewBag.Title.ToString())</title>
+
+
+    <link href="~/Scripts/bs-3.3.4/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <script src="~/Scripts/bs-3.3.4/js/bootstrap.js"></script>
+    <script src="~/Scripts/respond.js"></script>
+    <style>
+      
+            .active .row,
+            .active .row > .col-md-2,
+            .active >a
+             {
+                margin: 0;
+                padding: 0;
+            }
+            .active .row .btn{
+                border-radius:0px;
+            }
+    </style>
+</head>
+
+
+<body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/Home/index">比权网</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a  href="~/Home/index">首页</a>
+                    </li>
+                    <li>
+                        <a href="~/Home/Trade">期权交易</a>
+                    </li>
+@if (!Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isDisableBtcTrade", true)) { 
+                    <li>
+                        <a href="~/Spot/Trade">比特币交易</a>
+                    </li>
+}
+                    <li>
+                        <a  href="~/Cache/index">资金中心</a>
+                    </li>
+                    <li>
+                        <a  href="~/Secure/Index">安全中心</a>
+                    </li>
+                    <li>
+                        <a  href="~/NewNotices/Index">新闻公告</a>
+                    </li>
+                   
+                    @*<li class="active">
+                    
+                        <div class="row">
+                            <div class="col-md-2 col-sm-3 col-xs-6">
+                                <div class="btn-group btn-group-justified">
+                                    <a class="btn btn-primary"  href="~/Home/index">首页</a>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-2 col-sm-3 col-xs-6">
+                                <div class="btn-group btn-group-justified">
+                                    <a class="btn btn-primary" href="~/Home/Trade">期权交易</a>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6">
+                                <div class="btn-group btn-group-justified">
+                                    <a class="btn btn-primary" href="~/Spot/Trade">比特币交易</a>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6">
+                                <div class="btn-group btn-group-justified">
+                                    <a class="btn btn-primary" href="~/Cache/index">资金中心</a>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6">
+                                <div class="btn-group btn-group-justified">
+                                    <a class="btn btn-primary" href="~/Secure/Index">安全中心</a>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6">
+                                <div class="btn-group btn-group-justified">
+                                    <a class="btn btn-primary" href="~/NewNotices/Index">新闻公告</a>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6">
+                                <div class="btn-group btn-group-justified">
+                                    @Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-primary" })
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-6">
+                                <div class="btn-group btn-group-justified">
+                                    @Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                    </li>*@
+                    
+                </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    @Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                </li>
+                <li>
+                    @Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                </li>
+            </ul> 
+               
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+
+
+
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+     
+  
+    @RenderSection("links", required: false)  
+
+
+    @RenderSection("scripts", required: false)
+
+    @Html.Partial("Footer")
+</body>
+</html>

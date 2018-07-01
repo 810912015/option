@@ -1,0 +1,208 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+@model EmailContentViewModel
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <base target="_blank">
+    <style type="text/css">
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <style id="cloudAttachStyle" type="text/css">
+        #divNeteaseBigAttach, #divNeteaseBigAttach_bak {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="body" id="contentDiv" style="FONT-SIZE: 14px; HEIGHT: auto; POSITION: relative;ZOOM: 1; PADDING-BOTTOM: 10px; PADDING-TOP: 15px; PADDING-LEFT: 15px; Z-INDEX: 1; LINE-HEIGHT: 1.7; PADDING-RIGHT: 15px">
+        <div id="qm_con_body">
+            <div class="qmbox qm_con_body_content" id="mailContentContainer">
+                <table align="center" style="width:100%;BACKGROUND: #eeeeee;" border="0" cellspacing="0" cellpadding="0">
+
+                    <tbody>
+
+                        <tr>
+
+                            <td style="PADDING-BOTTOM: 30px; PADDING-TOP: 30px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px">
+
+                                <table width="650" align="center" style="BACKGROUND: #ffffff; border-radius: 10px" border="0" cellspacing="0" cellpadding="0">
+
+                                    <tbody>
+
+                                        <tr>
+
+                                            <td>
+
+                                                <table width="100%" style="BACKGROUND: #00a8ff; border-radius: 10px 10px 0 0">
+
+                                                    <tbody>
+
+                                                        <tr>
+
+                                                            <td width="1%" style="PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 20px;                                                                                                                            PADDING-RIGHT: 20px"></td>
+
+                                                            <td style="FONT-SIZE: 24px; COLOR: #fff; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px">
+                                                                @Model.Message
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td style="BORDER-TOP: medium none; COLOR: #666; PADDING-BOTTOM: 30px; PADDING-TOP: 30px;                                                                                                                     PADDING-LEFT: 30px; PADDING-RIGHT: 30px">
+
+                                                <table>
+
+                                                    <tbody>
+
+                                                        <tr>
+
+                                                            <td>
+                                                                亲爱的，
+                                                                <span style="COLOR: red">
+                                                                    <a href="mailto:@Model.Email" target="_blank">
+                                                                        @Model.Email
+                                                                        <br>
+                                                                    </a>
+                                                                </span>
+                                                                ， 欢迎您使用比权网，我们竭诚为您服务。
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <td style="PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 10px; PADDING-RIGHT:10px">
+
+                                                                <p>
+                                                                    点击下面的按钮 @Model.Message
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <td style="PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 10px; PADDING-RIGHT:10px">
+                                                                <a style="TEXT-DECORATION: none; BACKGROUND: #00a8ff; COLOR: #fff; PADDING-BOTTOM:10px; PADDING-TOP: 10px; PADDING-LEFT: 30px; PADDING-RIGHT: 30px; border-radius: 5px" href="@Uri.EscapeUriString(Model.Url)" target="_blank">
+                                                                    @Model.Message
+                                                                </a>
+
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <td>
+
+                                                                <p>
+                                                                    如果无法点击，请复制下面的链接至浏览器地址 @Model.Message：
+                                                                </p>
+
+                                                                <div style="WORD-WRAP: break-word; FONT-SIZE: 12px; BACKGROUND: #eee; WORD-BREAK: break-all; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px;                                                                                                                        border-radius: 5px">
+                                                                    <a href="@Uri.EscapeUriString(Model.Url)" target="_blank">
+                                                                        @Uri.EscapeUriString(Model.Url)
+                                                                    </a>
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <td style="COLOR: #1a6baf">
+                                                                该链接将在一个小时后失效，请尽快完成操作。
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <td style="TEXT-ALIGN: right">
+                                                                - 比权网团队
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                    <tfoot>
+
+                                        <tr>
+
+                                            <td style="FONT-SIZE: 12px; COLOR: #999; PADDING-BOTTOM: 20px; PADDING-TOP: 0px; PADDING-LEFT: 30px; PADDING-RIGHT: 30px">
+                                                此邮件由系统自动发出，请勿直接回复。&nbsp; 有问题请
+                                                <a href="mailto:service@bitsquan.com" target="_blank">
+                                                    联系我们
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <style>
+            #mailContentContainer .txt {
+                HEIGHT: auto;
+            }
+        </style>
+    </div>
+
+    <style type="text/css">
+        body {
+            font-size: 14px;
+            font-family: arial,verdana,sans-serif;
+            line-height: 1.666;
+            padding: 0;
+            margin: 0;
+            overflow: auto;
+            white-space: normal;
+            word-wrap: break-word;
+            min-height: 100px;
+        }
+
+        td, input, button, select, body {
+            font-family: Helvetica, 'Microsoft Yahei', verdana;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+            padding-right: 1px;
+        }
+
+        th, td {
+            font-family: arial,verdana,sans-serif;
+            line-height: 1.666;
+        }
+
+        img {
+            border: 0;
+        }
+
+        header, footer, section, aside, article, nav, hgroup, figure, figcaption {
+            display: block;
+        }
+    </style>
+
+    <style id="ntes_link_color" type="text/css">
+        a, td a {
+            color: #064977;
+        }
+    </style>
+</body>
+</html>

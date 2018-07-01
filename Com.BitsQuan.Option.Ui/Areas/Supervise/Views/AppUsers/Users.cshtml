@@ -1,0 +1,30 @@
+﻿@{
+    Html.RenderPartial("_Query", ViewData["args"]);
+}
+<script>
+    var makeAllow = function () { }
+    var resendemail=function(){}
+        $(function () {
+            makeAllow = function (a) {
+                var id = a;
+                $.post("/supervise/auth/allowtrade", { "uid": id }, function (d) {
+                    
+                    if (d.ResultCode == 0) {
+                        $("#td_" + id).text("已允许交易");
+                    }
+                    else $("#td_" + id).text(d.Desc);
+                })
+
+            };
+            resendemail = function (name) {
+                $.post("/account/resendconfirmemail", { "userName": name }, function (d) {
+                    if (d.ResultCode == 0) {
+                        $("#rse_" + name).text("已发送");
+                    }
+                    else {
+                        $("#rse_" + name).text(d.Desc);
+                    }
+                })
+            }
+        })
+    </script>

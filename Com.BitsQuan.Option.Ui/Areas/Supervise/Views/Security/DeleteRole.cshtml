@@ -1,0 +1,23 @@
+﻿@model Com.BitsQuan.Option.Ui.Models.ApplicationRole
+
+@{
+     
+}
+
+<h4>确认删除用户角色?</h4>
+<div class="pull-right">
+    @Html.ActionLink("返回列表", "Roles", null, new { @class = "btn btn-info btn-xs" })
+</div>
+<hr />
+@{Html.RenderPartial("_ARole");}
+@using (Html.BeginForm("DeleteRoleConfirmed", "account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m=>m.Id)
+
+    <div class="col-md-2 col-md-offset-2">
+        <input type="submit" value="删除" class="btn btn-primary" />
+    </div>
+}
+

@@ -1,0 +1,140 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+/*重置*/
+* {
+    font-family: "微软雅黑";
+    font-size: 14px;
+    border: 0px;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    text-decoration: none;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    color: #535353;
+}
+
+i {
+    font-style: normal;
+}
+
+body {
+    background-color: #50b8f5;
+}
+/*头部*/
+.headimg {
+    display: block;
+    width: 100%;
+}
+/*内容*/
+.mainbox img {
+    width: 1000px;
+    display: block;
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
+/*数据表*/
+.table {
+    width: 1000px;
+    height: 620px;
+    background: url(../../content/images/simulation/bluebg.png) no-repeat;
+    margin: 0 auto;
+    margin-top: 80px;
+    padding-bottom: 40px;
+}
+
+.tabletitle img {
+    display: block;
+}
+
+.tabletitle {
+    padding-top: 40px;
+    width: 465px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.date li {
+    color: #fff;
+    float: left;
+    font-size: 16px;
+    line-height: 34px;
+}
+
+.date {
+    width: 680px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.first {
+    width: 110px;
+    text-align: center;
+}
+
+.second {
+    width: 390px;
+    text-align: center;
+}
+
+.third {
+    width: 180px;
+    text-align: center;
+}
+
+.date1 li {
+    color: #fff;
+    float: left;
+    font-size: 16px;
+    line-height: 34px;
+}
+
+.date1 {
+    width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-bottom: 1px #fff solid;
+    padding-bottom: 20px;
+}
+
+.first1 {
+    width: 195px;
+    text-align: center;
+}
+
+.second1 {
+    width: 150px;
+    text-align: center;
+}
+
+.third1 {
+    width: 280px;
+    text-align: center;
+}
+
+.fourth1 {
+    width: 175px;
+    text-align: center;
+}
+
+.returnbox {
+    width: 80px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.return {
+    color: #fff;
+    font-size: 16px;
+    border: 1px solid #fff;
+    display: block;
+    width: 80px;
+    line-height: 30px;
+    text-align: center;
+}

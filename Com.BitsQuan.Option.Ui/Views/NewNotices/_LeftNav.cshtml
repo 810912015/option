@@ -1,0 +1,17 @@
+﻿@using Com.BitsQuan.Option.Ui.Models
+    @{
+        var chooseClass = new Func<ContentType, string>((_type) => { if (_type == ViewBag.Type)return "nav-normal nav-selected"; else return "nav-normal"; });
+        var ajo = new AjaxOptions
+        {
+            UpdateTargetId = "maincontent",
+            InsertionMode = InsertionMode.Replace
+        };
+    }
+    <div class="leftnavbox">
+        <ul class="leftnav">
+            <li class="nav-top"><a class="funds_center">资讯中心</a></li>
+            <li class="prompt">@Html.ActionLink("新闻中心", "Index", new { type = 1 }, new { @class = chooseClass(ContentType.新闻中心) })</li>
+            <li class="prompt">@Html.ActionLink("行业新闻", "Index", new { type = 2 }, new { @class = chooseClass(ContentType.行业新闻) })</li>
+            <li class="prompt">@Html.ActionLink("期权知识", "Index", new { type = 4 }, new { @class = chooseClass(ContentType.期权知识) })</li>
+        </ul>
+    </div>

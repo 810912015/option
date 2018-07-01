@@ -1,0 +1,389 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Ui.Models.CurrenAddress>
+    <style>
+      
+        /*右侧内容*/
+        .withdraw_cash .cash_ca {
+            font-family: "微软雅黑";
+            font-weight: 400;
+            font-size: 18px;
+            color: #666666;
+            display: block;
+            margin: 0 auto;
+            width: 100px;
+        }
+
+        .cashbox {
+            border: 1px solid #c2c2c2;
+            margin-top: 10px;
+            width: 780px;
+        }
+
+            .cashbox a {
+                font-family: "微软雅黑";
+                color: #666666;
+                font-size: 14px;
+                line-height: 30px;
+                display: inline-block;
+                width: 136px;
+                text-align: center;
+            }
+
+        .withdraw_cash .cashbox .cny1 {
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #e6e6e6;
+            margin-top: 20px;
+        }
+
+        .cashbox .cny1 .cny:hover {
+            background-color: #559be9;
+            color: white;
+        }
+
+        .cashbox .cny1 .btc:hover {
+            background-color: #559be9;
+            color: white;
+        }
+
+        .cashbox .cny1 .cny {
+            background-image: url(../Content/images/cnyborder.png);
+            background-repeat: no-repeat;
+            background-position: right;
+        }
+
+        .mycard1 {
+            font-weight: bold;
+            line-height: 28px;
+        }
+
+        .mycard2_ca {
+            line-height: 35px;
+            border: 1px solid #c2c2c2;
+            width: 300px;
+            /*background-image: url(../Content/images/closd.png);*/
+            background-repeat: no-repeat;
+            background-position: top right;
+        }
+
+            .mycard2_ca p {
+                margin-left: 20px;
+            }
+
+        .mycard3 p {
+            margin-left: 20px;
+        }
+
+        .mycard4 p {
+            margin-left: 20px;
+        }
+
+        .mycard3 {
+            border-left: 1px solid #c2c2c2;
+            line-height: 32px;
+            border-right: 1px solid #c2c2c2;
+            padding-top: 20px;
+            width: 300px;
+        }
+
+        .mycard4 {
+            border-left: 1px solid #c2c2c2;
+            line-height: 32px;
+            border-right: 1px solid #c2c2c2;
+            width: 300px;
+        }
+
+        .mycard5 {
+            border-left: 1px solid #c2c2c2;
+            line-height: 32px;
+            width: 300px;
+            border-bottom: 1px #c2c2c2 solid;
+            padding-top: 30px;
+            border-right: 1px solid #c2c2c2;
+        }
+
+            .mycard5 a {
+                color: #666666;
+                font-size: 12px;
+                display: block;
+                width: 300px;
+                text-align: center;
+            }
+
+                .mycard5 a:hover {
+                    color: red;
+                }
+
+        .card {
+            padding-bottom: 60px;
+            margin-top: 20px;
+        }
+
+        .cashbox .address {
+            line-height: 36px;
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            margin-bottom: 10px;
+            margin-left: 110px;
+        }
+
+        .cashbox input {
+            line-height: 30px;
+            margin-left: 10px;
+            width: 175px;
+        }
+
+        .address1 {
+            margin-left: 166px;
+        }
+
+
+        .button1 {
+            border: 1px solid #5daaff;
+            background-color: #559be9;
+            width: 179px;
+            margin-left: 276px;
+            font-family: "微软雅黑";
+            color: white;
+            font-size: 14px;
+            line-height: 36px;
+            margin-bottom: 30px;
+            margin-top: 5px;
+        }
+
+        .title {
+            font-family: "微软雅黑";
+            color: #559be9;
+            font-size: 14px;
+            line-height: 40px;
+            margin-top: 30px;
+        }
+
+        .record .title1 {
+            font-family: "微软雅黑";
+            color: #535353;
+            font-size: 14px;
+            line-height: 28px;
+            background-color: #f2f2f2;
+            width: 130px;
+            text-align: center;
+            float: left;
+            border-top: 1px solid #c2c2c2;
+            border-left: 1px solid #c2c2c2;
+        }
+
+        .record {
+            overflow: hidden;
+            width: 782px;
+            margin: 0 auto;
+        }
+
+            .record .title2 {
+                font-family: "微软雅黑";
+                color: #535353;
+                font-size: 14px;
+                line-height: 28px;
+                width: 130px;
+                text-align: center;
+                float: left;
+                background-color: #f2f2f2;
+                border-top: 1px solid #c2c2c2;
+            }
+
+            .record .title3 {
+                font-family: "微软雅黑";
+                color: #535353;
+                font-size: 14px;
+                line-height: 28px;
+                width: 130px;
+                text-align: center;
+                float: left;
+                background-color: #f2f2f2;
+                border-top: 1px solid #c2c2c2;
+                border-right: 1px solid #c2c2c2;
+            }
+
+            .record .title4 {
+                font-family: "微软雅黑";
+                color: #535353;
+                font-size: 14px;
+                line-height: 28px;
+                width: 130px;
+                text-align: center;
+                float: left;
+                border-top: 1px solid #c2c2c2;
+                border-left: 1px solid #c2c2c2;
+                border-bottom: 1px solid #c2c2c2;
+            }
+
+            .record .title5 {
+                font-family: "微软雅黑";
+                color: #535353;
+                font-size: 14px;
+                line-height: 28px;
+                width: 130px;
+                text-align: center;
+                float: left;
+                border-top: 1px solid #c2c2c2;
+                border-bottom: 1px solid #c2c2c2;
+            }
+
+            .record .title6 {
+                font-family: "微软雅黑";
+                color: #535353;
+                font-size: 14px;
+                line-height: 28px;
+                width: 130px;
+                text-align: center;
+                float: left;
+                border-top: 1px solid #c2c2c2;
+                border-right: 1px solid #c2c2c2;
+                border-bottom: 1px solid #c2c2c2;
+            }
+
+        .cashbox .cny1 {
+            width: 782px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+
+        .leftnavbox {
+            float: left;
+        }
+
+        .withdraw_cash {
+            float: left;
+            margin-left: 18px;
+            margin-top: 10px;
+            margin-bottom:20px;
+        }
+
+        .box {
+            overflow: hidden;
+            width: 1000px;
+            margin: 0 auto;
+        }
+    
+    </style>
+
+
+ 
+            <!--右侧内容-->
+            <div class="withdraw_cash">
+                <div class="cashbox">
+
+                    <ul>
+                        @*<li class="cny1"><a class="cny" href="#">银行卡账户</a><a class="btc" href="#">比特币账户</a></li>*@
+                        <li class="address">钱包别名<input type="text" name="钱包别名" id="name" onmouseout="this.style.border='1px solid #c2c2c2'" onmouseover="this.style.border='1px solid #559be9'" style="border:1px solid #c2c2c2"></li>
+                        <li class="address">钱包地址<input type="text" name="钱包地址" id="Caddress" onmouseout="this.style.border='1px solid #c2c2c2'" onmouseover="this.style.border='1px solid #559be9'" style="border:1px solid #c2c2c2"></li>
+                     
+                        <li class="address1"><input class="button1" type="submit" value="确定提交" id="saveba2"></li>
+                        <li class="address1"><span style="color:red" id="validate2"></span><span style="color:red" id="result2"></span></li>
+                    </ul>
+
+                </div>
+                <div id="show_ca">
+
+                    @foreach (var item in Model)
+{
+
+    <div class="card_ca" style="float:left;margin-right:10%;">
+        <ul class="mycard">
+            <li class="mycard1">我的BTC地址</li>
+            <li class="mycard2_ca">
+                <p>
+                    比特币<span style="border: 0px solid red; width: 20px; height: 60px; margin-left: 70%;">
+                        <img src="~/Content/images/closd.png" onclick="delAddress(this)" /><span id="aa" style="display:none">@item.Id</span>
+                    </span>
+                </p>
+            </li>
+            <li class="mycard3"><p>别名：@Html.DisplayFor(modelItem => item.Name)</p></li>
+            <li class="mycard4"><p>地址：@Html.DisplayFor(modelItem => item.Address)</p></li>
+            <li class="mycard5">@*<a href="#">转到该地址</a>*@</li>
+        </ul>
+    </div>
+}
+
+                    
+
+                </div>
+            </div>
+
+
+<script>
+
+    var Id = "";
+
+
+    //   var baTemp2 = "<tr id='ba_{{Id}}' class='bar'><td>{{Id}}</td><td>{{Name}}</td><td>{{Address}}</td><td>{{Coin}}</td></tr>";
+    var baTemp2 = "<div class='card_ca' style='float:left;margin-right:10%;'>\
+                        <ul class='mycard'>\
+                            <li class='mycard1'>我的BTC地址</li>\
+                            <li class='mycard2_ca'><p>比特币<span style='border: 0px solid red; width: 20px; height: 60px; margin-left: 70%;'>\
+                                <img src='/Content/images/closd.png' onclick='delAddress(this)' /><span id='aa' style='display:none'>{{Id}}</span>\
+                            </span></p></li>\
+                            <li class='mycard3'><p>名称：{{Name}}</p></li>\
+                            <li class='mycard4'><p>地址：{{Address}}</p></li>\
+                            <li class='mycard5'></li>\
+                        </ul>\
+                    </div>";
+    $("#saveba2").click(function () {
+        $("#result2").text("");
+        $("#validate2").text("");
+
+        var name = $("#name").val();
+        var Caddress = $("#Caddress").val()
+        var coin = "BTC"; //$("#coin").val();
+        if (name == "" || Caddress == "" || coin == "") {
+            $("#validate2").text("参数不能为空"); return;
+        }
+
+        var re = /^[A-Za-z0-9]{1,50}$/;
+        var result = re.exec(Caddress);
+        if (!result) {
+            $("#validate2").text("钱包地址最多为50个数字和字符"); return;
+        }
+
+        var securityToken = $('input[name=__RequestVerificationToken]').val();
+        //__RequestVerificationToken: securityToken, 
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/cache/AddCurrenAddress",
+            data: { "Name": name, "Address": Caddress, "coin": coin },
+            success: function (d) {
+                $("#result2").text(d.Desc);
+                if (d.ResultCode == 0) {
+                    var r2 = Mustache.render(baTemp2, d.CurrenAddress);
+                    $(r2).appendTo($("#show_ca"));
+                }
+                else {
+                    alert("有错");
+                }
+            }
+        });
+    });
+
+    $(".bar").click(function () {
+        Id = $(this).data("id");
+
+    })
+
+    function delAddress(curNum) {
+        // alert(curNum);
+        var num = $(curNum).siblings().html();
+        var r = confirm("确定要删除？");
+        if (r) {
+            if (num != "") {
+                var securityToken = $('input[name=__RequestVerificationToken]').val();
+                $.post("/cache/DelCurrenAddress", { __RequestVerificationToken: securityToken, "Id": num }, function (d) {
+                    if (d.ResultCode == 0) {
+                        //   $(curNum).parents('.card_ca').html("");
+                        $(curNum).parents('.card_ca').attr("style", "display:none");
+                    }
+                })
+            }
+        }
+    }
+</script>
+

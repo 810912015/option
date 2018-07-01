@@ -1,0 +1,89 @@
+﻿@using  Com.BitsQuan.Option.Match.Imp
+@model  Com.BitsQuan.Option.Ui.Areas.Supervise.Controllers.PosModel
+<link href="~/Scripts/tablesortor/theme.default.css" rel="stylesheet" />
+<script src="~/Scripts/tablesortor/jquery.tablesorter.min.js"></script>
+<script src="~/Scripts/tablesortor/jquery.tablesorter.widgets.min.js"></script>
+<div id="posbody">
+    <div style="margin:10px;">
+        <span>
+            @Html.DropDownList("contract", Model.Contracts, new { id = "contractCode" })
+        </span>
+        <span>
+           <select id="type">
+               <option value="1" @(Model.PType == Com.BitsQuan.Option.Core.PositionType.义务仓 ? "" : "selected")>权利仓</option>
+               <option value="2" @(Model.PType==Com.BitsQuan .Option.Core.PositionType.义务仓?"selected":"")>义务仓</option>
+           </select>
+        </span>
+    </div>
+
+    @{
+        var q = MvcApplication.OptionService.Model.Traders.Select(a => new { name = a.Name, pos = a.GetPositionSummary(Model.ContractCode, Model.PType) })
+            .Where(a => a.pos != null&&a.pos.Count>0)
+            .ToList();
+    }
+
+    @if (q == null || q.Count == 0)
+    {
+        <div>此合约没有持仓</div>
+    }
+    else
+    {
+        <div class="lead">@(Model.PType.ToString())总数:@(q.Where(a=>a.pos.PositionType==Model.PType.ToString()).Sum(a=>a.pos.Count))个,
+    对手仓总数:@(q.Where(a => a.pos.PositionType != Model.PType.ToString()).Sum(a => a.pos.Count))个
+    </div>
+        <table class=" table table-striped" id="postable">
+            <thead>
+
+
+                <tr>
+                    <th>用户</th>
+                    <th>类型</th>
+                    <th>持仓总数</th>
+                    @*<th>可平</th>*@
+                    <th>均价</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int j = 0; j < q.Count; j++)
+                {
+                    if (q[j].pos.PositionType != Model.PType.ToString()) { continue; }
+                    <tr>
+                        @{
+                    var cur = q[j];
+                        }
+
+                        <td>@cur.name</td>
+                        <td>@cur.pos.PositionType</td>
+                        <td>@cur.pos.Count</td>
+                       @*<td>@cur.pos.ClosableCount</td>*@
+                        <td>@cur.pos.BuyPrice.ToString("C2")</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    }
+</div>
+<script>
+    var getpos = function () {
+        var cc = $("#contractCode").val();
+        var t = $("#type").val();
+        $.get("/supervise/snap/pos", { "contractCode": cc, "type": t },
+        function (d) {
+            $("#posbody").html(d);
+        }
+        )
+    }
+
+    $(function () {
+        $("#type").change(function () {
+            getpos();
+        });
+        $("#contractCode").change(function () {
+            getpos();
+        });
+
+        $("table").tablesorter();
+    });
+</script>

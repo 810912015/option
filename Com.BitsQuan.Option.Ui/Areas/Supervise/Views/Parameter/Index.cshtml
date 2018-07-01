@@ -1,0 +1,51 @@
+﻿@{
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+}
+<style>
+    h3,h4,h5{
+        margin-left:100px;
+        margin-top:20px;
+    }
+</style>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3" style="margin-top:20px;border :1px solid red;">
+        <a id="stopbtn" class="btn btn-danger">停止系统</a>
+        <strong id="stopdesc">将所有数据保存到数据库,部署前必须执行.执行后将不再接受用户操作.</strong>
+    </div>
+   
+
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class=" btn-group btn-group-vertical btn-group-lg pull-right" style="margin-top:20px" >
+            @Ajax.ActionLink("爆仓参数", "blast", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("大户限仓", "limit", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("熔断参数", "fuse", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("收费参数", "fee", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("手动行权", "execute", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("比特币价格", "SetBtcPrice", null, ajo, new { @class = "btn btn-primary" })
+            @Ajax.ActionLink("经理人", "InvitorFee", null, ajo, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="col-md-10" id="maincontent">
+        @{
+            Html.RenderAction("SetBtcPrice");
+        }
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#stopbtn").click(function () {
+            $("#stopdesc").text("正在停止系统...");
+            $.post("/parameter/StopSystem", function (d) {
+            $("#stopdesc").text("停止成功,现在可以重启了");
+        })
+        })
+    })
+</script>

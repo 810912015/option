@@ -1,0 +1,12 @@
+﻿<hr />
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <h4 style="width:100%;border:1px solid #808080"><span>回帖人:hello1</span><span style="margin-left:80%">@item.RDate</span></h4>
+        <h4>@item.Rcontent</h4>
+        <h4 style="width: 100%; margin-left: 40%"> @Html.ActionLink("删除", "DeleteReply", new { id = item.Id })</h4>
+
+    }
+
+}

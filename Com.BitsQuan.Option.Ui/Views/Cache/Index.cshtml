@@ -1,0 +1,225 @@
+﻿@{
+
+    var ajo = new AjaxOptions
+   {
+       UpdateTargetId = "maincontent",
+       InsertionMode = InsertionMode.Replace
+   };
+    var isSimu = Com.BitsQuan.Miscellaneous.AppSettings.Read<bool>("isSimulate", true);
+}
+
+<style>
+    /*左侧导航*/
+    .box {
+        overflow: hidden;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .rightbox {
+        float: left;
+        margin-left: 18px;
+        border: 1px solid #DDDDDD;
+        width: 82%;
+    }
+
+    .leftnavbox {
+        float: left;
+    }
+
+    .leftnav {
+        background-color: #f2f2f2;
+        border: 1px solid #c2c2c2;
+        width: 158px;
+        height: 550px;
+    }
+
+        .leftnav li a {
+            width: 158px;
+            display: block;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #535353;
+            line-height: 40px;
+            text-indent: 24px;
+        }
+
+        .leftnav li .funds_center {
+            font-family: "微软雅黑";
+            font-size: 16px;
+            color: #535353;
+            line-height: 45px;
+            background-image: url(@Url.Content("~/Content/images/border.png"));
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+
+        .leftnav li .prompta:hover {
+            color: #000000;
+        }
+
+        .leftnav li.selected {
+            background-color: #559be9;
+        }
+
+            .leftnav li.selected a {
+                color: #ffffff;
+            }
+    /*右侧内容*/
+    .title {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-size: 18px;
+        color: #666666;
+        display: block;
+        margin: 0 auto;
+        /*width: 100px;*/
+        margin-top: 10px;
+    }
+
+    .rb {
+        margin-top: 10px;
+        width: 820px;
+    }
+
+    .tb {
+        margin: 20px 20px 0 20px;
+        background-color: #f2f2f2;
+        height: 30px;
+        border-bottom: 1px solid #c2c2c2;
+    }
+
+        .tb a {
+            line-height: 30px;
+            display: inline-block;
+            width: 135px;
+            text-align: center;
+            color: #535353;
+            background-image: url(@Url.Content("~/Content/images/cnyborder.png"));
+            background-position: right;
+            background-repeat: no-repeat;
+        }
+
+            .tb a:hover {
+                color: white;
+                background-color: #559be9;
+            }
+
+    .cash {
+        margin: 20px 0 0 20px;
+        background: url(@Url.Content("~/Content/images/bg.png")) no-repeat;
+        height: 101px;
+    }
+
+    .ctit {
+        font-size: 16px;
+        margin-left: 40px;
+        line-height: 20px;
+        padding-top: 14px;
+    }
+
+    .text {
+        font-size: 14px;
+        margin-left: 40px;
+        line-height: 26px;
+        font-family: "microsoft yahei";
+    }
+
+        .text span {
+            margin-left: 8px;
+            font-size: 14px;
+            font-weight: 200;
+        }
+
+        .text .sp {
+            color: #de5705;
+        }
+
+    table {
+        border: 1px solid #DDDDDD;
+    }
+
+    .border {
+        border-bottom: 4px solid #666;
+        margin-bottom: 20px;
+        margin-top: 30px;
+    }
+</style>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<div class="border"></div>
+
+<div class="row">
+
+    <!--内容-->
+    <div class="box">
+        <!--左侧导航-->
+        <div class="leftnavbox">
+            <ul class="leftnav">
+                <li><a class="funds_center">资金中心</a></li>
+                <li class="prompt selected">@Ajax.ActionLink("账户信息", "General", null, ajo, new { @class = "prompta" })</li>
+                <li class="prompt">
+                    @if (!isSimu)
+                    {
+                        @Ajax.ActionLink("充值", "Redraw", null, ajo, new { @class = "prompta" })
+                    }
+                </li>
+                <li class="prompt">
+                    @if (!isSimu)
+                    {
+                        @Ajax.ActionLink("提现", "Withdraw", null, ajo, new { @class = "prompta" })
+                    }
+                </li>
+                <li class="prompt">@Ajax.ActionLink("保证金操作", "Bail", null, ajo, new { @class = "prompta" })</li>
+                <li class="prompt">@Ajax.ActionLink("记录查询", "StreamShow", null, ajo, new { @class = "prompta" })</li>
+                <li class="prompt">@Ajax.ActionLink("结算查询", "LossRecord", null, ajo, new { @class = "prompta" })</li>
+                <li class="prompt">@Ajax.ActionLink("我要推广", "Invitation", null, ajo, new { @class = "prompta" })</li>
+            </ul>
+        </div>
+
+
+
+        <!--右侧内容-->
+
+        <div class="rightbox" id="maincontent">
+            @if (ViewData["Id"] == null)
+            {
+                Html.RenderAction("General", new { pageIndex = 1 });
+            }
+            else if (Convert.ToInt32(ViewData["Id"]) == 2 || Convert.ToInt32(ViewData["Id"]) == 3)
+            {
+                Html.RenderAction("General", new { pageIndex = 1, id = ViewData["Id"] });//资金中心使用
+            }
+            else
+            {//RMB充值
+                Html.RenderAction("Redraw");//比特币交易充值链接时使用
+            }
+        </div>
+
+    </div>
+
+</div>
+
+@section scripts{
+
+    <script>
+        $(function () {
+            $("li.prompt").on("click", function () {
+                $("li.prompt").removeClass("selected");
+                $(this).addClass("selected");
+            });
+        });
+
+        function FunAutoConvert() {
+            $.post("autoConvert", {}, function (d) {
+                turnSwitch(d, $("#autoConvertSwitch"));
+            });
+        }
+
+        function FunCloseRight() {
+            $.post("closeRight", {}, function (d) {
+                $("#closeRight").text(d ? "关闭权利仓自动买平" : "开启权利仓自动买平");
+            });
+        }
+    </script>
+}

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.AccountTradeRecord>
+
+<input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)">
+
+<table class="table table-striped">
+    <tr>
+        <th>编号</th>
+        <th>用户姓名</th>
+        <th>是否是保证金</th>
+        <th>货币名称</th>
+        <th>金额</th>
+        <th>操作类型</th>
+        <th>操作时间</th>
+        <th>当前余额</th>
+        <th>描述</th>
+        <th>操作人</th>
+        <th>操作结果</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Id</td>
+                <td>@v.Who.Name</td>
+                <td>@v.IsBail</td>
+                <td>@(v.Coin==null?"":v.Coin.Name)</td>
+                <td>@v.Delta</td>
+
+                <td>@v.OperateType</td>
+                <td>@v.When.ToString("yyyy-MM-dd HH:mm:ss.fff")</td>
+                <td>@v.Current</td>
+                <td>@v.OrderDesc</td>
+                <td>@v.ByWho</td>
+
+                <td>@v.IsAddTo</td>
+            </tr>
+        }
+    }
+
+</table>

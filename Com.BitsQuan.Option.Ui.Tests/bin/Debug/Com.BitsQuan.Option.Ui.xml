@@ -1,0 +1,1574 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Com.BitsQuan.Option.Ui</name>
+    </assembly>
+    <members>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,Com.BitsQuan.Option.Ui.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,Com.BitsQuan.Option.Ui.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},Com.BitsQuan.Option.Ui.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.#ctor(Com.BitsQuan.Option.Ui.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,Com.BitsQuan.Option.Ui.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:Com.BitsQuan.Option.Ui.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Com.BitsQuan.Option.Ui.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.Supervise.Data.BackDBServer">
+            <summary>
+             数据库操作类 Sqlserver
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.Supervise.Data.IRecharge.BtcRecharge(System.String,System.Decimal,System.String)">
+            <summary>
+            BTC充值
+            </summary>
+            <param name="name">充值用户</param>
+            <param name="count">充值数量</param>
+            <param name="address">充值地址（我们提供给用户）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.Supervise.Data.IWithdraw.BtcWithdraw(System.String,System.Int32,System.String)">
+            <summary>
+            比特币提现
+            </summary>
+            <param name="name">提现用户</param>
+            <param name="count">提现数量</param>
+            <param name="address">提现地址(用户提供给我们)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Areas.Supervise.Data.SuperviseModel.ReadDb">
+            <summary>
+            从数据库读出数据至内存中
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Areas.Supervise.Models.ContractModel.CoinName">
+            <summary>
+            币种即是标的?
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Areas.Supervise.Other.BackIdService`1">
+            <summary>
+            对象Id服务:初始化时从数据库中读取类型的最大id
+            单例
+            </summary>
+            <typeparam name="T">要为之产生id的类型</typeparam>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.CacheController.BankAccounts">
+            <summary>
+            某个用户的银行卡列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.CacheController.DelBankAccount(System.String)">
+            <summary>
+            逻辑删除银行卡
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.CacheController.DelCurrenAddress(System.Int32)">
+            <summary>
+            逻辑删除提现地址
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.CacheController.BTCWithDraw">
+            <summary>
+            btc提现
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.CacheController.AddCurrenAddress(Com.BitsQuan.Option.Ui.Models.AddressModel)">
+            <summary>
+            添加货币提现地址
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.CacheController.Image">
+            <summary>
+            BTC充值地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.HomeController.Activity">
+            <summary>
+            活动页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.HomeController.GetTopTradersOfSomeDay(System.DateTime)">
+            <summary>
+            获取某日排名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.HomeController.OrderIt(System.String,Com.BitsQuan.Option.Core.OrderPolicy,System.Decimal,System.Int32,Com.BitsQuan.Option.Core.TradeDirectType,Com.BitsQuan.Option.Core.OrderType,System.String,System.String)">
+            <summary>
+            下单(委托)
+            </summary>
+            <param name="code"></param>
+            <param name="policy"></param>
+            <param name="price"></param>
+            <param name="count"></param>
+            <param name="direct"></param>
+            <param name="openclose"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.HomeController.CurDeals(System.Nullable{System.DateTime},System.String)">
+            <summary>
+            获取指定时间之后的交易
+            </summary>
+            <param name="cname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.HomeController.FakeKline(System.String)">
+            <summary>
+            获取当前合约的k线数据-ohlc
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.HomeController.GetNow(System.String)">
+            <summary>
+            获取最新的一条5分钟ohlc数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.BindPhoneSet">
+            <summary>
+            设置手机号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.BindPhoneUpd">
+            <summary>
+            修改手机号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.IsPhoneBound(System.String)">
+            <summary>
+            判断手机号是否已被绑定
+            </summary>
+            <param name="phoneNum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.LoginPwdUpd">
+            <summary>
+            修改登录密码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.LoginPwdUpd(Com.BitsQuan.Option.Ui.Models.UpdL_PwdModel)">
+            <summary>
+            修改登录密码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.TradePwdSet">
+            <summary>
+            设置交易密码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.TradePwdUpd">
+            <summary>
+            修改交易密码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.SetInputTradeCount(System.String,System.String)">
+            <summary>
+            设置交易密码输入次数
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.RewardInvitorIfNeed(Com.BitsQuan.Option.Ui.Models.ApplicationUser)">
+            <summary>
+            判断被邀请用户是否完成相应操作，如果是则对邀请者进行相应的操作
+            </summary>
+            <param name="invited">被邀请用户</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.SecureController.IsTranPwdTrue(System.String)">
+            <summary>
+            登陆密码和交易密码不能相同
+            </summary>
+            <param name="Lpwd"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Controllers.TradeController">
+            <summary>
+            交易接口
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.Handle``1(System.Int32,System.Func{``0})">
+            <summary>
+            执行<paramref name="f"/>前根据用户id检查交易号是否存在，如果不存在则不执行<paramref name="f"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="uid"></param>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.Login(System.String,System.String)">
+            <summary>
+            登录
+            </summary>
+            <param name="name">用户名</param>
+            <param name="pwd">密码</param>
+            <returns>登录结果:如果成功Result是大于0的整数,用做后续操作的用户标志(uid);否则为-1;</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.GetDealsInMarket(System.Int32,System.String)">
+            <summary>
+            获取一个合约的成交记录
+            </summary>
+            <param name="uid">用户标志</param>
+            <param name="cname">合约名称</param>
+            <returns>合约的成交记录列表</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.GetMyOrders(System.Int32)">
+            <summary>
+            获取自己的委托列表
+            </summary>
+            <param name="uid">用户标志</param>
+            <returns>当前委托列表</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.GetMyPositions(System.Int32)">
+            <summary>
+            获取自己的持仓列表
+            </summary>
+            <param name="uid">用户标志</param>
+            <returns>当前持仓列表</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.RedoMyOrders(System.Int32)">
+            <summary>
+            撤销用户的所有未成交委托
+            </summary>
+            <param name="uid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.GetOrdersInMarket(System.Int32,System.String)">
+            <summary>
+            获取一个合约的所有委托
+            </summary>
+            <param name="uid">用户标志</param>
+            <param name="contractCode">合约代码</param>
+            <returns>合约的所有委托</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.OrderIt(System.Int32,System.String,Com.BitsQuan.Option.Core.OrderPolicy,System.Decimal,System.Int32,Com.BitsQuan.Option.Core.TradeDirectType,Com.BitsQuan.Option.Core.OrderType,System.String)">
+            <summary>
+            下单(委托)
+            </summary>
+            <param name="uid">用户标志</param>
+            <param name="code">合约代码</param>
+            <param name="policy">交易策略</param>
+            <param name="price">价格</param>
+            <param name="count">数量</param>
+            <param name="direct">买卖</param>
+            <param name="openclose">开平</param>
+            <param name="userOpId">用户操作id--用户自己定义</param>
+            <returns>下单结果</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.QueryMarket(System.Int32,System.String)">
+            <summary>
+            查询一个合约的市场信息
+            </summary>
+            <param name="uid">用户标志</param>
+            <param name="cname">合约名称</param>
+            <returns>一个合约的当前市场信息</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.Redo(System.Int32,System.Int32)">
+            <summary>
+            撤单
+            </summary>
+            <param name="uid">用户标志</param>
+            <param name="orderId">委托编号</param>
+            <returns>撤单结果</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.RedoMany(System.Int32,System.String)">
+            <summary>
+            撤单多个
+            </summary>
+            <param name="uid">用户标志</param>
+            <param name="orderId">委托编号集合，用逗号隔开</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.GetContracts(System.Int32)">
+            <summary>
+            获取所有合约
+            </summary>
+            <param name="uid">用户标志</param>
+            <returns>合约列表</returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.TradeController.GetMyAccount(System.Int32)">
+            <summary>
+            获取自己的账户信息
+            </summary>
+            <param name="uid">用户标志</param>
+            <returns>账户信息</returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Controllers.UserIdItem">
+            <summary>
+            用于api用户的id管理
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.UserIdItem.Refresh">
+            <summary>
+            更新最后访问时间
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Controllers.IdContainer">
+            <summary>
+            userId管理器:如果20分钟没有反应,则删除此Id
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.IdContainer.Create(System.Int32)">
+            <summary>
+            由交易员Id创建userId
+            </summary>
+            <param name="traderId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Controllers.IdContainer.GetTraderId(System.Int32)">
+            <summary>
+            由登录id得到交易id;如果没有返回-1
+            </summary>
+            <param name="uid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Extensions.MvcExtension.RenderRazorViewToString(System.Web.Mvc.Controller,System.String,System.Object)">
+            <summary>
+            使用model渲染指定视图，返回解析结果
+            </summary>
+            <param name="self"></param>
+            <param name="viewName"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Extensions.SystemExtension.Replace(System.String,System.Int32,System.Int32,System.Char)">
+            <summary>
+            把某区间内的的所有字符替换为指定字符
+            </summary>
+            <param name="self"></param>
+            <param name="startIndex"></param>
+            <param name="endIndex"></param>
+            <param name="substitude"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.SvcMonitor">
+            <summary>
+            交易系统监控
+            监控内容:
+                1.钱监控:每用户的保证金,现金总额之和,加上系统账户的私有总额,公共总额应该恒定;
+                2.仓监控:每合约的义务仓和权利仓数量应相等
+            运行方式:
+                1.每1分钟执行一次,计算结果写日志;
+                2.异常发生后通过设置的邮箱发邮件,电话发短信;邮箱和电话多个用逗号隔开;
+                3.可通过将邮件和电话设为空使不通知;
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.MvcApplication.OptionService">
+            <summary>
+            期权交易主程序
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.MvcApplication.SpotService">
+            <summary>
+            现货交易主程序
+            </summary>
+        </member>
+        <member name="F:Com.BitsQuan.Option.Ui.MvcApplication.raiseRobot">
+            <summary>
+            上限机器人
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.LoginFailRecord">
+            <summary>
+            登录失败记录
+            </summary>
+        </member>
+        <member name="F:Com.BitsQuan.Option.Ui.LoginFailManager.LockTimeSpan">
+            <summary>
+            锁定时长
+            </summary>
+        </member>
+        <member name="F:Com.BitsQuan.Option.Ui.LoginFailManager.MaxFailedAccessAttempts">
+            <summary>
+            最多尝试次数
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.LoginFailManager.Reset(System.String)">
+            <summary>
+            登录成功后调用此方法重置记录
+            </summary>
+            <param name="userId"></param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.LoginFailManager.Fail(System.String)">
+            <summary>
+            登录失败时调用此方法以增加失败计数
+            </summary>
+            <param name="userId"></param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.LoginFailManager.IsLocked(System.String)">
+            <summary>
+            判断帐号是不是处于锁定状态
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BigType.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BigType.Name">
+            <summary>
+            类型名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BankModel.Number">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BankModel.Bank">
+            <summary>
+            银行名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BankModel.Province">
+            <summary>
+            开户行
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BankModel.SalesOfficeName">
+            <summary>
+            营业部名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BankModel.Name">
+            <summary>
+            开户姓名
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.AddressModel.Id">
+            <summary>
+            卡号
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.AddressModel.Name">
+            <summary>
+            地址名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.AddressModel.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.AddressModel.Coin">
+            <summary>
+            货币类型
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.ForumHost">
+            <summary>
+            主贴
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumHost.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumHost.Fname">
+            <summary>
+            主贴名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumHost.Fcontent">
+            <summary>
+            主贴内容
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumHost.FuserName">
+            <summary>
+            发帖人
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumHost.FDate">
+            <summary>
+            发帖时间
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumHost.Bigtype">
+            <summary>
+            大类型
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumHost.Smalltype">
+            <summary>
+            小类型
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumHost.replyCount">
+            <summary>
+            回复数量
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.ForumReply">
+            <summary>
+            回帖
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumReply.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumReply.Fid">
+            <summary>
+            对应主贴编号
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumReply.Rcontent">
+            <summary>
+            回帖内容
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumReply.Uid">
+            <summary>
+            回帖用户
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ForumReply.RDate">
+            <summary>
+            回帖时间
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.Help">
+            <summary>
+            帮助
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Help.Htitle">
+            <summary>
+            新闻标题
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Help.Hcontent">
+            <summary>
+            新闻内容
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Help.Hdate">
+            <summary>
+            发布时间
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Help.Hperson">
+            <summary>
+            发布人
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Help.HlastDate">
+            <summary>
+            最后更新时间
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Help.HforeShow">
+            <summary>
+            是否在前台显示
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.Menu">
+            <summary>
+            菜单表
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ApplicationUser.InvitorId">
+            <summary>
+            推荐人id
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ApplicationUser.InvitorFeeRatio">
+            <summary>
+            手续费返回费率
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ApplicationUser.InviteCount">
+            <summary>
+            累计推荐人数
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ApplicationUser.InviteFeeSum">
+            <summary>
+            累计获得的手续费数
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ApplicationUser.InviteBonusSum">
+            <summary>
+            累计获得的奖金数
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ApplicationUser.IsInvitor">
+            <summary>
+            是不是推荐人
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.ApplicationUser.LastTransferFeeTime">
+            <summary>
+            推荐人最后奖金最后划转时间
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BankAccount.Province">
+            <summary>
+            开户行
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BankAccount.SalesOfficeName">
+            <summary>
+            营业部名称
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.CurrenAddress">
+            <summary>
+            BTC提现地址
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.CurrenAddress.Name">
+            <summary>
+            地址名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.CurrenAddress.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.CurrenAddress.Coin">
+            <summary>
+            货币类型
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.BankRecord.Num">
+            <summary>
+            充值或提现数量
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.FriendlyLink.LinkType">
+            <summary>
+            开户行
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.AdvImg.ImageAddress">
+            <summary>
+            开户行
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.WebHelper.WebContent">
+            <summary>
+            开户行
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Models.InvitorFeeMgr.Init">
+            <summary>
+            获取推荐人关系
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Models.InvitorFeeMgr.TransBonus(Com.BitsQuan.Option.Core.Trader,System.Collections.Generic.List{System.String})">
+            <summary>
+            奖金划转
+            </summary>
+            <param name="t">推荐人</param>
+            <param name="invitedNames">被推荐人名字</param>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Models.InvitorFeeMgr.TransferFee">
+            <summary>
+            手续费划转:执行从最近一次转账时间以来的手续费划转
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.OrderDeal">
+            <summary>
+            委托成交记录
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Pager.PageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Pager.PageIndex">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Pager.PostAction">
+            <summary>
+            返回url:当前是actionName
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Pager.TargetId">
+            <summary>
+            返回要替换的id
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.PagerUrlParam">
+            <summary>
+            分页url参数基类。自定义参数需继承这个抽象类
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Models.PagerUrlParam.GetParams">
+            <summary>
+            
+            </summary>
+            <returns>返回一个匿名类对象</returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.Query.QueryArgsCol">
+            <summary>
+            代表一个能查询的列的元数据:如列名字串,类型等
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryArgsCol.DisplayName">
+            <summary>
+            显示名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryArgsCol.ColName">
+            <summary>
+            列名称:必须与类的属性名称字串完全相符
+                   如果嵌套,则用propertyName.propertyName的表示形式
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryArgsCol.ListItems">
+            <summary>
+            为此列生成下拉框所用的数据
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Models.Query.QueryArgsCol.GetCols``1">
+            <summary>
+            为一个类指定能查询的列的元数据列表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.Query.QueryArgs">
+            <summary>
+            代表一个查询条件
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryArgs.Name">
+            <summary>
+            查询列的表示名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryArgs.Value">
+            <summary>
+            阀值
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryArgs.Relation">
+            <summary>
+            与阀值比较关系
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryArgs.Next">
+            <summary>
+            与下一个条件的关系
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryArgs.Value2">
+            <summary>
+            与下一个条件的关系
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.Query.PredicateBuilder">
+            <summary>
+            表达式合并器
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.Query.QueryEngine">
+            <summary>
+            查询引擎
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryEngine.Args">
+            <summary>
+            查询条件
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryEngine.Cols">
+            <summary>
+            能查询的列元数据
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.Query.QueryEngine.JsonString">
+            <summary>
+            列元数据列表的json表示
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Ui.Models.Query.QueryEngine.Query``2(Com.BitsQuan.Option.Ui.Models.Query.QueryEngine@,Com.BitsQuan.Option.Provider.BaseRepository{``0},System.String,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            查询数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="S"></typeparam>
+            <param name="aqa"></param>
+            <param name="ar"></param>
+            <param name="backUrl"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.Copyright">
+            <summary>
+            版权
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.Describe">
+            <summary>
+            Mata描述
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.Keyword">
+            <summary>
+            Mata关键字
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.SiteName">
+            <summary>
+            网站名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.SiteUrl">
+            <summary>
+            网站Url
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.OpenSite">
+            <summary>
+            开启网站
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.siteState">
+            <summary>
+            开启用户登陆
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.userRegiste">
+            <summary>
+            开启用户注册
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.trader">
+            <summary>
+            开启交易
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.tradePwd">
+            <summary>
+            开启交易使用交易密码
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.outTime">
+            <summary>
+            用户登录过期时间
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.emailUserPwd">
+            <summary>
+            邮箱认证用户密码
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.emailUserName">
+            <summary>
+            邮箱认证用户名
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.SendEmail">
+            <summary>
+            显示发送邮件
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.emaiSendName">
+            <summary>
+            显示发送者名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendFreezeEmail">
+            <summary>
+            发送账号冻结邮件
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendRecoverEmail">
+            <summary>
+            发送账号恢复邮件
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendZhuanzEmail">
+            <summary>
+            发送转账邮件
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendWithdrawEmail">
+            <summary>
+            发送提现邮件
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendreChargeEmail">
+            <summary>
+            发送充值邮件
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendFreezeMsg">
+            <summary>
+            发送账号冻结短信
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendThawMsg">
+            <summary>
+            发送账号解冻短信
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendZhuanzMsg">
+            <summary>
+            发送转账短信
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendWithdrawMsg">
+            <summary>
+            发送提现短信
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.sendreChargeMsg">
+            <summary>
+            发送充值短信
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Com.BitsQuan.Option.Ui.Models.SiteParameter.BankZhuanz" -->
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SiteParameter.OnlinePayment">
+            <summary>
+            开启在线支付
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Ui.Models.SmallType">
+            <summary>
+            小类型
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SmallType.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SmallType.Name">
+            <summary>
+            类型名称
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SmallType.Explain">
+            <summary>
+            类型说明
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SmallType.EditionUser">
+            <summary>
+            版主
+            </summary>
+        </member>
+        <member name="P:Com.BitsQuan.Option.Ui.Models.SmallType.BigType">
+            <summary>
+            对应的大类型
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Models.Security.MenuExtension">
+            <summary>
+            菜单扩展:用于判断当前菜单
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuExtension.IsActive(Com.BitsQuan.Option.Ui.Models.Menu,System.String)">
+            <summary>
+            子菜单中的当前菜单
+            </summary>
+            <param name="m"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuExtension.IsMainActive(Com.BitsQuan.Option.Ui.Models.Menu,System.String)">
+            <summary>
+            主菜单中的当前菜单
+            </summary>
+            <param name="m"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuExtension.IsAssenstor(Com.BitsQuan.Option.Ui.Models.Menu,Com.BitsQuan.Option.Ui.Models.Menu)">
+            <summary>
+            是否是上级菜单
+            </summary>
+            <param name="my"></param>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Models.Security.MenuAuthExtension">
+            <summary>
+            菜单项实际上代表了一个需要控制权限的资源
+                用户访问一个url,如果菜单项明确允许,那么允许
+                如果此url没有对应菜单项,那么找出其controller,
+                以菜单中的controller来决定其是否允许访问
+            </summary>
+        </member>
+        <member name="T:Com.BitsQuan.Option.Models.Security.MenuManager">
+            <summary>
+            菜单管理:
+            用户的菜单由用户角色决定
+                菜单项代表了一个需要控制权限的资源
+                用户访问一个url,如果菜单项明确允许,那么允许
+                如果此url没有对应菜单项(存在菜单项url等于请求的url),那么找出其controller,
+                以菜单中是否含有此url的controller来决定其是否允许访问
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuManager.Refresh(Com.BitsQuan.Option.Ui.Models.ApplicationDbContext)">
+            <summary>
+            从数据库中初始化读取菜单数据
+            </summary>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuManager.GetByUserName(System.String)">
+            <summary>
+            根据用户名获取菜单列表--通过用户的角色
+            </summary>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuManager.IsAllow(System.String,System.String,System.String)">
+            <summary>
+            用户请求url权限是否被允许
+            </summary>
+            <param name="userName"></param>
+            <param name="url"></param>
+            <param name="controllerName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuManager.GetByRoleId(System.String)">
+            <summary>
+            根据角色id从缓存中获取菜单列表
+            </summary>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuManager.GetMenuStrByRoleId(System.String)">
+            <summary>
+            根据角色id从缓存中读取菜单列表
+            </summary>
+            <param name="RoleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuManager.GetSingleByUrl(System.String)">
+            <summary>
+            根据请求的url获取菜单
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuManager.GetByUrl(System.String,System.String)">
+            <summary>
+            每session的菜单缓存
+            </summary>
+            <param name="url"></param>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.BitsQuan.Option.Models.Security.MenuManager.ClearMenu(System.String)">
+            <summary>
+            当sesseion终结时清除菜单缓存
+            </summary>
+            <param name="sessionId"></param>
+        </member>
+        <member name="M:System.Web.Mvc.IdentityExtension.GetInvitor(Com.BitsQuan.Option.Ui.Models.ApplicationUser)">
+            <summary>
+            获取推荐人
+            </summary>
+            <param name="self"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.IdentityExtension.UsersInvitedByMe(Com.BitsQuan.Option.Ui.Models.ApplicationUser)">
+            <summary>
+            获取本用户推荐的用户
+            </summary>
+            <param name="self"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

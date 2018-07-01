@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Com.BitsQuan.Option.Core.BlastRecord>
+
+<input type="hidden" id="ajaxpagecount" value="@(((Com.BitsQuan.Option.Ui.Models.Query.QueryEngine)ViewData["args"]).PageCount)" />
+
+<table class="table table-striped">
+    <tr>
+        <th>编号</th>
+        <th>用户名称</th>
+        <th>当前保证金金额</th>
+        <th>需要的保证金金额</th>
+        <th>爆仓类型</th>
+        <th>开始时间</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Id</td>
+                <td>@v.Trader.Name</td>
+                <td>@v.BailTotal</td>
+                <td>@v.NeededBail</td>
+                <td>@v.BlastType</td>
+                <td>@v.StartTime</td>
+            </tr>
+        }
+    }
+</table> 
